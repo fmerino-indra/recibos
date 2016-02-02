@@ -1,0 +1,21 @@
+.clockContainer {
+  background-color: $clock-background-color;
+  .x-toolbar {
+    background-color: transparent;
+    padding-left: 0px;
+    .x-box-inner {
+      border-top: $time-clock solid 1px;
+      .clock {
+        .dateClock {
+          color: $time-clock;
+          .x-form-item-label-inner {
+            padding-top: 4px;
+          }
+        }
+        .x-form-display-field {
+          color: $date-clock;
+        }
+      }
+    }
+  }
+}

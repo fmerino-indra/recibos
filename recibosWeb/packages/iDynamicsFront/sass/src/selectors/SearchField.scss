@@ -1,0 +1,153 @@
+.idf-searchfield {
+
+    &.read-only {
+        .idf-searchfield-trigger {
+            display: none;
+        }
+        .idf-searchfield-removeBtnCol {
+            display: none;
+        }
+    }
+	&.x-item-disabled .idf-searchfield-removeBtnCol{
+		opacity: 0.3;
+	}
+	
+	.x-mask{
+		background-color: transparent;
+	}
+	
+    .x-form-trigger:after {
+        content: '\f002';
+        font-family: FontAwesome;
+        top: 13px;
+        position: absolute;
+        right: 6px;
+        font-size: 14px;
+        color: #A5A5A5;
+        opacity: .5;
+    }
+    .x-form-trigger-over:after {
+             color: #000000;
+         }
+    .x-btn-icon-el-default-small {
+        &.x-btn-glyph {
+            color: #A5A5A5;
+            font-size: 14px;
+        }
+    }
+    >.x-form-item-body {
+        background-color: #fff;
+        border: solid 1px #eee;
+        
+        .x-form-trigger-wrap{
+        	border: none;
+        }
+        .idf-searchfield-grid {
+            border: 1px solid #fff !important;
+            background-color: #fff;
+            padding: 1px;
+            margin-right: 10px;
+            
+            &.x-panel {
+                .x-grid-body {
+                    border: none !important;
+                    background-color: transparent;
+                    background-image: none;
+                }
+                .x-grid-view {
+                    border: none !important;
+                    background-color: transparent;
+                    background-image: none;
+                }
+                .x-grid-table {
+                    border: none;
+                    box-shadow: none;
+                }
+                .x-grid-cell {
+                    border: none;
+                    background-color: transparent; /* border-top: 1px solid #fff; */
+                    /* line-height: 10px; */
+                    /* height: 10px !important; */
+                }
+                .x-grid-row-over {
+                    .x-grid-cell {
+                        background-color: transparent !important
+                    }
+                }
+                .x-grid-cell-inner {
+                    padding: 0px;
+                }
+            }
+        }
+    }
+
+    .idf-searchfield-grid {
+    
+    	.x-grid-item{
+    		border-color: #fff;
+    	}
+        .idf-searchfield-displayCol {
+            padding: 0px;
+        }
+        .idf-searchfield-displayCol {
+            .x-grid-cell-inner {
+                _font-size: 11px;
+                background-color: transparent;
+                _border-top-left-radius: 2px;
+                _border-bottom-left-radius: 2px;
+                line-height: 17px;
+                margin: 1px 0px 0px 1px; /* font-weight: bold; */
+            }
+        }
+        .idf-searchfield-removeBtnCol {
+            padding: 0px;
+            height: 15px;
+            cursor: pointer;
+        }
+        .idf-searchfield-removeBtnCol {
+            .x-grid-cell-inner {
+                height: 15px;
+                margin: 1px 0px 0px 0px;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                cursor: pointer;
+            }
+            .x-grid-cell-inner:after {
+                font-family: FontAwesome;
+                content: '\f00d';
+                color: black;
+            }
+        }
+    }
+
+    .idf-searchfield-trigger {
+        border: 1px solid transparent;
+        background-image: none;
+        background-color: transparent !important;
+        padding: 0px;
+        border-radius: 2px;
+        margin-left: -13px !important;
+        margin-top: 1px !important;
+
+        &.x-btn-over {
+            .x-btn-icon-el {
+                color: black;
+            }
+        }
+        &.x-btn-pressed {
+            border: none;
+            background: none;
+        }
+    }
+}
+
+.idf-searchfield-selected {
+    .x-grid-cell {
+        background-color: #ededed !important
+    }
+    &.x-grid-row-selected {
+        .x-grid-cell {
+            background-color: #d6c75c !important
+        }
+    }
+}

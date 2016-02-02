@@ -1,0 +1,12 @@
+.counters                                                                 {padding-bottom: 20px;}
+.counters .ux-view-item                                                   {display: block; border-bottom: 1px solid #fff; background-color: #eeeeee; text-align: left; padding-left: 6px;}
+.counters .ux-view-item .icon                                             {display: inline-block; float: left;}
+.counters .ux-view-item .text                                             {display: inline-block; height: 25px; line-height: 20px; color: #868689; padding-top: 2px; cursor: default; position: relative; width: 225px;}
+.counters .ux-view-item .count                                            {display: inline-block; height: 15px; width: 25px; background: url(images/separator.png) no-repeat 0 1px; margin-top:5px; padding-left: 2px; text-align: center; font-weight: bold; padding-right: 2px; font-size: 14px; float: right;}
+.counters .ux-view-item.x-item-over                                       {background-color: #c3cd05;}
+.counters .ux-view-item.x-item-over .text                                 {color: #fff;}
+.counters .ux-view-item.x-item-over .count                                {color: #fff;}
+.counters .ux-view-item.x-item-selected                                   {background-color: #00b0ca;}
+.counters .ux-view-item.x-item-selected .text                             {color: #fff;}
+.counters .ux-view-item.x-item-selected .count                            {color: #fff;}
+.counters .ux-view-item.x-item-selected.x-item-over                       {background-color: #c3cd05;}

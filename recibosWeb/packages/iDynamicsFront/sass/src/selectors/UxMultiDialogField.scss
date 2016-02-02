@@ -1,0 +1,118 @@
+.ux-multidialogfield {
+    .x-form-item-body {
+        background-color: #fff;
+        border: solid 1px #eee;
+        .ux-multidialogfield-grid {
+            border: 1px solid #fff !important;
+            background-color: #fff;
+            padding: 1px;
+            &.x-panel {
+                .x-grid-body {
+                    border: none !important;
+                    background-color: transparent;
+                    background-image: none;
+                }
+                .x-grid-view {
+                    border: none !important;
+                    background-color: transparent;
+                    background-image: none;
+                }
+                .x-grid-table {
+                    border: none;
+                    box-shadow: none;
+                }
+                .x-grid-cell {
+                    border: none;
+                    background-color: transparent; /* border-top: 1px solid #fff; */
+                    /* line-height: 10px; */
+                    /* height: 10px !important; */
+                }
+                .x-grid-row-over {
+                    .x-grid-cell {
+                        background-color: transparent !important
+                    }
+                }
+                .x-grid-cell-inner {
+                    padding: 0px;
+                }
+            }
+        }
+    }
+
+    .ux-multidialogfield-grid {
+        .ux-multidialogfield-displayCol {
+            padding: 0px;
+        }
+        .ux-multidialogfield-displayCol {
+            .x-grid-cell-inner {
+                font-size: 11px;
+                padding: 0px 0px 0px 7px;
+                background-color: #E0EEEE !important;
+                border-top-left-radius: 2px;
+                border-bottom-left-radius: 2px;
+                line-height: 15px;
+                margin: 1px 0px 0px 1px; /* font-weight: bold; */
+            }
+        }
+        .ux-multidialogfield-removeBtnCol {
+            padding: 0px;
+            height: 15px;
+            cursor: pointer;
+        }
+        .ux-multidialogfield-removeBtnCol {
+            .x-grid-cell-inner {
+                height: 15px;
+                margin: 1px 0px 0px 0px;
+                border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+                cursor: pointer;
+            }
+            .x-grid-cell-inner:after {
+                font-family: FontAwesome;
+                content: '\f00d';
+                color: black;
+            }
+        }
+    }
+
+    .ux-multidialogfield-trigger {
+        border: 1px solid transparent;
+        background-image: none;
+        background-color: transparent;
+        padding: 0px;
+        border-radius: 2px;
+        margin-left: -5px !important;
+        margin-top: 4px !important;
+        .ux-multidialogfield-triggerIcon {
+            margin: 0px;
+            left: 0px;
+            height: 20px;
+            color: #c0c0c0;
+        }
+        .ux-multidialogfield-searchIcon {
+            margin: 0px;
+            left: 0px;
+            height: 20px;
+            color: #c0c0c0;
+        }
+        &.x-btn-over {
+            .ux-multidialogfield-triggerIcon {
+                color: black;
+            }
+            .ux-multidialogfield-searchIcon {
+                color: black;
+            }
+        }
+    }
+}
+
+.ux-multidialogfield-selected {
+    .x-grid-cell {
+        background-color: #ededed !important
+    }
+    &.x-grid-row-selected {
+        .x-grid-cell {
+            background-color: #d6c75c !important
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.#{$prefix}tool-img {
+  overflow: hidden;
+  width: $tool-size;
+  height: $tool-size;
+  background-image: theme-background-image($tool-background-image);
+  background-color: $tool-glyph-color !important;
+  margin: 0;
+  @if $enable-font-icons {
+    color: $tool-glyph-color;
+    text-align: center;
+  }
+  @if $tool-opacity != 1 {
+    @include opacity($tool-opacity);
+  }
+  @if $tool-opacity-over != 1 or $tool-opacity != 1 {
+    .#{$prefix}tool-over & {
+      @include opacity($tool-opacity-over);
+    }
+  }
+  @if $tool-opacity-pressed != 1 or $tool-opacity != 1 {
+    .#{$prefix}tool-pressed & {
+      @include opacity($tool-opacity-pressed);
+    }
+  }
+}

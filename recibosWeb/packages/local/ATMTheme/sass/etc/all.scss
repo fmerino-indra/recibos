@@ -1,0 +1,118 @@
+$enable-font-icons: dynamic(true);
+
+$atm-background-color-menulist: dynamic(#424242);
+$atm-button-color-menulist: dynamic(#707070);
+$atm-button-color: dynamic(#fff);
+$alarm-button-border-color: dynamic(#8D4450);
+
+/*Neo Sans*/
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/NeoSans/AM261__.eot');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/NeoSans/AM263__.eot');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('fonts/NeoSans/AM265__.eot');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/NeoSans/AM267__.eot');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('NeoSans Light'), local('NeoSans-Light'), url('fonts/NeoSans/AM261__.TTF');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('NeoSans Regular'), local('NeoSans-Regular'), url('fonts/NeoSans/AM263__.TTF');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 500;
+  src: local('NeoSans Medium'), local('NeoSans-Medium'), url('fonts/NeoSans/AM265__.TTF');
+}
+
+@font-face {
+  font-family: 'NeoSans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('NeoSans Bold'), local('NeoSans-Bold'), url('fonts/NeoSans/AM267__.TTF');
+}
+
+/*Roboto*/
+/* Light */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url("fonts/Roboto/Roboto-Light.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 300;
+  src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url("fonts/Roboto/Roboto-LightItalic.ttf") format('truetype');
+}
+
+/* Normal */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url("fonts/Roboto/Roboto-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 400;
+  src: local('Roboto Italic'), local('Roboto-Italic'), url("fonts/Roboto/Roboto-Italic.ttf") format('truetype');
+}
+
+/* Bold */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url("fonts/Roboto/Roboto-Bold.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 700;
+  src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url("fonts/Roboto/Roboto-BoldItalic.ttf") format('truetype');
+}
+
+//Temporales
+.norisk{
+  display: none;
+}
+
+.x-tool-img {
+  background-image: none !important;
+}

@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "codigo": "M",
+      "nombre": "Mensual",
+      "frecuencia": 12,
+      "anticipacion": 0
+    }
+  ]
+}

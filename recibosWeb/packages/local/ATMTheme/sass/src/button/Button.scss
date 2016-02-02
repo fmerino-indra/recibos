@@ -1,0 +1,124 @@
+/** @class Ext.button.Button */
+//Eliminar sombras
+.#{$prefix}btn{
+  //eliminar sombras
+  &.#{$prefix}btn-focus {
+    box-shadow: none;
+    &.#{$prefix}btn-over {
+      box-shadow: none;
+    }
+  }
+}
+
+
+
+/* ATM UI's
+
+  toolbar: default
+  alarm
+
+*/
+
+/* TODO: PREPARADO PARA USAR DOBLE GLYPH CON VARIOS COLORES
+.#{$prefix}btn-glyph:after {
+  content: '?';
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  opacity: 0.6;
+  zoom:0.7;
+}
+*/
+
+/* UI highlight ····················································································································································································  */
+
+@include extjs-button-medium-ui (
+$ui: 'menulist',
+$border-color: dynamic(transparent),
+$border-color-over: dynamic(transparent),
+$border-color-focus: dynamic(transparent),
+$border-color-pressed: dynamic(transparent),
+$border-color-disabled: dynamic(transparent),
+$background-color: $atm-background-color-menulist,
+$background-color-over: $atm-background-color-menulist,
+$background-color-focus: $atm-background-color-menulist,
+$background-color-pressed: $atm-background-color-menulist,
+$background-color-disabled: $atm-background-color-menulist,
+$background-gradient: none,
+$background-gradient-over: none,
+$background-gradient-focus: none,
+$background-gradient-pressed: none,
+$background-gradient-disabled: none,
+$color: $atm-button-color,
+$color-over: $atm-button-color,
+$color-focus: $atm-button-color,
+$color-pressed: $atm-button-color,
+$color-disabled: $atm-button-color-menulist
+);
+
+/* UI warning ····················································································································································································  */
+/* EJEMPLO DE USO DE ESTE TIPO DE BOTÓN: GTD-LIST BUTTONS    */
+
+@include extjs-button-medium-ui(
+$ui: 'alarm',
+$background-color: transparent,
+$background-color-over: transparent,
+$background-color-focus: transparent,
+$background-color-pressed: transparent,
+$background-color-disabled: transparent,
+$background-gradient: none,
+$background-gradient-over: none,
+$background-gradient-focus: none,
+$background-gradient-pressed: none,
+$background-gradient-disabled: none,
+$border-radius: 0px,
+$border-width: 0px,
+$border-color: transparent,
+$border-color-over: transparent,
+$border-color-focus: transparent,
+$border-color-pressed: transparent,
+$border-color-disabled: transparent
+);
+
+
+.#{$prefix}btn-alarm-medium {
+    //eliminar sombras
+    &.#{$prefix}btn-focus {
+      box-shadow: none;
+      &.#{$prefix}btn-over {
+        box-shadow: none;
+      }
+    }
+  .#{$prefix}btn-icon-el-alarm-medium{
+    border-radius: $menulist-border-radius;
+    border: 2px solid $alarm-button-border-color;
+    width: 31px;
+    height: 31px;
+    font-size: 20px;
+  }
+}
+
+.degraded .x-btn-icon-el-alarm-medium {
+  background: $button-degradad-background;
+}
+.warning .x-btn-icon-el-alarm-medium {
+  background: $button-warning-background;
+}
+.error .x-btn-icon-el-alarm-medium {
+  background: $button-error-background;
+  background: @include filter-gradient(#F54A33, #ed1333, horizontal);
+  background: @include background-image(linear-gradient(left, #F54A33 0%, #F13133 24%, #EF1E32 46%,#EF2032 68%, #EC0432 100%));
+}
+.reset .x-btn-icon-el-alarm-medium {
+  background: transparent;
+}
+
+
+
+
+
+

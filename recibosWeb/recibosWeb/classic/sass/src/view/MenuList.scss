@@ -1,0 +1,145 @@
+
+
+@keyframes wavesound-critical {
+  from  {box-shadow: 0 0 0px 0px rgba(255,90,90,0.6); transform : rotate(30deg);}
+  to    {box-shadow: 0 0 0px 8px rgba(255,90,90,0);transform : rotate(-30deg);}
+}
+@keyframes wavesound-major {
+  from  {box-shadow: 0 0 0px 0px rgba(255,180,100,0.6);transform : rotate(30deg);}
+  to    {box-shadow: 0 0 0px 8px rgba(255,180,100,0);transform : rotate(-30deg);}
+}
+@keyframes wavesound-minor {
+  from  {box-shadow: 0 0 0px 0px rgba(255,255,120,0.6);transform : rotate(30deg);}
+  to    {box-shadow: 0 0 0px 8px rgba(255,255,120,0);transform : rotate(-30deg);}
+}
+@keyframes wavesound-bell {
+  from  {transform : rotate(30deg);}
+  to    {transform : rotate(-30deg);}
+}
+
+
+.alarm-sound.alarm-sound-critical .alarmsSummary .error     .x-btn-icon-el-alarm-medium  {animation:  wavesound-critical 1s infinite, wavesound-bell infinite alternate linear 0.28s;}
+.alarm-sound.alarm-sound-major    .alarmsSummary .warning   .x-btn-icon-el-alarm-medium  {animation:  wavesound-major    1s infinite, wavesound-bell infinite alternate linear 0.28s;}
+.alarm-sound.alarm-sound-minor    .alarmsSummary .degraded  .x-btn-icon-el-alarm-medium  {animation:  wavesound-minor    1s infinite,  wavesound-bell infinite alternate linear 0.28s;}
+
+
+.menulist {
+  background-color: $menulist-background-color;
+  border-bottom: 4px #353535 solid;
+  .toolbarmenulist {
+    background: transparent;
+
+    .title {
+      .x-form-item-label {
+        color: #FFFFFF;
+        font-size: 26px;
+        padding-top: 7px;
+        padding-left: 27px;
+      }
+    }
+
+    .differentView {
+      .x-btn-focus {
+        box-shadow: none;
+        &.x-btn-pressed {
+          box-shadow: none;
+          &.x-btn-default-toolbar-small {
+            box-shadow: none;
+            &.x-btn-over {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+      .x-segmented-button-item {
+        border: none;
+        background: transparent;
+        .x-btn-inner {
+          font-size: 15px;
+          width: auto;
+          height: 23px;
+          padding-top: 4px;
+          color: $menulist-color;
+        }
+        &.x-btn-pressed {
+          .x-btn-inner {
+            color: #FFFFFF;
+            box-shadow: #FFFFFF 0px 5px;
+          }
+        }
+      }
+    }
+
+    .btnradius {
+      background: transparent;
+      border: transparent;
+      top: 11px;
+      .x-btn-icon-el-default-toolbar-small {
+        color: #FFFFFF;
+        border-radius: $menulist-border-radius;
+        width: 34px;
+        height: 30px;
+        font-size: 20px;
+        padding-top: 4px;
+        border: 2px solid $alarm-button-border-color;
+
+      }
+      .x-btn-inner {
+        color: #FFFFFF;
+        padding-left: 1px;
+        font-size: 15px;
+        width: 12px;
+        height: 15px;
+      }
+      &.logout {
+        .x-btn-icon-el-default-toolbar-small {
+          border: transparent;
+          color: #FFFFFF;
+          font-size: 26px;
+          padding-top: 7px;
+        }
+      }
+    }
+  }
+  .user {
+    background: transparent;
+    border: transparent;
+    border-left: 1px dotted $menulist-color;
+    border-right: 1px dotted $menulist-color;
+  }
+  .alarmsSummary {
+    .#{$prefix}btn {
+      width: 68px;
+      transition: opacity 2s;
+      overflow: visible;
+      &.x-btn-focus.x-btn-menu-active,
+      &.x-btn-focus.x-btn-pressed {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+    .#{$prefix}btn-disabled {
+      opacity: 0.1;
+    }
+
+
+  }
+  .allAlarms {
+    width: 68px;
+    transition: opacity 2s;
+    &.#{$prefix}btn-disabled {
+      opacity: 0.1;
+    }
+  }
+  .alarm-error-sound {
+    .alarmsSummary {
+      .error {
+        .#{$prefix}btn-icon-el-alarm-medium {
+          opacity: 0.1;
+        }
+      }
+    }
+  }
+
+}

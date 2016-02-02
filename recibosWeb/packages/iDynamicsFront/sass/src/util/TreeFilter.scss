@@ -1,0 +1,23 @@
+.idf-treefilter {
+  
+  
+  .filter-field {
+		display: inline-block;
+    
+    
+		.x-form-clear-trigger {
+    	border-radius: 10px;
+		}
+	}
+  
+  .results-field {
+    display: inline-block;
+    
+    .x-form-display-field {
+	    font-size: 13px;
+	    font-weight: bold;
+	    padding: 0px 5px;
+	    color: #303030;
+    }
+  }
+}

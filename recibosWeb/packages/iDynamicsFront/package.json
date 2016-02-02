@@ -1,0 +1,35 @@
+{
+  "name"               : "iDynamicsFront",
+  "format"             : "1",
+  "version"            : "1.0.0",
+  "creator"            : "Centro de Competencias de Arquitecturas Front-End",
+  "summary"            : "Short summary",
+  "detailedDescription": "",
+  "type"               : "code",
+  "js"                 : [
+    {
+      "path": "vendor/log4javascript.js"
+    },
+    {
+      "path": "vendor/rsvp.js"
+    },
+    {
+      "path": "vendor/rx.js"
+    }
+  ],
+  "output"             : {
+    "base": "${package.dir}/build/${build.id}",
+    "js"  : "..",
+    "sass": ""
+  },
+  "local"              : true,
+  "framework"          : "ext",
+  "sass"               : {
+    "namespace": "iDynamicsFront"
+  },
+  "builds"             : {
+    "crisp": {
+      "theme": "ext-theme-crisp"
+    }
+  }
+}

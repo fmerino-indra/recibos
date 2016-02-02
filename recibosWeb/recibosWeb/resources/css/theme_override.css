@@ -1,0 +1,590 @@
+/* GENERALES ----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+html, body												{overflow:hidden !important}
+strong 													{font-weight:bold}
+
+html 													{height:100%; background: url('../images/ux/main-bg.png')}
+body 													{height:100%; text-align: center; padding: 20px !important; padding-top: 0px !important;}
+
+.x-body 												{color: black; font-size: 12px; font-family: arial, tahoma, verdana, sans-serif !important;}
+.x-splitter												{background: url('../images/ux/buttons/btn-splitter.png') no-repeat center top; height:12px !important; z-index:999999}
+
+/* separadores */
+.fields-group-separator 								{padding-right: 15px; background: url('../images/ux/fields-group-separator.png') repeat-x; height: 2px !important; width: 100% !important; margin: 15px 0 16px 0; overflow: hidden; }
+.x-toolbar-separator-horizontal 						{border: none !important; background:  transparent url('../images/ux/separator.png') no-repeat center center !important; width:1px !important; height:17px !important;}
+
+/* cargando y aviso de 'en construcción' */
+#loadingApp 											{display:block; height: 36px; background-color:#00b0ca; color:white; width:180px; left:50%; top:50%; margin-left:-90px; margin-top:-20px; position:relative; padding:10px; border-radius:4px; white-space:nowrap; border:solid 2px white; font-weight:bold; font-size:10px; text-transform:uppercase; text-align:center}
+.comming-soon											{background: whitesmoke !important; top:20px}
+.comming-soon .msg										{display:block; position:relative; color:#00b0ca; width:280px; left:50%; top:50%; margin-left:-90px; margin-top:-20px; position:relative; padding:10px; border-radius:4px; white-space:nowrap; font-weight:bold; font-size:10px; text-transform:uppercase; text-align:center; font-style:italic}
+/* --IE */
+.x-ie #loadingApp										{left:0px; height: 24px; margin: 0px; padding: 0; padding-top: 10px;}
+
+/* tools */
+.x-tool 												{border:none !important}
+.x-tool img 											{background-image: url('../images/ux/tool-sprites.png') !important; cursor: default;}
+.x-ie7 .x-panel-header-horizontal .x-tool, 
+.x-window-header-horizontal .x-tool 					{}
+
+/* color de fondo */
+.main-container .x-border-layout-ct						{background-color: #f5f5f5;}
+
+/* cabecera de los paneles */
+.x-panel-header											{background: none !important;border: none !important;}
+.x-panel-header-default-top								{}
+.x-panel-header-text-default 							{font-family: arial, tahoma, verdana, sans-serif !important; color: #303030; text-transform: uppercase;}
+
+/* sombra de los windows */
+.x-css-shadow 											{box-shadow: rgba(0,0,0,0.4) 4px 4px 64px 1px !important;}
+
+/* sombra que sale debajo del toolbar */
+.top-shadow 											{background: url('../images/ux/top-shadow-4px.png') repeat-x 0 bottom !important; width: 100%;height: 6px; top: 61px; left: 0px; position: absolute; z-index: 9999;}
+.x-ie .top-shadow										{top: 57px;}
+
+
+/* FOOTER -----------------------------------------------------------------------------------------------*/
+
+.footer-label									{float:left; font-family: arial; font-size: 11px; color: #fff; margin-left: 9px;}
+.footer-date									{float: right; font-family: arial; font-size: 11px; color: #fff; margin-right: 9px;}
+.footer-cnt										{background-color:#909090; border-radius: 4px; _padding-top: 5px; margin: 40px auto; width:960px; height:26px; line-height:26px;}
+.footer-cnt .x-panel-body-default				{background-color: transparent; border:0px solid;}
+
+
+/* MENU (MENU PRINCIPAL, MENU DE ORDENACION DE LAS COLUMNAS DEL GRID, ETC.) ----------------------------------------------------------------------------*/
+
+.x-column-header-trigger						{background-image: url(../images/ux/grid-trigger-order.png) !important;}
+.x-menu-body									{_background-color: #ebf6ff !important;}
+.x-menu-icon-separator							{width: 0; border: 0;}
+.x-menu-item-separator							{height: 1px; border: 0;}
+.x-menu-item-link								{text-align: left ;}
+
+
+/* BOUNDLIST (DROPDOWN DEL COMBOBOX Y EN LISTA) -----------------------------------------------------------------------------------------------------------------------*/
+
+.x-boundlist 									{border-width: 1px; border-style: solid; border-color: #b4cdd6 !important; background: white; padding: 4px; border-radius: 3px; font:normal 11px Arial; color: #151515;}
+.x-boundlist .x-boundlist-item-over 			{background : #8FD8E4; border-color : transparent; border-radius:3px}
+.x-boundlist .x-boundlist-selected				{background : #5fc0ce; color : #113439; border-radius:2px; border: none;}
+.x-boundlist .x-boundlist-item            		{text-align: left; padding: 2px 6px}
+
+.ux-dialog-fieldn .btns-container-boundlist		{text-align: right; margin-top: 2px;}
+.ux-dialog-fieldn .x-form-item-label			{margin-bottom: 2px;}
+
+
+/* BOTONES ------------------------------------------------------------------------------------------------------------------------*/
+
+/* BOTONES NORMALES */
+.ux-btn.x-btn-default-small,							
+.ux-btn.x-btn												{height: 26px !important; background: #5fc0ce; border:solid 1px #b9ecf4; padding:0 4px 0 2px !important;}
+.ux-btn.x-btn em											{}
+.ux-btn.x-btn button										{height: 26px !important;}
+.ux-btn.x-btn .x-btn-inner 									{height: 26px !important; line-height:24px !important; padding:0 11px 0 32px !important; font-size:11px; color:#303030;}
+.ux-btn.x-btn .x-btn-icon									{top:3px;}
+.ux-btn.x-btn.x-btn-over									{background-color: #5fc0ce; border-color: #5fc0ce;}
+.ux-btn.x-btn.x-btn-pressed  								{background-color: #5fc0ce; border-color: #5fc0ce}
+/* --IE */
+.x-ie .ux-btn.x-btn											{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat right top !IMPORTANT;}
+.x-ie .ux-btn.x-btn em										{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat left -30px !IMPORTANT;}
+.x-ie .ux-btn.x-btn.x-btn-over								{background-position: right  -60px !important;}
+.x-ie .ux-btn.x-btn.x-btn-over em							{background-position: left   -90px !important;}
+.x-ie .ux-btn.x-btn.x-btn-pressed							{background-position: right -120px !important;}
+.x-ie .ux-btn.x-btn.x-btn-pressed em						{background-position: left  -150px !important;}
+.x-ie .ux-btn.x-btn.x-btn-disabled							{background-position: right -180px !important;}
+.x-ie .ux-btn.x-btn.x-btn-disabled em						{background-position: left  -210px !important;}
+
+/* BOTONES HIGHTLIGHT */
+.ux-btn-highlighted.x-btn             						{height: 26px !important; background: #5fc0ce; border: 1px solid #b9ecf4; padding:0 4px 0 2px !important;}
+.ux-btn-highlighted.x-btn em                  				{}
+.ux-btn-highlighted.x-btn button              				{height: 26px !important;}
+.ux-btn-highlighted.x-btn .x-btn-inner     					{font-weight:bold; height: 26px !important; line-height:24px !important; padding:0 11px 0 32px !important; font-size:11px; color:#303030;}
+.ux-btn-highlighted.x-btn .x-btn-icon						{top:3px;}
+.ux-btn-highlighted.x-btn.x-btn-over        				{background-color: #5fc0ce; border-color: #5fc0ce}   
+.ux-btn-highlighted.x-btn.x-btn-pressed  					{background-color: #5fc0ce; border-color: #5fc0ce}
+/* --IE */
+.x-ie .ux-btn-highlighted.x-btn								{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat right top !important;}
+.x-ie .ux-btn-highlighted.x-btn em							{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat left -30px !important;}
+.x-ie .ux-btn-highlighted.x-btn.x-btn-over					{background-position: right  -60px !important;}
+.x-ie .ux-btn-highlighted.x-btn.x-btn-over em				{background-position: left   -90px !important;}
+.x-ie .ux-btn-highlighted.x-btn.x-btn-pressed				{background-position: right -120px !important;}
+.x-ie .ux-btn-highlighted.x-btn.x-btn-pressed em			{background-position: left  -120px !important;}
+.x-ie .ux-btn-highlighted.x-btn.x-btn-disabled				{background-position: right -180px !important;}
+.x-ie .ux-btn-highlighted.x-btn.x-btn-disabled em			{background-position: left  -210px !important;}
+
+/* BOTONES UX-TOOLBAR MEDIUM */
+.x-toolbar.ux-toolbar.medium .x-btn								{}
+.x-toolbar.ux-toolbar.medium .x-btn button						{}
+.x-toolbar.ux-toolbar.medium .x-btn .x-btn-inner 				{padding:0 5px 0 25px !important;}
+.x-toolbar.ux-toolbar.medium .x-btn.over						{background-image: none !important; background-color: #5fc0ce; border-color: #5fc0ce}
+.x-toolbar.ux-toolbar.medium .x-btn.over .x-btn-inner 			{}
+.x-toolbar.ux-toolbar.medium .x-btn.x-disabled .x-btn-inner 	{}
+.x-toolbar.ux-toolbar.medium .x-btn.x-disabled 					{}
+/* --IE */
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn						{height: 26px !important; padding:0 4px 0 0 !important; margin-top: 2px;}
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn em					{}
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn button				{width: auto; height: 26px !important;}
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn .x-btn-inner 			{height: 22px !important; line-height:20px !important; padding:0 11px 0 32px !important; font-size:11px; color:#303030;}
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn-over					{background-color: transparent;}
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn-over					{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat right -60px !IMPORTANT;}
+.x-ie .x-toolbar.ux-toolbar.medium .x-btn-over em				{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat left -90px !IMPORTANT;}
+
+/* BOTONES UX-TOOLBAR SMALL */
+.x-toolbar.ux-toolbar.small .x-btn								{height: 22px !important;}
+.x-toolbar.ux-toolbar.small .x-btn button						{height: 22px !important;}
+.x-toolbar.ux-toolbar.small .x-btn .x-btn-inner 				{height: 22px; padding:0 5px 0 25px !important;}
+.x-toolbar.ux-toolbar.small .x-btn.over							{background-image: none !important; background-color: #5fc0ce; border-color: #5fc0ce}
+.x-toolbar.ux-toolbar.small .x-btn.over .x-btn-inner 			{height: 22px !important;}
+.x-toolbar.ux-toolbar.small .x-btn.x-disabled .x-btn-inner 		{}
+.x-toolbar.ux-toolbar.small .x-btn.x-disabled 					{}
+/* --IE */
+.x-ie .x-toolbar.ux-toolbar.small .x-btn						{height: 22px !important; padding:0 4px 0 0 !important; margin-top: 2px;}
+.x-ie .x-toolbar.ux-toolbar.small .x-btn em						{}
+.x-ie .x-toolbar.ux-toolbar.small .x-btn button					{width: auto; height: 22px !important;}
+.x-ie .x-toolbar.ux-toolbar.small .x-btn .x-btn-inner 			{height: 22px !important; line-height:20px !important; padding:0 11px 0 32px !important; font-size:11px; color:#303030;}
+.x-ie .x-toolbar.ux-toolbar.small .x-btn-over					{background-color: transparent;}
+.x-ie .x-toolbar.ux-toolbar.small .x-btn-over					{background: transparent url(../images/ux/buttons/btn-base-small-ie.png) no-repeat right -60px !IMPORTANT;}
+.x-ie .x-toolbar.ux-toolbar.small .x-btn-over em				{background: transparent url(../images/ux/buttons/btn-base-small-ie.png) no-repeat left -90px !IMPORTANT;}
+
+/* ICONOS DE BOTONES */
+.x-btn .x-btn-icon  									{width:24px !important; height:22px !important; top:2px; background: url('../images/ux/ICONS_TOOLBARS_60x60_MONOCROMO.png') no-repeat 0 0;}
+.x-ie .x-btn .x-btn-icon								{margin-left: 4px;}
+
+.x-btn .x-btn-icon.icon-fileAdd							{background-position:	 0px 	0px !important;}
+.x-btn .x-btn-icon.icon-fileRemove						{background-position:	-60px 	0px !important;}
+.x-btn .x-btn-icon.icon-fileNew							{background-position:	-120px 	0px !important;}
+.x-btn .x-btn-icon.icon-window							{background-position:	-180px 	0px !important;}
+.x-btn .x-btn-icon.icon-windowCancel					{background-position:	-240px 	0px !important;}
+.x-btn .x-btn-icon.icon-fileCancel						{background-position:	-300px 	0px !important;}
+.x-btn .x-btn-icon.icon-file							{background-position:	-360px 	0px !important;}
+.x-btn .x-btn-icon.icon-fileExport						{background-position:	-420px 	0px !important;}
+.x-btn .x-btn-icon.icon-fileImport						{background-position:	-480px 	0px !important;}
+.x-btn .x-btn-icon.icon-fileData						{background-position:	-540px 	0px !important;}
+
+.x-btn .x-btn-icon.icon-delete							{background-position:	 0px 	-60px !important;}
+.x-btn .x-btn-icon.icon-edit							{background-position:	-60px 	-60px !important;}
+.x-btn .x-btn-icon.icon-search							{background-position:	-120px 	-60px !important;}
+.x-btn .x-btn-icon.icon-disable							{background-position:	-180px 	-60px !important;}
+.x-btn .x-btn-icon.icon-accept							{background-position:	-240px 	-60px !important;}
+.x-btn .x-btn-icon.icon-cancel							{background-position:	-300px 	-60px !important;}
+.x-btn .x-btn-icon.icon-cursorDown						{background-position:	-360px 	-60px !important;}
+.x-btn .x-btn-icon.icon-cursorRight						{background-position:	-420px 	-60px !important;}
+.x-btn .x-btn-icon.icon-cursorLeft						{background-position:	-480px 	-60px !important;}
+.x-btn .x-btn-icon.icon-cursorUp						{background-position:	-540px 	-60px !important;}
+
+.x-btn .x-btn-icon.icon-arrowLeft						{background-position:	 0px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowLeftDown					{background-position:	-60px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowDown						{background-position:	-120px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowRightDown					{background-position:	-180px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowRight						{background-position:	-240px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowRightUp					{background-position:	-300px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowUp							{background-position:	-360px 	-120px !important;}
+.x-btn .x-btn-icon.icon-arrowLeftUp						{background-position:	-420px 	-120px !important;}
+.x-btn .x-btn-icon.icon-attention						{background-position:	-480px 	-120px !important;}
+.x-btn .x-btn-icon.icon-calculator						{background-position:	-540px 	-120px !important;}
+
+.x-btn .x-btn-icon.icon-calendar						{background-position:	 0px 	-180px !important;}
+.x-btn .x-btn-icon.icon-calendar2						{background-position:	-60px 	-180px !important;}
+.x-btn .x-btn-icon.icon-chart							{background-position:	-120px 	-180px !important;}
+.x-btn .x-btn-icon.icon-chart2							{background-position:	-180px 	-180px !important;}
+.x-btn .x-btn-icon.icon-messageAttention				{background-position:	-240px 	-180px !important;}
+.x-btn .x-btn-icon.icon-message							{background-position:	-300px 	-180px !important;}
+.x-btn .x-btn-icon.icon-Checked							{background-position:	-360px 	-180px !important;}
+.x-btn .x-btn-icon.icon-Unchecked						{background-position:	-420px 	-180px !important;}
+.x-btn .x-btn-icon.icon-clip							{background-position:	-480px 	-180px !important;}
+.x-btn .x-btn-icon.icon-copy							{background-position:	-540px 	-180px !important;}
+
+.x-btn .x-btn-icon.icon-cut								{background-position:	 0px 	-240px !important;}
+.x-btn .x-btn-icon.icon-past							{background-position:	-60px 	-240px !important;}
+.x-btn .x-btn-icon.icon-clock							{background-position:	-120px 	-240px !important;}
+.x-btn .x-btn-icon.icon-cloud							{background-position:	-180px 	-240px !important;}
+.x-btn .x-btn-icon.icon-conf							{background-position:	-240px 	-240px !important;}
+.x-btn .x-btn-icon.icon-conf2							{background-position:	-300px 	-240px !important;}
+.x-btn .x-btn-icon.icon-download						{background-position:	-360px 	-240px !important;}
+.x-btn .x-btn-icon.icon-contact							{background-position:	-420px 	-240px !important;}
+.x-btn .x-btn-icon.icon-cursorArrow						{background-position:	-480px 	-240px !important;}
+.x-btn .x-btn-icon.icon-cursorDrag						{background-position:	-540px 	-240px !important;}
+
+.x-btn .x-btn-icon.icon-handClose						{background-position:	 0px 	-300px !important;}
+.x-btn .x-btn-icon.icon-handOpen						{background-position:	-60px 	-300px !important;}
+.x-btn .x-btn-icon.icon-splitH							{background-position:	-120px 	-300px !important;}
+.x-btn .x-btn-icon.icon-splitV							{background-position:	-180px 	-300px !important;}
+.x-btn .x-btn-icon.icon-bd								{background-position:	-240px 	-300px !important;}
+.x-btn .x-btn-icon.icon-desconnect						{background-position:	-300px 	-300px !important;}
+.x-btn .x-btn-icon.icon-noConnect						{background-position:	-360px 	-300px !important;}
+.x-btn .x-btn-icon.icon-connect							{background-position:	-420px 	-300px !important;}
+.x-btn .x-btn-icon.icon-netComponent					{background-position:	-480px 	-300px !important;}
+.x-btn .x-btn-icon.icon-netWork							{background-position:	-540px 	-300px !important;}
+
+.x-btn .x-btn-icon.icon-ffNext							{background-position:	 0px 	-360px !important;}
+.x-btn .x-btn-icon.icon-RewPrev							{background-position:	-60px 	-360px !important;}
+.x-btn .x-btn-icon.icon-ff								{background-position:	-120px 	-360px !important;}
+.x-btn .x-btn-icon.icon-rew								{background-position:	-180px 	-360px !important;}
+.x-btn .x-btn-icon.icon-prev							{background-position:	-240px 	-360px !important;}
+.x-btn .x-btn-icon.icon-next							{background-position:	-300px 	-360px !important;}
+.x-btn .x-btn-icon.icon-play							{background-position:	-360px 	-360px !important;}
+.x-btn .x-btn-icon.icon-pause							{background-position:	-420px 	-360px !important;}
+.x-btn .x-btn-icon.icon-rec								{background-position:	-480px 	-360px !important;}
+.x-btn .x-btn-icon.icon-stop							{background-position:	-540px 	-360px !important;}
+
+.x-btn .x-btn-icon.icon-folderExport					{background-position:	 0px 	-420px !important;}
+.x-btn .x-btn-icon.icon-folderCancel					{background-position:	-60px 	-420px !important;}
+.x-btn .x-btn-icon.icon-folder							{background-position:	-120px 	-420px !important;}
+.x-btn .x-btn-icon.icon-folderRemove					{background-position:	-180px 	-420px !important;}
+.x-btn .x-btn-icon.icon-folderOpen						{background-position:	-240px 	-420px !important;}
+.x-btn .x-btn-icon.icon-folderAdd						{background-position:	-300px 	-420px !important;}
+.x-btn .x-btn-icon.icon-home							{background-position:	-360px 	-420px !important;}
+.x-btn .x-btn-icon.icon-export							{background-position:	-420px 	-420px !important;}
+.x-btn .x-btn-icon.icon-import							{background-position:	-480px 	-420px !important;}
+.x-btn .x-btn-icon.icon-eject							{background-position:	-540px 	-420px !important;}
+
+.x-btn .x-btn-icon.icon-indentDecrease					{background-position:	 0px 	-480px !important;}
+.x-btn .x-btn-icon.icon-indentIncrease					{background-position:	-60px 	-480px !important;}
+.x-btn .x-btn-icon.icon-information						{background-position:	-120px 	-480px !important;}
+.x-btn .x-btn-icon.icon-key								{background-position:	-180px 	-480px !important;}
+.x-btn .x-btn-icon.icon-layers							{background-position:	-240px 	-480px !important;}
+.x-btn .x-btn-icon.icon-lighting						{background-position:	-300px 	-480px !important;}
+.x-btn .x-btn-icon.icon-link							{background-position:	-360px 	-480px !important;}
+.x-btn .x-btn-icon.icon-list							{background-position:	-420px 	-480px !important;}
+.x-btn .x-btn-icon.icon-listNumber						{background-position:	-480px 	-480px !important;}
+.x-btn .x-btn-icon.icon-imageText						{background-position:	-540px 	-480px !important;}
+
+.x-btn .x-btn-icon.icon-mail							{background-position:	 0px 	-540px !important;}
+.x-btn .x-btn-icon.icon-mail2							{background-position:	-60px 	-540px !important;}
+.x-btn .x-btn-icon.icon-printer							{background-position:	-120px 	-540px !important;}
+.x-btn .x-btn-icon.icon-mic								{background-position:	-180px 	-540px !important;}
+.x-btn .x-btn-icon.icon-mic2							{background-position:	-240px 	-540px !important;}
+.x-btn .x-btn-icon.icon-monitor							{background-position:	-300px 	-540px !important;}
+.x-btn .x-btn-icon.icon-music							{background-position:	-360px 	-540px !important;}
+.x-btn .x-btn-icon.icon-layout							{background-position:	-420px 	-540px !important;}
+.x-btn .x-btn-icon.icon-expand							{background-position:	-480px 	-540px !important;}
+.x-btn .x-btn-icon.icon-expand2							{background-position:	-540px 	-540px !important;}
+
+.x-btn .x-btn-icon.icon-notepad							{background-position:	 0px 	-600px !important;}
+.x-btn .x-btn-icon.icon-notepad2						{background-position:	-60px 	-600px !important;}
+.x-btn .x-btn-icon.icon-onOff							{background-position:	-120px 	-600px !important;}
+.x-btn .x-btn-icon.icon-lockClose						{background-position:	-180px 	-600px !important;}
+.x-btn .x-btn-icon.icon-lockOpen						{background-position:	-240px 	-600px !important;}
+.x-btn .x-btn-icon.icon-lockOpen2						{background-position:	-300px 	-600px !important;}
+.x-btn .x-btn-icon.icon-phone							{background-position:	-360px 	-600px !important;}
+.x-btn .x-btn-icon.icon-phoneMovil						{background-position:	-420px 	-600px !important;}
+.x-btn .x-btn-icon.icon-phoneTouch						{background-position:	-480px 	-600px !important;}
+.x-btn .x-btn-icon.icon-square							{background-position:	-540px 	-600px !important;}
+
+.x-btn .x-btn-icon.icon-picture							{background-position:	 0px 	-660px !important;}
+.x-btn .x-btn-icon.icon-pinMap							{background-position:	-60px 	-660px !important;}
+.x-btn .x-btn-icon.icon-pinMap2							{background-position:	-120px 	-660px !important;}
+.x-btn .x-btn-icon.icon-podCast							{background-position:	-180px 	-660px !important;}
+.x-btn .x-btn-icon.icon-camera							{background-position:	-240px 	-660px !important;}
+.x-btn .x-btn-icon.icon-pushPin							{background-position:	-300px 	-660px !important;}
+.x-btn .x-btn-icon.icon-redo							{background-position:	-360px 	-660px !important;}
+.x-btn .x-btn-icon.icon-refresh							{background-position:	-420px 	-660px !important;}
+.x-btn .x-btn-icon.icon-reload							{background-position:	-480px 	-660px !important;}
+.x-btn .x-btn-icon.icon-sand							{background-position:	-540px 	-660px !important;}
+
+.x-btn .x-btn-icon.icon-save							{background-position:	 0px 	-720px !important;}
+.x-btn .x-btn-icon.icon-share							{background-position:	-60px 	-720px !important;}
+.x-btn .x-btn-icon.icon-share2							{background-position:	-120px 	-720px !important;}
+.x-btn .x-btn-icon.icon-shield							{background-position:	-180px 	-720px !important;}
+.x-btn .x-btn-icon.icon-shopCart						{background-position:	-240px 	-720px !important;}
+.x-btn .x-btn-icon.icon-shopBag							{background-position:	-300px 	-720px !important;}
+.x-btn .x-btn-icon.icon-soundHight						{background-position:	-360px 	-720px !important;}
+.x-btn .x-btn-icon.icon-soundLow						{background-position:	-420px 	-720px !important;}
+.x-btn .x-btn-icon.icon-soundMute						{background-position:	-480px 	-720px !important;}
+.x-btn .x-btn-icon.icon-chat							{background-position:	-540px 	-720px !important;}
+
+.x-btn .x-btn-icon.icon-bubble							{background-position:	 0px 	-780px !important;}
+.x-btn .x-btn-icon.icon-bubbleLine						{background-position:	-60px 	-780px !important;}
+.x-btn .x-btn-icon.icon-remove							{background-position:	-120px 	-780px !important;}
+.x-btn .x-btn-icon.icon-add								{background-position:	-180px 	-780px !important;}
+.x-btn .x-btn-icon.icon-star							{background-position:	-240px 	-780px !important;}
+.x-btn .x-btn-icon.icon-star2							{background-position:	-300px 	-780px !important;}
+.x-btn .x-btn-icon.icon-clock							{background-position:	-360px 	-780px !important;}
+.x-btn .x-btn-icon.icon-tag								{background-position:	-420px 	-780px !important;}
+.x-btn .x-btn-icon.icon-target							{background-position:	-480px 	-780px !important;}
+.x-btn .x-btn-icon.icon-user							{background-position:	-540px 	-780px !important;}
+
+.x-btn .x-btn-icon.icon-users							{background-position:	 0px 	-840px !important;}
+.x-btn .x-btn-icon.icon-wireless						{background-position:	-60px 	-840px !important;}
+.x-btn .x-btn-icon.icon-tools							{background-position:	-120px 	-840px !important;}
+
+
+/* SIN ICONO (adaptamos el padding del label y quitamos el background del icon) */
+.x-btn.x-btn-noicon .x-btn-inner							{padding:0 11px 0 15px !important;}
+.x-btn.x-btn-noicon .x-btn-icon								{background: none;}
+
+
+/* TOOLBAR -----------------------------------------------------------------------------------------------------------------------------*/
+
+/* UX-TOOLBAR CON BOTONES SIN LABEL */
+.x-toolbar.ux-toolbar.noLabels .x-btn .x-btn-inner			{padding: 0 !important; width: 20px;}
+/* --IE */
+.x-ie .x-toolbar.ux-toolbar.noLabels .x-btn .x-btn-inner	{padding: 0 !important;}
+
+/* UX-TOOLBAR MEDIUM */
+.x-toolbar.ux-toolbar.medium								{}
+
+/* UX-TOOLBAR SMALL */
+.x-toolbar.ux-toolbar.small									{}
+.x-toolbar.ux-toolbar.small .x-btn .x-btn-icon				{top: -2px;}
+/* --IE */
+.x-ie .x-toolbar.ux-toolbar.small .x-btn .x-btn-icon		{top: 0px;}
+
+/* MAIN-TOOLBAR */
+.x-toolbar.main-toolbar										{border-color: #e5e5e5; background-color: #f9f9f9; background-image: none;}
+
+/* TOOLBAR FOOTER */
+.x-toolbar-footer 											{background-color: #fff; height: 30px !important;}
+.x-toolbar-footer .x-box-inner								{height: 30px !important;}
+/* -- IE */
+.x-ie .x-toolbar-footer										{height: 26px !important; padding-left: 0px !important;}
+.x-ie .x-toolbar-footer .x-box-inner						{height: 26px !important;}
+
+/* PAGGING TOOLBAR */
+.pagingtoolbar												{border-top: 1px solid #d2d2d2 !important; background: #f9f9f9;}
+.pagingtoolbar > .x-box-inner								{height: 26px !important;}
+
+
+/* FORMULARIOS  ----------------------------------------------------------------------------------------------------------------------------- */
+
+/* LABEL */
+.x-form-item-label,
+.x-form-item-label-top 											{text-align:left; color: #059fb8; font-size: 12px;}
+
+/* FIELDS */
+.x-form-text		  											{height:22px; background: white none; font:bold 11px Arial; color:#303030; border-radius: 3px; -moz-border-radius: 3px; border: 1px solid #b4cdd6 !important; padding:0px 10px}
+.x-form-cb-wrap													{color:#303030;}
+.x-field-form-focus    											{border-color: #5fcfdf !important}
+TEXTAREA.x-form-field											{color:#303030; padding: 0 10px;}
+.x-form-text.x-form-required-field, 
+textarea.x-form-field.x-form-required-field 					{background: white url('../images/ux/required-field.png') no-repeat 2px center !important;}
+.x-form-field.x-field-form-focus, 
+textarea.x-form-field.x-field-form-focus 						{}
+/*-- IE */
+.x-ie .x-form-text												{padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0; height: 20px;}
+.x-ie TEXTAREA.x-form-field										{height: auto;}
+
+/* VALIDATION FIELD */
+.x-form-invalid-field, textarea .x-form-invalid-field			{border-color: red !important;}
+
+/*-- adaptamos los td de los trigger para las imagenes --*/
+.x-form-trigger-wrap td											{_width: 23px !important;}
+.x-form-trigger-wrap .x-form-trigger-input-cell					{width: 100% !important;}
+
+/* COMBO */
+.ux-combo .x-form-field 										{border-radius: 3px 0 0 3px !important; -moz-border-radius: 3px 0 0 3px; border: 1px solid #b4cdd6; border-right:0 none !important;}
+.ux-combo .x-form-trigger 										{background: transparent url('../images/ux/form/trigger.png') no-repeat 0 center; border-radius: 0 3px 3px 0 !important; -moz-border-radius: 0 3px 3px 0; border: 1px solid #b4cdd6; border-left:0 none !important; height:22px; width:23px !important}
+.ux-combo .x-form-trigger.x-form-trigger-over					{border: 1px solid #b4cdd6; background-position: -46px center}
+.ux-combo .x-form-trigger-wrap-focus .x-form-trigger 			{border: 1px solid #5fcfdf; background-position: -23px center}
+.ux-combo .x-field-form-focus                               	{border-color: #5fcfdf}
+/* -- IE */
+.x-ie .ux-combo .x-form-trigger									{width: 22px !important; height: 20px;}
+
+/* datepicker
+.ux-datepicker .x-form-trigger-wrap-focus .x-form-field 		{border-radius: 3px 0 0 3px !important; -moz-border-radius: 3px 0 0 3px; border: 1px solid #5fcfdf; border-right:0 none !important;}
+.ux-datepicker .x-form-field 									{border-radius: 3px 0 0 3px !important; -moz-border-radius: 3px 0 0 3px; border: 1px solid #b4cdd6; border-right:0 none !important;}
+.x-form-date-trigger  											{background: url('../images/ux/form/date-trigger.png') no-repeat 0 center; border-radius: 0 3px 3px 0 !important; -moz-border-radius: 0 5px 5px 0; border: 1px solid #bbd7df; border-left:0 none !important; height:22px !important; width:23px !important}	
+.x-form-date-trigger-over										{border: 1px solid #b4cdd6; background-position: -23px center !important;}
+.x-form-date-trigger-focus 										{border: 1px solid #5fcfdf; background-position: -23px center !important;}
+.x-form-date-trigger-click 										{border: 1px solid #5fcfdf; background-position: -46px center !important;}
+.ux-datepicker .x-form-trigger-wrap-focus .x-form-trigger		{border: 1px solid #5fcfdf; background-position: -23px center !important;}
+.ux-datepicker .emptytext-date::-webkit-input-placeholder,        
+.ux-datepicker .x-field-form-focus::-webkit-input-placeholder	{color: #19a8bc !important; font:italic 11px Arial}
+/* -- IE
+.x-ie .x-form-date-trigger										{height: 20px !important; width: 22px !important;}
+ */
+
+/* spinner
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-up,
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-down          	{background: transparent url('../images/ux/form/spinner.png') no-repeat 0 0; border-left:0 none !important; height:11px; width:23px !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-down           {background-position: 0 -11px !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-up-over	    {background-position: -23px 0 !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-down-over      {background-position: -23px -11px !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-up-click       {background-position: -46px 0 !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-down-click     {background-position: -46px -11px !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-up-disabled    {background-position: -69px 0 !important}
+.ux-spinner .x-form-trigger-wrap .x-form-spinner-down-disabled  {background-position: -69px -11px !important}
+.ux-spinner .x-form-field 										{border-radius: 3px 0 0 3px !important; -moz-border-radius: 3px 0 0 3px; border: 1px solid #b4cdd6; border-right:0 none !important;}
+
+.x-form-trigger-wrap .x-form-spinner-up, 
+.x-form-trigger-wrap .x-form-spinner-down 						{height: 11px !important}
+
+/* html-editor */
+.x-html-editor-wrap												{border: none 0; border: 1px solid #b4cdd6;}
+.x-html-editor-tb 												{background-color:white; border-bottom:solid 1px #dbeefe}
+.x-html-editor-wrap	.x-btn-default-small, 
+.x-html-editor-wrap	.x-btn 										{height: 16px !important;}
+.x-html-editor-wrap	.x-btn em									{height: 16px !important;}
+.x-html-editor-wrap	.x-btn .x-btn-inner 						{padding: 0px !important; line-height: 16px !important; height: 16px !important; font-size: 12px; color: white; }
+.x-html-editor-wrap	.x-btn button 								{height:16px !important;}
+
+/* POPUP ADVISOR VALIDATION FORMULARIO */
+.form-validation-popup .error-list								{}
+.form-validation-popup .error-list .level1						{padding-top: 5px;}
+.form-validation-popup .error-list .level1 .bloque				{display: block; padding: 2px 1px; }
+.form-validation-popup .error-list .level1 .campo				{display: inline-table; font-weight: bold; padding-right: 8px;}
+.form-validation-popup .error-list .level1 .error				{display: inline-table;}
+
+
+/* WINDOWS --------------------------------------------------------------------------------------------------------------------------- */
+
+.x-window-default 							{padding: 0px; border: solid 4px white; background-color: #fafafa; -moz-box-shadow: none; -webkit-box-shadow: none; -o-box-shadow: none; box-shadow: none;} 
+.x-window-header 							{background-color: #5fc0ce;}
+.x-window-header-body 						{border-radius: 3px !important; border:none; padding: 2px 0px 2px 6px; _background-color: #f21c0a;} 
+.x-window-header-text-default 				{color: #303030; font-weight: bold; line-height: 20px; font-family: arial, tahoma, verdana, sans-serif; font-size: 12px;}
+.x-window-body-default,				
+.x-panel-body-default						{border:none !important; background:transparent;}
+/*--- IE */
+.x-ie .x-window-body						{_top: 23px !important;}
+.x-ie .x-window-default-tl					{background-image: url('../images/ux/window/window-default-corners.png') !important;}
+.x-ie .x-window-default-tr					{background-image: url('../images/ux/window/window-default-corners.png') !important;}
+.x-ie .x-window-default-tc					{background-image: url('../images/ux/window/window-default-corners.png') !important;}
+.x-ie .x-window-default-ml					{background-image: url('../images/ux/window/window-default-sides.png') !important;}
+.x-ie .x-window-default-mr					{background-image: url('../images/ux/window/window-default-sides.png') !important;}
+.x-ie .x-window-default-mc					{background: white none !important;}
+.x-ie .x-window-header-default-top-tl		{background-image: none !important;}
+.x-ie .x-window-header-default-top-tc		{background-image: none !important;}
+.x-ie .x-window-header-default-top-tr		{background-image: none !important;}
+.x-ie .x-window-header-default-top-ml		{background-image: none !important;}
+.x-ie .x-window-header-default-top-mc		{background-image: none !important; background-color: #e8e8e8 !important;}
+.x-ie .x-window-header-default-top-mr		{background-image: none !important;}
+.x-ie .x-window-default-bl					{background-image: url('../images/ux/window/window-default-corners.png') !important;}
+.x-ie .x-window-default-bc					{background-image: url('../images/ux/window/window-default-corners.png') !important;}
+.x-ie .x-window-default-br					{background-image: url('../images/ux/window/window-default-corners.png') !important;}
+
+
+/* MESSAGE BOX -----------------------------------------------------------------------------------------------------------------------------*/
+
+.x-message-box 										{background:#ffffff url('../images/ux/main-bg.png') repeat 0 -1px;}
+.x-message-box .x-container							{padding:0 !important}
+.x-message-box .x-window-body 						{background-color: transparent; border: none; padding-top: 10px;}
+.x-message-box.ux-mb .x-window-item .x-box-inner	{min-height: 70px;}
+.x-message-box.ux-mb .x-dlg-icon					{background: url('../images/ux/notification-icons.png') no-repeat 0 0 !important; width: 80px !important; height:70px !important;}
+.x-message-box.ux-mb .x-message-box-info			{background-position: 0px 0 !important;}
+.x-message-box.ux-mb .x-message-box-error			{background-position: -80px 0 !important;}
+.x-message-box.ux-mb .x-message-box-warning			{background-position: -160px 0 !important;}
+.x-message-box.ux-mb .x-message-box-question		{background-position: -240px 0 !important;}
+.x-message-box.ux-mb .x-form-display-field			{font-size: 11px; color: #303030; text-align: left; padding-left: 30px; font-family: arial; padding-right: 25px;}
+/* ---botones */
+.x-message-box .x-btn-default-small,							
+.x-message-box .x-btn								{background: #46c6d9; border:solid 1px #dff5f9;}
+.x-message-box .x-btn em							{}
+.x-message-box .x-btn button						{}
+.x-message-box .x-btn .x-btn-inner 					{}
+.x-message-box .x-btn.x-btn-over					{background-color: #46c6d9; border-color: #fff;}
+.x-message-box .x-btn.x-btn-pressed  				{background-color: #00b0ca; border-color: #fff}
+/* --IE */
+.x-message-box .x-ie .x-btn							{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat right top !IMPORTANT;}
+.x-message-box .x-ie .x-btn em						{background: transparent url(../images/ux/buttons/btn-base-ie.png) no-repeat left -30px !IMPORTANT;}
+.x-message-box .x-ie .x-btn.x-btn-over				{background-position: right  -60px !important;}
+.x-message-box .x-ie .x-btn.x-btn-over em			{background-position: left   -90px !important;}
+.x-message-box .x-ie .x-btn.x-btn-pressed			{background-position: right -120px !important;}
+.x-message-box .x-ie .x-btn.x-btn-pressed em		{background-position: left  -150px !important;}
+.x-message-box .x-ie .x-btn.x-btn-disabled			{background-position: right -180px !important;}
+.x-message-box .x-ie .x-btn.x-btn-pressed em		{background-position: left  -210px !important;}
+
+
+/* GRID --------------------------------------------------------------------------------------------------------------------------------------*/
+
+.x-grid-header-ct														{border:none; border-bottom: solid 1px #e5e5e5 !important; border-top: solid 1px #e5e5e5 !important; background: none white !important;} /*HIGAR - border-bottom: solid 1px #cdf0f5 !important;*/
+.x-column-header 														{border: none !important; background: none #f0f0f0 !important; border-left:solid 1px #e5e5e5 !important} /*HIGAR - border-left:solid 1px #cceff4 !important*/
+.x-column-header-inner 													{height:29px !important; background: none transparent !important; padding-left:9px;}
+.x-column-header .x-column-header-text									{display:inline-block; font:normal 11px Arial; color: #059fb8; text-transform:uppercase;} /*HIGAR - color: #00d0e1*/
+.x-column-header-first                									{border: none !important;}
+/* -- IE */
+.x-ie .x-column-header-inner 											{height:22px !important;}
+
+.x-grid-row .x-grid-cell												{background-color: transparent; border-color:#f5f5f5 !important; border:none; border-bottom:solid 1px;} /*HIGAR - border-color:#cceff4 !important;*/
+.x-grid-row .x-grid-cell 												{-webkit-transition: background-color  .4s ease; -moz-transition: background-color  .4s ease; -ms-transition: background-color  .4s ease; -o-transition: background-color  .4s ease; transition: background-color  .4s ease;}
+.x-grid-row .x-grid-cell-inner 											{padding-left: 10px !important; padding-right: 10px;}			
+.x-grid-row.x-grid-row-selected .x-grid-cell							{background-color:#5fc0ce !important; color:white !important}
+/* .x-grid-row.x-grid-row-selected.x-grid-row-focused .x-grid-cell 		{background-color:#5fc0ce !important} */
+.x-grid-row.x-grid-row-over .x-grid-cell								{background-color: #8FD8E4 !important} /*HIGAR - color: #cceff4 !important;*/
+.x-grid-row-alt .x-grid-cell, 
+.x-grid-row-alt .x-grid-rowwrap-div   									{background-color: transparent;}
+
+.x-grid-row .x-grid-cell-first	     									{border-left:none !important}
+.x-grid-row .x-grid-cell-special   										{background: none transparent !important; border-right: none}
+.x-grid-row .x-grid-cell-special .x-grid-cell-inner  					{padding-right: 9px; padding-top: 3px} 
+
+/* align */
+.centerHd																{text-align: center;}
+
+
+/* TREE (NECESARIO LOS ESTILOS DE GRID) -------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* Body */
+.tree .x-grid-row .x-grid-cell-inner   							{padding-top: 0px; margin-top: -1px; padding-left: 11px}
+.tree .x-grid-row .x-grid-cell-treecolumn .x-grid-cell-inner	{padding-top: 3px; }
+/* -- IE */
+.x-ie .tree .x-grid-row .x-grid-cell-treecolumn .x-grid-cell-inner	{padding-top: 0px;}
+
+/* Iconos de las filas del arbol(parent y leaf) */
+.x-grid-tree-node-expanded .x-tree-icon-parent 					{background-image: none; width: 0px}
+.x-tree-icon-parent 											{background-image: none; width: 0px}
+.x-tree-icon-leaf 												{background-image: none; width: 0px}
+
+/* Ux-grouper-bar */
+.tree .ux-grouper-bar											{}
+.tree .ux-grouper-bar-body      								{border-top: 1px solid #8cdbe8; position: absolute; left:0;}
+.tree .x-horizontal-box-overflow-body     						{top: 9px; height: 20px !important; position: relative; display: inline-block}
+.tree .ico-arrastrar-col    									{position: relative; display: inline-block; float: right; background:url(../images/ux/tree/ico-arrastrar-col.png) no-repeat 0 -2px; width: 325px; height:39px}
+.tree .lbl-arrastrar-col   										{position: relative; display: inline-block; float: right; color: #23abbf; font:normal 10px Arial; text-transform: uppercase; padding-top: 14px; padding-right: 26px}
+
+/* tab */
+.tree .x-tab                                					{border: none}
+.tree .x-tab.over												{background: #57cbdc;}
+.tree .x-tab-default-top                    					{background-image: none; background-color: #57cbdc; border-bottom: none !important; border-radius: 2px !important; -moz-box-shadow: none; -webkit-box-shadow: none; -o-box-shadow: none; box-shadow: none; margin-left: 13px}
+.tree .x-border-box .x-tab-default-top  						{height: 20px}
+.tree .x-tab-closable em                    					{padding-right: 26px}
+.tree .x-tab  button                        					{color: white; text-transform: uppercase; font:bold 10px Arial}
+.tree .x-tab-default-top button,
+.tree .x-tab-default-top .x-tab-inner    						{height: 20px; line-height: 12px}
+.tree .x-tab-close-btn    										{background-image: url(../images/ux/tab/tab-default-close.png); width: 21px; height: 20px; top: 0px; right: 0px}
+
+/* Flechas */
+.x-tree-arrows .x-tree-elbow-plus, 
+.x-tree-arrows .x-tree-elbow-minus, 
+.x-tree-arrows .x-tree-elbow-end-plus, 
+.x-tree-arrows .x-tree-elbow-end-minus 							{background-image: url(../images/ux/tree/tree-arrows.png) !important; margin-left: 1px}
+.x-tree-arrows .x-tree-elbow-plus 								{background: transparent no-repeat 0 0}
+.x-tree-arrows .x-grid-tree-node-expanded .x-tree-elbow-plus, 
+.x-tree-arrows .x-grid-tree-node-expanded .x-tree-elbow-end-plus {background-position: -16px 0;}
+
+
+/* COLUMNA GRIP COLAPSABLE --------------------------------------------------------------------------------------------------------------*/
+.x-region-collapsed-placeholder 								{background: #96d4e1 url('../images/ux/region-collapsed-placeholder.png') repeat-y 0 0 !important; box-shadow: none; -webkit-box-shadow: none; border-right: solid 1px white !important; padding:0}
+.x-region-collapsed-placeholder .x-panel-header-body 			{padding:5px 4px;}
+/* --IE */
+.x-ie .x-region-collapsed-placeholder							{padding-left: 4px; padding-right: 4px;}
+.x-ie .x-region-collapsed-placeholder .x-panel-header-body		{padding-left: 0; padding-right: 0;}
+
+
+/* TAB-BAR DE UN FORMULARIO -----------------------------------------------------------------------------------------------------------------*/
+
+.x-tab-bar							{background-image: none !important; background-color: #fff; padding-left: 0 !important;}
+.x-tab-bar-body						{border: none; padding: 1px 0 0 0 !important; height: auto !important;}
+.x-tab-bar-body > .x-box-inner		{height: 24px !important;}
+.x-tab-bar-strip					{display: none;}
+.x-tab								{border: none; height: 24px !important; box-shadow: none; border-radius: 0; background-color: #fff !important; background-image: none; border-bottom: none !important;}
+.x-tab.over							{background: #f8f8f8 !important;}
+.x-tab button						{padding-left:4px; padding-right:4px; color: #303030; font-weight: normal;}
+.x-tab-active						{background-color: #f5f5f5 !important;}
+.x-tab-active.over					{background-color: #f5f5f5 !important;}
+.x-tab-active button				{font-weight: normal;}
+/* -- IE */
+.x-ie .x-tab						{background-image: none !important;}
+.x-ie .x-tab .x-frame-tl,
+.x-ie .x-tab .x-frame-tc,
+.x-ie .x-tab .x-frame-tr,
+.x-ie .x-tab .x-frame-ml,
+.x-ie .x-tab .x-frame-mc,
+.x-ie .x-tab .x-frame-mr			{background: none transparent !important;}
+.x-ie .x-tab .x-frame-mc button		{width: 100% !important;}
+
+
+/* CLASES PARA LAS NOTIFICACIONES -----------------------------------------------------------------------------------------------------------------*/
+
+#msg-div 					{position:absolute; left:50%; margin-left:-190px; top:2px; width:380px; z-index:20000;}
+#msg-div .msg 				{border-radius: 8px; -moz-border-radius: 8px; background: #F6F6F6; border: 2px solid #ccc; margin-top: 2px; padding: 10px 15px 4px 15px; color: #555; text-align:center;}
+#msg-div .msg h3 			{margin: 0 0 8px; font-weight: bold; font-size: 14px;}
+#msg-div .msg p 			{margin: 0;}
+
+

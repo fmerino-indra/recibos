@@ -1,0 +1,30 @@
+/*LOGIN*/
+.login                      {background-color: #f0f0f0;}
+
+.login :focus               {outline:none;}
+
+.login .header              {background-color: rgba(0,0,0,0.66); border-bottom: solid 1px black; position: absolute; top:0; left:0; width: 100%; height:40px;}
+
+.login .btn-back            {text-transform: uppercase; color: #999; font-size:11px; font-weight: 100; line-height: 40px; text-decoration: none; font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial; margin-left:10px; cursor:pointer;}
+.login .btn-back:hover      {border-bottom: dotted 1px #eee; color: #eee;}
+/*
+.login .header .logoA       {background:url('../images/ux/app-logo.png') no-repeat center center; display: inline-block; width:320px; height:80px; position:relative; border:none;}
+.login .header .logoB       {background:url('../images/ux/app-logoB.png') no-repeat center center; display: inline-block; width:320px; height:80px; position:relative; border:none;}
+                 */
+
+.login .message 			{color:orange; position:absolute; font:normal 10px Arial; color: #939393; text-transform: uppercase; text-align:center; width:100%; padding:0 32px 0 0; top: 360px; left:-26px;}
+.form-login					{background: url('../images/ux/bg-login.png') no-repeat center center; width:919px; height:687px; position:relative; border:none; margin:auto; top:60px;}
+.form-login					fieldset {height:100%; border:none;}
+
+.form-field 			    {position: absolute; top: 333px; left: 252px; width: 409px;	background: transparent; border: none; height: 34px; font-size: 22px; font-weight: bold;}
+.form-field.user 			{top: 333px;}
+.form-field.password	    {top: 393px; color:#0084b4;}
+
+.form-field:-moz-placeholder {font-weight: 100; font-size: 14px;line-height: 22px;}
+.form-field:-ms-input-placeholder {font-weight: 100; font-size: 14px;line-height: 22px;}
+.form-field::-webkit-input-placeholder {font-weight: 100; font-size: 14px;line-height: 22px;}
+.form-field:placeholder {font-weight: 100; font-size: 14px; line-height: 22px;}
+
+.btn-submit					{position:absolute; display:inline-block; top:489px; left:413px; width:301px; height:96px; line-height:31px; background: transparent url('../images/ux/btn-enter.png') no-repeat center 0; border:none; color:white; cursor:pointer; opacity: 0.7; transition:opacity 0.2s;}
+.btn-submit:hover		    {opacity: 1;}
+

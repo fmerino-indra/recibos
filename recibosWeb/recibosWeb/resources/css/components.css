@@ -1,0 +1,22 @@
+/*
+	ESTILOS PARA EL UXITEMLIST
+*/
+.ux-item-remover 			 		  		{padding: 5px!important;border:solid 1px #bbd7df !important; background: #ffffe4 !important; border-radius: 5px !important;overflow: auto; height: 25px;}
+.ux-item-remover-over 			 	  		{background: #ffffee !important;}
+.ux-item-remover .btn-eliminar-item         {width:16px; height: 16px; background:url('../images/ux/buttons/btn-ico-elimina.png') no-repeat 0 0;position: absolute; right:0;cursor: pointer}
+.ux-item-remover .btn-eliminar-item:hover   {background-position: 0 -16px}
+.ux-item-remover .text				 		{position: absolute; left:20px; font: normal 11px Arial}
+
+
+/*
+	TOOLBAR CON APARIENCIA DE TÍTULO PARA LOS UXFILTERBARS
+*/
+.x-panel-header-icon 								{width: 31px; height: 31px; background-image: url('../images/ux/ICONS_TITLEBARS_31x31.png') !important; background-repeat: no-repeat; background-position: -62px 0; vertical-align: middle; margin-right: -4px; margin-left: -4px; margin-top: 0px; margin-bottom: 0px;}
+.x-toolbar.title-toolbar 							{line-height: 20px; height:31px; border:none 0; border-color: #c4c4c4; background: url('../images/ux/bg-panel-header-default.png') repeat-x 0 0 !important; -moz-box-shadow: none; -webkit-box-shadow: none; -o-box-shadow: none; box-shadow: none; padding: 0px 4px 0px 0px;}
+.x-toolbar.title-toolbar .x-panel-header-icon 		{display:block; width:31px; height:31px; background-image: url('../images/ux/ICONS_TITLEBARS_31x31.png') !important; background-repeat: no-repeat; background-position: -62px 0; vertical-align: middle; margin-right: -14px; margin-left: -8px; margin-top: 0px; margin-bottom: 0px; color: #79b2c8 !important; font-size:10px; font-family: arial,tahoma, verdana,sans-serif; font-weight: normal; text-transform: uppercase;}
+.x-toolbar.title-toolbar .x-toolbar-text 			{vertical-align: middle; color: #79b2c8 !important; font-size:10px; font-family: arial,tahoma, verdana,sans-serif; font-weight: normal; text-transform: uppercase;}
+.x-toolbar.title-toolbar .x-toolbar-text strong 	{color: #303030 !important; font-weight: bold;}
+		
+
+button.btn-clear-field						{display:  none}		
+button.btn-clear-field.x-form-empty-field 	{display: block}
