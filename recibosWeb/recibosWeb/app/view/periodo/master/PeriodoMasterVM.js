@@ -9,7 +9,7 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoMasterVM', {
             model       : 'recibosWeb.model.Periodo',
             filterOnLoad: false,
             remoteSort  : true,
-            pageSize    : 25,
+            pageSize    : 4,
             remoteFilter: true,
             listeners: { datachanged: 'periodosDataChanged' }
         }

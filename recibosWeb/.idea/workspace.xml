@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportCtrl.js" line="45" mnemonic="7" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="bdc8e7dc-5b5f-4d6a-a0d7-8a35cbabc1a2" name="Default" comment="" />
     <ignored path="recibosWeb.iws" />
@@ -24,31 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PeriodoDetailForm.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/detail/PeriodoDetailForm.js">
+      <file leaf-file-name="CabeceraDetailMasterVM.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailMasterVM.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Periodo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/recibosWeb/app/model/Periodo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PeriodoViewportCtrl.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6944444">
-              <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.44444445">
+              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -59,33 +36,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoSearchForm.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoGrid.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewport.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoMaster.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/MenuListCtrl.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/detail/PeriodoDetailForm.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/Viewer.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app.json" />
-        <option value="$PROJECT_DIR$/recibosWeb/resources/css/app.css" />
-        <option value="$PROJECT_DIR$/packages/iDynamicsFront/src/lib/I18n.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/Application.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/lib/I18n.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoGrid.js" />
-        <option value="$PROJECT_DIR$/build/development/recibosWeb/resources/i18n/application_es.properties" />
-        <option value="$PROJECT_DIR$/recibosWeb/resources/i18n/application_es.properties" />
-        <option value="$PROJECT_DIR$/recibosWeb/resources/i18n/messages_es.properties" />
-        <option value="$PROJECT_DIR$/recibosWeb/data/periodosListado.json" />
-        <option value="$PROJECT_DIR$/packages/iDynamicsFront/src/data/Proxy.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoMasterVM.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/PeriodoViewport.js" />
         <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoSearchForm.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoMasterCtrl.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoMaster.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/detail/PeriodoDetailCtrl.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/model/Periodo.js" />
-        <option value="$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/lib/I18n.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/Application.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/Persona.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/cabecera/master/CabeceraMasterVM.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/Suscripcion.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/PSD.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/Header.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/emission.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/headers/CabeceraViewportCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/headers/HeaderViewportVM.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/header/CabeceraViewportCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/header/master/CabeceraMasterCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/header/master/CabeceraMasterVM.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/header/CabeceraViewport.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/header/detail/CabeceraDetailForm.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/header/detail/CabeceraDetailFormCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/MenuListCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/header/detail/HeaderDetailFormCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/header/HeaderViewport.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic.json" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/Emision.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app.json" />
+        <option value="$PROJECT_DIR$/packages/iDynamicsFront/src/data/Proxy.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/EmisionDTO.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/Cabecera.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/master/CabeceraGrid.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/model/CabeceraDTO.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailFormCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailMasterCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/cabecera/master/CabeceraMasterCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/cabecera/CabeceraViewportCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/detail/CabeceraDetailForm.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/reemitir/master/CabeceraMasterCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/ReemitirViewport.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/detail/ReemitirDetailForm.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/reemitir/ReemitirViewportCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/reemitir/master/ReemitirMasterVM.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/reemitir/detail/ReemitirDetailMasterCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/Viewer.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/detail/ReemitirDetailMaster.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/detail/CabeceraDetailMaster.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/master/ReemitirMaster.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/reemitir/master/ReemitirMasterCtrl.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/MenuList.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/master/ReemitirGrid.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/master/ReemitirSearchForm.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/reemitir/detail/ReemitirDetailMasterVM.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/detail/CabeceraDetailGrid.js" />
+        <option value="$PROJECT_DIR$/recibosWeb/resources/i18n/application_es.properties" />
+        <option value="$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailMasterVM.js" />
       </list>
     </option>
   </component>
@@ -125,6 +126,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -171,7 +173,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recibosWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recibosWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="recibosWeb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i18n" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -227,7 +251,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="periodo" />
+              <option name="myItemId" value="cabecera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -257,7 +281,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="periodo" />
+              <option name="myItemId" value="cabecera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -291,7 +315,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="periodo" />
+              <option name="myItemId" value="cabecera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -379,7 +403,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="periodo" />
+              <option name="myItemId" value="cabecera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -405,84 +429,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="periodo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="master" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recibosWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recibosWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recibosWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="periodo" />
+              <option name="myItemId" value="cabecera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="detail" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recibosWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recibosWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="recibosWeb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Workspace/editranFront" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\packages\iDynamicsFront\src\util" />
-      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\app\lib" />
-      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\resources" />
-      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\packages\local\ATMTheme\resources" />
+      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\classic\src\view" />
+      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\app\view" />
+      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\app\view\cabecera\detail" />
+      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\app\model" />
+      <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\classic\src\view\cabecera\detail" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="Y:\Development\WorkspaceMars\parroquia\recibos\recibosWeb\recibosWeb\resources" />
@@ -548,7 +522,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35651538" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29721814" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -562,7 +536,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18652038" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -580,70 +554,267 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/recibosWeb/app/appConfig/Environment.js</url>
+          <line>40</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/detail/PeriodoDetailForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/model/Periodo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportCtrl.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportVM.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/Readme.md">
-      <provider editor-type-id="markdown-preview-editor">
-        <state />
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/PeriodoViewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoMasterCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoMaster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/master/CabeceraSearchForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/util/UxMainToolbar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/production/recibosWeb/classic/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/master/CabeceraMasterCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/CabeceraViewportCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="235" column="42" selection-start-line="235" selection-start-column="42" selection-end-line="235" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/CabeceraViewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13793103">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/detail/CabeceraDetailForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="124" selection-start-line="36" selection-start-column="124" selection-end-line="36" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext/packages/font-awesome/resources/fonts/fontawesome-webfont.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3995943">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext/packages/font-awesome/sass/etc/_animated.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext/packages/font-awesome/sass/etc/font-awesome.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4732334">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext/packages/font-awesome/sass/etc/_stacked.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext/packages/font-awesome/sass/etc/_rotated-flipped.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/lib/GlyphCatalog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="211" column="38" selection-start-line="211" selection-start-column="38" selection-end-line="211" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailMasterCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30555555">
+          <caret line="39" column="41" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/ReemitirViewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/detail/ReemitirDetailGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22222222">
+          <caret line="8" column="43" selection-start-line="8" selection-start-column="43" selection-end-line="8" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/reemitir/ReemitirViewportCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15097691">
+          <caret line="227" column="29" selection-start-line="227" selection-start-column="29" selection-end-line="227" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailFormCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7777778">
+          <caret line="150" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/detail/ReemitirDetailForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.111111">
+          <caret line="184" column="27" selection-start-line="184" selection-start-column="27" selection-end-line="184" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/reemitir/detail/ReemitirDetailMasterCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1811723">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/detail/ReemitirDetailMaster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30555555">
+          <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/detail/CabeceraDetailMaster.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
-          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/master/CabeceraMaster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3611111">
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/Application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recibosWeb/classic.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3190882">
-          <caret line="0" column="15861" selection-start-line="0" selection-start-column="15861" selection-end-line="0" selection-end-column="15861" />
+        <state vertical-scroll-proportion="0.39037433">
+          <caret line="0" column="12934" selection-start-line="0" selection-start-column="12884" selection-end-line="0" selection-end-column="12934" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/index.html">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/modern.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3058511">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recibosWeb/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37562189">
-          <caret line="599" column="55" selection-start-line="599" selection-start-column="53" selection-end-line="599" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/store/Personnel.js">
+    <entry file="file://$PROJECT_DIR$/workspace.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/reemitir/master/ReemitirMasterCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16666667">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/MenuList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6666667">
+          <caret line="44" column="36" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -654,280 +825,104 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/MenuListCtrl.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/Viewer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8034826">
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.19444445">
+          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/Clock.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/master/ReemitirSearchForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36589697">
+          <caret line="73" column="65" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/master/ReemitirMaster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.055555556">
+          <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/reemitir/master/ReemitirGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16666667">
+          <caret line="71" column="26" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/reemitir/ReemitirViewportVM.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/main/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5646766">
-          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/lib/GlyphCatalog.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/reemitir/master/ReemitirMasterVM.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/model/Cabecera.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.44444445">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/lib/Notifications.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/reemitir/detail/ReemitirDetailMasterVM.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42288557">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.6388889">
+          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/lib/Logger.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.014925373">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/MenuList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46517414">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/resources/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6666667">
-          <caret line="139" column="2" selection-start-line="139" selection-start-column="2" selection-end-line="139" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327645">
-          <caret line="273" column="33" selection-start-line="273" selection-start-column="33" selection-end-line="273" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2960199">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/locale/Es.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailGridCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="36" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/development/recibosWeb/resources/i18n/application_es.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9607842">
-          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/resources/locale/es.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37562189">
-          <caret line="110" column="27" selection-start-line="110" selection-start-column="25" selection-end-line="110" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/resources/ext-locale/ext-locale-es.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3324468">
-          <caret line="146" column="44" selection-start-line="146" selection-start-column="40" selection-end-line="146" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/util/i18n/Bundle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.699005">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/util/i18n/reader/Json.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0447762">
-          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/lib/I18n.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9726368">
-          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/lib/I18n.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12686567">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="18" />
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recibosWeb/resources/i18n/application_es.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.9131175">
+          <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/util/UxMainToolbar.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/detail/CabeceraDetailGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24875621">
-          <caret line="68" column="57" selection-start-line="68" selection-start-column="57" selection-end-line="68" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.22222222">
+          <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/resources/i18n/messages_es.properties">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/cabecera/master/CabeceraGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35543767">
-          <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/Application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3611111">
-          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/data/periodosListado.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/data/Proxy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportVM.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/ViewportCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/Viewport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/Viewer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoSearchForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="38" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoMasterVM.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/master/PeriodoMasterCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoGrid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0149254">
-          <caret line="24" column="56" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/master/PeriodoMaster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84577113">
-          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/PeriodoViewport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16915423">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packages/iDynamicsFront/src/util/ViewController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37562189">
-          <caret line="39" column="55" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.2777778">
+          <caret line="75" column="26" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/detail/PeriodoDetailCtrl.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/model/CabeceraDTO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3233831">
-          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/classic/src/view/periodo/detail/PeriodoDetailForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.5">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/model/Periodo.js">
+    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/cabecera/detail/CabeceraDetailMasterVM.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recibosWeb/app/view/periodo/PeriodoViewportCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6944444">
-          <caret line="118" column="27" selection-start-line="118" selection-start-column="27" selection-end-line="118" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.44444445">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
           <folding />
         </state>
       </provider>

@@ -13,7 +13,7 @@ import es.cnc.suscripciones.domain.dao.spring.PeriodoRepository;
 import es.cnc.suscripciones.services.emision.EmisionService;
 
 @RestController()
-@RequestMapping("/periodos")
+@RequestMapping("{contextPath}/periodos")
 public class PeriodoController {
 	@Autowired
 	EmisionService emisionService;

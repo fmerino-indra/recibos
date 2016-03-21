@@ -2,7 +2,8 @@ Ext.define('recibosWeb.view.MenuList', {
     extend    : 'Ext.container.Container',
     alias     : 'widget.menulist',
     requires  : [
-        'Ext.view.View'
+        'Ext.view.View',
+        'recibosWeb.view.MenuListVM'
     ],
     cls       : 'menulist',
     layout    : 'fit',
@@ -17,7 +18,7 @@ Ext.define('recibosWeb.view.MenuList', {
             xtype: 'tbspacer'
         }, {
             xtype         : 'displayfield',
-            fieldLabel    : 'demo',
+            fieldLabel    : 'Recibos',
             labelSeparator: '',
             cls           : 'title'
         }, {
@@ -26,22 +27,22 @@ Ext.define('recibosWeb.view.MenuList', {
             allowMultiple: false,
             items        : [{
                 xtype    : 'button',
-                text     : 'Monitorizacion',
+                text     : 'Periodo',
                 index    : 0,
                 reference: 'monitorizacion',
                 pressed  : true,
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
-                text     : 'Informes',
+                text     : 'Cabeceras',
                 index    : 1,
-                reference: 'informes',
+                reference: 'cabeceras',
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
-                text     : 'Métricas',
+                text     : 'Re-emitir',
                 index    : 2,
-                reference: 'metricas',
+                reference: 'reemitir',
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',

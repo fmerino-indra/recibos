@@ -11,9 +11,12 @@ Ext.define('recibosWeb.view.Viewport', {
         'Ext.plugin.Viewport',
         'recibosWeb.view.Viewer',
         'recibosWeb.view.Clock',
-        'recibosWeb.view.MenuList'
+        'recibosWeb.view.MenuList',
+        'recibosWeb.view.ViewportCtrl',
+        'recibosWeb.view.MenuListCtrl'
+
     ],
-    xtype     : 'app-main',
+    xtype     : 'Appviewport',//'app-main',
     controller: 'viewport',
 //    viewModel : 'viewport',
 

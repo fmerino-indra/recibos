@@ -25,6 +25,7 @@
         "${toolkit.name}/src"
     ],
 
+
     /**
      * Comma-separated string with the paths of directories or files to search. Any classes
      * declared in these locations will be automatically required and included in the build.
@@ -41,7 +42,7 @@
      * The Sencha Framework for this application: "ext" or "touch".
      */
     "framework": "ext",
-    
+    "dev" : "${build.environment}",
     /**
      * The toolkit to use. Select either "classic" or "modern".
      */
@@ -307,6 +308,22 @@
      * Settings specific to production builds.
      */
     "production": {
+        "env"            : "${build.environment}",
+        "baseUrl"        : "/recibosWeb",
+        "applicationPath": "/",
+        "servicesPath"   : "/",
+        /**
+         * Permite saltarse de una vez toda la configuracionde configProxies
+         */
+        "useMockups"     : false,
+        "tags": [
+            // You can add this tag to enable Fashion when using app watch or
+            // you can add "?platformTags=fashion:1" to the URL to enable Fashion
+            // without changing this file.
+            //
+            // "fashion"
+        ],
+
         "output": {
             "appCache": {
                 "enable": true,
@@ -334,6 +351,14 @@
      * Settings specific to development builds.
      */
     "development": {
+        "env"            : "${build.environment}",
+        "baseUrl"        : "/recibosWeb",
+        "applicationPath": "/",
+        "servicesPath"   : "/",
+        /**
+         * Permite saltarse de una vez toda la configuracionde configProxies
+         */
+        "useMockups"     : false,
         "tags": [
             // You can add this tag to enable Fashion when using app watch or
             // you can add "?platformTags=fashion:1" to the URL to enable Fashion
@@ -433,8 +458,8 @@
             "shared": "resources"
         }
     },
-    
-    
+
+
     /**
     * Controls for localStorage caching
     *   "cache": {

@@ -78,7 +78,6 @@ Ext.define('iDynamicsFront.util.i18n.Bundle', {
             language = me.formatLanguageCode(config.lang || me.guessLanguage()),
             noCache = (config.noCache !== false),
             url, Model;
-
         me.language = language;
         me.bundle = config.bundle || me.bundle;
         me.path = config.path || me.path;
@@ -199,7 +198,6 @@ Ext.define('iDynamicsFront.util.i18n.Bundle', {
 
 
 }, function(){
-
     //hook on Ext.Base
     Ext.override(Ext.Base, {
         initConfig: function(instanceConfig) {

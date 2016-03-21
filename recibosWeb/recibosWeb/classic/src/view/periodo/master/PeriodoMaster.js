@@ -26,11 +26,9 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoMaster', {
             {
                 xtype    : 'periodo_periodosearchform',
                 reference: 'periodo_periodosearchform',
-                region   : 'west'
-                /*,
-                split    : true*/
-                /*,
-                height: 155*/
+                region   : 'west',
+                split    : true
+//                height: 155
             },
             {
                 xtype    : 'periodo_periodogrid',

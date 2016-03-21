@@ -27,9 +27,9 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoSearchForm', {
                 items   : [
                     {
                         xtype  : 'button',
-                        text   : t('commons.buttons.limpiar'),
+                        text   : 'Limpiar',//t('commons.buttons.limpiar'),
                         cls    : 'ux-btn',
-                        handler: 'periodoReset',
+                        //handler: 'periodoReset',
                         glyph  : Glyphs.getIcon('eraser')
                     },
                     {
@@ -37,7 +37,7 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoSearchForm', {
                     },
                     {
                         xtype  : 'button',
-                        text   : t('commons.buttons.buscar'),
+                        text   : 'Buscar',//t('commons.buttons.buscar'),
 //                        ui     : 'highlight',
                         cls    : 'ux-btn',
                         handler: 'periodoSearch',

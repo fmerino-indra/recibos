@@ -3,7 +3,9 @@ Ext.define('recibosWeb.view.Viewer', {
     alias   : 'widget.viewer',
     requires: [
 //        'APP.view.monitorizacion.MonitorizacionViewport'
-        'recibosWeb.view.periodo.PeriodoViewport'
+        'recibosWeb.view.periodo.PeriodoViewport',
+        'recibosWeb.view.cabecera.CabeceraViewport',
+        'recibosWeb.view.reemitir.ReemitirViewport'
     ],
     cls     : 'viewer-cnt',
     layout  : 'card',
@@ -11,11 +13,9 @@ Ext.define('recibosWeb.view.Viewer', {
         xtype: 'periodo_periodoviewport'
 
     }, {
-        xtype: 'panel',
-        html : 'vacio'
+        xtype: 'cabecera_cabeceraviewport'
     }, {
-        xtype: 'panel',
-        html : 'vacio'
+        xtype: 'reemitir_reemitirviewport'
     }, {
         xtype: 'panel',
         html : 'vacio'

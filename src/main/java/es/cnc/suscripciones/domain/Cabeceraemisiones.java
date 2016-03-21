@@ -15,13 +15,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "cabeceraemisiones")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Cabeceraemisiones extends AbstractEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,7 +49,8 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
     
     @Column(name = "FechaEmision", nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+//  @DateTimeFormat(style = "M-")
+    @DateTimeFormat(iso=ISO.DATE_TIME)
     private Date fechaEmision;
     
     @Column(name = "CodigoMes")
@@ -56,14 +64,21 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
     
     @Column(name = "FechaEnvio")
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+//    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(iso=ISO.DATE_TIME)
     private Date fechaEnvio;
     
-    @Column(name = "Importe", precision = 22)
+    @Transient
+    @JsonProperty("importe")
     private Double importe;
     
-    @Column(name = "ImporteDevuelto", precision = 22)
+    @Transient
+    @JsonProperty("importeDevuelto")
     private Double importeDevuelto;
+    
+    @Transient
+    @JsonProperty("devueltos")
+    private Long devueltos;
     
     @Column(name = "Concepto", length = 40)
     private String concepto;
@@ -156,5 +171,13 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
 
 	public void setParroquiaHasParroco(ParroquiaHasParroco parroquiaHasParroco) {
 		this.parroquiaHasParroco = parroquiaHasParroco;
+	}
+
+	public Long getDevueltos() {
+		return devueltos;
+	}
+
+	public void setDevueltos(Long devueltos) {
+		this.devueltos = devueltos;
 	}
 }

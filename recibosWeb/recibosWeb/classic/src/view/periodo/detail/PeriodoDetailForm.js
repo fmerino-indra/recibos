@@ -1,7 +1,10 @@
 Ext.define('recibosWeb.view.periodo.detail.PeriodoDetailForm', {
     extend         : 'Ext.form.Panel',
     alias          : 'widget.periodo_periododetailform',
-    requires       : ['iDynamicsFront.selectors.UxLocatorField', 'iDynamicsFront.util.UxDialogFieldN', 'iDynamicsFront.utils.UxMainToolbar'],
+    requires       : ['iDynamicsFront.selectors.UxLocatorField',
+        'iDynamicsFront.util.UxDialogFieldN',
+        'iDynamicsFront.utils.UxMainToolbar',
+        'recibosWeb.view.periodo.detail.PeriodoDetailCtrl'],
     model          : 'recibosWeb.model.Periodo',
     modelValidation: true,
     cls            : 'card detail usuario ux-validation-form fa',

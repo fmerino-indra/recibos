@@ -8,7 +8,7 @@ Ext.define('iDynamicsFront.menu.Menu', {
     alias: 'widget.uxmenu',
     itemId: 'app-menu',
     reference: 'mainmenu',
-    requires: ['iDynamicsFront.menu.MenuController'],
+    requires: ['iDynamicsFront.menu.MenuController', 'Ext.panel.Panel'],
     //atributos configurables
     // Datos json del menu
     hash: null,

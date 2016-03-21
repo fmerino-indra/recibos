@@ -7,15 +7,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
+import es.cnc.suscripciones.domain.Devoluciones;
 import es.cnc.suscripciones.domain.Emision;
 import es.cnc.suscripciones.domain.Meses;
 import es.cnc.suscripciones.domain.PSD;
 import es.cnc.suscripciones.domain.Periodo;
 import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
+import es.cnc.suscripciones.domain.dao.spring.DevolucionRepository;
 import es.cnc.suscripciones.domain.dao.spring.EmisionRepository;
 import es.cnc.suscripciones.domain.dao.spring.PSDRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaHasParrocoRepository;
@@ -40,6 +44,9 @@ public class EmisionServiceImpl implements EmisionService {
 
 	@Autowired
 	EmisionRepository emisionRepository;
+
+	@Autowired
+	DevolucionRepository devolucionRepository;
 	
 	public EmisionServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -158,10 +165,57 @@ public class EmisionServiceImpl implements EmisionService {
 	 */
 	@Override
 	public void deleteCabecera(Cabeceraemisiones ce) {
-		ce = cabeceraRepository.findEmisionesByCabecera(ce);
+		ce = cabeceraRepository.findCabeceraByIdWithEmisiones(ce);
 		for (Emision e:ce.getEmisions()) {
 			emisionRepository.delete(e);
 		}
 		cabeceraRepository.delete(ce);
+	}
+// TODO FMM Sin probar
+	@Override
+	@Transactional
+	public void devolver(List<Integer> ids) {
+		Emision aux = null;
+		Devoluciones devolucionActiva;
+		LocalDateTime today = LocalDateTime.now();
+		for (Integer id:ids) {
+			aux=emisionRepository.getOne(id);
+			aux.setDevuelto(true);
+			emisionRepository.save(aux);
+			
+			// TODO FMM No tiene sentido, nunca habrá una activa si se va a devolver 
+			devolucionActiva = devolucionRepository.findActiveReturnedByEmision(aux);
+			if (devolucionActiva != null) {
+				
+				devolucionActiva.setFechaBaja(LocalDateUtil.localDateTimeToDate(today));
+				devolucionRepository.save(devolucionActiva);
+			}
+			devolucionActiva = new Devoluciones();
+			devolucionActiva.setEmision(aux);
+			devolucionActiva.setFechaDevolucion(LocalDateUtil.localDateTimeToDate(today));
+			devolucionRepository.save(devolucionActiva);
+		}
+	}
+
+	@Override
+	@Transactional
+	public void anular(List<Integer> ids) {
+		Emision aux = null;
+		Devoluciones devolucionActiva;
+		LocalDateTime today = LocalDateTime.now();
+		for (Integer id:ids) {
+			aux=emisionRepository.getOne(id);
+			aux.setDevuelto(false);
+			emisionRepository.save(aux);
+			
+			devolucionActiva = devolucionRepository.findActiveReturnedByEmision(aux);
+			if (devolucionActiva != null) {
+				
+				devolucionActiva.setFechaBaja(LocalDateUtil.localDateTimeToDate(today));
+				devolucionRepository.save(devolucionActiva);
+			} else {
+// TODO FMM Si está anulada y es 
+			}
+		}
 	}
 }

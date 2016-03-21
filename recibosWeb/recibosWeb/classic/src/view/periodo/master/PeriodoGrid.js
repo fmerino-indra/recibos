@@ -6,6 +6,17 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoGrid', {
     alias        : 'widget.periodo_periodogrid',
     cls          : 'data-list usuarios',
     multiSelect  : true,
+/*
+    viewModel : {
+        type: 'periodo-master'
+    },
+*/
+    bind     : {
+        store: '{periodos}'
+//        title: 'Listado de usuarios [{usuarios.totalCount}]'
+    },
+
+
 //    glyph      : Glyphs.getIcon('bars'),
 //    viewConfig   : {
 //        getRowClass: function (record) {
@@ -16,7 +27,7 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoGrid', {
         this.columns =
             [
                 {
-                    header   : 'Código',
+                    header   : t('periodo.items.codigo'),
                     dataIndex: 'codigo',
                     flex     : 1
                 }
@@ -28,19 +39,19 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoGrid', {
                 }
                 ,
                 {
-                    header   : t('periodo.items.frecuencia'),
+                    header   : 'Frecuencia',//t('periodo.items.frecuencia'),
                     dataIndex: 'frecuencia',
                     flex     : 1
                 }
                 ,
                 {
-                    header   : t('periodo.items.anticipacion'),
+                    header   : 'Anticipacion',//t('periodo.items.anticipacion'),
                     dataIndex: 'anticipacion',
                     flex     : 1
                 }
 
             ];
-        /* TODO FMM
+        /* TODO FMM */
         this.bbar = [
             '->'
             ,
@@ -52,7 +63,7 @@ Ext.define('recibosWeb.view.periodo.master.PeriodoGrid', {
                     store: '{periodos}'
                 }
             }];
-            */
+
         this.callParent();
     }
 /* TODO FMM

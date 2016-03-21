@@ -1,4 +1,4 @@
-Ext.define('APP.view.MenuListCtrl', {
+Ext.define('recibosWeb.view.MenuListCtrl', {
     extend: 'Ext.app.ViewController',
     alias : 'controller.menulist',
 
@@ -6,6 +6,7 @@ Ext.define('APP.view.MenuListCtrl', {
         var viewer = bt.up('viewport').down('viewer'),
             viewportCtrl = bt.up('viewport').getController(),
             stompClient, level, rx, local;
+/*
         if (bt.index === 0) {
             stompClient = viewportCtrl.stompClient;
             level = viewportCtrl.level;
@@ -13,6 +14,7 @@ Ext.define('APP.view.MenuListCtrl', {
             local = viewportCtrl.local;
             rx ? SubSystemsService.getInitialLoad({level: viewportCtrl.getCookie('level')}) : local ? '' :  stompClient.send("/monitoring/nodes", {}, JSON.stringify({level: viewportCtrl.getCookie('level')}));
         }
+*/
         if (viewer.getLayout().getActiveItem() !== viewer.items.items[bt.index]) {
             viewer.getLayout().setActiveItem(bt.index);
         }

@@ -73,7 +73,6 @@ Ext.define('iDynamicsFront.data.Proxy', {
         }
 
         this.callParent(arguments);
-        debugger
         /* Esto me lo puedo llevar e Environmnet... */
         this.isRemote = Environment.isProxyRemote(config.name);
         if (this.isRemote) {
@@ -90,6 +89,7 @@ Ext.define('iDynamicsFront.data.Proxy', {
      */
     toogleUrl: function() {
         var me = this;
+//debugger;
         if (me.isRemote) {
             me.setUrl(PlanesCuenta.environment.servicesPath + me.config.remoteUrl);
         } else {

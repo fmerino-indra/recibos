@@ -21,4 +21,8 @@ public interface EmisionService {
 
 	void deleteCabecera(Cabeceraemisiones ce);
 
+	void devolver(List<Integer> ids);
+	
+	void anular(List<Integer> ids);
+	
 }

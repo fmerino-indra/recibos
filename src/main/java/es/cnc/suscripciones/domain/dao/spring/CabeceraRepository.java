@@ -19,6 +19,8 @@ package es.cnc.suscripciones.domain.dao.spring;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -32,9 +34,11 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 			+ " where ce.fechaEmision = ?1 order by ce.fechaEmision desc")
 	public List<Cabeceraemisiones> findCabeceraAndEmisionesByFecha(Date fecha);
 
-	// TODO Hacer paginable
 	@Query("select ce from Cabeceraemisiones ce order by ce.fechaEmision desc")
 	public List<Cabeceraemisiones> findCabecerasDesc();
+	
+	@Query("select ce from Cabeceraemisiones ce order by ce.fechaEmision desc")
+	public Page<Cabeceraemisiones> findCabecerasDesc(Pageable pageable);
 	
 	@Query("select distinct ce from Cabeceraemisiones ce LEFT JOIN FETCH ce.emisions em"
 			+ " INNER JOIN FETCH ce.parroquiaHasParroco"
@@ -43,5 +47,18 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 			+ " INNER JOIN FETCH psd.idSuscripcion s"
 			+ " INNER JOIN FETCH s.persona"
 			+ " where ce = ?1 ")
-	public Cabeceraemisiones findEmisionesByCabecera(Cabeceraemisiones cabecera);
+	public Cabeceraemisiones findCabeceraByIdFull(Cabeceraemisiones cabecera);
+	
+	@Query("select distinct ce from Cabeceraemisiones ce LEFT JOIN FETCH ce.emisions em"
+			+ " INNER JOIN FETCH em.idSuscripcion psd"
+			+ " INNER JOIN FETCH psd.idDomiciliacion d"
+			+ " INNER JOIN FETCH psd.idSuscripcion s"
+			+ " INNER JOIN FETCH s.persona"
+			+ " where ce = ?1 ")
+	@Deprecated // This is a heavy query
+	public Cabeceraemisiones findCabeceraByIdWithEmisiones(Cabeceraemisiones cabecera);
+
+	@Query("select distinct ce from Cabeceraemisiones ce "
+			+ " where ce = ?1 ")
+	public Cabeceraemisiones findCabeceraByIdWithoutEmisiones(Cabeceraemisiones cabecera);
 }

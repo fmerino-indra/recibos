@@ -1,7 +1,10 @@
 Ext.define('recibosWeb.lib.I18n', {
 	singleton         : true,
 	alternateClassName: 'I18n',
-	requires          : ['iDynamicsFront.util.i18n.Bundle'],
+	requires          : [
+		'iDynamicsFront.util.i18n.Bundle',
+		'iDynamicsFront.lib.I18n'
+	],
 
 	currentLocale: function () {
 		return 'es';
@@ -29,7 +32,7 @@ Ext.define('recibosWeb.lib.I18n', {
 			if (!name) {
 				name = this.bundleApplication.getMsg(str);
 				if (!name) {
-					name = "-" + str.split('.')[str.split('.').length - 1] + "-";
+					name = "---" + str.split('.')[str.split('.').length - 1] + "---";
 					return getFromCamelCase(name);
 				} else {
 					return name;
@@ -38,7 +41,7 @@ Ext.define('recibosWeb.lib.I18n', {
 				return name;
 			}
 		} catch (e) {
-			name = "-" + str.split('.')[str.split('.').length - 1] + "-";
+			name = "---" + str.split('.')[str.split('.').length - 1] + "---";
 			return getFromCamelCase(name);
 		}
 	},
@@ -79,6 +82,6 @@ Ext.require('recibosWeb.lib.I18n', function () {
 	recibosWeb.lib.I18n.registerLocale('es',iDynamicsFront.locale.Es.keys);
 //	Editran.lib.Logger.info("i18n fin...");
 //	$AC.i18n = window.t = Ext.bind(recibosWeb.lib.I18n.translate, recibosWeb.lib.I18n);
-	window.t = Ext.bind(recibosWeb.lib.I18n.translate, recibosWeb.lib.I18n);
+	window.t = Ext.bind(recibosWeb.lib.I18n.i18n, recibosWeb.lib.I18n);
 });
 

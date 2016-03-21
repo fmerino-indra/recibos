@@ -56,7 +56,7 @@ public class EmisionServiceTest {
 	}
 
 	@Test
-	public void testMascara() throws Exception {
+	public void emitirYGenerar() throws Exception {
 		List<Cabeceraemisiones> cabeceras = null;
 		cabeceras = emisionService.generate(2);
 		assertNotNull(cabeceras);

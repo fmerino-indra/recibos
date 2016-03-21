@@ -3,7 +3,7 @@ Gestor de textos internacionalizados
 */
 Ext.define('iDynamicsFront.lib.I18n', {
     singleton: true,
-	alternateClassName: 'I18n',
+	alternateClassName: 'I18nFront',
     requires: ['iDynamicsFront.locale.*'],
     locale: 'es',
 
@@ -72,7 +72,8 @@ Ext.require('iDynamicsFront.lib.I18n', function(){
     //PlanesCuenta.lib.Logger.info("i18n start...");
     iDynamicsFront.lib.I18n.registerLocale('es');//, iDynamicsFront.locale.Es.keys);
     //PlanesCuenta.lib.Logger.info("i18n fin...");
-    window.i18ntraslate = window.t = Ext.bind(iDynamicsFront.lib.I18n.translate, iDynamicsFront.lib.I18n);
+// TODO FMM Reorganizar el i18n
+//    window.i18ntraslate = window.t = Ext.bind(iDynamicsFront.lib.I18n.translate, iDynamicsFront.lib.I18n);
 });
 
 

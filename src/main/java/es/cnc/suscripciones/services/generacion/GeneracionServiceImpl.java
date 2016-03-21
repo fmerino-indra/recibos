@@ -70,7 +70,7 @@ public class GeneracionServiceImpl implements GeneracionService {
 		 * 2. Busca las emisiones
 		 * 3. 
 		 */
-		Cabeceraemisiones cabAux = cabeceraRepository.findEmisionesByCabecera(cabecera);
+		Cabeceraemisiones cabAux = cabeceraRepository.findCabeceraByIdWithEmisiones(cabecera);
 		if (cabAux == null) {
 			// TODO To throw a Business Exception
 			throw new RuntimeException("No Emission Header");
