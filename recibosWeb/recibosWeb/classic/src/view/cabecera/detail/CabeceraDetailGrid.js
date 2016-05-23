@@ -6,6 +6,7 @@ Ext.define('recibosWeb.view.cabecera.detail.CabeceraDetailGrid', {
     alias        : 'widget.cabecera_cabeceradetailgrid',
     cls          : 'data-list usuarios',
     multiSelect  : false,
+    // This attribute is not from ExtJS
     model        : 'recibosWeb.model.EmisionDTO',
     initComponent: function () {
         this.columns = [

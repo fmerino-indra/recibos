@@ -9,7 +9,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionMasterVM', {
             model       : 'recibosWeb.model.Suscripcion',
             filterOnLoad: false,
             remoteSort  : true,
-            pageSize    : 4,
+            pageSize    : 22,
             remoteFilter: true,
             listeners: { datachanged: 'suscripcionsDataChanged' }
         }

@@ -70,7 +70,8 @@ public class GeneracionServiceImpl implements GeneracionService {
 		 * 2. Busca las emisiones
 		 * 3. 
 		 */
-		Cabeceraemisiones cabAux = cabeceraRepository.findCabeceraByIdWithEmisiones(cabecera);
+//		Cabeceraemisiones cabAux = cabeceraRepository.findCabeceraByIdWithEmisiones(cabecera);
+		Cabeceraemisiones cabAux = cabeceraRepository.findCabeceraByIdFull(cabecera);
 		if (cabAux == null) {
 			// TODO To throw a Business Exception
 			throw new RuntimeException("No Emission Header");
@@ -103,8 +104,10 @@ public class GeneracionServiceImpl implements GeneracionService {
 		mapper.registerModule(new JacksonXmlModule());
 
 		try {
+			System.out.println();
 			mapper.writeValue(System.out, document);
 			System.out.println();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

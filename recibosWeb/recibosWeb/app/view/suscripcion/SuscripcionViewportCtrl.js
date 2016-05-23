@@ -93,7 +93,7 @@ Ext.define('recibosWeb.view.suscripcion.SuscripcionViewportCtrl', {
         }
         detail.setTitle(t('suscripcion.detail.title'));
         form.reset();
-        form.loadRecord(Ext.create('recibosWeb.model.Suscripcion'));
+        form.loadRecord(Ext.create('recibosWeb.model.SuscripcionDTO'));
         form.clearInvalid();
         form.getFields().getAt(0).focus();
     },
@@ -164,8 +164,8 @@ Ext.define('recibosWeb.view.suscripcion.SuscripcionViewportCtrl', {
         }
 
         store = dataList.getStore();
-        me.log('Prepared to remove suscripcion with id: "' + record.data.id
-            + '"');
+//        me.log('Prepared to remove suscripcion with id: "' + record.data.id
+//            + '"');
         Ext.MessageBox.confirm(t('commons.msgs.warning'),
             t('commons.msgs.question.delete'),
             function (action) {

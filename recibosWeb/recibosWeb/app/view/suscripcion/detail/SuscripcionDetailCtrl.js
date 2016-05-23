@@ -23,20 +23,15 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl', {
             uxfield, uxfieldN, boundList, len, len2, model, datos, detail, enabled, bt;
 
         detail = me.getView();
-        recibosWeb.model.Suscripcion.load(modelSelected.get('id'), {
-            callback: function (suscripcion, operation) {
-                if (suscripcion.data === null) {
+        recibosWeb.model.SuscripcionDTO.load(modelSelected.get('id'), {
+            callback: function (suscripcionDTO, operation) {
+                if (suscripcionDTO.data === null) {
                     me.error(operation.getError());
                 } else {
-                    model = suscripcion;
+                    model = suscripcionDTO;
                     detail.getForm().loadRecord(model);
                     bt = me.lookupReference('enableBtn');
-                    //añadimos o eliminamos la clase disabled en función del atributo enabled
-                    enabled = model.get('enabled');
-                    detail[(enabled ? 'remove' : 'add') + 'Cls']('disabled');
-                    bt.setText(enabled ? 'Desactivar' : 'Activar');
-                    enabled ? bt.setGlyph(Glyphs.getIcon('lock')) : bt.setGlyph(Glyphs.getIcon('unlock'));
-                    //me.getView().setTitle(['Detalle', usuario.get('name'), usuario.get('surname')].join(' '));
+                    
                     me.getView().setTitle(t('usrusuario.detail.title'));
 
                     // seek simple search components and
@@ -89,7 +84,7 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl', {
      */
     suscripcionReloadDependentStores: function (detail) {
         var me = this, viewModel = this.getViewModel(),
-            stores = ['suscripcions'], storeLoader;
+            stores = ['suscripcionDTOs'], storeLoader;
 
         storeLoader = function (store) {
             new RSVP.Promise(function (resolve, reject) {
@@ -135,22 +130,6 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl', {
         if (validations2.length > 0) {
             detail.addFormActiveErrors(validations2);
             return false;
-        }
-    },
-    onPasswordChange   : function (field, value) {
-        var passwordConfirmationF = this.lookupReference('passwordConfirmation'),
-            passwordF = this.lookupReference('password');
-        if (passwordConfirmationF && passwordF) {
-            if (passwordConfirmationF.getValue() !== passwordF.getValue()) {
-                if (field.name === 'passwordConfirmation') {
-                    passwordF.markInvalid('La password no son idénticas.');
-                } else {
-                    passwordConfirmationF.markInvalid('La password no son idénticas.');
-                }
-            } else {
-                passwordF.clearInvalid();
-                passwordConfirmationF.clearInvalid();
-            }
         }
     },
 

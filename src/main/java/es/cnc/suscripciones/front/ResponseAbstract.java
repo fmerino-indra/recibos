@@ -1,6 +1,6 @@
 package es.cnc.suscripciones.front;
 
-public class ResponseAbstract<T> {
+public abstract class ResponseAbstract<T> {
 
 	private T data;
 	private Response info;

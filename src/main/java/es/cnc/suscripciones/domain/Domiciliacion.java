@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.stasiena.sepa.util.IBANUtil;
 
 @Entity
 @Table(name = "domiciliacion")
@@ -127,8 +128,16 @@ public class Domiciliacion extends AbstractEntity<Integer> {
         return iban;
     }
     
+    /**
+     * 
+     * @param iban Must be a valid IBAN
+     */
     public void setIban(String iban) {
-        this.iban = iban;
+    	if (!IBANUtil.validarIBAN(iban)) {
+    		throw new RuntimeException("Not valid IBAN: " + iban);
+    	} else {
+    		this.iban = iban;
+    	}
     }
     
     public String toString() {

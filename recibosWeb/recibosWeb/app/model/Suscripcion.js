@@ -1,5 +1,10 @@
 Ext.define('recibosWeb.model.Suscripcion', {
     extend: 'recibosWeb.model.Base',
+    requires   : [
+      'iDynamicsFront.data.Proxy'
+    ],
+
+    requires: ['Ext.data.proxy.Rest'],
     idProperty : 'idSuscripcion',
     fields: [
         {name:'secuenciaAdeudo'}
@@ -17,6 +22,23 @@ Ext.define('recibosWeb.model.Suscripcion', {
         ,{name:'euros', type:"number", useNull:true}
         ,{name:'idAntigua', type:"int", useNull:true}
         ,{name:'concepto', type:"string", useNull:true}
-        ,{name:'idSuscripcion', type:"int", useNull:true}
-    ]
+        ,{name:'idSuscripcion', type:"int", useNull:false}
+        ,{name: 'nombrePersona', 
+        	calculate: function (data) {
+        		if (data.persona)
+        			return data.persona.nombre;
+        		else
+        			return '';
+        	}
+        }
+    ],
+    proxy      : {
+        type     : 'idfproxy',
+        name     : 'recibosWeb.proxy.Suscripcion',
+        mockupUrl: 'data/suscripcionesListado.json',
+        remoteUrl: 'suscripciones'
+//        ,
+//        url      : '/periodos'
+    }
+    
 });

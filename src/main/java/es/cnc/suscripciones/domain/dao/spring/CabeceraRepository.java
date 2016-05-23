@@ -23,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
@@ -61,4 +62,15 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 	@Query("select distinct ce from Cabeceraemisiones ce "
 			+ " where ce = ?1 ")
 	public Cabeceraemisiones findCabeceraByIdWithoutEmisiones(Cabeceraemisiones cabecera);
+	
+	@Query("select distinct ce from Cabeceraemisiones ce "
+			+ " inner join fetch ce.emisions em "
+			+ " INNER JOIN FETCH em.idSuscripcion psd"
+			+ " INNER JOIN FETCH psd.idSuscripcion s"
+			+ " INNER JOIN FETCH s.persona"
+			+ " WHERE em.devuelto = TRUE"
+			+ " AND ce.fechaEmision >= :from"
+			+ " AND ce.fechaEmision <= :to")
+	public List<Cabeceraemisiones> findRefundedCabeceraBetweenDatesFull(@Param("from") Date from, @Param("to") Date to);
+
 }

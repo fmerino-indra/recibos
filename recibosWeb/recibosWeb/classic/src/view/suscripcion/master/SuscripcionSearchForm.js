@@ -1,6 +1,6 @@
 Ext.define('recibosWeb.view.suscripcion.master.SuscripcionSearchForm', {
     extend       : 'Ext.form.Panel',
-    alias        : 'widget.periodo_periodosearchform',
+    alias        : 'widget.suscripcion_suscripcionsearchform',
     requires     : ['Ext.layout.container.Column'],
     border       : false,
     collapsible  : true,
@@ -18,7 +18,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionSearchForm', {
     },
 
     initComponent: function () {
-        this.title = 'Criterios de B�squeda';
+        this.title = 'Criterios de Búsqueda';
         this.dockedItems = [
             {
                 dock    : 'bottom',
@@ -29,7 +29,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionSearchForm', {
                         xtype  : 'button',
                         text   : 'Limpiar',//t('commons.buttons.limpiar'),
                         cls    : 'ux-btn',
-                        //handler: 'periodoReset',
+                        //handler: 'suscripcionReset',
                         glyph  : Glyphs.getIcon('eraser')
                     },
                     {
@@ -40,7 +40,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionSearchForm', {
                         text   : 'Buscar',//t('commons.buttons.buscar'),
 //                        ui     : 'highlight',
                         cls    : 'ux-btn',
-                        handler: 'periodoSearch',
+                        handler: 'suscripcionSearch',
                         glyph  : Glyphs.getIcon('search')
                     }
                 ]

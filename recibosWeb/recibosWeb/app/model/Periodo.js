@@ -1,7 +1,8 @@
 Ext.define('recibosWeb.model.Periodo', {
     extend: 'Ext.data.Model',
     requires   : [
-        'iDynamicsFront.data.Proxy'
+        'iDynamicsFront.data.Proxy',
+        'Ext.data.proxy.Rest'
     ],
 
 //    requires: ['Ext.data.proxy.Rest'],

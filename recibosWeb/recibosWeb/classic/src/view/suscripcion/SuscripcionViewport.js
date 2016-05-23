@@ -1,6 +1,6 @@
 Ext.define('recibosWeb.view.suscripcion.SuscripcionViewport', {
     extend    : 'Ext.container.Container',
-    alias     : 'widget.periodo_periodoviewport',
+    alias     : 'widget.suscripcion_suscripcionviewport',
     requires  : ['iDynamicsFront.utils.UxMainToolbar',
         'recibosWeb.view.suscripcion.master.SuscripcionMaster',
         'recibosWeb.view.suscripcion.detail.SuscripcionDetailForm',
@@ -14,8 +14,8 @@ Ext.define('recibosWeb.view.suscripcion.SuscripcionViewport', {
     },
     items: [
         {
-            xtype      : 'periodo_periodomaster',
-            reference  : 'periodo_periodomaster',
+            xtype      : 'suscripcion_suscripcionmaster',
+            reference  : 'suscripcion_suscripcionmaster',
             dockedItems: [
                 {
                     xtype: 'ux-maintoolbar',
@@ -41,8 +41,8 @@ Ext.define('recibosWeb.view.suscripcion.SuscripcionViewport', {
             ]
         },
         {
-            xtype    : 'periodo_periododetailform',
-            reference: 'periodo_periododetailform'
+            xtype    : 'suscripcion_suscripciondetailform',
+            reference: 'suscripcion_suscripciondetailform'
         }
     ],
     html: '<div class="top-shadow"></div>'

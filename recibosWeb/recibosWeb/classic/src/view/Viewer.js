@@ -5,13 +5,16 @@ Ext.define('recibosWeb.view.Viewer', {
 //        'APP.view.monitorizacion.MonitorizacionViewport'
         'recibosWeb.view.periodo.PeriodoViewport',
         'recibosWeb.view.cabecera.CabeceraViewport',
-        'recibosWeb.view.reemitir.ReemitirViewport'
+        'recibosWeb.view.reemitir.ReemitirViewport',
+        'recibosWeb.view.suscripcion.SuscripcionViewport'
     ],
     cls     : 'viewer-cnt',
     layout  : 'card',
-    items   : [{
+    items   : [
+    {
+        xtype: 'suscripcion_suscripcionviewport'
+    }, {
         xtype: 'periodo_periodoviewport'
-
     }, {
         xtype: 'cabecera_cabeceraviewport'
     }, {

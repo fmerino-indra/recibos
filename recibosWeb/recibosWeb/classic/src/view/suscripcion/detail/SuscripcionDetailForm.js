@@ -1,19 +1,19 @@
 Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
     extend         : 'Ext.form.Panel',
-    alias          : 'widget.periodo_periododetailform',
+    alias          : 'widget.suscripcion_suscripciondetailform',
     requires       : ['iDynamicsFront.selectors.UxLocatorField',
         'iDynamicsFront.util.UxDialogFieldN',
         'iDynamicsFront.utils.UxMainToolbar',
         'recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl'],
     model          : 'recibosWeb.model.Suscripcion',
-    modelValidation: true,
+    modelValidation: false,
     cls            : 'card detail usuario ux-validation-form fa',
 
 
     controller   : 'suscripcion-detail',
-//    viewModel    : {
-//        type: 'suscripcion-detail'
-//    },
+    viewModel    : {
+        type: 'suscripcion-detail'
+    },
     fieldDefaults: {
         labelPad      : 1,
         labelSeparator: ':',
@@ -31,46 +31,96 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
                 dock : 'top',
                 cls  : 'main-toolbar',
                 scale: 'medium',
-                items: ['back', '-', 'add', '-', 'delete', '-',
-                    {text: 'desactivar', reference: 'enableBtn', handler: 'enable'},
-                    {text: 'resetear contraseña', handler: 'resetPass', glyph: Glyphs.getIcon('refresh')}]
+                items: ['back', '-', 'add', '-', 'delete']
             }
         ];
         this.items = [
             {
                 xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.codigo'),
-                name      : 'codigo',
-                bind      : "{suscripcion.codigo}"
+                fieldLabel: t('suscripcion.items.id'),
+                name      : 'id',
+                bind      : "{suscripcion.id}",
+                editable  : false,
+                align     : 'right'
+                	
+            }
+            ,
+            {
+                xtype       : 'datefield',
+                format      : 'd-m-Y',
+                fieldLabel: t('suscripcion.items.fechaInicio'),
+                bind      : "{suscripcion.fechaInicio}",
+                editable  : false,
+                name      : 'fechaInicio'
+            }
+            ,
+            {
+                xtype       : 'datefield',
+                format      : 'd-m-Y',
+                fieldLabel: t('suscripcion.items.fechaBaja'),
+                bind      : "{suscripcion.fechaBaja}",
+                editable  : false,
+                name      : 'fechaBaja'
             }
             ,
             {
                 xtype     : 'textfield',
                 fieldLabel: t('suscripcion.items.nombre'),
                 bind      : "{suscripcion.nombre}",
+                editable  : false,
                 name      : 'nombre'
             }
             ,
             {
                 xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.frecuencia'),
-                bind      : "{suscripcion.frecuencia}",
-                name      : 'frecuencia'
+                fieldLabel: t('suscripcion.items.euros'),
+                bind      : "{suscripcion.euros}",
+                name      : 'euros'
             }
             ,
             {
                 xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.anticipacion'),
-                bind      : "{suscripcion.anticipacion}",
-                name      : 'anticipacion'
+                fieldLabel: t('suscripcion.items.divisa'),
+                bind      : "{suscripcion.divisa}",
+                editable  : false,
+                name      : 'divisa'
             }
-            /*-ITEMS- detail:##,oldPassword,passwordConfirmation,roleId,username,password,name,surname,email,enabled,creationDate,*/
+            ,
+            {
+                xtype     : 'textfield',
+                fieldLabel: t('suscripcion.items.periodo'),
+                bind      : "{suscripcion.periodo}",
+                name      : 'periodo'
+            }
+            ,
+            {
+                xtype     : 'checkboxfield',
+                fieldLabel: t('suscripcion.items.activo'),
+                bind      : "{suscripcion.activo}",
+                editable  : false,
+                name      : 'activo'
+            }
+            ,
+            {
+                xtype     : 'textfield',
+                fieldLabel: t('suscripcion.items.concepto'),
+                bind      : "{suscripcion.concepto}",
+                editable  : false,
+                name      : 'concepto'
+            }
+            ,
+            {
+                xtype     : 'textfield',
+                fieldLabel: t('suscripcion.items.iban'),
+                bind      : "{suscripcion.iban}",
+                name      : 'iban'
+            }
         ];
 
         this.resetButton = Ext.create('Ext.button.Button', {
             xtype  : 'button',
             text   : t('commons.buttons.reset'),
-            handler: 'periodoResetEdit',
+            handler: 'suscripcionResetEdit',
             ui     : 'plain',
             scale  : 'medium',
             glyph  : Glyphs.getIcon('undo')
@@ -82,7 +132,7 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
             text    : t('commons.buttons.guardar'),
             scale   : 'medium',
             ui      : 'highlight',
-            handler : 'periodoSave',
+            handler : 'suscripcionSave',
             formBind: true,
             glyph   : Glyphs.getIcon('save')
         });

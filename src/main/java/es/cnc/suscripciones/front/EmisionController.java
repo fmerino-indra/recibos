@@ -17,11 +17,21 @@ public class EmisionController {
 	@Autowired
 	EmisionService emisionService;
 	
+	/**
+	 * Anota una devolución de recibo.
+	 * @param body
+	 * @param ids
+	 */
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/devolver" })
     public void devolver(@RequestBody String body, @RequestParam("id") ArrayList<Integer> ids) {
     	System.out.println(ids);
     	emisionService.devolver(ids);
     }
+    /**
+     * Anula una devolución.
+     * @param body
+     * @param ids
+     */
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/anular" })
     public void anular(@RequestBody String body, @RequestParam("id") ArrayList<Integer> ids) {
     	System.out.println(ids);

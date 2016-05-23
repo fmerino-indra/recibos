@@ -3,16 +3,16 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
         'Ext.toolbar.Paging'
     ],
     extend       : 'Ext.grid.Panel',
-    alias        : 'widget.periodo_periodogrid',
+    alias        : 'widget.suscripcion_suscripciongrid',
     cls          : 'data-list usuarios',
-    multiSelect  : true,
+    multiSelect  : false,
 /*
     viewModel : {
         type: 'suscripcion-master'
     },
 */
     bind     : {
-        store: '{periodos}'
+        store: '{suscripcions}'
 //        title: 'Listado de usuarios [{usuarios.totalCount}]'
     },
 
@@ -26,27 +26,36 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
     initComponent: function () {
         this.columns =
             [
+	            {
+	                header   : 'id',//t('suscripcion.items.frecuencia'),
+	                dataIndex: 'idSuscripcion',
+	                flex     : 1
+	            }
+	            ,
                 {
-                    header   : t('suscripcion.items.codigo'),
-                    dataIndex: 'codigo',
+                    header   : t('suscripcion.items.fechaInicio'),
+                    dataIndex: 'fechaInicio',
+                    flex     : 1,
+                    renderer: Ext.util.Format.dateRenderer('d-m-Y')
+                }
+                ,
+                {
+                    header   : t('suscripcion.items.euros'),
+                    dataIndex: 'euros',
+                    flex     : 1,
+                    xtype    : 'numbercolumn',
+                    format   : '0,000.00'
+                }
+                ,
+                {
+                    header   : 'Nombre',//t('suscripcion.items.frecuencia'),
+                    dataIndex: 'nombrePersona',
                     flex     : 1
                 }
                 ,
                 {
-                    header   : t('suscripcion.items.nombre'),
-                    dataIndex: 'nombre',
-                    flex     : 1
-                }
-                ,
-                {
-                    header   : 'Frecuencia',//t('suscripcion.items.frecuencia'),
-                    dataIndex: 'frecuencia',
-                    flex     : 1
-                }
-                ,
-                {
-                    header   : 'Anticipacion',//t('suscripcion.items.anticipacion'),
-                    dataIndex: 'anticipacion',
+                    header   : 'Activo',//t('suscripcion.items.anticipacion'),
+                    dataIndex: 'activo',
                     flex     : 1
                 }
 
@@ -60,7 +69,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
                 displayInfo: true,
                 cls        : 'paging-toolbar',
                 bind       : {
-                    store: '{periodos}'
+                    store: '{suscripcions}'
                 }
             }];
 
@@ -73,13 +82,13 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
     translate: function () {
         var me = this;
         me.setTitle(t('listado.de.datos'));
-        console.log('periodo_periodogrid.translate.ini');
+        console.log('suscripcion_suscripciongrid.translate.ini');
         me.down('#codigo').setText(t('suscripcion.items.codigo'));
         me.down('#nombre').setText(t('suscripcion.items.nombre'));
         me.down('#frecuencia').setText(t('suscripcion.items.frecuencia'));
         me.down('#anticipacion').setText(t('suscripcion.items.anticipacion'));
         me.down('pagingtoolbar').setLocale(AppConfig.getLocale());
-        console.log('periodo_periodogrid.translate.fin');
+        console.log('suscripcion_suscripciongrid.translate.fin');
     }
     */
 })

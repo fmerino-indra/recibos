@@ -19,8 +19,13 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "suscripcion")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Suscripcion extends AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,7 +58,7 @@ public class Suscripcion extends AbstractEntity<Integer> {
     private Secuenciaadeudo secuenciaAdeudo;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "persona", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "persona", referencedColumnName = "id", nullable = true)
     private Persona persona;
     
     @Column(name = "FechaInicio")
@@ -66,9 +71,11 @@ public class Suscripcion extends AbstractEntity<Integer> {
     @DateTimeFormat(style = "M-")
     private Date fechaBaja;
     
+    @Deprecated
     @Column(name = "PAGO", length = 1)
     private String pago;
     
+    @Deprecated
     @Column(name = "PESETAS", precision = 22)
     private Double pesetas;
     
@@ -78,23 +85,27 @@ public class Suscripcion extends AbstractEntity<Integer> {
     @Column(name = "PERIODO", length = 1)
     private String periodo;
     
+    @Deprecated
     @Column(name = "DEVOLUCION", length = 10)
     private String devolucion;
     
     @Column(name = "Activo")
     private Boolean activo;
     
+    @Deprecated
     @Column(name = "UltimaEmision")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(style = "M-")
     private Date ultimaEmision;
     
+    @Deprecated
     @Column(name = "IdTitular")
     private Integer idTitular;
     
     @Column(name = "Euros", precision = 22)
     private Double euros;
     
+    @Deprecated
     @Column(name = "idAntigua")
     private Integer idAntigua;
     
@@ -141,18 +152,22 @@ public class Suscripcion extends AbstractEntity<Integer> {
         this.fechaBaja = fechaBaja;
     }
     
+    @Deprecated
     public String getPago() {
         return pago;
     }
     
+    @Deprecated
     public void setPago(String pago) {
         this.pago = pago;
     }
     
+    @Deprecated
     public Double getPesetas() {
         return pesetas;
     }
     
+    @Deprecated
     public void setPesetas(Double pesetas) {
         this.pesetas = pesetas;
     }
@@ -173,10 +188,12 @@ public class Suscripcion extends AbstractEntity<Integer> {
         this.periodo = periodo;
     }
     
+    @Deprecated
     public String getDevolucion() {
         return devolucion;
     }
     
+    @Deprecated
     public void setDevolucion(String devolucion) {
         this.devolucion = devolucion;
     }
@@ -189,18 +206,22 @@ public class Suscripcion extends AbstractEntity<Integer> {
         this.activo = activo;
     }
     
+    @Deprecated
     public Date getUltimaEmision() {
         return ultimaEmision;
     }
     
+    @Deprecated
     public void setUltimaEmision(Date ultimaEmision) {
         this.ultimaEmision = ultimaEmision;
     }
     
+    @Deprecated
     public Integer getIdTitular() {
         return idTitular;
     }
     
+    @Deprecated
     public void setIdTitular(Integer idTitular) {
         this.idTitular = idTitular;
     }
@@ -213,10 +234,12 @@ public class Suscripcion extends AbstractEntity<Integer> {
         this.euros = euros;
     }
     
+    @Deprecated
     public Integer getIdAntigua() {
         return idAntigua;
     }
     
+    @Deprecated
     public void setIdAntigua(Integer idAntigua) {
         this.idAntigua = idAntigua;
     }
@@ -233,4 +256,20 @@ public class Suscripcion extends AbstractEntity<Integer> {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("pSDs", "secuenciaAdeudo", "persona").toString();
     }
 
+    /**
+     * Call only if PSD is initialized
+     * @return
+     */
+    @JsonIgnore
+    public PSD getActivePSD() {
+    	PSD active = null;
+    	if (this.pSDs != null) {
+    		for (PSD psd : pSDs) {
+    			if (psd.getFechaBaja() == null) {
+    				active = psd;
+    			}
+    		}
+    	}
+    	return active;
+    }
 }

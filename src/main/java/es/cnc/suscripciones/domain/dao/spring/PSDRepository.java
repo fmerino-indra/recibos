@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import es.cnc.suscripciones.domain.PSD;
+import es.cnc.suscripciones.domain.Suscripcion;
 
 public interface PSDRepository extends JpaRepository<PSD, Integer> {
 	
@@ -18,4 +20,8 @@ public interface PSDRepository extends JpaRepository<PSD, Integer> {
 			+ " and s.activo = TRUE"
 			+ " and s.periodo = ?1")
 	public List<PSD> findByPeriod(String period);
+	
+	@Query("SELECT DISTINCT psd FROM PSD psd"
+			+ " WHERE psd.idSuscripcion = :s")
+	public List<PSD> findBySuscripcion(@Param("s") Suscripcion s);
 }

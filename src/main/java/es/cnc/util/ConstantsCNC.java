@@ -9,7 +9,7 @@ public class ConstantsCNC {
 	}
 
 	public static final String CONCEPTO = "Financiación de la Iglesia Católica";
-	
+	public static final String DIVISA = "Eur";
 	/**
 	 * Secuencia Adeudo
 	 */

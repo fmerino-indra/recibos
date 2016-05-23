@@ -18,7 +18,10 @@
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +34,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.cnc.Application;
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
+import es.cnc.suscripciones.domain.Emision;
+import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
 import es.cnc.suscripciones.services.emision.EmisionService;
 import es.cnc.suscripciones.services.generacion.GeneracionService;
+import es.cnc.util.LocalDateUtil;
 
 /**
  * Integration test to run the application.
@@ -50,6 +56,8 @@ public class EmisionServiceTest {
 	@Autowired
 	private EmisionService emisionService;
 
+	@Autowired
+	private CabeceraRepository cabeceraRepository;
 	@Before
 	public void setUp() {
 		logger = LoggerFactory.getLogger(this.getClass());
@@ -58,7 +66,7 @@ public class EmisionServiceTest {
 	@Test
 	public void emitirYGenerar() throws Exception {
 		List<Cabeceraemisiones> cabeceras = null;
-		cabeceras = emisionService.generate(2);
+		cabeceras = emisionService.generate(4);
 		assertNotNull(cabeceras);
 		assertTrue(cabeceras.size()>0);
 		for (Cabeceraemisiones cabecera: cabeceras) {
@@ -66,4 +74,44 @@ public class EmisionServiceTest {
 		}
 	}
 	
+//	@Test
+	public void generarCabecera() throws Exception {
+		Cabeceraemisiones cab = null;
+		cab = cabeceraRepository.findOne(3805);
+		generacionService.generateISO20022(cab);
+	
+	}
+//	@Test
+//	@Transactional
+	public void testRefunded() throws Exception {
+		List<Cabeceraemisiones> cabeceras = null;
+		LocalDateTime from = null;
+		LocalDateTime to = null;
+		
+		from = LocalDateUtil.fromInitialYearMonth(2016, 2);
+		to = LocalDateUtil.fromLastYearMonth(2016, 2);
+		
+		
+		cabeceras = cabeceraRepository.findRefundedCabeceraBetweenDatesFull(
+				LocalDateUtil.localDateTimeToDate(from),
+				LocalDateUtil.localDateTimeToDate(to));
+		
+		assertNotNull(cabeceras);
+		assertTrue(cabeceras.size()>0);
+		for (Cabeceraemisiones cabecera : cabeceras) {
+			System.out.println(cabecera.getId() + "-" + cabecera.getCodigoMes() + "-" + cabecera.getFechaEmision());
+			for (Emision emision : cabecera.getEmisions()) {
+				System.out.println("    +" + emision.getId() + "-" + emision.getImporte() + "-" + emision.getIdSuscripcion().getIdSuscripcion().getPersona().getNombre() + "-" + emision.getIdSuscripcion().getIdSuscripcion().getPersona().getNif());
+			}
+			
+		}
+		
+		cabeceras = emisionService.generateRefunded(2016, 2);
+		assertNotNull(cabeceras);
+		assertTrue(cabeceras.size()>0);
+		for (Cabeceraemisiones cabecera: cabeceras) {
+			generacionService.generateISO20022(cabecera);
+		}
+		
+	}
 }

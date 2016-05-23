@@ -34,7 +34,7 @@ public class CabeceraController {
 		CabeceraDTO cab = buildCabeceraDTO(ce, emissionList);
 		
 //		ResponseDetail<Cabeceraemisiones> returnValue = new ResponseDetail<>();
-		ResponseAbstract<CabeceraDTO> returnValue = new ResponseAbstract<>();
+		ResponseAbstract<CabeceraDTO> returnValue = new ResponseDTO<>();
 		returnValue.setData(cab);
 		returnValue.setSuccess(true);
 		returnValue.setTotalCount(1l);
@@ -83,15 +83,22 @@ public class CabeceraController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json", params = { "page", "start", "limit", "filter"})
-	public ResponseList<List<Cabeceraemisiones>> listPag(@RequestParam("filter") String filter, @RequestParam("limit") String limit,
-			@RequestParam("page") String page, @RequestParam("start") String start) {
+	public ResponseList<List<Cabeceraemisiones>> listPag(
+			@RequestParam("filter") String filter, 
+			@RequestParam("limit") String limit,
+			@RequestParam("page") String page, 
+			@RequestParam("start") String start) {
 		return listPag(filter, limit, page, start, null);
 	}
 
 	// TODO Apply filters!!!
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json", params = { "page", "start", "limit", "filter", "sort" })
-	public ResponseList<List<Cabeceraemisiones>> listPag(@RequestParam("filter") String filter, @RequestParam("limit") String limit,
-			@RequestParam("page") String page, @RequestParam("start") String start, @RequestParam("sort") String sort) {
+	public ResponseList<List<Cabeceraemisiones>> listPag(
+			@RequestParam("filter") String filter, 
+			@RequestParam("limit") String limit,
+			@RequestParam("page") String page, 
+			@RequestParam("start") String start, 
+			@RequestParam("sort") String sort) {
 		ResponseList<List<Cabeceraemisiones>> returnContainer = new ResponseList<>();
 		Integer iPage = parseToInteger(page);
 		Integer iStart = parseToInteger(start);
@@ -146,7 +153,7 @@ public class CabeceraController {
 		CabeceraDTO cab = buildCabeceraDTO(ce, emissionList);
 		
 //		ResponseDetail<Cabeceraemisiones> returnValue = new ResponseDetail<>();
-		ResponseAbstract<CabeceraDTO> returnValue = new ResponseAbstract<>();
+		ResponseDTO<CabeceraDTO> returnValue = new ResponseDTO<>();
 		returnValue.setData(cab);
 		returnValue.setSuccess(true);
 		returnValue.setTotalCount(1l);

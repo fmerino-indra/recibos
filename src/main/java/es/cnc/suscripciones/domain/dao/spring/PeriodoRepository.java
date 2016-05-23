@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import es.cnc.suscripciones.domain.Meses;
 import es.cnc.suscripciones.domain.Periodo;
 
-public interface PeriodoRepository extends JpaRepository<Periodo, Integer> {
+public interface PeriodoRepository extends JpaRepository<Periodo, String> {
 	@Query("select p from Periodo p JOIN FETCH p.meseses m where m.idMes = ?1")
 	public List<Periodo> findPeriodosByMes(Integer idMes);
 

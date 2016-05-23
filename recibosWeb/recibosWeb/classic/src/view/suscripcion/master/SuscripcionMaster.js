@@ -1,6 +1,6 @@
 Ext.define('recibosWeb.view.suscripcion.master.SuscripcionMaster', {
     extend  : 'Ext.panel.Panel',
-    alias   : 'widget.periodo_periodomaster',
+    alias   : 'widget.suscripcion_suscripcionmaster',
     cls     : 'card master',
     layout  : {
         type: 'border'
@@ -24,17 +24,17 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionMaster', {
         this.title = "Lista de Suscripcions"//t('suscripcion.dataList.title');
         this.items = [
             {
-                xtype    : 'periodo_periodosearchform',
-                reference: 'periodo_periodosearchform',
+                xtype    : 'suscripcion_suscripcionsearchform',
+                reference: 'suscripcion_suscripcionsearchform',
                 region   : 'west',
                 split    : true
 //                height: 155
             },
             {
-                xtype    : 'periodo_periodogrid',
-                reference: 'periodo_periodogrid',
+                xtype    : 'suscripcion_suscripciongrid',
+                reference: 'suscripcion_suscripciongrid',
                 bind     : {
-                    store: '{periodos}',
+                    store: '{suscripcions}',
                     title: 'Listado de usuarios [{usuarios.totalCount}]'
                 },
                 region   : 'center',

@@ -248,13 +248,24 @@ public class VariosTests {
 		
 		PageRequest pr = new PageRequest(page, limit);
 
-		lista = suscripcionRepository.findSuscripcionesActivas(pr);
+		lista = suscripcionRepository.findActiveSuscripciones(pr);
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 
-		lista = suscripcionService.findSuscripcionesActivas(page, start, limit);
+		lista = suscripcionRepository.findInactiveSuscripciones(pr);
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
+
+		lista = suscripcionService.findActiveSuscripciones(page, start, limit);
+		assertNotNull(lista);
+		assertTrue(lista.getSize() > 0);
+		
+		lista = suscripcionService.findInactiveSuscripciones(page, start, limit);
+		assertNotNull(lista);
+		assertTrue(lista.getSize() > 0);
+		for (Suscripcion ss:lista) {
+			System.out.println(ss.getId() + ":" + ss.getPersona().getNombre() + ":" + ss.getEuros());
+		}
 		
 		s=suscripcionService.findSuscripcionById(lista.getContent().get(0).getId());
 		assertNotNull(s);

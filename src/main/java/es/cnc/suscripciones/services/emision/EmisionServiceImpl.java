@@ -18,12 +18,14 @@ import es.cnc.suscripciones.domain.Emision;
 import es.cnc.suscripciones.domain.Meses;
 import es.cnc.suscripciones.domain.PSD;
 import es.cnc.suscripciones.domain.Periodo;
+import es.cnc.suscripciones.domain.Suscripcion;
 import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
 import es.cnc.suscripciones.domain.dao.spring.DevolucionRepository;
 import es.cnc.suscripciones.domain.dao.spring.EmisionRepository;
 import es.cnc.suscripciones.domain.dao.spring.PSDRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaHasParrocoRepository;
 import es.cnc.suscripciones.domain.dao.spring.PeriodoRepository;
+import es.cnc.suscripciones.domain.dao.spring.SuscripcionRepository;
 import es.cnc.util.ConstantsCNC;
 import es.cnc.util.LocalDateUtil;
 
@@ -35,7 +37,7 @@ public class EmisionServiceImpl implements EmisionService {
 
 	@Autowired
 	CabeceraRepository cabeceraRepository;
-	
+
 	@Autowired
 	ParroquiaHasParrocoRepository phpRepository;
 
@@ -47,12 +49,17 @@ public class EmisionServiceImpl implements EmisionService {
 
 	@Autowired
 	DevolucionRepository devolucionRepository;
-	
+
+	@Autowired
+	SuscripcionRepository suscripcionRepository;
+
 	public EmisionServiceImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see es.cnc.suscripciones.services.emision.EmisionService#findMascara()
 	 */
 	@Override
@@ -77,7 +84,76 @@ public class EmisionServiceImpl implements EmisionService {
 		return periodoRepository.findPeriodosByMes(mes);
 	}
 
-	private Cabeceraemisiones generateDirectDebitHeader(Periodo p, LocalDateTime today, LocalDateTime fEnvio) {
+	@Override
+	@Transactional
+	public List<Cabeceraemisiones> generate() {
+		LocalDate today = LocalDate.now();
+		return generate(today.getMonthValue());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see es.cnc.suscripciones.services.emision.EmisionService#generate()
+	 */
+	@Override
+	@Transactional
+	public List<Cabeceraemisiones> generate(int month) {
+		List<Cabeceraemisiones> lista;
+		lista = generateDirectDebtHeaders(month);
+		for (Cabeceraemisiones ce : lista) {
+			ce.setEmisions(generateDirectDebts(ce));
+		}
+		return lista;
+	}
+
+	/**
+	 * Regular or normal group of generating methods.
+	 */
+
+	/**
+	 * Generate a list of Cabeceraemisiones for the month passed as parameter.
+	 * Search de period pattern for the month passed as parameter.
+	 * 
+	 * @param month
+	 * @return
+	 */
+	private List<Cabeceraemisiones> generateDirectDebtHeaders(int month) {
+		List<Periodo> periodList = findMascara(month);
+		return generateDirectDebtHeaders(periodList);
+	}
+
+	/**
+	 * Generate a list of Cabeceraemisiones for the period pattern list passed
+	 * as parameter and for the current date like issue date and payment date
+	 * (issue date + 4)
+	 * 
+	 * @param periodList
+	 * @return
+	 */
+	private List<Cabeceraemisiones> generateDirectDebtHeaders(List<Periodo> periodList) {
+		List<Cabeceraemisiones> lista = null;
+		LocalDateTime today = LocalDateTime.now();
+		LocalDateTime fEnvio = today.plusDays(4);
+		lista = new ArrayList<>(periodList.size());
+		for (Periodo p : periodList) {
+			lista.add(generateDirectDebtHeader(p, today, fEnvio));
+		}
+		return lista;
+	}
+
+	/**
+	 * Generate a Cabeceraemisiones for the period pattern passed as parameter.
+	 * 
+	 * @param p
+	 *            -> Period pattern.
+	 * @param today
+	 *            -> Issue date.
+	 * @param fEnvio
+	 *            -> Payment date.
+	 * @return
+	 */
+	private Cabeceraemisiones generateDirectDebtHeader(Periodo p, LocalDateTime today, LocalDateTime fEnvio) {
 		Cabeceraemisiones ce = new Cabeceraemisiones();
 		ce.setCodigoMes(today.getMonthValue());
 		ce.setEmisionManual(false);
@@ -86,45 +162,35 @@ public class EmisionServiceImpl implements EmisionService {
 		ce.setFechaEnvio(LocalDateUtil.localDateTimeToDate(fEnvio));
 		ce.setParroquiaHasParroco(phpRepository.findActiveParroquiaHasParroco());
 		ce.setPeriodo(p.getId());
-		// TODO Where saving?
 		cabeceraRepository.save(ce);
 		return ce;
 	}
-	
-	private List<Cabeceraemisiones> generateDirectDebitHeaders(int month) {
-		List<Periodo> periodList = findMascara(month);
-		return generateDirectDebitHeaders(periodList);
-	}
-	
-	private List<Cabeceraemisiones> generateDirectDebitHeaders(List<Periodo> periodList) {
-		List<Cabeceraemisiones> lista = null;
-		LocalDateTime today = LocalDateTime.now();
-		LocalDateTime fEnvio = today.plusDays(4);
-		lista = new ArrayList<>(periodList.size());
-		for (Periodo p:periodList) {
-			lista.add(generateDirectDebitHeader(p, today, fEnvio));
-		}
-		return lista;
-	}
-	
-	private Set<Emision> generateDirectDebits(Cabeceraemisiones ce) {
+
+	/**
+	 * Generate a set of Emision (issue)
+	 * 
+	 * @param ce
+	 * @return
+	 */
+	private Set<Emision> generateDirectDebts(Cabeceraemisiones ce) {
 		List<PSD> psdList = psdRepository.findByPeriod(ce.getPeriodo());
 		Emision emision;
 		Set<Emision> emisiones = new HashSet<>(psdList.size());
-		for (PSD psd:psdList) {
-			emision = generateDirectDebit(psd, ce);
+		for (PSD psd : psdList) {
+			emision = generateDirectDebt(psd, ce);
 			emisiones.add(emision);
 		}
 		return emisiones;
 	}
-	
+
 	/**
-	 * Generate and save Emision, ce must be saved.
+	 * Generate and save a Emision (direct debt issue).
+	 * 
 	 * @param psd
 	 * @param ce
 	 * @return Generated Emision.
 	 */
-	private Emision generateDirectDebit(PSD psd, Cabeceraemisiones ce) {
+	private Emision generateDirectDebt(PSD psd, Cabeceraemisiones ce) {
 		Emision em = null;
 		em = new Emision();
 		em.setDevuelto(false);
@@ -140,53 +206,117 @@ public class EmisionServiceImpl implements EmisionService {
 		emisionRepository.save(em);
 		return em;
 	}
-	
-	@Override
-	public List<Cabeceraemisiones> generate() {
-		LocalDate today = LocalDate.now();
-		return generate(today.getMonthValue());
-	}
-	
-	/* (non-Javadoc)
-	 * @see es.cnc.suscripciones.services.emision.EmisionService#generate()
+
+	/**
+	 * Re-issue (re-emission) group of generating methods.
 	 */
+
 	@Override
-	public List<Cabeceraemisiones> generate(int mes) {
+	@Transactional
+	public List<Cabeceraemisiones> generateRefunded(int year, int month) {
 		List<Cabeceraemisiones> lista;
-		lista = generateDirectDebitHeaders(mes);
-		for (Cabeceraemisiones ce: lista) {
-			ce.setEmisions(generateDirectDebits(ce));
+		lista = generateRefundedDirectDebtHeader(year, month);
+		// for (Cabeceraemisiones ce: lista) {
+		// ce.setEmisions(generateRefundedDirectDebits(ce));
+		// }
+		return lista;
+	}
+
+	private List<Cabeceraemisiones> generateRefundedDirectDebtHeader(int year, int month) {
+		List<Cabeceraemisiones> refundedList = null;
+		LocalDateTime from = null;
+		LocalDateTime to = null;
+		from = LocalDateUtil.fromInitialYearMonth(year, month);
+		to = LocalDateUtil.fromLastYearMonth(year, month);
+
+		refundedList = cabeceraRepository.findRefundedCabeceraBetweenDatesFull(LocalDateUtil.localDateTimeToDate(from),
+				LocalDateUtil.localDateTimeToDate(to));
+
+		return generateRefundedDirectDebtHeader(refundedList);
+	}
+
+	private List<Cabeceraemisiones> generateRefundedDirectDebtHeader(List<Cabeceraemisiones> refundedList) {
+		List<Cabeceraemisiones> lista = null;
+
+		LocalDateTime today = LocalDateTime.now();
+		LocalDateTime fEnvio = today.plusDays(4);
+		lista = new ArrayList<>(refundedList.size());
+
+		for (Cabeceraemisiones refunded : refundedList) {
+			lista.add(generateRefundedDirectDebtHeader(refunded, today, fEnvio));
 		}
 		return lista;
 	}
-	
-	/* (non-Javadoc)
-	 * @see es.cnc.suscripciones.services.emision.EmisionService#deleteCabecera(es.cnc.suscripciones.domain.Cabeceraemisiones)
+
+	/**
+	 * Generate Direct Debt Header for refunded debts.
+	 * 
+	 * @param refunded.
+	 *            Cabeceraemisiones with all emisiones
+	 * @param today
+	 * @param fEnvio
+	 * @return
+	 */
+	private Cabeceraemisiones generateRefundedDirectDebtHeader(Cabeceraemisiones refunded, LocalDateTime today,
+			LocalDateTime fEnvio) {
+		Cabeceraemisiones ce = new Cabeceraemisiones();
+		ce.setCodigoMes(refunded.getCodigoMes());
+		ce.setEmisionManual(true);
+		ce.setConcepto(ConstantsCNC.CONCEPTO + " - " + LocalDateUtil.obtainTextualMonth(LocalDateUtil.dateToLocalDateTime(
+				refunded.getFechaEmision())) + " (Devueltos)");
+		ce.setFechaEmision(LocalDateUtil.localDateTimeToDate(today));
+		ce.setFechaEnvio(LocalDateUtil.localDateTimeToDate(fEnvio));
+		ce.setParroquiaHasParroco(phpRepository.findActiveParroquiaHasParroco());
+		ce.setPeriodo(refunded.getPeriodo());
+		cabeceraRepository.save(ce);
+		Suscripcion suscripcionActiva = null;
+		PSD psdActivo = null;
+		for (Emision refundedEmision : refunded.getEmisions()) {
+			if (refundedEmision.getDevuelto()) {
+				suscripcionActiva = suscripcionRepository.findActiveSuscripcionByPersona(
+					refundedEmision.getIdSuscripcion().getIdSuscripcion().getPersona());
+				if (suscripcionActiva != null) {
+					psdActivo = suscripcionActiva.getActivePSD();
+					if (psdActivo != null)
+						ce.getEmisions().add(generateDirectDebt(psdActivo, ce));
+				}
+			}
+		}
+		return ce;
+	}
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * es.cnc.suscripciones.services.emision.EmisionService#deleteCabecera(es.
+	 * cnc.suscripciones.domain.Cabeceraemisiones)
 	 */
 	@Override
+	@Transactional
 	public void deleteCabecera(Cabeceraemisiones ce) {
 		ce = cabeceraRepository.findCabeceraByIdWithEmisiones(ce);
-		for (Emision e:ce.getEmisions()) {
+		for (Emision e : ce.getEmisions()) {
 			emisionRepository.delete(e);
 		}
 		cabeceraRepository.delete(ce);
 	}
-// TODO FMM Sin probar
+
 	@Override
 	@Transactional
 	public void devolver(List<Integer> ids) {
 		Emision aux = null;
 		Devoluciones devolucionActiva;
 		LocalDateTime today = LocalDateTime.now();
-		for (Integer id:ids) {
-			aux=emisionRepository.getOne(id);
+		for (Integer id : ids) {
+			aux = emisionRepository.getOne(id);
 			aux.setDevuelto(true);
 			emisionRepository.save(aux);
-			
-			// TODO FMM No tiene sentido, nunca habrá una activa si se va a devolver 
+
+			// TODO FMM No tiene sentido, nunca habrá una activa si se va a
+			// devolver
 			devolucionActiva = devolucionRepository.findActiveReturnedByEmision(aux);
 			if (devolucionActiva != null) {
-				
+
 				devolucionActiva.setFechaBaja(LocalDateUtil.localDateTimeToDate(today));
 				devolucionRepository.save(devolucionActiva);
 			}
@@ -203,19 +333,26 @@ public class EmisionServiceImpl implements EmisionService {
 		Emision aux = null;
 		Devoluciones devolucionActiva;
 		LocalDateTime today = LocalDateTime.now();
-		for (Integer id:ids) {
-			aux=emisionRepository.getOne(id);
+		for (Integer id : ids) {
+			aux = emisionRepository.getOne(id);
 			aux.setDevuelto(false);
 			emisionRepository.save(aux);
-			
+
 			devolucionActiva = devolucionRepository.findActiveReturnedByEmision(aux);
 			if (devolucionActiva != null) {
-				
+
 				devolucionActiva.setFechaBaja(LocalDateUtil.localDateTimeToDate(today));
 				devolucionRepository.save(devolucionActiva);
 			} else {
-// TODO FMM Si está anulada y es 
+				// TODO FMM Si está anulada y es
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		LocalDateTime fecha = LocalDateTime.now();
+		fecha = fecha.minusMonths(1l);
+		System.out.println("Mes:" + LocalDateUtil.obtainTextualMonth(fecha));
+
 	}
 }

@@ -48,6 +48,6 @@ Ext.define('recibosWeb.view.reemitir.detail.ReemitirDetailMaster', {
             }
 
         }
-    ],
+    ]
 })
 ;

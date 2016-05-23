@@ -22,8 +22,8 @@ public class PeriodoController {
 	PeriodoRepository periodoRepository;
 	
     @RequestMapping(path={"/{id}"}, method = RequestMethod.GET)
-    public String detail(@PathVariable String id) {
-        return "";
+    public Periodo detail(@PathVariable String id) {
+        return periodoRepository.findOne(id);
     }
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<Periodo> list() {

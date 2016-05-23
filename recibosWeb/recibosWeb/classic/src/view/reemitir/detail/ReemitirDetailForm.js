@@ -34,9 +34,8 @@ Ext.define('recibosWeb.view.reemitir.detail.ReemitirDetailForm', {
                     {text: 'devolver', action: 'devolver', bind: {disabled: '{!hasAnyPaid}'}, glyph : Glyphs.getIcon('unlock_alt')},
                     {text: 'anular', action: 'anular', bind: {disabled: '{!hasAnyReturned}'}, glyph : Glyphs.getIcon('lock')},
                     {text: 'pruebaDevolver', action: 'anular', bind: {disabled: '{!hasAnyReturned}'}, glyph : Glyphs.getIcon('money')},
-                    {text: 'pruebaAnular', action: 'anular', bind: {disabled: '{!hasAnyReturned}'}, glyph : Glyphs.getIcon('')},
-
-                    ]
+                    {text: 'pruebaAnular', action: 'anular', bind: {disabled: '{!hasAnyReturned}'}, glyph : Glyphs.getIcon('')}
+                ]
             }
         ];
 

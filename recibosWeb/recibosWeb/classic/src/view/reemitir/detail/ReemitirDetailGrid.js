@@ -1,6 +1,6 @@
 Ext.define('recibosWeb.view.reemitir.detail.ReemitirDetailGrid', {
     requires     : [
-        'Ext.toolbar.Paging',
+        'Ext.toolbar.Paging'
     ],
     extend       : 'Ext.grid.Panel',
     alias        : 'widget.reemitir_reemitirdetailgrid',

@@ -56,7 +56,8 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionMasterCtrl', {
                     property: name,
                     value   : value
                 };
-                recibosWeb.lib.Logger.info('property ' + name + 'value ' + value);
+                console.log('property:' + name + ' value:' + value);
+//                recibosWeb.lib.Logger.info('property ' + name + 'value ' + value);
             }
         });
 
