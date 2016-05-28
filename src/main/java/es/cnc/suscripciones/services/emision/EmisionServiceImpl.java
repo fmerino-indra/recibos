@@ -157,7 +157,8 @@ public class EmisionServiceImpl implements EmisionService {
 		Cabeceraemisiones ce = new Cabeceraemisiones();
 		ce.setCodigoMes(today.getMonthValue());
 		ce.setEmisionManual(false);
-		ce.setConcepto(ConstantsCNC.CONCEPTO);
+		ce.setConcepto(ConstantsCNC.CONCEPTO + "-" + LocalDateUtil.obtainTextualMonth(today) + "-" + p.getNombre());
+//		ce.setConcepto(ConstantsCNC.CONCEPTO);
 		ce.setFechaEmision(LocalDateUtil.localDateTimeToDate(today));
 		ce.setFechaEnvio(LocalDateUtil.localDateTimeToDate(fEnvio));
 		ce.setParroquiaHasParroco(phpRepository.findActiveParroquiaHasParroco());

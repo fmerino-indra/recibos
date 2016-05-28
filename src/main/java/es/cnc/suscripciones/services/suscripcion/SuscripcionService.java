@@ -47,4 +47,6 @@ public interface SuscripcionService {
 	@Transactional
 	Suscripcion cancelSuscripcion(Integer id);
 
+	@Transactional
+	Suscripcion createSuscripcion(String iban, Double euros, String nombre, String periodo);
 }

@@ -1,6 +1,5 @@
 package es.cnc.suscripciones.front;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import es.cnc.suscripciones.services.suscripcion.SuscripcionService;
 
 @RestController()
 @RequestMapping("{contextPath}/suscripciones")
-public class SuscripcionController {
+public class SuscripcionController extends AbstractController<Suscripcion> {
 	@Autowired
 	SuscripcionService suscripcionService;
 	
@@ -69,15 +68,7 @@ public class SuscripcionController {
 		return returnContainer;
 	}
 
-	private List<Suscripcion> toList(Page<Suscripcion> page) {
-		List<Suscripcion> returnValue = new ArrayList<Suscripcion>(page.getSize());
-		for (Suscripcion ce:page) {
-			returnValue.add(ce);
-		}
-		return returnValue;
-	}
-	
-    @RequestMapping(method = RequestMethod.PUT, produces = "application/json", path={"/{id}"})
+	@RequestMapping(method = RequestMethod.PUT, produces = "application/json", path={"/{id}"})
     public void cambiarSuscripcion(@RequestBody String body, @PathVariable("id") Integer id) {
     	System.out.println(body);
     }

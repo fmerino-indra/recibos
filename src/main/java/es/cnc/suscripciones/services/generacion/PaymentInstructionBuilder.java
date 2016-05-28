@@ -318,7 +318,8 @@ public class PaymentInstructionBuilder {
 
 	private static RemittanceInformation5 buildRmtInf(Emision em) {
 		RemittanceInformation5 ri5 = oF.createRemittanceInformation5();
-		ri5.getUstrd().add(em.getIdSuscripcion().getIdSuscripcion().getConcepto());
+//		ri5.getUstrd().add(em.getIdSuscripcion().getIdSuscripcion().getConcepto());
+		ri5.getUstrd().add(em.getIdCabecera().getConcepto());
 		return ri5;
 	}
 }

@@ -27,40 +27,47 @@ Ext.define('recibosWeb.view.MenuList', {
             allowMultiple: false,
             items        : [{
                 xtype    : 'button',
-                text     : 'Suscripciones',
+                text     : 'Personas',
                 index    : 0,
-                reference: 'suscripciones',
+                reference: 'personas',
                 pressed  : true,
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
-                text     : 'Periodo',
+                text     : 'Suscripciones',
                 index    : 1,
+                reference: 'suscripciones',
+                pressed  : false,
+                handler  : 'onChangeCard'
+            }, {
+                xtype    : 'button',
+                text     : 'Periodo',
+                index    : 2,
                 reference: 'monitorizacion',
                 pressed  : false,
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
                 text     : 'Cabeceras',
-                index    : 2,
+                index    : 3,
                 reference: 'cabeceras',
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
                 text     : 'Re-emitir',
-                index    : 3,
+                index    : 4,
                 reference: 'reemitir',
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
                 text     : 'Paneles',
-                index    : 4,
+                index    : 5,
                 reference: 'paneles',
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
                 text     : 'Administración',
-                index    : 5,
+                index    : 6,
                 reference: 'administracion',
                 handler  : 'onChangeCard'
             }]

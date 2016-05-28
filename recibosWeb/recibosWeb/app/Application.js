@@ -33,7 +33,7 @@ Ext.define('recibosWeb.Application', {
             listeners: {
                 loaded: function () {
                     // Se hace aquí, en lugar de en app.js (configuración) porque si no se cre
-                    // sobre la marcha.
+                    // sobre la marcha.;
                     recibosWeb.appConfig.Initializer.init();
                     me.mainView = Ext.create('recibosWeb.view.Viewport');
                 }

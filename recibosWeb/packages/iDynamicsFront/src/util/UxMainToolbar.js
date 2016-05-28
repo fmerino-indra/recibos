@@ -145,7 +145,24 @@ Ext.define('iDynamicsFront.utils.UxMainToolbar', {
                 tooltip: t('commons.buttons.tooltip.pdf'),
                 frame  : false,
                 glyph  : Glyphs.getIcon('file_pdf_o')
+            },
+            'save'       : {
+                iconCls: 'icon-edit',
+                action : 'saveRecord',
+                text   : t('commons.buttons.save'),
+                tooltip: t('commons.buttons.tooltip.save'),
+                frame  : false,
+                glyph  : Glyphs.getIcon('save')
+            },
+            'reset'       : {
+                iconCls: 'icon-cancel',
+                action : 'resetRecord',
+                text   : t('commons.buttons.reset'),
+                tooltip: t('commons.buttons.tooltip.reset'),
+                frame  : false,
+                glyph  : Glyphs.getIcon('undo')
             }
+
         }
     }
 });

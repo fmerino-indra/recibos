@@ -40,12 +40,15 @@ Ext.define('recibosWeb.view.Viewport', {
                 }, {
                     region: 'east',
                     width : 0
-                }, {
+                }
+/*
+                , {
                     region: 'south',
                     xtype : 'clock',
                     height: 30,
                     border: false
                 }
+*/
             ]
         }
     ]

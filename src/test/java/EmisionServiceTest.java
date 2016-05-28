@@ -21,8 +21,6 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +64,7 @@ public class EmisionServiceTest {
 	@Test
 	public void emitirYGenerar() throws Exception {
 		List<Cabeceraemisiones> cabeceras = null;
-		cabeceras = emisionService.generate(4);
+		cabeceras = emisionService.generate(5);
 		assertNotNull(cabeceras);
 		assertTrue(cabeceras.size()>0);
 		for (Cabeceraemisiones cabecera: cabeceras) {
@@ -75,12 +73,12 @@ public class EmisionServiceTest {
 	}
 	
 //	@Test
-	public void generarCabecera() throws Exception {
-		Cabeceraemisiones cab = null;
-		cab = cabeceraRepository.findOne(3805);
-		generacionService.generateISO20022(cab);
+//	public void generarCabecera() throws Exception {
+//		Cabeceraemisiones cab = null;
+//		cab = cabeceraRepository.findOne(3805);
+//		generacionService.generateISO20022(cab);
+//	}
 	
-	}
 //	@Test
 //	@Transactional
 	public void testRefunded() throws Exception {

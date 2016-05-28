@@ -163,11 +163,11 @@ public class VariosTests {
 		assertNotNull(php);
 	}
 	
-//	@Test
+	@Test
 	public void testGeneracion() throws Exception {
 		Cabeceraemisiones cabecera = null;
 		cabecera = new Cabeceraemisiones();
-		cabecera.setId(3785);
+		cabecera.setId(3806);
 		
 		generacionService.generateISO20022(cabecera);
 	}

@@ -2,6 +2,7 @@ package es.cnc.suscripciones.services.suscripcion;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -20,6 +21,7 @@ import es.cnc.suscripciones.domain.Sucursal;
 import es.cnc.suscripciones.domain.Suscripcion;
 import es.cnc.suscripciones.domain.dao.spring.DomiciliacionRepository;
 import es.cnc.suscripciones.domain.dao.spring.PSDRepository;
+import es.cnc.suscripciones.domain.dao.spring.PersonaRepository;
 import es.cnc.suscripciones.domain.dao.spring.SucursalRepository;
 import es.cnc.suscripciones.domain.dao.spring.SuscripcionRepository;
 import es.cnc.util.ConstantsCNC;
@@ -40,6 +42,9 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
 	@Autowired
 	private DomiciliacionRepository domiciliacionRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository;
 	
 	public SuscripcionServiceImpl() {
 		logger = LoggerFactory.getLogger(this.getClass());
@@ -203,6 +208,7 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 	}
 
 	@Override
+	@Transactional
 	public Suscripcion cancelSuscripcion(Integer id) {
 		Suscripcion s = null;
 		LocalDateTime today = null;
@@ -216,11 +222,25 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 	public Suscripcion findActiveSuscripcionByPersona(Persona p) {
 		return suscripcionRepository.findActiveSuscripcionByPersona(p);
 	}
-	
-//	@Override
-//	@Transactional
-//	public Suscripcion createSuscripcion(String iban, Double euros) {
-//		
-//	}
 
+	@Override
+	@Transactional
+	public Suscripcion createSuscripcion(String iban, Double euros, String nif, String periodo) {
+		List<Persona> lista = personaRepository.findPersonaByNif(nif);
+		Persona persona = null;
+		LocalDateTime today = null;
+		today = LocalDateTime.now();
+		Suscripcion s = null;
+		if (lista == null) { // Crear persona
+			throw new RuntimeException("Persona:" + nif + " - No existe");
+		} else if (lista.size() > 1) {
+			throw new RuntimeException("El NIF:" + nif + " - Está repetido");
+		} else {
+			persona = lista.get(0);
+		}
+		if (persona != null) {
+			s = createSuscripcion(iban, euros, persona, today, periodo);
+		}
+		return s;
+	}
 }

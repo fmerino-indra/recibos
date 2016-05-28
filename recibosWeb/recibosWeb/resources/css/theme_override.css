@@ -38,7 +38,9 @@ body 													{height:100%; text-align: center; padding: 20px !important; pa
 .x-css-shadow 											{box-shadow: rgba(0,0,0,0.4) 4px 4px 64px 1px !important;}
 
 /* sombra que sale debajo del toolbar */
-.top-shadow 											{background: url('../images/ux/top-shadow-4px.png') repeat-x 0 bottom !important; width: 100%;height: 6px; top: 61px; left: 0px; position: absolute; z-index: 9999;}
+/*[FMM] Tests
+/*.top-shadow 											{background: url('../images/ux/top-shadow-4px.png') repeat-x 0 bottom !important; width: 100%;height: 6px; top: 61px; left: 0px; position: absolute; z-index: 9999;}*/
+.top-shadow 											{background: url('../images/ux/top-shadow-4px.png') repeat-x 0 bottom !important; width: 100%;height: 350px !important; top: 61px; left: 0px; position: absolute; z-index: 9999;}
 .x-ie .top-shadow										{top: 57px;}
 
 
@@ -110,7 +112,8 @@ body 													{height:100%; text-align: center; padding: 20px !important; pa
 .x-ie .ux-btn-highlighted.x-btn.x-btn-disabled em			{background-position: left  -210px !important;}
 
 /* BOTONES UX-TOOLBAR MEDIUM */
-.x-toolbar.ux-toolbar.medium .x-btn								{}
+/*[FMM] TEST*/
+.x-toolbar.ux-toolbar.medium .x-btn								{border-color: red !important; border-style:dotted !important; border-width: 20px}
 .x-toolbar.ux-toolbar.medium .x-btn button						{}
 .x-toolbar.ux-toolbar.medium .x-btn .x-btn-inner 				{padding:0 5px 0 25px !important;}
 .x-toolbar.ux-toolbar.medium .x-btn.over						{background-image: none !important; background-color: #5fc0ce; border-color: #5fc0ce}

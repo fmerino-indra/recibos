@@ -593,6 +593,7 @@
             "sass": {
                 // "save": "classic/sass/save.scss"
             }
+/*
         },
 
         "modern": {
@@ -604,9 +605,10 @@
             "sass": {
                 // "save": "modern/sass/save.scss"
             }
+*/
         }
     },
-    
+
 
     /**
      * Uniquely generated id for this application, used as prefix for localStorage keys.

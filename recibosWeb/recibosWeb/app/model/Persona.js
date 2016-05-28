@@ -1,5 +1,8 @@
 Ext.define('recibosWeb.model.Persona', {
     extend: 'recibosWeb.model.Base',
+    requires   : [
+        'iDynamicsFront.data.Proxy'
+    ],
     idProperty : 'id',
     fields: [
         {name:'nombre', type:"string", useNull:true}
@@ -11,5 +14,15 @@ Ext.define('recibosWeb.model.Persona', {
         ,{name:'tfno', type:"string", useNull:true}
         ,{name:'idAntigua', type:"int", useNull:true}
         ,{name:'id', type:"int", useNull:true}
-    ]
+    ],
+    proxy      : {
+        type     : 'idfproxy',
+        name     : 'recibosWeb.proxy.Persona',
+        mockupUrl: 'data/personasListado.json',
+        remoteUrl: 'personas'
+//        ,
+//        url      : '/periodos'
+    }
+
+
 });

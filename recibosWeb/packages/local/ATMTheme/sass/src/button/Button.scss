@@ -117,6 +117,204 @@ $border-color-disabled: transparent
   background: transparent;
 }
 
+////// EDITRAN //////////
+
+/** @class Ext.button.Button */
+//
+
+/* Editran UI's
+
+  toolbar: default
+  hightlight
+  hightlightpunch
+  darkhighlight
+  plain
+
+*/
+
+$glyph-color: $editran-darkgrey;
+
+/* UI highlight ····················································································································································································  */
+@include extjs-button-medium-ui (
+$ui: 'default',
+
+$border-color: $editran-mediumgrey,
+$border-color-over: $editran-grey,
+$border-color-focus: $editran-grey,
+$border-color-pressed: $editran-darkgrey,
+$border-color-disabled: $editran-lightgrey,
+
+$background-color: rgba(255,255,255,0), // $editran-mediumgrey,
+$background-color-over: $editran-lightgrey,
+$background-color-focus: $editran-lightgrey,
+$background-color-pressed: $editran-darkgrey,
+$background-color-disabled: rgba(255,255,255,0),
+
+$background-gradient: none,
+$background-gradient-over: none,
+$background-gradient-focus: none,
+$background-gradient-pressed: none,
+$background-gradient-disabled: none,
+
+$color: $editran-darkgrey,
+$color-over: $editran-darkgrey,
+$color-focus: $editran-darkgrey,
+$color-pressed: #fff,
+$color-disabled: $editran-grey,
+
+$border-radius: 4px
+
+);
+.#{$prefix}btn-default-small              {transition: background-color 0.2s, border-color 0.2s, color 0.2s; padding: 6px;} /* ESTE PADDING HA SIDO NECESARIO PONERLO PORQUE SI NO EL MIXIN FRAME.SCSS HACE UN CÁLCULO EXTRAÑO PARA PONER EL PADDING EN FUNCIÓN DEL BORDER-RADIUS Y SI ESTE ES MUY ÁLTO (PARA HACER BOTONES EN FORMA DE CÁPSULA) NO HAY MANERA DE CONSEGUIRLO*/
+.#{$prefix}btn-default-small .x-btn-inner {font-weight: normal; font-family: inherit; text-transform: uppercase;}
+
+
+.#{$prefix}btn-glyph {
+  color: $glyph-color;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.17);
+  position: relative;
+  opacity: 0.8;
+}
+
+/* TODO: PREPARADO PARA USAR DOBLE GLYPH CON VARIOS COLORES
+.#{$prefix}btn-glyph:after {
+  content: '?';
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  opacity: 0.6;
+  zoom:0.7;
+}
+*/
+
+
+/* UI highlight ····················································································································································································  */
+
+@include extjs-button-medium-ui (
+$ui: 'highlight',
+
+$border-color: $editran-ultradarkcolor,
+$border-color-over: $editran-ultradarkcolor,
+$border-color-focus: $editran-color-grisoscuro,
+$border-color-pressed: $editran-ultradarkcolor,
+$border-color-disabled: $editran-lightgrey,
+
+$background-color: $editran-main-color,
+$background-color-over: $editran-color-grisverdosooscuro,
+$background-color-focus: $editran-color-grisverdosooscuro,
+$background-color-pressed: $editran-color-grisverdosooscuro,
+$background-color-disabled: rgba(255,255,255,0),
+
+$background-gradient: none,
+$background-gradient-over: none,
+$background-gradient-focus: none,
+$background-gradient-pressed: none,
+$background-gradient-disabled: none,
+
+$color: #F0F0F0,
+$color-over: #FFF,
+$color-focus: #F0F0F0,
+$color-pressed: #fff,
+$color-disabled: $editran-grey,
+
+
+$border-radius: 4px
+
+);
+
+.#{$prefix}btn-highlight-medium                       {transition: background-color 0.2s, border-color 0.2s, color 0.2s; padding: 2px 6px;} /* ESTE PADDING HA SIDO NECESARIO PONERLO PORQUE SI NO EL MIXIN FRAME.SCSS HACE UN CÁLCULO EXTRAÑO PARA PONER EL PADDING EN FUNCIÓN DEL BORDER-RADIUS Y SI ESTE ES MUY ÁLTO (PARA HACER BOTONES EN FORMA DE CÁPSULA) NO HAY MANERA DE CONSEGUIRLO*/
+.#{$prefix}btn-highlight-medium .x-btn-inner          {text-transform: uppercase; font-size:12px;}
+.#{$prefix}btn-highlight-medium .#{$prefix}btn-glyph  {color: #FFF; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 1; font-size:20px;}
+
+
+
+
+
+/* UI plain ····················································································································································································  */
+/* EJEMPLO DE USO DE ESTE TIPO DE BOTÓN: GTD-LIST BUTTONS    */
+
+@include extjs-button-medium-ui(
+
+$ui: 'plain',
+
+$background-color: transparent,
+$background-color-over: $button-toolbar-background-color-over,
+$background-color-focus: $button-toolbar-background-color-focus,
+$background-color-pressed: $button-toolbar-background-color-pressed,
+$background-color-disabled: $button-toolbar-background-color-disabled,
+
+$background-gradient: none,
+$background-gradient-over: none,
+$background-gradient-focus: none,
+$background-gradient-pressed: none,
+$background-gradient-disabled: none,
+
+$border-radius: 0,
+$border-width: 0,
+$border-color: transparent,
+$border-color-over: transparent,
+$border-color-focus: transparent,
+$border-color-pressed: transparent,
+$border-color-disabled: transparent,
+
+$color: $editran-color-grisoscuro,
+$color-over: $editran-color-grisoscuro,
+$color-focus: $editran-color-grisoscuro,
+$color-pressed: #000,
+$color-disabled: #AAA,
+
+$font-weight: 400,
+$font-size: 12px,
+
+$glyph-color:$editran-color-rojo,
+$glyph-opacity:1
+
+);
+
+.#{$prefix}btn-plain-small .#{$prefix}btn-inner   {text-transform: uppercase;}
+.#{$prefix}btn-plain-small .#{$prefix}btn-button  {vertical-align: top;}
+
+.#{$prefix}btn-plain-medium .#{$prefix}btn-inner   {text-transform: uppercase;}
+.#{$prefix}btn-plain-medium .#{$prefix}btn-button  {vertical-align: top;}
+
+
+
+/* UI default TOOLBAR BUTTONS ····················································································································································································  */
+@include extjs-button-toolbar-medium-ui(
+$ui: 'default',
+
+$background-color: rgba(0,0,0,0),
+$background-color-over: $button-toolbar-background-color-over,
+$background-color-focus: $button-toolbar-background-color-focus,
+$background-color-pressed: $button-toolbar-background-color-pressed,
+$background-color-disabled: rgba(0,0,0,0),
+
+$background-gradient: none,
+$background-gradient-over: none,
+$background-gradient-focus: none,
+$background-gradient-pressed: none,
+$background-gradient-disabled: none,
+
+$border-radius: 0,
+$border-width: 0,
+$border-color: transparent,
+$border-color-over: $editran-ultradarkcolor,
+$border-color-focus: $editran-ultradarkcolor,
+$border-color-pressed: $editran-ultradarkcolor,
+$border-color-disabled: transparent
+
+);
+
+.#{$prefix}btn-default-toolbar-medium                       {transition: background-color 0.2s, border-color 0.2s, color 0.2s; padding: 2px 6px;} /* ESTE PADDING HA SIDO NECESARIO PONERLO PORQUE SI NO EL MIXIN FRAME.SCSS HACE UN CÁLCULO EXTRAÑO PARA PONER EL PADDING EN FUNCIÓN DEL BORDER-RADIUS Y SI ESTE ES MUY ÁLTO (PARA HACER BOTONES EN FORMA DE CÁPSULA) NO HAY MANERA DE CONSEGUIRLO*/
+.#{$prefix}btn-default-toolbar-medium .x-btn-inner          {font-family: inherit; text-transform: uppercase; font-size:12px;}
+.#{$prefix}btn-default-toolbar-medium .#{$prefix}btn-glyph  {color: $editran-color-rojo; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 0.96; font-size:20px;}
+
+
+
 
 
 

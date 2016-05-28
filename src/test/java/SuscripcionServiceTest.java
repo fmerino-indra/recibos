@@ -17,6 +17,7 @@
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -218,5 +219,47 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s);
 //		assertNull(s.getFechaBaja());
 //		assertNotNull(s.getActivePSD());
+		
+//2016/05/24		
+		//CALVO GABÁS, JUAN IGNACIO
+//		s = suscripcionService.findSuscripcionById(6792);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES7520381015976800009087", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+		
+		//GURGES VILLUENDAS, EDUARDO
+//		s = suscripcionService.findSuscripcionById(6788);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES4720381133803000013713", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+		
+		// BAGUÉS REVUELTA, MARIA DOLORES
+//		s = suscripcionService.findSuscripcionById(7000);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES9520381015923003561668", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+		
+		// ZARAGOZA DE ALBA, PERFECTO
+//		s = suscripcionService.findSuscripcionById(6872);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES5000496102412616139329", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+		
+		// CASO NEIRA, ALFREDO
+		s = suscripcionService.findSuscripcionById(6572);
+		assertNotNull(s);
+		s = suscripcionService.updateSuscripcion(s.getId(), "ES6800308116110001570271", null);		
+		assertNotNull(s);
+		assertNull(s.getFechaBaja());
+		assertNotNull(s.getActivePSD());
+		
 	}
 }

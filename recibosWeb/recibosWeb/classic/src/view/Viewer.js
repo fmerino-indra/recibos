@@ -2,7 +2,7 @@ Ext.define('recibosWeb.view.Viewer', {
     extend  : 'Ext.container.Container',
     alias   : 'widget.viewer',
     requires: [
-//        'APP.view.monitorizacion.MonitorizacionViewport'
+        'recibosWeb.view.persona.PersonaViewport',
         'recibosWeb.view.periodo.PeriodoViewport',
         'recibosWeb.view.cabecera.CabeceraViewport',
         'recibosWeb.view.reemitir.ReemitirViewport',
@@ -12,6 +12,8 @@ Ext.define('recibosWeb.view.Viewer', {
     layout  : 'card',
     items   : [
     {
+        xtype: 'persona_personaviewport'
+    }, {
         xtype: 'suscripcion_suscripcionviewport'
     }, {
         xtype: 'periodo_periodoviewport'
