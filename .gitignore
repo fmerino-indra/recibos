@@ -15,3 +15,5 @@ recibosWebWorkspaceOnly.7z
 mvnTest.bat
 public/
 recibosWeb/build/
+sencha-error*.log
+
