@@ -27,7 +27,9 @@ public class Divisa extends AbstractEntity<String>{
 	public void setId(String id) {
 		setIdDivisa(id);
 	}
-	
+	public Divisa() {
+    	super(Divisa.class);
+	}
     public String getIdDivisa() {
         return this.idDivisa;
     }

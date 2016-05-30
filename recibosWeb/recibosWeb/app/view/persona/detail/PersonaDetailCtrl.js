@@ -147,6 +147,7 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailCtrl', {
             record = form.updateRecord(form.getRecord()).getRecord(),
             bounds = Ext.ComponentQuery.query('uxdialogfieldn', detailForm),
             len = bounds.length;
+
         while (len--) {
             bound = bounds[len];
             record.set(bound.getName(), bound.getData());
@@ -162,6 +163,7 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailCtrl', {
             }
             record.save({
                 success: function (r, operation) {
+                    detailForm.getForm().loadRecord(r);
                     detailForm.setLoading(false);
                     saveBtn.setDisabled(false);
                     me.info(t('commons.msgs.operacionCorrecta'));

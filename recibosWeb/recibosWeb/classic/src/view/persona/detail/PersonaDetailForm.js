@@ -32,11 +32,11 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailForm', {
         this.dockedItems = [
             {
                 xtype: 'ux-maintoolbar',
-                dock : 'bottom',
+                dock : 'top',
                 cls  : 'main-toolbar',
                 scale: 'medium',
 //                items: ['back', '-', 'add', '-', 'delete']
-                items: ['back', '-', 'save', '-', 'reset']
+                items: ['back']
             }
         ];
 
@@ -93,8 +93,8 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailForm', {
             ,
             {
                 xtype       : 'textfield',
-                fieldLabel: t('persona.items.telefono'),
-                name      : 'telefono',
+                fieldLabel: t('persona.items.tfno'),
+                name      : 'tfno',
                 bind      : "{persona.tfno}",
                 editable  : true
             }
@@ -102,9 +102,9 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailForm', {
 
         this.resetButton = Ext.create('Ext.button.Button', {
             xtype  : 'button',
-            text   : 'Reset',//t('commons.buttons.reset'),
+            text   : 'Limpiar',//t('commons.buttons.reset'),
             handler: 'personaResetEdit',
-            ui     : 'plain',
+//            ui     : 'plain',
             scale  : 'medium',
             glyph  : Glyphs.getIcon('undo')
 
@@ -112,7 +112,7 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailForm', {
 
         this.saveButton = Ext.create('Ext.button.Button', {
             xtype   : 'button',
-            text    : 'Save',//t('commons.buttons.guardar'),
+            text    : 'Guardar',//t('commons.buttons.guardar'),
             scale   : 'medium',
             ui      : 'highlight',
             handler : 'personaSave',

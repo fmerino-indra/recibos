@@ -37,7 +37,9 @@ public class ParroquiaHasParroco extends AbstractEntity<Integer> {
         this.id = id;
     }
 
-    
+    public ParroquiaHasParroco() {
+    	super(ParroquiaHasParroco.class);
+	}
     @ManyToOne(fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "parroco_Id", referencedColumnName = "Id", nullable = false)

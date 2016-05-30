@@ -35,6 +35,9 @@ public class PSD extends AbstractEntity<Integer> {
         this.id = id;
     }
     
+    public PSD() {
+    	super(PSD.class);
+	}
     @OneToMany(mappedBy = "idSuscripcion", fetch = FetchType.LAZY)
     private Set<Emision> emisions;
     

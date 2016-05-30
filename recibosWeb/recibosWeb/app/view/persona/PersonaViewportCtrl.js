@@ -1,5 +1,6 @@
 Ext.define('recibosWeb.view.persona.PersonaViewportCtrl', {
-    extend  : 'Ext.app.ViewController',
+
+    extend  : 'iDynamicsFront.util.ViewController',//'Ext.app.ViewController',
     alias   : 'controller.persona-viewport',
     requires: ['recibosWeb.model.Persona'],
 
@@ -257,10 +258,5 @@ Ext.define('recibosWeb.view.persona.PersonaViewportCtrl', {
                 //me.error(response);
             }
         });
-    },
-    saveRecord: function () {
-        var me = this;
-        debugger
-        me.personaSave();
     }
 });

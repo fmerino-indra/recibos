@@ -2,14 +2,21 @@ package es.cnc.suscripciones.domain.dao.spring;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import es.cnc.suscripciones.domain.Persona;
 
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
-	@Query("select p from Persona p where p.nif = ?1")
-	public List<Persona> findPersonaByNif(String nif);
+	@Query("select p from Persona p where p.nif = :nif")
+	public List<Persona> findPersonaByNif(@Param("nif") String nif);
+
+	@Query(value="select p from Persona p where p.nif like :nif%", 
+			countQuery = "select COUNT(p) from Persona p where p.nif like :nif%")
+	public Page<Persona> findPersonaByNif(@Param("nif") String nif, Pageable pageable);
 
 	@Query("select distinct p from Persona p "
 			+ " INNER JOIN FETCH p.suscripcions s"

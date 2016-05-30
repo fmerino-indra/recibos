@@ -27,7 +27,9 @@ public class Emision extends AbstractEntity<Integer> {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+    public Emision() {
+    	super(Emision.class);
+	}
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCabecera", referencedColumnName = "id")
     private Cabeceraemisiones idCabecera;

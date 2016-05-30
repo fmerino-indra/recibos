@@ -29,7 +29,9 @@ public class Pais extends AbstractEntity<Integer> {
     public void setIdPais(Integer id) {
         this.idPais = id;
     }
-
+    public Pais() {
+    	super(Pais.class);
+	}
 	@Override
 	public Integer getId() {
 		return getIdPais();

@@ -28,7 +28,9 @@ public class Bancos extends AbstractEntity<Integer> {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+    public Bancos() {
+    	super(Bancos.class);
+	}
     @OneToMany(mappedBy = "idBanco", fetch = FetchType.LAZY)
     private Set<Sucursal> sucursals;
     

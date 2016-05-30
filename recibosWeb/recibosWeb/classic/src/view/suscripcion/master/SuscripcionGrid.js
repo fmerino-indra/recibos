@@ -27,7 +27,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
         this.columns =
             [
 	            {
-	                header   : 'id',//t('suscripcion.items.frecuencia'),
+	                header   : t('suscripcion.items.id'),
 	                dataIndex: 'idSuscripcion',
 	                flex     : 1
 	            }
@@ -48,13 +48,13 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
                 }
                 ,
                 {
-                    header   : 'Nombre',//t('suscripcion.items.frecuencia'),
+                    header   : t('suscripcion.items.nombrePersona'),
                     dataIndex: 'nombrePersona',
                     flex     : 1
                 }
                 ,
                 {
-                    header   : 'Activo',//t('suscripcion.items.anticipacion'),
+                    header   : t('suscripcion.items.activo'),
                     dataIndex: 'activo',
                     flex     : 1
                 }

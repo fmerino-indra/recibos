@@ -40,6 +40,9 @@ public class Periodo extends AbstractEntity<String> {
         this.codigo = id;
     }
     
+    public Periodo() {
+    	super(Periodo.class);
+	}
     @JsonIgnore
     @ManyToMany(mappedBy = "periodoes", fetch = FetchType.LAZY)
     private Set<Meses> meseses;

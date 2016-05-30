@@ -43,7 +43,9 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
         this.id = id;
     }
     
-    
+    public Cabeceraemisiones() {
+    	super(Cabeceraemisiones.class);
+	}
     @OneToMany(mappedBy = "idCabecera", fetch = FetchType.LAZY)
     private Set<Emision> emisions;
     

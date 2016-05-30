@@ -29,7 +29,9 @@ public class DirectDebitOrder extends AbstractEntity<Integer>{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+	public DirectDebitOrder() {
+    	super(DirectDebitOrder.class);
+	}
     @Column(name = "msgId", length = 35)
     private String msgId;
     

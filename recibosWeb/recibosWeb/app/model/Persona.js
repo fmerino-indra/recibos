@@ -13,7 +13,7 @@ Ext.define('recibosWeb.model.Persona', {
         ,{name:'poblacion', type:"string", useNull:true}
         ,{name:'tfno', type:"string", useNull:true}
         ,{name:'idAntigua', type:"int", useNull:true}
-        ,{name:'id', type:"int", useNull:true}
+        ,{name:'id', type:"int"}
     ],
     proxy      : {
         type     : 'idfproxy',
@@ -22,6 +22,25 @@ Ext.define('recibosWeb.model.Persona', {
         remoteUrl: 'personas'
 //        ,
 //        url      : '/periodos'
+/*
+        ,
+        reader: {
+            getResponseData: function(response) {
+                try {
+                    var data = Ext.decode(response.responseText);
+                }
+                catch (ex) {
+                    Ext.Error.raise({
+                        response: response,
+                        json: response.responseText,
+                        parseError: ex,
+                        msg: 'Unable to parse the JSON returned by the server: ' + ex.toString()
+                    });
+                };
+                return data;
+            }
+        }
+*/
     }
 
 

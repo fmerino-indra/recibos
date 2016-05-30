@@ -131,8 +131,10 @@ $border-color-disabled: transparent
   plain
 
 */
-
-$glyph-color: $editran-darkgrey;
+//[FMM] Changes: Aunque no vale sólo con esto. Aquí: extjs-button-toolbar-medium-ui es donde le da el color al glyph.
+// para los botones de la toolbar ui:default.
+//$glyph-color: $editran-darkgrey;
+$glyph-color: $editran-color-rojo;
 
 /* UI highlight ····················································································································································································  */
 @include extjs-button-medium-ui (
@@ -225,10 +227,14 @@ $color-disabled: $editran-grey,
 $border-radius: 4px
 
 );
-
 .#{$prefix}btn-highlight-medium                       {transition: background-color 0.2s, border-color 0.2s, color 0.2s; padding: 2px 6px;} /* ESTE PADDING HA SIDO NECESARIO PONERLO PORQUE SI NO EL MIXIN FRAME.SCSS HACE UN CÁLCULO EXTRAÑO PARA PONER EL PADDING EN FUNCIÓN DEL BORDER-RADIUS Y SI ESTE ES MUY ÁLTO (PARA HACER BOTONES EN FORMA DE CÁPSULA) NO HAY MANERA DE CONSEGUIRLO*/
-.#{$prefix}btn-highlight-medium .x-btn-inner          {text-transform: uppercase; font-size:12px;}
-.#{$prefix}btn-highlight-medium .#{$prefix}btn-glyph  {color: #FFF; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 1; font-size:20px;}
+//[FMM] Changes: para el tipo de letra.
+//.#{$prefix}btn-highlight-medium .x-btn-inner          {text-transform: uppercase; font-size:12px;}
+.#{$prefix}btn-highlight-medium .x-btn-inner          {font-family: inherit; text-transform: uppercase; font-size:12px;}
+
+//[FMM] Changes
+//.#{$prefix}btn-highlight-medium .#{$prefix}btn-glyph  {color: #FFF; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 1; font-size:20px;}
+.#{$prefix}btn-highlight-medium .#{$prefix}btn-glyph  {color: $glyph-color; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 1; font-size:20px;}
 
 
 
@@ -270,7 +276,9 @@ $color-disabled: #AAA,
 $font-weight: 400,
 $font-size: 12px,
 
+//[FMM] Tests
 $glyph-color:$editran-color-rojo,
+//$glyph-color:green,
 $glyph-opacity:1
 
 );
@@ -311,7 +319,9 @@ $border-color-disabled: transparent
 
 .#{$prefix}btn-default-toolbar-medium                       {transition: background-color 0.2s, border-color 0.2s, color 0.2s; padding: 2px 6px;} /* ESTE PADDING HA SIDO NECESARIO PONERLO PORQUE SI NO EL MIXIN FRAME.SCSS HACE UN CÁLCULO EXTRAÑO PARA PONER EL PADDING EN FUNCIÓN DEL BORDER-RADIUS Y SI ESTE ES MUY ÁLTO (PARA HACER BOTONES EN FORMA DE CÁPSULA) NO HAY MANERA DE CONSEGUIRLO*/
 .#{$prefix}btn-default-toolbar-medium .x-btn-inner          {font-family: inherit; text-transform: uppercase; font-size:12px;}
-.#{$prefix}btn-default-toolbar-medium .#{$prefix}btn-glyph  {color: $editran-color-rojo; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 0.96; font-size:20px;}
+//[FMM] Changes
+//.#{$prefix}btn-default-toolbar-medium .#{$prefix}btn-glyph  {color: $editran-color-rojo; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 0.96; font-size:20px;}
+.#{$prefix}btn-default-toolbar-medium .#{$prefix}btn-glyph  {color: $glyph-color; text-shadow: 1px 1px 1px rgba(0,0,0,0.17); position: relative; opacity: 0.96; font-size:20px;}
 
 
 

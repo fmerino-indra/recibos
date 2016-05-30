@@ -37,6 +37,9 @@ public class Suscripcion extends AbstractEntity<Integer> {
 		return getIdSuscripcion();
 	}
 
+	public Suscripcion() {
+    	super(Suscripcion.class);
+	}
 	@Override
 	public void setId(Integer id) {
 		setIdSuscripcion(id);

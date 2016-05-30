@@ -31,6 +31,10 @@ public class Parroquia extends AbstractEntity<Integer> {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public Parroquia() {
+    	super(Parroquia.class);
+	}
     @OneToOne(mappedBy = "idParroquia", fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     private ParroquiaAux parroquiaAux;

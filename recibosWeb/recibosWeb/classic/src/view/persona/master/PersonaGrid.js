@@ -27,7 +27,7 @@ Ext.define('recibosWeb.view.persona.master.PersonaGrid', {
         this.columns =
             [
 	            {
-	                header   : 'nif',//t('persona.items.frecuencia'),
+	                header   : t('persona.items.nif'),
 	                dataIndex: 'nif',
 	                flex     : 1
 	            }
@@ -45,13 +45,13 @@ Ext.define('recibosWeb.view.persona.master.PersonaGrid', {
                 }
                 ,
                 {
-                    header   : 'cp',//t('persona.items.frecuencia'),
+                    header   : t('persona.items.cp'),
                     dataIndex: 'cp',
                     flex     : 1
                 }
                 ,
                 {
-                    header   : 'Teléfono',//t('persona.items.anticipacion'),
+                    header   : t('persona.items.tfno'),
                     dataIndex: 'tfno',
                     flex     : 1
                 }

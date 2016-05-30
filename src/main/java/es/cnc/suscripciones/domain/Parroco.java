@@ -30,7 +30,9 @@ public class Parroco extends AbstractEntity<Integer> {
         this.id = id;
     }
 
-    
+    public Parroco() {
+    	super(Parroco.class);
+	}
     @OneToMany(mappedBy = "parrocoId", fetch = FetchType.LAZY)
     private Set<ParroquiaHasParroco> parroquiaHasParroco;
     

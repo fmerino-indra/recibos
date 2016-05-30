@@ -31,6 +31,9 @@ public class ParroquiaAux extends AbstractEntity<Integer> {
         this.id = id;
     }
     
+    public ParroquiaAux() {
+    	super(Parroquia.class);
+	}
     @ManyToOne(fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "pais", referencedColumnName = "idPais")

@@ -18,10 +18,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Secuenciaadeudo extends AbstractEntity<Integer> {
 	
 	public Secuenciaadeudo() {
-		super();
+    	this(null, null);
 	}
     public Secuenciaadeudo(Integer id, String descripcion) {
-		super();
+    	super(Secuenciaadeudo.class);
 		this.id = id;
 		this.descripcion = descripcion;
 	}

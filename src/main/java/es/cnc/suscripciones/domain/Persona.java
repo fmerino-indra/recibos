@@ -29,6 +29,9 @@ public class Persona extends AbstractEntity<Integer> {
         this.id = id;
     }
     
+    public Persona() {
+    	super(Persona.class);
+	}
     
     @OneToMany(mappedBy = "idPersona", fetch = FetchType.LAZY)
     private Set<Domiciliacion> domiciliacions;
@@ -142,5 +145,9 @@ public class Persona extends AbstractEntity<Integer> {
     
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("domiciliacions", "suscripcions").toString();
+    }
+    
+    public static Persona fromJSON(String json) {
+    	return (Persona)AbstractEntity.fromJSONToEntity(json, Persona.class);
     }
 }

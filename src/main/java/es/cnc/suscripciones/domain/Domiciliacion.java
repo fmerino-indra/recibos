@@ -34,6 +34,10 @@ public class Domiciliacion extends AbstractEntity<Integer> {
 	public void setId(Integer id) {
 		setIdDomiciliacion(id);
 	}
+	
+	public Domiciliacion() {
+    	super(Domiciliacion.class);
+	}
     public Integer getIdDomiciliacion() {
         return this.idDomiciliacion;
     }

@@ -33,7 +33,9 @@ public class Sucursal extends AbstractEntity<Integer> {
         this.id = id;
     }
 
-    
+    public Sucursal() {
+    	super(Sucursal.class);
+	}
     @OneToMany(mappedBy = "sucursalId", fetch = FetchType.LAZY)
     private Set<Domiciliacion> domiciliacions;
     

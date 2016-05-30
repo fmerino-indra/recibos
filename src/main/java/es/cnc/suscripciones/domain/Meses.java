@@ -33,6 +33,10 @@ public class Meses extends AbstractEntity<Integer> {
 	public void setId(Integer id) {
 		setIdMes(id);
 	}
+	
+	public Meses() {
+    	super(Meses.class);
+	}
     public Integer getIdMes() {
         return this.idMes;
     }
