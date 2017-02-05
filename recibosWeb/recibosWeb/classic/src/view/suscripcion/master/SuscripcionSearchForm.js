@@ -5,7 +5,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionSearchForm', {
     border       : false,
     collapsible  : true,
     autoScroll   : true,
-    layout       : 'anchor',
+    layout       : 'vbox',
     dialogMode   : false,
     cls          : 'search-form',
     defaults     : {
@@ -21,65 +21,62 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionSearchForm', {
         this.title = 'Criterios de Búsqueda';
         this.dockedItems = [
             {
-                dock    : 'bottom',
-                xtype   : 'toolbar',
+                dock: 'bottom',
+                xtype: 'toolbar',
                 defaults: {scale: 'medium'},
-                items   : [
+                items: [
                     {
-                        xtype  : 'button',
-                        text   : 'Limpiar',//t('commons.buttons.limpiar'),
-                        cls    : 'ux-btn',
+                        xtype: 'button',
+                        text: 'Limpiar',//t('commons.buttons.limpiar'),
+                        cls: 'ux-btn',
                         //handler: 'suscripcionReset',
-                        glyph  : Glyphs.getIcon('eraser')
+                        glyph: Glyphs.getIcon('eraser')
                     },
                     {
                         xtype: 'tbfill'
                     },
                     {
-                        xtype  : 'button',
-                        text   : 'Buscar',//t('commons.buttons.buscar'),
+                        xtype: 'button',
+                        text: 'Buscar',//t('commons.buttons.buscar'),
 //                        ui     : 'highlight',
-                        cls    : 'ux-btn',
+                        cls: 'ux-btn',
                         handler: 'suscripcionSearch',
-                        glyph  : Glyphs.getIcon('search')
+                        glyph: Glyphs.getIcon('search')
                     }
                 ]
             }
         ];
         this.items = [
             {
-                xtype : 'container',
-                border: false,
-                layout: 'column',
-                flex  : 2,
-                items : [
-                    {
-                        xtype      : 'container',
-                        border     : false,
-                        layout     : 'column',
-                        columnWidth: 1,
-                        items      : [
-                            {
-                                columnWidth: 1,
-                                layout     : 'column',
-                                style      : 'margin-left:10px',
-                                flex       : 1,
-                                items      : [
-                                    {
-                                        columnWidth: 0.33,
-                                        style      : 'margin-left:10px;margin-bottom:10px',
-                                        xtype      : 'textfield',
-                                        name       : 'nombre',
-                                        cls        : 'search-element',
-                                        fieldLabel : t('suscripcion.items.nombre')
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+                columnWidth: 0.33,
+                style: 'margin-left:10px;margin-bottom:10px',
+                xtype: 'textfield',
+                name: 'nombre',
+                cls: 'search-element',
+                fieldLabel: t('suscripcion.items.nombre')
+            },
+/*
+            {
+                xtype: 'checkbox',
+                name: 'activo',
+                width: 100,
+                padding: '8px 0px 0px 9px',
+                cls: 'search-element',
+                fieldLabel: t('suscripcion.items.active')
 
-            }
+            },
+*/
+            {
+                xtype: 'checkboxgroup',
+                fieldLabel: 'Activos (S/N)',
+                // Arrange checkboxes into two columns, distributed vertically
+                columns: 2,
+                vertical: true,
+                name: 'activo',
+                items: [
+                { boxLabel: 'Activos', name: 'activo', inputValue: true, checked: true  },
+                { boxLabel: 'No activos', name: 'noActivo', inputValue: false}
+            ]}
         ];
         this.callParent();
     }

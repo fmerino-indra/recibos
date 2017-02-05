@@ -248,7 +248,7 @@ public class VariosTests {
 		
 		PageRequest pr = new PageRequest(page, limit);
 
-		lista = suscripcionRepository.findActiveSuscripciones(pr);
+		lista = suscripcionRepository.findActiveSuscripciones(pr, "");
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 
@@ -256,7 +256,7 @@ public class VariosTests {
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 
-		lista = suscripcionService.findActiveSuscripciones(page, start, limit);
+		lista = suscripcionService.findActiveSuscripciones(page, start, limit, null);
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 		

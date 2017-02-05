@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -13,6 +14,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
+
+import es.cnc.suscripciones.front.export.pdf.util.PdfViewResolver;
 
 @Configuration
 public class WebMVCConfig extends WebMvcConfigurerAdapter {
@@ -51,4 +54,44 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         converters.add(jacksonMessageConverter());
         super.configureMessageConverters(converters);
     }
+    
+    /*
+     * Configure ContentNegotiatingViewResolver
+     */
+//    @Bean
+//    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+//        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+//        resolver.setContentNegotiationManager(manager);
+// 
+//        // Define all possible view resolvers
+//        List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
+//        resolvers.add(pdfViewResolver());
+// 
+////        resolvers.add(jaxb2MarshallingXmlViewResolver());
+////        resolvers.add(jsonViewResolver());
+////        resolvers.add(jspViewResolver());
+////        resolvers.add(excelViewResolver());
+//         
+//        resolver.setViewResolvers(resolvers);
+//        return resolver;
+//    }
+    
+    /*
+     * Configure ContentNegotiationManager
+     */
+//    @Override
+//    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+//        configurer.ignoreAcceptHeader(true).defaultContentType(
+//                MediaType.TEXT_HTML);
+//    }
+    
+    /*
+     * Configure View resolver to provide PDF output using lowagie pdf library to
+     * generate PDF output for an object content
+     */
+    @Bean
+    public ViewResolver pdfViewResolver() {
+        return new PdfViewResolver();
+    }
+    
 }

@@ -1,4 +1,4 @@
-package es.cnc.util;
+package es.cnc.util.sepa;
 
 import es.cnc.suscripciones.domain.Secuenciaadeudo;
 

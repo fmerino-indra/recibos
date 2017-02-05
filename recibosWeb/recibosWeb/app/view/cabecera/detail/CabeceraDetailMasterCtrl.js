@@ -38,10 +38,11 @@ Ext.define('recibosWeb.view.cabecera.detail.CabeceraDetailMasterCtrl', {
                 } else {
                     model = cabecera;
                     detail.getForm().loadRecord(model);
+                    me.comprobarBotones();
                     /*
-                    // Busca el botón con reference: 'enableBtn'
+                    // Busca el botï¿½n con reference: 'enableBtn'
                     bt = me.lookupReference('enableBtn');
-                    //añadimos o eliminamos la clase disabled en función del atributo enabled
+                    //aï¿½adimos o eliminamos la clase disabled en funciï¿½n del atributo enabled
                     enabled = model.get('enabled');
                     detail[(enabled ? 'remove' : 'add') + 'Cls']('disabled');
                     bt.setText(enabled ? 'Desactivar' : 'Activar');
@@ -127,16 +128,20 @@ Ext.define('recibosWeb.view.cabecera.detail.CabeceraDetailMasterCtrl', {
     },
 
     onSelectionChange: function (grid, selecion) {
+    	this.comprobarBotones();
+//        this.getViewModel().set('hasAnyReturned', this.hasAnyReturned(true));
+//        this.getViewModel().set('hasAnyPaid', this.hasAnyReturned(false));
+    },
+
+    comprobarBotones: function () {
         this.getViewModel().set('hasAnyReturned', this.hasAnyReturned(true));
         this.getViewModel().set('hasAnyPaid', this.hasAnyReturned(false));
     },
-
-
     /**
      *
      * @param selection
      * @param active
-     * @returns {boolean} true si hay algún activo seleccionado y false si hay algún inactivo
+     * @returns {boolean} true si hay algï¿½n activo seleccionado y false si hay algï¿½n inactivo
      */
     hasAnyReturned: function (active) {
         var hasAny = false, selection;

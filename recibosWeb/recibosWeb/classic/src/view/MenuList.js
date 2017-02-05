@@ -60,9 +60,9 @@ Ext.define('recibosWeb.view.MenuList', {
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',
-                text     : 'Paneles',
+                text     : 'Pre-Emitir',
                 index    : 5,
-                reference: 'paneles',
+                reference: 'preemision',
                 handler  : 'onChangeCard'
             }, {
                 xtype    : 'button',

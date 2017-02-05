@@ -55,7 +55,7 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailForm', {
                 xtype       : 'textfield',
                 fieldLabel: t('persona.items.nombre'),
                 name      : 'nombre',
-                bind      : "{persona.nombre}",
+                bind      : "{nombre}",
                 editable  : true
             }
             ,
@@ -98,6 +98,25 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailForm', {
                 bind      : "{persona.tfno}",
                 editable  : true
             }
+//            ,
+//            {
+//            	xtype     : 'gridpanel',
+//            	name      : 'suscripciones',
+//            	id        : 'suscripciones',
+//            	multiselect:false,
+//            	columns : [
+//           	            {
+//        	                header   : 'euros',
+//        	                dataIndex: 'euros',
+//        	                flex     : 1
+//        	            },
+//           	            {
+//        	                header   : t('persona.items.nif'),
+//        	                dataIndex: '{euros}',
+//        	                flex     : 1
+//        	            }
+//            	         ]
+//            }
         ];
 
         this.resetButton = Ext.create('Ext.button.Button', {

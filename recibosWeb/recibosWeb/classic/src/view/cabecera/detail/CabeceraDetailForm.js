@@ -24,8 +24,8 @@ Ext.define('recibosWeb.view.cabecera.detail.CabeceraDetailForm', {
                 cls  : 'main-toolbar',
                 scale: 'medium',
                 items: ['back', '-',
-                    {text: 'devolver', action: 'devolver', bind: {disabled: '{!hasAnyPaid}'}, glyph : Glyphs.getIcon('unlock_alt')},
-                    {text: 'anular', action: 'anular', bind: {disabled: '{!hasAnyReturned}'}, glyph : Glyphs.getIcon('lock')}
+                    {text: 'devolver', action: 'devolver', bind: {disabled: '{!hasAnyPaid}'}, glyph : Glyphs.getIcon('ban')},
+                    {text: 'anular', action: 'anular', bind: {disabled: '{!hasAnyReturned}'}, glyph : Glyphs.getIcon('undo')}
                 ]
             }
         ];
@@ -126,8 +126,15 @@ Ext.define('recibosWeb.view.cabecera.detail.CabeceraDetailForm', {
                 columnWidth: .25,
                 layout: 'form',
                 items: [
+//                    {
+//                        xtype: 'textfield',
+//                        fieldLabel: t('cabecera.items.concepto'),
+//                        bind: "{cabecera.concepto}",
+//                        name: 'concepto',
+//                        editable: false
+//                    }
                     {
-                        xtype: 'textfield',
+                        xtype: 'textareafield',
                         fieldLabel: t('cabecera.items.concepto'),
                         bind: "{cabecera.concepto}",
                         name: 'concepto',

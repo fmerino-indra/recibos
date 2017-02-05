@@ -48,7 +48,7 @@ Ext.define('recibosWeb.view.persona.master.PersonaMasterCtrl', {
         ];
 
         store = me.getViewModel().getStore('personas');
-
+debugger;
         Ext.each(Ext.Object.getKeys(params), function (name) {
             value = params[name];
             if (value !== '' && value !== null) {

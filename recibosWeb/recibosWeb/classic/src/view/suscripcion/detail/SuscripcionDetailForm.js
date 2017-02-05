@@ -24,6 +24,11 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
     autoScroll: true,
 
     initComponent: function () {
+        var master = Ext.create('viewmodel.persona-master');
+
+        me.storePersona = master.getStore('personas');
+        //me.personasStore = Ext.create('');
+
         this.title = t('suscripcion.detail.title');
         this.dockedItems = [
             {
@@ -69,8 +74,45 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
                 bind      : "{suscripcion.nombre}",
                 editable  : false,
                 name      : 'nombre'
-            }
-            ,
+            },
+            {
+                xtype       : 'idf-searchfield',
+                fieldLabel  : t('suscripcion.items.nombre'),
+                name        : 'partyentitytype',
+                reference   : 'partyentitytype',
+                allowBlank  : false,
+                store       : me.storePersona,
+                displayField: 'nombre',
+                lastQuery   : '',
+                queryMode   : 'local',
+                valueField  : 'id',
+                width       : 550
+            },
+            
+            {
+                xtype             : 'idf-searchfield',
+//                reference         : 'recognitionqueuename',
+                fieldLabel        : t('suscripcion.items.nombre'),
+                name              : 'nameSearch',
+                store             : me.storePersona,
+                displayField      : 'nombre',
+                lastQuery         : '',
+                queryMode         : 'local',
+                width             : 550,
+                valueField        : 'id',
+                triggerConfig     : {iconCls: 'ux-multidialogfield-searchIcon'},
+                dialogWidgetConfig: { //Configuraci�n del dialogo que sale, solo es necesario lo del selectionWidget
+                    width          : 950,
+                    height         : 650,
+                    modal          : true,
+                    title          : 'Suscriptores',
+                    selectionWidget: {
+                        xtype: 'persona_personamaster',
+                        multiSelect : true
+                    }
+                }
+            },
+
             {
                 xtype     : 'textfield',
                 fieldLabel: t('suscripcion.items.euros'),

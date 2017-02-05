@@ -26,13 +26,13 @@ Ext.define('recibosWeb.view.suscripcion.SuscripcionViewport', {
                         'add',
                         'edit',
                         '-',
-                        'delete',
-                        '-',
-/*
+
                         {text: 'desactivar', action: 'disable', bind: {disabled: '{!hasAnyActive}'}, glyph : Glyphs.getIcon('lock')},
                         {text: 'activar', action: 'enable', bind: {disabled: '{!hasAnyInactive}'}, glyph : Glyphs.getIcon('unlock_alt')},
-                        {text: 'resetear contraseña', action: 'resetPass', glyph : Glyphs.getIcon('refresh')},
-*/
+
+                        '-',
+                        {text: 'certificado', action: 'certificado', bind: {disabled: '{!hasSelected}'}, glyph : Glyphs.getIcon('unlock_alt')},
+
                         '-',
                         'excel',
                         'pdf'

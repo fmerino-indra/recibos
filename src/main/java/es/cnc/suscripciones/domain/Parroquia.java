@@ -16,6 +16,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "parroquia")
 public class Parroquia extends AbstractEntity<Integer> {
@@ -40,6 +42,7 @@ public class Parroquia extends AbstractEntity<Integer> {
     private ParroquiaAux parroquiaAux;
     
     @OneToMany(mappedBy = "parroquiaId", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<ParroquiaHasParroco> parroquiaHasParroco;
     
     @Column(name = "Nombre", length = 50)
@@ -59,6 +62,9 @@ public class Parroquia extends AbstractEntity<Integer> {
     
     @Column(name = "Cuenta", length = 10)
     private String cuenta;
+    
+    @Column(name = "Telefono", length = 10)
+    private String telefono;
     
     public ParroquiaAux getParroquiaAux() {
         return parroquiaAux;
@@ -127,4 +133,18 @@ public class Parroquia extends AbstractEntity<Integer> {
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("parroquiaAuxes", "parroquiaHasParrocoes").toString();
     }
+
+	/**
+	 * @return the telefono
+	 */
+	public String getTelefono() {
+		return telefono;
+	}
+
+	/**
+	 * @param telefono the telefono to set
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 }

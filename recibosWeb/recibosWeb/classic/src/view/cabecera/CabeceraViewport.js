@@ -23,10 +23,7 @@ Ext.define('recibosWeb.view.cabecera.CabeceraViewport', {
                     cls  : 'main-toolbar',
                     scale: 'medium',
                     items: [
-                        'add',
-                        'edit',
-                        '-',
-                        'delete',
+                        {text: 'ver', action: 'editRecord', bind: {disabled: '{!hasAnySelected}'}, glyph : Glyphs.getIcon('search_plus')},                            
                         '-',
                         '-',
                         'excel',

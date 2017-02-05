@@ -13,7 +13,7 @@ Ext.define('recibosWeb.view.cabecera.master.CabeceraMasterVM', {
             model       : 'recibosWeb.model.Cabecera',
             filterOnLoad: false,
             remoteSort  : true,
-            pageSize    : 16,
+            pageSize    : 20,
             remoteFilter: true,
             listeners: { datachanged: 'cabecerasDataChanged' }
         }

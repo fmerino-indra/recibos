@@ -23,6 +23,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import es.cnc.suscripciones.domain.Persona;
+import es.cnc.suscripciones.front.response.ResponseAbstract;
+import es.cnc.suscripciones.front.response.ResponseDetail;
+import es.cnc.suscripciones.front.response.ResponseList;
 import es.cnc.suscripciones.services.persona.PersonaService;
 
 @RestController()

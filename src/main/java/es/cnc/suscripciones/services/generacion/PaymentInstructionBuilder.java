@@ -37,11 +37,11 @@ import com.sepa.domain.SequenceType1Code;
 import com.sepa.domain.ServiceLevel8Choice;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
+import es.cnc.suscripciones.domain.Domiciliacion;
 import es.cnc.suscripciones.domain.Emision;
-import es.cnc.suscripciones.domain.Parroquia;
 import es.cnc.suscripciones.domain.ParroquiaHasParroco;
-import es.cnc.util.ConverterUtils;
 import es.cnc.util.LocalDateUtil;
+import es.cnc.util.sepa.ConverterUtils;
 
 public class PaymentInstructionBuilder {
 	private static ObjectFactory oF = new ObjectFactory();
@@ -90,7 +90,7 @@ public class PaymentInstructionBuilder {
 	/**
 	 *
 	 * <PmtTpInf> <SvcLvl> <Cd>SEPA</Cd> </SvcLvl>
-	 * <LclInstrm> <Cd>COR1</Cd> </LclInstrm> <SeqTp>RCUR</SeqTp> </PmtTpInf>
+	 * <LclInstrm> <Cd>CORE</Cd> </LclInstrm> <SeqTp>RCUR</SeqTp> </PmtTpInf>
 	 *
 	 * @param cabAux
 	 * @return
@@ -101,7 +101,7 @@ public class PaymentInstructionBuilder {
 		LocalInstrument2Choice li2 = oF.createLocalInstrument2Choice();
 
 		sl8.setCd("SEPA");
-		li2.setCd("COR1");
+		li2.setCd("CORE");
 		pti20.setSvcLvl(sl8);
 		pti20.setLclInstrm(li2);
 		pti20.setSeqTp(SequenceType1Code.RCUR);
@@ -123,7 +123,7 @@ public class PaymentInstructionBuilder {
 
 	/**
 	 * <CdtrAcct> <Id> <IBAN>ES1000810591350001251035</IBAN> </Id> </CdtrAcct>
-	 * 
+	 * TODO [FMM] Actualizar banco, sucursal y DC
 	 * @return
 	 */
 	private static CashAccount16 buildCdtrAcct(Cabeceraemisiones ce) {
@@ -131,13 +131,16 @@ public class PaymentInstructionBuilder {
 		AccountIdentification4Choice ai4 = oF.createAccountIdentification4Choice();
 		String iban = null;
 
-		Parroquia p = ce.getParroquiaHasParroco().getParroquiaId();
-		String banco = p.getBanco();
-		String sucursal = p.getSucursal();
-		String DC = p.getDc();
-		String cuenta = p.getCuenta();
-		iban = IBANUtil.calcular(p.getParroquiaAux().getPais().getCodigoIso2(), banco, sucursal, DC, cuenta);
-		ai4.setIBAN(iban);
+//		Parroquia p = ce.getParroquiaHasParroco().getParroquiaId();
+//		String banco = p.getBanco();
+//		String sucursal = p.getSucursal();
+//		String DC = p.getDc();
+//		String cuenta = p.getCuenta();
+//		iban = IBANUtil.calcular(p.getParroquiaAux().getPais().getCodigoIso2(), banco, sucursal, DC, cuenta);
+		Domiciliacion dom = ce.getDomiciliacion();
+		iban = dom.getIban();
+		if (IBANUtil.validarIBAN(iban))
+			ai4.setIBAN(iban);
 
 		ca16.setId(ai4);
 		return ca16;

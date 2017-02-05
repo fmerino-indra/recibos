@@ -1,6 +1,7 @@
 package es.cnc.suscripciones.services.persona;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 
@@ -10,6 +11,7 @@ import es.cnc.suscripciones.dto.FilterHolder;
 
 public interface PersonaService {
 	public Persona createPersona(String nif, String nombre, String domicilio, String cp, String poblacion, String tfno);
+	public Persona createPersona(String nif, String nombre, Persona antecesor);
 	public Persona createPersona(Persona p);
 	/**
 	 * Find a list of active personas
@@ -17,6 +19,7 @@ public interface PersonaService {
 	 */
 	public Page<Persona> findPersonas(Integer page, Integer start, Integer limit);
 	public Page<Persona> findPersonasWithCriteria(FilterHolder<? extends Collection<FilterBaseDTO<?>>> filter, Integer page, Integer start, Integer limit);
+	public List<Persona> findPersonasByNif(String nif);
 
 	/**
 	 * Find a Persona by PK with all relations.

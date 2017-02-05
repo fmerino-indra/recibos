@@ -1,6 +1,7 @@
 package es.cnc.suscripciones.services.suscripcion;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.stasiena.sepa.util.IBANUtil;
+import org.stasiena.sepa.util.NIFUtil;
 
 import es.cnc.suscripciones.domain.Domiciliacion;
 import es.cnc.suscripciones.domain.PSD;
@@ -21,11 +23,13 @@ import es.cnc.suscripciones.domain.Sucursal;
 import es.cnc.suscripciones.domain.Suscripcion;
 import es.cnc.suscripciones.domain.dao.spring.DomiciliacionRepository;
 import es.cnc.suscripciones.domain.dao.spring.PSDRepository;
-import es.cnc.suscripciones.domain.dao.spring.PersonaRepository;
 import es.cnc.suscripciones.domain.dao.spring.SucursalRepository;
 import es.cnc.suscripciones.domain.dao.spring.SuscripcionRepository;
-import es.cnc.util.ConstantsCNC;
+import es.cnc.suscripciones.dto.FilterBaseDTO;
+import es.cnc.suscripciones.dto.FilterHolder;
+import es.cnc.suscripciones.services.persona.PersonaService;
 import es.cnc.util.LocalDateUtil;
+import es.cnc.util.sepa.ConstantsCNC;
 
 @Component("suscripcionService")
 public class SuscripcionServiceImpl implements SuscripcionService {
@@ -44,16 +48,21 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 	private DomiciliacionRepository domiciliacionRepository;
 	
 	@Autowired
-	private PersonaRepository personaRepository;
+	private PersonaService personaService;
 	
 	public SuscripcionServiceImpl() {
 		logger = LoggerFactory.getLogger(this.getClass());
 	}
 
 	@Override
-	public Page<Suscripcion> findActiveSuscripciones(Integer page, Integer start, Integer limit) {
+	public Page<Suscripcion> findActiveSuscripciones(Integer page, Integer start, Integer limit, FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh) {
 		PageRequest pr = new PageRequest(page, limit);
-		Page<Suscripcion> response = suscripcionRepository.findActiveSuscripciones(pr);
+		FilterBaseDTO<?> dto = null;
+		if (fh != null) 
+			dto = fh.get("nombre");
+
+		
+		Page<Suscripcion> response = suscripcionRepository.findActiveSuscripciones(pr, dto != null?dto.getValue().toString():"");
 		return response;
 	}
 
@@ -76,8 +85,16 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		Domiciliacion d = null;
 		Persona titular = null;
 		LocalDateTime today = null;
+		PSD psd = null;
 		today = LocalDateTime.now();
 		s = suscripcionRepository.findSuscripcionById(id);
+		
+		if (s == null) {
+			String message = "Suscripción no encontrada: " + s;
+			logger.error(message);
+			throw new RuntimeException(message);
+		}
+			
 		titular = s.getPersona();
 		Double importe = null;
 		String ibanValue = null;
@@ -91,42 +108,33 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		} else {
 			importe = s.getEuros();
 		}
-		
-		if (null != iban) {
+
+		// Si no se introduce IBAN, se coge el de la domiciliación activa de la suscripción introducida.
+		if (iban == null) {
+			psd = s.getActivePSD();
+			if (psd != null) {
+				d = psd.getIdDomiciliacion();
+				ibanValue = s.getActivePSD().getIdDomiciliacion().getIban();
+			} else {
+				String message = "No hay domiciliación activa para esta suscripción ("+s+") y no se ha indicado IBAN";
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+		} else {
 			if (!IBANUtil.validarIBAN(iban)) {
 				String message = "IBAN no válido:" + iban;
 				logger.error(message);
 				throw new RuntimeException(message);
 			}
-
-			d = s.getActivePSD().getIdDomiciliacion();
-			if (!iban.equals(d.getIban())) {
-				ibanValue = iban;
-			} else {
-				ibanValue = s.getActivePSD().getIdDomiciliacion().getIban();
-			}
-		}		
-		desactivar(s, today);
-		d = createDomiciliacion(ibanValue, titular);
+			ibanValue = iban;
+		}
+		if (s.getActivo())
+			desactivar(s, today);
+		if (d == null)
+			d = createDomiciliacion(ibanValue, titular);
+		
 		s = createSuscripcion(ibanValue, importe, titular,today,s.getPeriodo());
 		createPSD(s, d, today);
-		
-//		if (euros != null && !s.getEuros().equals(euros)) {
-//			desactivar(s, today);
-//			d = createDomiciliacion(iban, titular);
-//			s = createSuscripcion(iban, euros, titular, today, s.getPeriodo());
-//			createPSD(s, d, today);
-//		}
-//		
-//		if (null != iban) {
-//			d = s.getActivePSD().getIdDomiciliacion();
-//			if (!iban.equals(d.getIban()) && IBANUtil.validarIBAN(iban)) {
-//				desactivar(s, today);
-//				d = createDomiciliacion(iban, titular);
-//				s = createSuscripcion(iban, euros != null?euros:s.getEuros(), titular,today,s.getPeriodo());
-//				createPSD(s, d, today);
-//			}
-//		}
 		return s;
 	}
 	
@@ -226,7 +234,8 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 	@Override
 	@Transactional
 	public Suscripcion createSuscripcion(String iban, Double euros, String nif, String periodo) {
-		List<Persona> lista = personaRepository.findPersonaByNif(nif);
+		List<Persona> lista = personaService.findPersonasByNif(nif);
+		
 		Persona persona = null;
 		LocalDateTime today = null;
 		today = LocalDateTime.now();
@@ -241,6 +250,167 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		if (persona != null) {
 			s = createSuscripcion(iban, euros, persona, today, periodo);
 		}
+		return s;
+	}
+
+	@Override
+	public Page<Suscripcion> findAllSuscripciones(Integer page, Integer start, Integer limit) {
+		PageRequest pr = new PageRequest(page, limit);
+		return suscripcionRepository.findActiveInactiveSuscripciones(pr);
+	}
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Transactional
+	public Suscripcion changeAccountHolder(Integer id, String iban, Double euros, String nif, String nombre, String periodo) {
+		Suscripcion s = null;
+		Domiciliacion d = null;
+		Persona accountHolder = null;
+		Persona oldAccountHolder = null;
+		LocalDateTime today = null;
+		PSD psd = null;
+		today = LocalDateTime.now();
+		Double importe = null;
+		String ibanValue = null;
+
+		s = suscripcionRepository.findSuscripcionById(id);
+		
+		if (s == null) {
+			String message = "Suscripción no encontrada: " + s;
+			logger.error(message);
+			throw new RuntimeException(message);
+		}
+		if (nif != null) {
+			if (!NIFUtil.isNIFValid(nif)) {
+				String message = "NIF introducido no es válido: " + nif;
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+		}
+		if (nombre == null) {
+			String message = "El nombre introducido es null";
+			logger.error(message);
+			throw new RuntimeException(message);
+		}
+		oldAccountHolder = s.getPersona();
+		
+		if (euros == null && iban == null) {
+			logger.info("updateSuscripcion: Nada que hacer");
+			return s;
+		}
+		
+		if (euros != null && !s.getEuros().equals(euros)) {
+			importe = euros;
+		} else {
+			importe = s.getEuros();
+		}
+
+		// Si no se introduce IBAN, se coge el de la domiciliación activa de la suscripción introducida.
+		if (iban == null) {
+			psd = s.getActivePSD();
+			if (psd != null) {
+				d = psd.getIdDomiciliacion();
+				ibanValue = s.getActivePSD().getIdDomiciliacion().getIban();
+			} else {
+				String message = "No hay domiciliación activa para esta suscripción ("+s+") y no se ha indicado IBAN";
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+		} else {
+			if (!IBANUtil.validarIBAN(iban)) {
+				String message = "IBAN no válido:" + iban;
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+			ibanValue = iban;
+		}
+		if (s.getActivo())
+			desactivar(s, today);
+		accountHolder = personaService.createPersona(nif, nombre, oldAccountHolder); 
+		d = createDomiciliacion(ibanValue, accountHolder);
+		s = createSuscripcion(ibanValue, importe, accountHolder, today,s.getPeriodo());
+		createPSD(s, d, today);
+		return s;
+	}
+
+	@Override
+	@Transactional
+	public Suscripcion reactivateSuscripcion(Integer id, String iban, Double euros) {
+		Suscripcion s = null;
+		Domiciliacion d = null;
+		Persona titular = null;
+		LocalDateTime today = null;
+		PSD psd = null;
+		today = LocalDateTime.now();
+		s = suscripcionRepository.findSuscripcionById(id);
+		
+		if (s == null) {
+			String message = "Suscripción no encontrada: " + s;
+			logger.error(message);
+			throw new RuntimeException(message);
+		}
+			
+		titular = s.getPersona();
+		Double importe = null;
+		String ibanValue = null;
+		if (euros == null)  {
+			if  (iban == null) {
+				logger.debug("reactivateSuscripcion: Reactivate Only Suscripción: {0}, Persona: {1} ", s.getId(), s.getPersona().getNombre());
+	//			return s;
+			} else {
+				logger.debug("updateSuscripcion: Update Suscripción: Changes IBAN: {0}, Old Suscripcion: {1}, Persona: {2} ", iban,s.getId(), s.getPersona().getNombre());
+			}
+		} else {
+			if (iban == null) {
+				logger.debug("updateSuscripcion: Update Suscripción: Changes Importe: {0}, Old Suscripcion: {1}, Persona: {2} ", euros,s.getId(), s.getPersona().getNombre());
+			} else {
+				logger.debug("updateSuscripcion: Update Suscripción: Changes IBAN & Importe: {0}, {1}, Old Suscripcion: {2}, Persona: {3} ", iban, euros,s.getId(), s.getPersona().getNombre());
+				
+			}
+		}
+		
+		if (euros != null && !s.getEuros().equals(euros)) {
+			importe = euros;
+		} else {
+			importe = s.getEuros();
+		}
+	
+		// Si no se introduce IBAN, se coge el de la domiciliación activa de la suscripción introducida.
+		if (iban == null) {
+			psd = s.getActivePSD();
+			if (psd != null) {
+				d = psd.getIdDomiciliacion();
+				ibanValue = s.getActivePSD().getIdDomiciliacion().getIban();
+			} else {
+				// Buscar última Domiciliación
+				psd = s.getLastPSD();
+				if (psd != null) {
+					d = psd.getIdDomiciliacion();
+					ibanValue = psd.getIdDomiciliacion().getIban();					
+				} else {
+					String message = "No hay domiciliación activa para esta suscripción ("+s+") y no se ha indicado IBAN";
+					logger.error(message);
+					throw new RuntimeException(message);
+				}
+			}
+		} else {
+			if (!IBANUtil.validarIBAN(iban)) {
+				String message = "IBAN no válido:" + iban;
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+			ibanValue = iban;
+		}
+		if (s.getActivo())
+			desactivar(s, today);
+		if (d == null)
+			d = createDomiciliacion(ibanValue, titular);
+		
+		s = createSuscripcion(ibanValue, importe, titular,today,s.getPeriodo());
+		createPSD(s, d, today);
 		return s;
 	}
 }

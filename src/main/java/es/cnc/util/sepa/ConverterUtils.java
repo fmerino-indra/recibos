@@ -1,9 +1,10 @@
-package es.cnc.util;
+package es.cnc.util.sepa;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Formatter;
 
@@ -13,9 +14,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Emision;
+import es.cnc.util.LocalDateUtil;
 
 public class ConverterUtils {
 
+	public static DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 	public static String buildNbOfTxs(Integer nbOfTxt) {
 		StringBuilder sb = new StringBuilder();
 		Formatter formatter = new Formatter(sb);
@@ -54,7 +57,10 @@ public class ConverterUtils {
 	         * <li>{@code uuuu-MM-dd'T'HH:mm:ss.SSSSSSSSS}</li>
 	         * </ul>
 		*/
-		return DatatypeFactory.newInstance().newXMLGregorianCalendar(auxTime.toString());
+		/*
+		 * Falla la hora con precisión reducida, es decir si se pone la hora sin segundos (formato reducido) el parser interno falla.
+		 */
+		return DatatypeFactory.newInstance().newXMLGregorianCalendar(auxTime.format(formatter));
 	}
 	
 	/**
@@ -79,6 +85,7 @@ public class ConverterUtils {
 		System.out.println(LocalDateUtil.toYYYYMMDDz(fecha));
 		System.out.println(buildCreDtTm(hora));
 		System.out.println(buildCreDtTm(new Date()));
+		System.out.println(ConverterUtils.buildCreDtTm(LocalDateUtil.dateToLocalDateTime(new Date())));
 		
 	}
 	

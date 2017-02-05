@@ -15,6 +15,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "parroquia_aux")
 public class ParroquiaAux extends AbstractEntity<Integer> {
@@ -42,6 +44,7 @@ public class ParroquiaAux extends AbstractEntity<Integer> {
     @OneToOne(fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "idParroquia", referencedColumnName = "Id")
+    @JsonIgnore
     private Parroquia idParroquia;
     
     @Column(name = "direccion", length = 50)

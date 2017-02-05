@@ -8,7 +8,9 @@ Ext.define('recibosWeb.view.cabecera.CabeceraViewportCtrl', {
 
     control: {
         'cabecera_cabeceragrid'                 : {
-            itemdblclick   : 'cabeceraOnDataListDblClick'
+            itemdblclick   : 'cabeceraOnDataListDblClick',
+            selectionchange: 'onSelectionChange'
+            
 //            ,
 //            selectionchange: 'cabeceraOnDatalistSelectionChange'
         },
@@ -60,17 +62,25 @@ Ext.define('recibosWeb.view.cabecera.CabeceraViewportCtrl', {
             master = me.lookupReference("cabecera_cabeceradetailmaster"),
             detail = master.down('cabecera_cabeceradetailform'),
             detailGrid = master.down('cabecera_cabeceradetailgrid'),
-            detailController, dependencies, detailFormController, detailGridController;
+            detailMasterController,
+            //detailController, 
+            dependencies;
+            //, detailFormController;
+            //, detailGridController;
 
         detail.getForm().reset();
         me.getView().getLayout().next();
 
-        detailController = master.getController();
-        detailFormController = detailController;
-        dependencies = detailController.cabeceraReloadDependentStores();
+//        detailController = master.getController();
+//        detailFormController = detailController;
+//        dependencies = detailController.cabeceraReloadDependentStores();
 
+        detailMasterController = master.getController();
+        dependencies = detailMasterController.cabeceraReloadDependentStores();
+        
         RSVP.all(dependencies).then(function () {
-            detailFormController.cabeceraViewDetail(model);
+//            detailFormController.cabeceraViewDetail(model);
+        	detailMasterController.cabeceraViewDetail(model);
         });
 
     },
@@ -239,20 +249,16 @@ Ext.define('recibosWeb.view.cabecera.CabeceraViewportCtrl', {
             }
         });
     },
+    //Selection control
+    
+    onSelectionChange: function (grid, selection) {
+		this.getViewModel().set('hasAnySelected', selection.length >0);
+//    	this.comprobarBotonVer();
+    },
 
-    resetPass: function () {
-        var me = this, ids;
-        ids = me.getIdsFromSelection();
-        Ext.Ajax.request({
-            url    : Ext.util.Format.format('{0}/usrusuarios/{1}', $AC.getWebPath(), 'reset-passwd'),
-            params : {id: ids},
-            success: function (response) {
-                me.info(Ext.util.Format.format('Contraseña reseteada a {0} {1}', ids.length, ids.length > 1 ? 'usuarios' : 'usuario'));
-                me.getView().down('usuario_usuariomaster').getController().usuarioLoad();
-            },
-            failure: function (response) {
-                //me.error(response);
-            }
-        });
+    comprobarBotonVer: function () {
+    	
+        var selection = this.getView().down('cabecera_cabeceragrid').getSelectionModel().getSelection();
+        this.getViewModel().set('hasAnySelected', selection.length != null);
     }
 });

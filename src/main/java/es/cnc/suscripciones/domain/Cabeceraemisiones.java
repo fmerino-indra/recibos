@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -88,6 +89,13 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Parroquia_has_parroco", referencedColumnName = "id")
     private ParroquiaHasParroco parroquiaHasParroco;
+    
+    @Column(name="anyo")
+    private Integer anyo;
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "domiciliacion", referencedColumnName = "idDomiciliacion")
+    private Domiciliacion domiciliacion;
     
     public Set<Emision> getEmisions() {
     	if (emisions == null)
@@ -181,5 +189,33 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
 
 	public void setDevueltos(Long devueltos) {
 		this.devueltos = devueltos;
+	}
+
+	/**
+	 * @return the anyo
+	 */
+	public Integer getAnyo() {
+		return anyo;
+	}
+
+	/**
+	 * @param anyo the anyo to set
+	 */
+	public void setAnyo(Integer anyo) {
+		this.anyo = anyo;
+	}
+
+	/**
+	 * @return the domiciliacion
+	 */
+	public Domiciliacion getDomiciliacion() {
+		return domiciliacion;
+	}
+
+	/**
+	 * @param domiciliacion the domiciliacion to set
+	 */
+	public void setDomiciliacion(Domiciliacion domiciliacion) {
+		this.domiciliacion = domiciliacion;
 	}
 }

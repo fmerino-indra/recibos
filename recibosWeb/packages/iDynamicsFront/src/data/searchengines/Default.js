@@ -4,6 +4,7 @@ Ext.define('iDynamicsFront.data.searchengines.Default', {
 
     buildFilter: function (params) {
         var createFilterForKey = function (key) {
+debugger;        	
             //devolvemos null en los casos que esté vacío y ern los que no, devolvemos un objeto con formato {property: nombre_propiedad, value: valor_para_esa_propiedad}
             return !Ext.isEmpty(params[key]) ? {property : key, value : params[key]} : null;
         };

@@ -20,7 +20,7 @@ public class JsonToFilter {
 	}
 	
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
-		String json = "[{\"property\":\"filter\",\"value\":true},{\"property\":\"nif\",\"value\":\"2\"}]";
+		String json = "[{\"property\":\"filter\",\"value\":true},{\"property\":\"nif\",\"value\":2}]";
 		JsonToFilter.toFilter(json, new TypeReference<List<FilterBaseDTO<?>>>() {});
 	}
 }

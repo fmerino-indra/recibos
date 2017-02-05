@@ -113,7 +113,6 @@ Ext.define('recibosWeb.appConfig.initializers.Ajax', {
 //        sessionMonitor.verbose = true;
 
         Ext.Ajax.on("requestcomplete", function (conn, response, options, eOpts) {
-
             if (response && response.getResponseHeader != null) {
                 var timeout = parseInt(response.getResponseHeader("timeout"));
                 //para las pruebas en local

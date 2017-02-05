@@ -8,9 +8,17 @@ Ext.define('recibosWeb.model.Suscripcion', {
     idProperty : 'idSuscripcion',
     fields: [
         {name:'secuenciaAdeudo'}
-        ,{name:'persona', reference:"Persona"}
-        ,{name:'fechaInicio', type: 'date', dateFormat: 'time'}
-        ,{name:'fechaBaja', type: 'date', dateFormat: 'time'}
+        ,{
+            name:'persona',
+            reference: {
+                type:"Persona",
+                association: 'personaSuscripcion',
+                role:'personaRel',
+                inverse: 'suscripciones'
+            }
+        }
+        ,{name:'fechaInicio', type: 'string'}
+        ,{name:'fechaBaja', type: 'string'}
         ,{name:'pago', type:"string", useNull:true}
         ,{name:'pesetas', type:"number", useNull:true}
         ,{name:'divisa', type:"string", useNull:true}

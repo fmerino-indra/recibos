@@ -82,6 +82,8 @@ Ext.define('iDynamicsFront.selectors.SearchField', {
     initComponent: function () {
         var me = this,
             triggerConfig, comboConfig;
+//FMM        
+//debugger;        
         me.cls = me.cls + (me.dialogWidgetConfig ? ' advanced' : ' basic');
         me.triggerConfig = triggerConfig = Ext.merge(
             {
@@ -243,7 +245,7 @@ Ext.define('iDynamicsFront.selectors.SearchField', {
     launchSearcher: function (btn, data) {
         var me = this,
             dialogWidgetConfig, store, searchForm, searchData = {};
-
+debugger;
         if (me.dialogWidgetConfig) {
             store = me.getValuesStore();
             dialogWidgetConfig = Ext.merge({

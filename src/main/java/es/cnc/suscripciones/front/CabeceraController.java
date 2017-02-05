@@ -15,6 +15,9 @@ import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Emision;
 import es.cnc.suscripciones.front.dto.CabeceraDTO;
 import es.cnc.suscripciones.front.dto.EmisionDTO;
+import es.cnc.suscripciones.front.response.ResponseAbstract;
+import es.cnc.suscripciones.front.response.ResponseDTO;
+import es.cnc.suscripciones.front.response.ResponseList;
 import es.cnc.suscripciones.services.cabecera.CabeceraService;
 
 @RestController()

@@ -35,7 +35,7 @@ Ext.define('recibosWeb.view.cabecera.master.CabeceraMaster', {
                 reference: 'cabecera_cabeceragrid',
                 bind     : {
                     store: '{cabeceras}',
-                    title: 'Listado de usuarios [{usuarios.totalCount}]'
+                    title: 'Listado de cabeceras [{cabeceras.totalCount}]'
                 },
                 region   : 'center',
                 border   : false,

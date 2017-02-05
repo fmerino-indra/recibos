@@ -18,8 +18,8 @@ import com.sepa.domain.PersonIdentification5;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.ParroquiaHasParroco;
-import es.cnc.util.ConverterUtils;
 import es.cnc.util.LocalDateUtil;
+import es.cnc.util.sepa.ConverterUtils;
 
 public class GroupHeaderBuilder {
 	private static ObjectFactory oF = new ObjectFactory();
@@ -38,7 +38,11 @@ public class GroupHeaderBuilder {
 		grpHdr.setMsgId(buildGrpHdrId(ce.getParroquiaHasParroco().getParroquiaId().getNif(), ce.getId(), ldt));
 		
 		// CreDtTm
+		try {
 		grpHdr.setCreDtTm(ConverterUtils.buildCreDtTm(ldt));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// NoOfTxs
 		grpHdr.setNbOfTxs(ConverterUtils.buildNbOfTxs(ce.getEmisions().size()));
 		

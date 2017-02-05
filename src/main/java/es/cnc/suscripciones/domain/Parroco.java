@@ -42,6 +42,9 @@ public class Parroco extends AbstractEntity<Integer> {
     @Column(name = "NIF", length = 9)
     private String nif;
     
+    @Column(name = "NombreFirma", length = 45)
+    private String nombreFirma;
+    
     public Set<ParroquiaHasParroco> getParroquias() {
         return parroquiaHasParroco;
     }
@@ -69,5 +72,19 @@ public class Parroco extends AbstractEntity<Integer> {
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("parroquiaHasParrocoes").toString();
     }
+
+	/**
+	 * @return the nombreFirma
+	 */
+	public String getNombreFirma() {
+		return nombreFirma;
+	}
+
+	/**
+	 * @param nombreFirma the nombreFirma to set
+	 */
+	public void setNombreFirma(String nombreFirma) {
+		this.nombreFirma = nombreFirma;
+	}
     
 }

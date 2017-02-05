@@ -52,5 +52,11 @@ public interface CabeceraService {
 	 */
 	List<Emision> findRefundedEmissionList(Cabeceraemisiones ce);
 	
-	
+	/**
+	 * Returns all cabeceraemisiones from a given year
+	 * @param anyo
+	 * @return
+	 */
+	List<Cabeceraemisiones> findCabecerasByYear(Integer anyo);
+
 }

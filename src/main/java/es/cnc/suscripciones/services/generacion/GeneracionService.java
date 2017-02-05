@@ -15,6 +15,7 @@ public interface GeneracionService {
 	 */
 	List<Periodo> findMascara();
 
-	void generateISO20022(Cabeceraemisiones cabecera) throws DatatypeConfigurationException;
+	String generateISO20022(Cabeceraemisiones cabecera) throws DatatypeConfigurationException;
+	String calcFileName(Cabeceraemisiones cabecera);
 
 }

@@ -27,10 +27,19 @@ public interface EmisionService {
 	/**
 	 * Generate a list of Cabeceraemisiones and Emision for the month passed as parameter.
 	 * @param month
+	 * @param year
 	 * @return
 	 */
 	@Transactional
-	public List<Cabeceraemisiones> generate(int month);
+	public List<Cabeceraemisiones> generate(int year, int month);
+
+	/**
+	 * Pre-Generate a list of Cabeceraemisiones and Emision for the month passed as parameter.
+	 * @param month
+	 * @return
+	 */
+	@Transactional
+	public List<Cabeceraemisiones> preGenerate(int year, int month);
 
 
 	/**
@@ -61,5 +70,7 @@ public interface EmisionService {
 	 */
 	@Transactional
 	void anular(List<Integer> ids);
+
+	List<Cabeceraemisiones> findCabecerasByAnyoMes(Integer year, Integer codigoMes);
 	
 }

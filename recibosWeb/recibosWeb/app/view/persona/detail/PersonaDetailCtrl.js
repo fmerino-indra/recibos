@@ -33,7 +33,9 @@ Ext.define('recibosWeb.view.persona.detail.PersonaDetailCtrl', {
                     bt = me.lookupReference('enableBtn');
                     
                     me.getView().setTitle(t('usrusuario.detail.title'));
-
+					var sus = detail.getComponent('suscripciones');
+					if (sus)
+						sus.reconfigure(model.suscripciones());
                     // seek simple search components and
                     // assign them to the initial value
                     uxfieldArray = Ext.ComponentQuery.query('uxdialogfield', detail);

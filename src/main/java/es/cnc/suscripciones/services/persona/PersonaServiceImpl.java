@@ -1,6 +1,7 @@
 package es.cnc.suscripciones.services.persona;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -35,15 +36,16 @@ public class PersonaServiceImpl implements PersonaService {
 	}
 	
 	@Override
-	public Persona createPersona(String nif, String nombre, String domicilio, String cp, String poblacion, String tfno) {
-		Persona p = new Persona();
-		p.setCp(cp);
-		p.setDomicilio(domicilio);
-		p.setNif(nif);
-		p.setNombre(nombre);
-		p.setPoblacion(poblacion);
-		p.setTfno(tfno);
-		return createPersona(p);
+	public Persona createPersona(String nif, String nombre, String domicilio, String cp, String poblacion,
+			String tfno) {
+		return createPersona(nif, nombre, domicilio, cp, poblacion,tfno, null);
+	}
+
+	@Override
+	public Persona createPersona(String nif, String nombre, Persona antecesor) {
+		if (antecesor == null)
+			throw new RuntimeException("El antecesor es nulo.");
+		return createPersona(nif, nombre, antecesor.getDomicilio(), antecesor.getCp(), antecesor.getPoblacion(), antecesor.getTfno(), antecesor);
 	}
 
 	@Override
@@ -63,7 +65,7 @@ public class PersonaServiceImpl implements PersonaService {
 			response = findPersonas(page, start, limit);
 		} else {//List<FilterBaseDTO<?>>
 			nif = (FilterBaseDTO<String>)filter.get("nif");
-			response = personaRepository.findPersonaByNif(nif.getValue(), pr);
+			response = personaRepository.findAllPersonasLikeNif(nif.getValue(), pr);
 		}
 		return response;
 	}
@@ -71,11 +73,30 @@ public class PersonaServiceImpl implements PersonaService {
 	@Override
 	public Persona findPersonaById(Integer id) {
 		return personaRepository.findFullById(id);
+//		return personaRepository.findOne(id);
 	}
 
 	@Override
 	public void deletePersona(Integer id) {
 		personaRepository.delete(id);
+	}
+
+	@Override
+	public List<Persona> findPersonasByNif(String nif) {
+		return personaRepository.findAllPersonasByNif(nif);
+	}
+
+	private Persona createPersona(String nif, String nombre, String domicilio, String cp, String poblacion, String tfno, Persona antecesor) {
+		Persona p = new Persona();
+		p.setCp(cp);
+		p.setDomicilio(domicilio);
+		p.setNif(nif);
+		p.setNombre(nombre);
+		p.setPoblacion(poblacion);
+		p.setTfno(tfno);
+		if (antecesor != null)
+			p.setAntecesor(antecesor);
+		return createPersona(p);
 	}
 
 }

@@ -42,6 +42,7 @@ class BancosServiceImpl implements BancosService {
 		this.bancosRepository = bancosRepository;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public Page<Bancos> findBancos(BancosSearchCriteria criteria, Pageable pageable) {
 
@@ -54,6 +55,7 @@ class BancosServiceImpl implements BancosService {
 		}
 
 		String country = "";
+		@SuppressWarnings("null")
 		int splitPos = name.lastIndexOf(",");
 
 		if (splitPos >= 0) {

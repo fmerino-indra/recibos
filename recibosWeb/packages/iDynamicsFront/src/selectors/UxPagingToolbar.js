@@ -80,7 +80,7 @@ Ext.define('iDynamicsFront.selectors.UxPagingToolbar', {
          extraParams = Ext.clone(proxy.extraParams),
          colArr = grid.columns,
          colDataArray = [];
-      //debugger
+debugger;
       extraParams = ( extraParams!=null ? extraParams : {} )
       //Añadimos los parámetros adicionales necesarios a los parámetros de búsqueda
       extraParams.format = type; 

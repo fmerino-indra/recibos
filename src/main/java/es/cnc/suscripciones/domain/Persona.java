@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -62,6 +64,10 @@ public class Persona extends AbstractEntity<Integer> {
     
     @Column(name = "idAntigua")
     private Integer idAntigua;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "antecesor", referencedColumnName = "id", nullable = true)
+    private Persona antecesor;
     
     public Set<Domiciliacion> getDomiciliacions() {
         return domiciliacions;
@@ -150,4 +156,12 @@ public class Persona extends AbstractEntity<Integer> {
     public static Persona fromJSON(String json) {
     	return (Persona)AbstractEntity.fromJSONToEntity(json, Persona.class);
     }
+
+	public Persona getAntecesor() {
+		return antecesor;
+	}
+
+	public void setAntecesor(Persona antecesor) {
+		this.antecesor = antecesor;
+	}
 }

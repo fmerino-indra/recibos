@@ -1,4 +1,4 @@
-package es.cnc.suscripciones.front;
+package es.cnc.suscripciones.front.response;
 
 import java.util.List;
 

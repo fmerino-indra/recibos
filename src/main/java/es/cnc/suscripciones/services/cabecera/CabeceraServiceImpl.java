@@ -128,4 +128,45 @@ public class CabeceraServiceImpl implements CabeceraService {
 	public List<Emision> findRefundedEmissionList(Cabeceraemisiones ce) {
 		return emisionRepository.findRefundedEmissionsByCabecera(ce);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Cabeceraemisiones> findCabecerasByYear(Integer anyo) {
+		List<Cabeceraemisiones> response = cabeceraRepository.findCabecerasByYear(anyo);
+		List<Integer> ids = null;
+		List<Object[]> resultSum = null;
+		Query query = null;
+		Map<Integer, Double> sumas = null;
+		Map<Integer, Double> devoluciones = null;
+		Map<Integer, Long> devueltos = null;
+		if (response != null && response.size() > 0) {
+			ids = new ArrayList<>();
+			query = entityManager.createQuery("SELECT e.idCabecera.id, SUM(e.importe),"
+					+ "SUM( CASE WHEN (e.devuelto = 1) THEN e.importe ELSE 0.0 END) AS importeDevuelto, "
+					+ "SUM( CASE WHEN (e.devuelto = 1) THEN 1 ELSE 0 END) AS devueltos "
+					+ " FROM Emision e "
+					+ " WHERE e.idCabecera.id IN :ids"
+					+ " group by e.idCabecera");
+			for (Cabeceraemisiones ce : response) {
+				ids.add(ce.getId());
+			}
+			query.setParameter("ids", ids);
+			resultSum = query.getResultList();
+			sumas = new HashMap<>(resultSum.size());
+			devoluciones = new HashMap<>(resultSum.size());
+			devueltos = new HashMap<>(resultSum.size());
+			for (Object[] fila: resultSum) {
+				sumas.put((Integer)fila[0], (Double)fila[1]);
+				devoluciones.put((Integer)fila[0], (Double)fila[2]);
+				devueltos.put((Integer)fila[0], (Long)fila[3]);
+			}
+			for (Cabeceraemisiones ce : response) {
+				ce.setImporte(sumas.get(ce.getId()));
+				ce.setImporteDevuelto(devoluciones.get(ce.getId()));
+				ce.setDevueltos(devueltos.get(ce.getId()));
+				
+			}
+		}
+		return response; 
+	}
 }

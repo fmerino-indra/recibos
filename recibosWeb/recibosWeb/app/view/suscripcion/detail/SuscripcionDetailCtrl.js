@@ -25,6 +25,7 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl', {
         detail = me.getView();
         recibosWeb.model.SuscripcionDTO.load(modelSelected.get('id'), {
             callback: function (suscripcionDTO, operation) {
+debugger;                	
                 if (suscripcionDTO.data === null) {
                     me.error(operation.getError());
                 } else {
@@ -85,7 +86,7 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl', {
     suscripcionReloadDependentStores: function (detail) {
         var me = this, viewModel = this.getViewModel(),
             stores = ['suscripcionDTOs'], storeLoader;
-
+debugger;
         storeLoader = function (store) {
             new RSVP.Promise(function (resolve, reject) {
                 resolve();

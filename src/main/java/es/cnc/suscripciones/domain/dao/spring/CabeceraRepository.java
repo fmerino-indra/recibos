@@ -38,6 +38,11 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 	@Query("select ce from Cabeceraemisiones ce order by ce.fechaEmision desc")
 	public List<Cabeceraemisiones> findCabecerasDesc();
 	
+	@Query("select ce from Cabeceraemisiones ce "
+			+ "where ce.anyo = :anyo "
+			+ "order by ce.codigoMes asc")
+	public List<Cabeceraemisiones> findCabecerasByYear(@Param("anyo")Integer anyo);
+	
 	@Query("select ce from Cabeceraemisiones ce order by ce.fechaEmision desc")
 	public Page<Cabeceraemisiones> findCabecerasDesc(Pageable pageable);
 	
@@ -47,6 +52,7 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 			+ " INNER JOIN FETCH psd.idDomiciliacion d"
 			+ " INNER JOIN FETCH psd.idSuscripcion s"
 			+ " INNER JOIN FETCH s.persona"
+			+ " INNER JOIN FETCH ce.domiciliacion domPar"
 			+ " where ce = ?1 ")
 	public Cabeceraemisiones findCabeceraByIdFull(Cabeceraemisiones cabecera);
 	
@@ -73,4 +79,9 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 			+ " AND ce.fechaEmision <= :to")
 	public List<Cabeceraemisiones> findRefundedCabeceraBetweenDatesFull(@Param("from") Date from, @Param("to") Date to);
 
+	@Query("SELECT ce FROM Cabeceraemisiones ce "
+			+ " WHERE ce.anyo = :anyo "
+			+ " AND ce.codigoMes = :mes")
+	public List<Cabeceraemisiones> findCabeceraByYearMonth(@Param("anyo")Integer year, @Param("mes")Integer codigoMes);
+	
 }

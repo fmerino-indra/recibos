@@ -254,12 +254,54 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s.getActivePSD());
 		
 		// CASO NEIRA, ALFREDO
-		s = suscripcionService.findSuscripcionById(6572);
-		assertNotNull(s);
-		s = suscripcionService.updateSuscripcion(s.getId(), "ES6800308116110001570271", null);		
-		assertNotNull(s);
-		assertNull(s.getFechaBaja());
-		assertNotNull(s.getActivePSD());
-		
+//		s = suscripcionService.findSuscripcionById(6572);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES6800308116110001570271", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+
+// 24/06/2016
+		// ALBERTO RIVAS GONZALEZ y Mª ISABEL TORRES SÁNCHEZ
+//		s = suscripcionService.findSuscripcionById(6662);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES9520381050503001863409", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+
+		// CASTELLANO PALACIOS, ANTOLIANO -> JOSEFA MOTTA SANCHEZ
+//		s = suscripcionService.findSuscripcionById(6590);
+//		assertNotNull(s);
+//		s = suscripcionService.changeAccountHolder(s.getId(), "ES6821009281212200446232", null, "00028282S", "Motta Sánchez, Josefa",null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+	
+		// Sendino Herrero, José Manuel
+//		s = suscripcionService.findSuscripcionById(6976);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES7020381876666000196050", null);		
+//		assertNotNull(s);
+//		assertNull(s.getFechaBaja());
+//		assertNotNull(s.getActivePSD());
+	
+// 03-08-2016
+// MARIA VICTORIA VALERO ARNAZ		
+//		s = suscripcionService.findSuscripcionById(6823);
+//		assertNotNull(s);
+//		s = suscripcionService.cancelSuscripcion(s.getId());
+//		assertNotNull(s);
+//		assertNotNull(s.getFechaBaja());
+//		assertNull(s.getActivePSD());
+
+// JOSE MARIA HITA ARROYO	
+//		s = suscripcionService.findSuscripcionById(7008);
+//		assertNotNull(s);
+//		s = suscripcionService.cancelSuscripcion(s.getId());
+//		assertNotNull(s);
+//		assertNotNull(s.getFechaBaja());
+//		assertNull(s.getActivePSD());
+	
 	}
 }

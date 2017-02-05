@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Emision;
@@ -20,16 +21,17 @@ public interface EmisionRepository extends JpaRepository<Emision, Integer> {
 			+ " INNER JOIN FETCH psd.idDomiciliacion d"
 			+ " INNER JOIN FETCH psd.idSuscripcion s"
 			+ " INNER JOIN FETCH s.persona"
-			+ " WHERE e.idCabecera = ?"
+			+ " WHERE e.idCabecera = :cabecera"
 			+ " ORDER BY s.persona.nombre")
-	public List<Emision> findEmissionsByCabecera(Cabeceraemisiones ce);
+	public List<Emision> findEmissionsByCabecera(@Param("cabecera") Cabeceraemisiones ce);
 
 	@Query("SELECT e FROM Emision e "
 			+ " INNER JOIN FETCH e.idSuscripcion psd"
 			+ " INNER JOIN FETCH psd.idDomiciliacion d"
 			+ " INNER JOIN FETCH psd.idSuscripcion s"
 			+ " INNER JOIN FETCH s.persona"
-			+ " WHERE e.idCabecera = ?"
+			+ " WHERE e.idCabecera = :cabecera"
 			+ " AND e.devuelto = true")
-	public List<Emision> findRefundedEmissionsByCabecera(Cabeceraemisiones ce);
+	public List<Emision> findRefundedEmissionsByCabecera(@Param("cabecera") Cabeceraemisiones ce);
+
 }

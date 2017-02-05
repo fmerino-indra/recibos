@@ -1,13 +1,12 @@
-package es.cnc.suscripciones.front;
+package es.cnc.suscripciones.front.response;
 
-import java.util.Collection;
+import java.util.Map;
 
-public class ResponseList<T extends Collection<?>> extends ResponseAbstract<T> {
+public class ResponseMap<T extends Map<?, ?>> extends ResponseAbstract<T> {
 
 	private int count = 0;
-//	private boolean more = false;
 	
-	public ResponseList() {
+	public ResponseMap() {
 		// TODO Auto-generated constructor stub
 	}
 	

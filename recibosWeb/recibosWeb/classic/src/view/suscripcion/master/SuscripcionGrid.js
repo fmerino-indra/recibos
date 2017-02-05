@@ -5,6 +5,7 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
     extend       : 'Ext.grid.Panel',
     alias        : 'widget.suscripcion_suscripciongrid',
     cls          : 'data-list usuarios',
+    reference    : 'suscripciongrid',
     multiSelect  : false,
 /*
     viewModel : {
@@ -35,8 +36,9 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
                 {
                     header   : t('suscripcion.items.fechaInicio'),
                     dataIndex: 'fechaInicio',
-                    flex     : 1,
-                    renderer: Ext.util.Format.dateRenderer('d-m-Y')
+                    flex     : 1 ,
+//                    renderer: Ext.util.Format.dateRenderer('Y-m-d')
+                    renderer: Ext.Date.format('Y-m-d')
                 }
                 ,
                 {

@@ -16,10 +16,14 @@
  */
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,14 +65,42 @@ public class EmisionServiceTest {
 		logger = LoggerFactory.getLogger(this.getClass());
 	}
 
-	@Test
+//	@Test
+//	@Transactional
 	public void emitirYGenerar() throws Exception {
 		List<Cabeceraemisiones> cabeceras = null;
-		cabeceras = emisionService.generate(5);
+		cabeceras = emisionService.generate(2016, 8);
 		assertNotNull(cabeceras);
 		assertTrue(cabeceras.size()>0);
 		for (Cabeceraemisiones cabecera: cabeceras) {
+			System.out.println(cabecera.getId() + "-" + cabecera.getPeriodo() +  "-" + cabecera.getCodigoMes() + "-" + cabecera.getConcepto()+"-"+cabecera.getFechaEmision());
+		}
+		for (Cabeceraemisiones cabecera: cabeceras) {
 			generacionService.generateISO20022(cabecera);
+		}
+	}
+	
+	
+//	@Test
+	public void generar() throws Exception {
+		Cabeceraemisiones cabecera = null;
+		cabecera = cabeceraRepository.findOne(3854);
+		assertNotNull(cabecera);
+		System.out.println(cabecera.getId() + "-" + cabecera.getPeriodo() +  "-" + cabecera.getCodigoMes() + "-" + cabecera.getConcepto()+"-"+cabecera.getFechaEmision());
+		generacionService.generateISO20022(cabecera);
+	}
+	
+//	@Test
+	@Transactional
+	public void preEmitirYGenerar() throws Exception {
+		List<Cabeceraemisiones> cabeceras = null;
+		LocalDate today = LocalDate.now();
+
+		cabeceras = emisionService.preGenerate(today.getYear(), today.getMonthValue());
+		assertNotNull(cabeceras);
+		assertTrue(cabeceras.size()>0);
+		for (Cabeceraemisiones cabecera: cabeceras) {
+			assertNotNull(cabecera);
 		}
 	}
 	
@@ -80,7 +112,7 @@ public class EmisionServiceTest {
 //	}
 	
 //	@Test
-//	@Transactional
+	@Transactional
 	public void testRefunded() throws Exception {
 		List<Cabeceraemisiones> cabeceras = null;
 		LocalDateTime from = null;
@@ -112,4 +144,58 @@ public class EmisionServiceTest {
 		}
 		
 	}
+	
+//	@Test
+	@Transactional
+	public void eliminar() throws Exception {
+		Cabeceraemisiones cabecera = null;
+
+		cabecera = cabeceraRepository.findOne(3865);
+		assertNotNull(cabecera);
+		emisionService.deleteCabecera(cabecera);
+		cabecera = cabeceraRepository.findOne(3865);
+		assertNull(cabecera);
+		
+		cabecera = cabeceraRepository.findOne(3866);
+		assertNotNull(cabecera);
+		emisionService.deleteCabecera(cabecera);
+		cabecera = cabeceraRepository.findOne(3866);
+		assertNull(cabecera);
+		
+		cabecera = cabeceraRepository.findOne(3863);
+		assertNotNull(cabecera);
+		emisionService.deleteCabecera(cabecera);
+		cabecera = cabeceraRepository.findOne(3863);
+		assertNull(cabecera);
+		
+		cabecera = cabeceraRepository.findOne(3864);
+		assertNotNull(cabecera);
+		emisionService.deleteCabecera(cabecera);
+		cabecera = cabeceraRepository.findOne(3864);
+		assertNull(cabecera);
+		
+		
+		
+		
+//		cabecera = cabeceraRepository.findOne(3808);
+//		assertNotNull(cabecera);
+//		emisionService.deleteCabecera(cabecera);
+//		cabecera = cabeceraRepository.findOne(3808);
+//		assertNull(cabecera);
+//
+//		cabecera = cabeceraRepository.findOne(3809);
+//		assertNotNull(cabecera);
+//		emisionService.deleteCabecera(cabecera);
+//		cabecera = cabeceraRepository.findOne(3809);
+//		assertNull(cabecera);
+//
+//		cabecera = cabeceraRepository.findOne(3810);
+//		assertNotNull(cabecera);
+//		emisionService.deleteCabecera(cabecera);
+//		cabecera = cabeceraRepository.findOne(3809);
+//		assertNull(cabecera);
+		
+		
+	}
+	
 }

@@ -12,14 +12,23 @@ import es.cnc.suscripciones.domain.Persona;
 
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 	@Query("select p from Persona p where p.nif = :nif")
-	public List<Persona> findPersonaByNif(@Param("nif") String nif);
+	public List<Persona> findAllPersonasByNif(@Param("nif") String nif);
+
+	@Query(value="select p from Persona p where p.nif = :nif", 
+			countQuery = "select COUNT(p) from Persona p where p.nif = :nif")
+	public Page<Persona> findAllPersonasByNif(@Param("nif") String nif, Pageable pageable);
 
 	@Query(value="select p from Persona p where p.nif like :nif%", 
 			countQuery = "select COUNT(p) from Persona p where p.nif like :nif%")
-	public Page<Persona> findPersonaByNif(@Param("nif") String nif, Pageable pageable);
+	public Page<Persona> findAllPersonasLikeNif(@Param("nif") String nif, Pageable pageable);
 
 	@Query("select distinct p from Persona p "
-			+ " INNER JOIN FETCH p.suscripcions s"
+			+ " LEFT JOIN FETCH p.suscripcions s"
 			+ " where p.id = ?1")
+	@Deprecated
 	public Persona findFullById(Integer id);
+	
+	@Query("SELECT p FROM Persona p"
+			+ " WHERE p.id = :id")
+	public Persona findByPrimaryKey(@Param("id") Integer id);
 }

@@ -9,7 +9,7 @@ Ext.define('recibosWeb.view.persona.master.PersonaMasterVM', {
             model       : 'recibosWeb.model.Persona',
             filterOnLoad: false,
             remoteSort  : true,
-            pageSize    : 22,
+            pageSize    : 20,
             remoteFilter: true,
             listeners: { datachanged: 'personasDataChanged' }
         }

@@ -38,10 +38,11 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionMaster', {
                     title: 'Listado de usuarios [{usuarios.totalCount}]'
                 },
                 region   : 'center',
-                border   : false,
-                listeners: {
-                    selectionchange: 'onSelectionChange'
-                }
+                border   : false
+//                ,
+//                listeners: {
+//                    selectionchange: 'onSelectionChange'
+//                }
             }
         ];
         this.callParent();

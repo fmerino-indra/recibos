@@ -18,24 +18,24 @@ Ext.define('recibosWeb.view.persona.PersonaViewportCtrl', {
     },
 
     // FMM From iDynamics
-    onAction: function (btn) {
-        var me = this, action = btn.action;
-        me.executeAction(action, btn);
-    },
+//    onAction: function (btn) {
+//        var me = this, action = btn.action;
+//        me.executeAction(action, btn);
+//    },
     // FMM From iDynamics
-    executeAction: function (action) {
-        var me = this;
-        if (action) {
-            if (typeof me[action] === 'function') {
-                var args = Ext.toArray(arguments);
-                me[action].apply(me, args.slice(1, args.length));
-            } else {
-                me.warn('Action "' + action + '" is not defined.');
-            }
-        } else {
-            me.warn('No action defined to this event: ' + action);
-        }
-    },
+//    executeAction: function (action) {
+//        var me = this;
+//        if (action) {
+//            if (typeof me[action] === 'function') {
+//                var args = Ext.toArray(arguments);
+//                me[action].apply(me, args.slice(1, args.length));
+//            } else {
+//                me.warn('Action "' + action + '" is not defined.');
+//            }
+//        } else {
+//            me.warn('No action defined to this event: ' + action);
+//        }
+//    },
 
 
     onBeforeToolbarRender: function (tbar) {

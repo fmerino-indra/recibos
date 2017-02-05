@@ -275,4 +275,17 @@ public class Suscripcion extends AbstractEntity<Integer> {
     	}
     	return active;
     }
+
+    public PSD getLastPSD() {
+    	PSD last = null;
+    	if (this.pSDs != null) {
+//    		pSDs.stream().map(psd -> psd.getFechaInicio()).max(Date::compareTo).get();
+    		for (PSD psd : pSDs) {
+    			if (last == null || psd.getFechaInicio().compareTo(last.getFechaInicio()) >0 ) {
+    				last = psd;
+    			}
+    		}
+    	}
+    	return last;
+    }
 }

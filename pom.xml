@@ -39,7 +39,32 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
+		<!-- PDF -->
+<!-- 
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+ -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.10</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>6.4.0</version>
+		</dependency>
+    <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports-functions</artifactId>
+        <version>6.4.0</version>
+    </dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -62,15 +87,15 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate4</artifactId>
- 		</dependency>
+		</dependency>
 
 		<!-- Attribute without prefix Ccy="EUR" -->
 		<dependency>
-		  <groupId>org.codehaus.woodstox</groupId>
-		  <artifactId>woodstox-core-asl</artifactId>
-		  <version>4.4.1</version>
+			<groupId>org.codehaus.woodstox</groupId>
+			<artifactId>woodstox-core-asl</artifactId>
+			<version>4.4.1</version>
 		</dependency>
-		
+
 		<!-- SEPA ISO20022 -->
 		<dependency>
 			<groupId>org.stasiena.sepa</groupId>
@@ -85,13 +110,23 @@
 
 		<!-- http://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.5</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
 		</dependency>
-
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.3.1</version>
+		</dependency>
 	</dependencies>
 	<repositories>
+		<!-- FONTS -->
+	  	<repository>
+	    	<id>lsup_local_repo</id>
+	    	<url>file://${project.basedir}/fonts-local-repo</url>
+  		</repository>
+		<!-- FONTS -->
 		<repository>
 			<id>sonatype-nexus-snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -110,9 +145,112 @@
 		<jackson.version>2.6.3</jackson.version>
 		<tree.version>0.0.1-SNAPSHOT</tree.version>
 		<tomcat.version>8.0.29</tomcat.version>
+		<igs.build.release.directory>${project.build.directory}</igs.build.release.directory>
 	</properties>
+	<profiles>
+
+
+		<!-- ==================== DEVELOPMENT PROFILE =================== -->
+		<profile>
+			<id>development</id>
+
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<build.profile.id>development-${user.name}</build.profile.id>
+			</properties>
+
+
+			<build>
+				<plugins>
+
+					<!-- Copy full public folder to be included as a resource. Sencha Cmd 
+						tool is not used in development profile. -->
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.7</version>
+						<executions>
+							<execution>
+								<id>copy-public-resources</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>public</directory>
+											<targetPath>public</targetPath>
+											<excludes>
+												<exclude>build/testing/**</exclude>
+												<exclude>build/production/**</exclude>
+											</excludes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Copy application.properties to target directory outside jar file -->
+					<plugin>
+						<groupId>com.coderplus.maven.plugins</groupId>
+						<artifactId>copy-rename-maven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<id>copy-file</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+
+								<configuration>
+									<fileSets>
+										<fileSet>
+											<sourceFile>${project.build.outputDirectory}/application.properties</sourceFile>
+											<destinationFile>${igs.build.release.directory}/application.properties</destinationFile>
+										</fileSet>
+									</fileSets>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<build>
+		<filters>
+			<!-- Ensures that the config-profiles/[build.profile.id].properties file 
+				is always loaded from the configuration file of the active Maven profile. -->
+			<filter>config-profiles/${build.profile.id}.properties</filter>
+		</filters>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/binary</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
