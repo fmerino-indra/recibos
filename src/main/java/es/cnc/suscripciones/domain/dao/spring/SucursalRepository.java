@@ -16,6 +16,7 @@ public interface SucursalRepository extends JpaRepository<Sucursal, Integer> {
 	@Query("SELECT s FROM Sucursal s"
 			+ " INNER JOIN FETCH s.idBanco b"
 			+ " WHERE b.codBco = :codBco"
+			+ " AND b.activo = TRUE"
 			+ " AND s.codSuc = :codSuc")
 	public Sucursal findSucursalByCodBanAndCodSuc(@Param("codBco") String codBco, @Param("codSuc") String codSuc);
 	

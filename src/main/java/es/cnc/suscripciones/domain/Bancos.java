@@ -40,6 +40,9 @@ public class Bancos extends AbstractEntity<Integer> {
     @Column(name = "DEN_BCO", length = 40)
     private String denBco;
     
+    @Column
+    private boolean activo;
+    
     public Set<Sucursal> getSucursals() {
         return sucursals;
     }
@@ -67,6 +70,20 @@ public class Bancos extends AbstractEntity<Integer> {
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("sucursals").toString();
     }
+
+	/**
+	 * @return the activo
+	 */
+	public boolean isActivo() {
+		return activo;
+	}
+
+	/**
+	 * @param activo the activo to set
+	 */
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
     
     
 }

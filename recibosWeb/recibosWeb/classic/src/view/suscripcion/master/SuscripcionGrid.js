@@ -37,8 +37,8 @@ Ext.define('recibosWeb.view.suscripcion.master.SuscripcionGrid', {
                     header   : t('suscripcion.items.fechaInicio'),
                     dataIndex: 'fechaInicio',
                     flex     : 1 ,
-//                    renderer: Ext.util.Format.dateRenderer('Y-m-d')
-                    renderer: Ext.Date.format('Y-m-d')
+                    renderer: Ext.util.Format.dateRenderer('Y-m-d')
+//                    renderer: Ext.Date.format('Y-m-d')
                 }
                 ,
                 {

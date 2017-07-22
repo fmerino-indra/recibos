@@ -197,7 +197,7 @@ public class CertificadoServiceImpl implements CertificadoService {
 	}
 
 	private Path calcPath(Integer year) throws IOException {
-		Path camino = Paths.get("pdf/pdfProduction/", year.toString());
+		Path camino = Paths.get("pdf/pdfProduction/", year.toString(), "/certificados");
 		try {
 			Files.deleteIfExists(camino);
 			Files.createDirectories(camino);

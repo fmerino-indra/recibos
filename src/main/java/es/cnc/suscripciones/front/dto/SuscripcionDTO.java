@@ -1,6 +1,8 @@
 package es.cnc.suscripciones.front.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SuscripcionDTO extends AbstractDTO {
 
@@ -14,7 +16,9 @@ public class SuscripcionDTO extends AbstractDTO {
     private Boolean activo;
 	private String concepto;
 	private String iban;
-
+	private String telefono;
+	private List<SuscripcionDTO> others;
+	
 	public SuscripcionDTO() {
 	}
 
@@ -96,5 +100,39 @@ public class SuscripcionDTO extends AbstractDTO {
 
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
+	}
+
+	/**
+	 * @return the telefono
+	 */
+	public String getTelefono() {
+		return telefono;
+	}
+
+	/**
+	 * @param telefono the telefono to set
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	/**
+	 * @return the others
+	 */
+	public List<SuscripcionDTO> getOthers() {
+		return others;
+	}
+
+	/**
+	 * @param others the others to set
+	 */
+	public void setOthers(List<SuscripcionDTO> others) {
+		this.others = others;
+	}
+	
+	public void addSuscripcionDtoHistory(SuscripcionDTO dto) {
+		if (others == null)
+			others = new ArrayList<>();
+		others.add(dto);
 	}
 }

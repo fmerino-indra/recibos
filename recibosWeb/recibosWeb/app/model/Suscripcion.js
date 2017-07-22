@@ -17,8 +17,8 @@ Ext.define('recibosWeb.model.Suscripcion', {
                 inverse: 'suscripciones'
             }
         }
-        ,{name:'fechaInicio', type: 'string'}
-        ,{name:'fechaBaja', type: 'string'}
+        ,{name:'fechaInicio', type: 'date', dateFormat: 'time'}
+        ,{name:'fechaBaja', type: 'date', dateFormat: 'time'}
         ,{name:'pago', type:"string", useNull:true}
         ,{name:'pesetas', type:"number", useNull:true}
         ,{name:'divisa', type:"string", useNull:true}

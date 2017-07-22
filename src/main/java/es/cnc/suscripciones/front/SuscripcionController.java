@@ -41,9 +41,31 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
     @RequestMapping(path={"/{id}"}, method = RequestMethod.GET)
     public ResponseAbstract<SuscripcionDTO> detail(@PathVariable Integer id) {
         SuscripcionDTO dto = null;
+//        SuscripcionDTO auxDto = null;
         ResponseDTO<SuscripcionDTO> response = null;
         
         Suscripcion s = suscripcionService.findSuscripcionById(id);
+//        List<Suscripcion> suscripciones = suscripcionService.findAllByIdPersona(s.getPersona().getId());
+        dto = buildDTO(s);
+
+//        if (suscripciones != null && !suscripciones.isEmpty()) {
+//        	for (Suscripcion ss:suscripciones) {
+//        		if (!ss.getId().equals(s.getId())) {
+//        			auxDto = buildDTO(ss);
+//        			dto.addSuscripcionDtoHistory(auxDto);
+//        		}
+//        	}
+//        }
+        
+        response = new ResponseDTO<>();
+        response.setData(dto);
+        response.setSuccess(true);
+        response.setTotalCount(1l);
+        return response;
+    }
+    
+    private SuscripcionDTO buildDTO(Suscripcion s) {
+        SuscripcionDTO dto = null;
         if (s != null) {
             dto = new SuscripcionDTO();
         	dto.setId(s.getId());
@@ -64,12 +86,9 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
         		}
         	}
         }
-        response = new ResponseDTO<>();
-        response.setData(dto);
-        response.setSuccess(true);
-        response.setTotalCount(1l);
-        return response;
+    	return dto;
     }
+    
     @SuppressWarnings("unchecked")
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public ResponseList<List<Suscripcion>> list(@RequestParam("filter") String filter, 
@@ -95,9 +114,9 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
 		}
 		
 		if (activo != null && noActivo != null || activo == null && noActivo == null) {
-			pagina = suscripcionService.findAllSuscripciones(page-1, start, limit);
+			pagina = suscripcionService.findAllSuscripciones(page-1, start, limit, fh);
 		} else if (noActivo != null) {
-			pagina = suscripcionService.findInactiveSuscripciones(page-1, start, limit);
+			pagina = suscripcionService.findInactiveSuscripciones(page-1, start, limit,fh);
 			
 		} else if (activo != null) {
 			pagina = suscripcionService.findActiveSuscripciones(page-1, start, limit, fh);
@@ -108,7 +127,49 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
 		return returnContainer;
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, produces = "application/json", path={"/{id}"})
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json" , path={"others"})
+    public ResponseList<List<SuscripcionDTO>> listOhters(@RequestParam("filter") String filter) throws JsonParseException, JsonMappingException, IOException {
+		ResponseList<List<SuscripcionDTO>> returnContainer = new ResponseList<>();
+		List<SuscripcionDTO> others = null;
+		List<Suscripcion> suscripciones = null;		
+        SuscripcionDTO auxDto = null;
+        Suscripcion s = null;
+		FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh = null;
+		Integer idSuscripcion = null;
+		
+		fh = buildFilters(filter);
+		FilterBaseDTO<Integer> dto = null;
+		if (fh.isActive() ) {
+			dto =  (FilterBaseDTO<Integer>)fh.get("idSuscription");
+			if (dto != null) {
+				idSuscripcion = dto.getValue();
+				s = suscripcionService.findSuscripcionById(idSuscripcion);
+				suscripciones = suscripcionService.findAllByIdPersona(s.getPersona().getId());
+
+		        if (suscripciones != null && !suscripciones.isEmpty()) {
+		        	others = new ArrayList<>();
+		        	for (Suscripcion ss:suscripciones) {
+		        		if (!ss.getId().equals(s.getId())) {
+		        			auxDto = buildDTO(ss);
+		        			others.add(auxDto);
+		        		}
+		        	}
+		        }
+		        returnContainer.setData(others);
+		        if(others != null)
+		        	returnContainer.setTotalCount(others.size());
+		        else
+		        	returnContainer.setTotalCount(0);
+			}
+		}
+		returnContainer.setSuccess(true);
+		return returnContainer;
+	}
+
+    
+    @RequestMapping(method = RequestMethod.PUT, produces = "application/json", path={"/{id}"})
     public void cambiarSuscripcion(@RequestBody String body, @PathVariable("id") Integer id) {
     	System.out.println(body);
     }

@@ -1,6 +1,7 @@
 package es.cnc.suscripciones.services.suscripcion;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -23,13 +24,13 @@ public interface SuscripcionService {
 	 * Find a list of inactive subscriptions 
 	 * @return The list of active subscriptions
 	 */
-	Page<Suscripcion> findInactiveSuscripciones(Integer page, Integer start, Integer limit);
+	Page<Suscripcion> findInactiveSuscripciones(Integer page, Integer start, Integer limit, FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh);
 
 	/**
 	 * Find a list of all subscriptions 
 	 * @return The list of all subscriptions
 	 */
-	Page<Suscripcion> findAllSuscripciones(Integer page, Integer start, Integer limit);
+	Page<Suscripcion> findAllSuscripciones(Integer page, Integer start, Integer limit, FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh);
 
 	/**
 	 * Find a Suscripcion by PK with PSD set.
@@ -61,7 +62,7 @@ public interface SuscripcionService {
 	Suscripcion cancelSuscripcion(Integer id);
 
 	@Transactional
-	Suscripcion createSuscripcion(String iban, Double euros, String nombre, String periodo);
+	Suscripcion createSuscripcion(String iban, Double euros, String nif, String periodo);
 
 	/**
 	 * Changes the account holder and build relationship between the old one and the new.
@@ -75,4 +76,6 @@ public interface SuscripcionService {
 	 */
 	@Transactional
 	Suscripcion changeAccountHolder(Integer id, String iban, Double euros, String nif, String nombre, String periodo);
+	
+	List<Suscripcion> findAllByIdPersona(Integer idPersona);
 }

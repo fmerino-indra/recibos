@@ -16,8 +16,8 @@
  */
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -303,5 +303,46 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s.getFechaBaja());
 //		assertNull(s.getActivePSD());
 	
+// VILLAGRÁ BLANCO, FELISA	
+//		s = suscripcionService.findSuscripcionById(6977);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 100d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// Amo López, Eva	
+//		s = suscripcionService.findSuscripcionById(6883);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 50d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// GALERA RASTROJO, CATALINA	
+//		s = suscripcionService.findSuscripcionById(6765);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES3720381015993004154651", 200d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// GOMEZ FERNANDEZ, TOMAS	
+//		s = suscripcionService.findSuscripcionById(6793);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES4500495142122816194983", 40d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+//		s = suscripcionService.findSuscripcionById(7033);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 40d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// AYALA PEREDA, MARIA ROSA	
+//		s = suscripcionService.findSuscripcionById(6744);
+//		assertNotNull(s);
+		s = suscripcionService.createSuscripcion("ES0600494679182216466862",30d,"01155157M", "M");
+		assertNotNull(s);
+		assertNotNull(s.getActivePSD());
+
 	}
 }

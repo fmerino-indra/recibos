@@ -1,6 +1,8 @@
 package es.cnc.suscripciones.services.suscripcion;
 
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +31,7 @@ import es.cnc.suscripciones.dto.FilterBaseDTO;
 import es.cnc.suscripciones.dto.FilterHolder;
 import es.cnc.suscripciones.services.persona.PersonaService;
 import es.cnc.util.LocalDateUtil;
+import es.cnc.util.app.ConstantsData;
 import es.cnc.util.sepa.ConstantsCNC;
 
 @Component("suscripcionService")
@@ -67,10 +70,26 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 	}
 
 	@Override
-	public Page<Suscripcion> findInactiveSuscripciones(Integer page, Integer start, Integer limit) {
+	public Page<Suscripcion> findInactiveSuscripciones(Integer page, Integer start, Integer limit, FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh) {
 		PageRequest pr = new PageRequest(page, limit);
-		Page<Suscripcion> response = suscripcionRepository.findInactiveSuscripciones(pr);
+
+		FilterBaseDTO<?> dto = null;
+		if (fh != null) 
+			dto = fh.get("nombre");
+
+		Page<Suscripcion> response = suscripcionRepository.findInactiveSuscripciones(pr, dto != null?dto.getValue().toString():"");
 		return response;
+	}
+
+	@Override
+	public Page<Suscripcion> findAllSuscripciones(Integer page, Integer start, Integer limit, FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh) {
+		PageRequest pr = new PageRequest(page, limit);
+
+		FilterBaseDTO<?> dto = null;
+		if (fh != null) 
+			dto = fh.get("nombre");
+
+		return suscripcionRepository.findActiveInactiveSuscripciones(pr, dto != null?dto.getValue().toString():"");
 	}
 
 	@Override
@@ -133,7 +152,7 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		if (d == null)
 			d = createDomiciliacion(ibanValue, titular);
 		
-		s = createSuscripcion(ibanValue, importe, titular,today,s.getPeriodo());
+		s = createSuscripcion(importe, titular,today,s.getPeriodo());
 		createPSD(s, d, today);
 		return s;
 	}
@@ -184,7 +203,7 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 	}
 
 	@Transactional
-	private Suscripcion createSuscripcion(String iban, Double euros, Persona titular, LocalDateTime today, String periodo)  {
+	private Suscripcion createSuscripcion(Double euros, Persona titular, LocalDateTime today, String periodo)  {
 		Suscripcion s = null;
 		s = new Suscripcion();
 		s.setActivo(true);
@@ -240,6 +259,9 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		LocalDateTime today = null;
 		today = LocalDateTime.now();
 		Suscripcion s = null;
+		Domiciliacion d = null;
+		String ibanValue = null;
+		
 		if (lista == null) { // Crear persona
 			throw new RuntimeException("Persona:" + nif + " - No existe");
 		} else if (lista.size() > 1) {
@@ -247,16 +269,28 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		} else {
 			persona = lista.get(0);
 		}
+		
+		if (!IBANUtil.validarIBAN(iban)) {
+			String message = "IBAN no válido:" + iban;
+			logger.error(message);
+			throw new RuntimeException(message);
+		}
+		ibanValue = iban;
+		if (periodo == null || !(ConstantsData.ANUAL.equals(periodo) || 
+				ConstantsData.SEMESTRAL.equals(periodo) ||
+				ConstantsData.TRIMESTRAL.equals(periodo) ||
+				ConstantsData.MENSUAL.equals(periodo)) ) {
+			String message = MessageFormat. format("PERIODO no válido:", iban);
+			logger.error(message);
+			throw new RuntimeException(message);
+		}
 		if (persona != null) {
-			s = createSuscripcion(iban, euros, persona, today, periodo);
+			s = createSuscripcion(euros, persona, today, periodo);
+			d = createDomiciliacion(ibanValue, persona);
+			createPSD(s, d, today);
+			
 		}
 		return s;
-	}
-
-	@Override
-	public Page<Suscripcion> findAllSuscripciones(Integer page, Integer start, Integer limit) {
-		PageRequest pr = new PageRequest(page, limit);
-		return suscripcionRepository.findActiveInactiveSuscripciones(pr);
 	}
 
 	
@@ -331,7 +365,7 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 			desactivar(s, today);
 		accountHolder = personaService.createPersona(nif, nombre, oldAccountHolder); 
 		d = createDomiciliacion(ibanValue, accountHolder);
-		s = createSuscripcion(ibanValue, importe, accountHolder, today,s.getPeriodo());
+		s = createSuscripcion(importe, accountHolder, today,s.getPeriodo());
 		createPSD(s, d, today);
 		return s;
 	}
@@ -409,8 +443,17 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		if (d == null)
 			d = createDomiciliacion(ibanValue, titular);
 		
-		s = createSuscripcion(ibanValue, importe, titular,today,s.getPeriodo());
+		s = createSuscripcion(importe, titular,today,s.getPeriodo());
 		createPSD(s, d, today);
 		return s;
+	}
+
+	@Override
+	public List<Suscripcion> findAllByIdPersona(Integer idPersona) {
+		if (idPersona == null) {
+			return new ArrayList<>();
+		} else {
+			return suscripcionRepository.findAllById(idPersona);
+		}
 	}
 }

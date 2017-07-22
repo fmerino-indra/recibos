@@ -33,4 +33,9 @@ public interface PersonaService {
 	 * @param id
 	 */
 	public void deletePersona(Integer id);
+
+	/**
+	 * Genera un PDF por cada suscriptor
+	 */
+	void generateFichaSuscriptores();
 }

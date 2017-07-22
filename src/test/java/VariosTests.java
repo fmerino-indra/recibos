@@ -252,7 +252,7 @@ public class VariosTests {
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 
-		lista = suscripcionRepository.findInactiveSuscripciones(pr);
+		lista = suscripcionRepository.findInactiveSuscripciones(pr, null);
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 
@@ -260,7 +260,7 @@ public class VariosTests {
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 		
-		lista = suscripcionService.findInactiveSuscripciones(page, start, limit);
+		lista = suscripcionService.findInactiveSuscripciones(page, start, limit, null);
 		assertNotNull(lista);
 		assertTrue(lista.getSize() > 0);
 		for (Suscripcion ss:lista) {

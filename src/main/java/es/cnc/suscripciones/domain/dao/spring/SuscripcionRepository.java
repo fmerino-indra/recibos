@@ -10,40 +10,52 @@ import org.springframework.data.repository.query.Param;
 
 import es.cnc.suscripciones.domain.Persona;
 import es.cnc.suscripciones.domain.Suscripcion;
-import es.cnc.suscripciones.front.dto.CertificadoDTO;
 
 public interface SuscripcionRepository extends JpaRepository<Suscripcion, Integer> {
 	
 	@Query(value="SELECT s FROM Suscripcion s"
 				+ " INNER JOIN FETCH s.persona p "
-				+ " WHERE p.nombre like CONCAT('%',:name,'%')"
+				+ " WHERE ( :name is null or p.nombre like CONCAT(:name,'%') )"
 				+ " and s.fechaBaja is null"
 				+ " and s.activo = TRUE"
 				+ " ORDER BY p.nombre",
 			countQuery = "SELECT COUNT(s) FROM Suscripcion s"
 				+ " INNER JOIN s.persona p "
-				+ " WHERE p.nombre like CONCAT('%',:name,'%')"
+				+ " WHERE ( :name is null or p.nombre like CONCAT(:name,'%') )"
 				+ " and s.fechaBaja is null"
 				+ " and s.activo = TRUE")
 	public Page<Suscripcion> findActiveSuscripciones(Pageable pageable, @Param("name") String name);
 	
 	@Query(value="SELECT s FROM Suscripcion s"
 			+ " INNER JOIN FETCH s.persona p "
-			+ " WHERE s.fechaBaja is not null"
+			+ " WHERE ( :name is null or p.nombre like CONCAT(:name,'%') )"
+			+ " and s.fechaBaja is not null"
 			+ " and s.activo = FALSE"
 			+ " ORDER BY p.nombre",
 		countQuery = "SELECT COUNT(s) FROM Suscripcion s"
 			+ " INNER JOIN s.persona p "
-			+ " WHERE s.fechaBaja is not null"
+			+ " WHERE ( :name is null or p.nombre like CONCAT(:name,'%') )"
+			+ " and s.fechaBaja is not null"
 			+ " and s.activo = FALSE")
-public Page<Suscripcion> findInactiveSuscripciones(Pageable pageable);
+	public Page<Suscripcion> findInactiveSuscripciones(Pageable pageable, @Param("name") String name);
 
 	@Query(value="SELECT s FROM Suscripcion s"
 			+ " INNER JOIN FETCH s.persona p "
+			+ " WHERE :name is null or p.nombre like CONCAT('%',:name,'%') "
 			+ " ORDER BY p.nombre",
 		countQuery = "SELECT COUNT(s) FROM Suscripcion s"
-			+ " INNER JOIN s.persona p ")
-public Page<Suscripcion> findActiveInactiveSuscripciones(Pageable pageable);
+			+ " INNER JOIN s.persona p "
+			+ " WHERE :name is null or p.nombre like CONCAT('%',:name,'%')")
+	public Page<Suscripcion> findActiveInactiveSuscripciones(Pageable pageable, @Param("name") String name);
+
+	@Query(value="SELECT s FROM Suscripcion s"
+			+ " INNER JOIN FETCH s.persona p "
+			+ " WHERE p.id = :idPersona "
+			+ " ORDER BY s.fechaInicio desc",
+		countQuery = "SELECT COUNT(s) FROM Suscripcion s"
+			+ " INNER JOIN s.persona p "
+			+ " WHERE p.id = :idPersona ")
+	public List<Suscripcion> findAllById(@Param("idPersona") Integer idPersona);
 
 	/**
 	 * Return the Suscripcion with PSD, Domiciliacion and Persona

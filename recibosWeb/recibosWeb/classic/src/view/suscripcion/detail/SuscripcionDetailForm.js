@@ -22,7 +22,7 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
     },
 
     autoScroll: true,
-
+    layout: 'column',
     initComponent: function () {
         var master = Ext.create('viewmodel.persona-master');
 
@@ -41,121 +41,142 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
         ];
         this.items = [
             {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.id'),
-                name      : 'id',
-                bind      : "{suscripcion.id}",
-                editable  : false,
-                align     : 'right'
-                	
+            	columnWidth:.15,
+                layout : 'vbox',
+                items : [
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.id'),
+		                name      : 'id',
+		                bind      : "{suscripcion.id}",
+		                editable  : false,
+		                align     : 'right'
+		                	
+		            }
+		            ,
+		            {
+		                xtype       : 'datefield',
+		                format      : 'd-m-Y',
+		                fieldLabel: t('suscripcion.items.fechaInicio'),
+		                bind      : "{suscripcion.fechaInicio}",
+		                editable  : false,
+		                name      : 'fechaInicio'
+		            }
+		            ,
+		            {
+		                xtype       : 'datefield',
+		                format      : 'd-m-Y',
+		                fieldLabel: t('suscripcion.items.fechaBaja'),
+		                bind      : "{suscripcion.fechaBaja}",
+		                editable  : false,
+		                name      : 'fechaBaja'
+		            }
+		        ]
             }
             ,
             {
-                xtype       : 'datefield',
-                format      : 'd-m-Y',
-                fieldLabel: t('suscripcion.items.fechaInicio'),
-                bind      : "{suscripcion.fechaInicio}",
-                editable  : false,
-                name      : 'fechaInicio'
-            }
-            ,
-            {
-                xtype       : 'datefield',
-                format      : 'd-m-Y',
-                fieldLabel: t('suscripcion.items.fechaBaja'),
-                bind      : "{suscripcion.fechaBaja}",
-                editable  : false,
-                name      : 'fechaBaja'
-            }
-            ,
-            {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.nombre'),
-                bind      : "{suscripcion.nombre}",
-                editable  : false,
-                name      : 'nombre'
-            },
-            {
-                xtype       : 'idf-searchfield',
-                fieldLabel  : t('suscripcion.items.nombre'),
-                name        : 'partyentitytype',
-                reference   : 'partyentitytype',
-                allowBlank  : false,
-                store       : me.storePersona,
-                displayField: 'nombre',
-                lastQuery   : '',
-                queryMode   : 'local',
-                valueField  : 'id',
-                width       : 550
-            },
+            	columnWidth:.50,
+                layout : 'vbox',
+                items : [
             
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.nombre'),
+		                bind      : "{suscripcion.nombre}",
+		                editable  : false,
+		                name      : 'nombre'
+		            },
+		            {
+		                xtype       : 'idf-searchfield',
+		                fieldLabel  : t('suscripcion.items.nombre'),
+		                name        : 'partyentitytype',
+		                reference   : 'partyentitytype',
+		                allowBlank  : false,
+		                store       : me.storePersona,
+		                displayField: 'nombre',
+		                lastQuery   : '',
+		                queryMode   : 'local',
+		                valueField  : 'id',
+		                width       : 550
+		            },
+		            
+		            {
+		                xtype             : 'idf-searchfield',
+		//                reference         : 'recognitionqueuename',
+		                fieldLabel        : t('suscripcion.items.nombre'),
+		                name              : 'nameSearch',
+		                store             : me.storePersona,
+		                displayField      : 'nombre',
+		                lastQuery         : '',
+		                queryMode         : 'local',
+		                width             : 550,
+		                valueField        : 'id',
+		                triggerConfig     : {iconCls: 'ux-multidialogfield-searchIcon'},
+		                dialogWidgetConfig: { //Configuraci�n del dialogo que sale, solo es necesario lo del selectionWidget
+		                    width          : 950,
+		                    height         : 650,
+		                    modal          : true,
+		                    title          : 'Suscriptores',
+		                    selectionWidget: {
+		                        xtype: 'persona_personamaster',
+		                        multiSelect : true
+		                    }
+		                }
+		            }
+		        ]
+            }
+		    ,
             {
-                xtype             : 'idf-searchfield',
-//                reference         : 'recognitionqueuename',
-                fieldLabel        : t('suscripcion.items.nombre'),
-                name              : 'nameSearch',
-                store             : me.storePersona,
-                displayField      : 'nombre',
-                lastQuery         : '',
-                queryMode         : 'local',
-                width             : 550,
-                valueField        : 'id',
-                triggerConfig     : {iconCls: 'ux-multidialogfield-searchIcon'},
-                dialogWidgetConfig: { //Configuraci�n del dialogo que sale, solo es necesario lo del selectionWidget
-                    width          : 950,
-                    height         : 650,
-                    modal          : true,
-                    title          : 'Suscriptores',
-                    selectionWidget: {
-                        xtype: 'persona_personamaster',
-                        multiSelect : true
-                    }
-                }
-            },
+            	columnWidth:.25,
+                layout : 'vbox',
+                items : [
+            
 
-            {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.euros'),
-                bind      : "{suscripcion.euros}",
-                name      : 'euros'
-            }
-            ,
-            {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.divisa'),
-                bind      : "{suscripcion.divisa}",
-                editable  : false,
-                name      : 'divisa'
-            }
-            ,
-            {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.periodo'),
-                bind      : "{suscripcion.periodo}",
-                name      : 'periodo'
-            }
-            ,
-            {
-                xtype     : 'checkboxfield',
-                fieldLabel: t('suscripcion.items.activo'),
-                bind      : "{suscripcion.activo}",
-                editable  : false,
-                name      : 'activo'
-            }
-            ,
-            {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.concepto'),
-                bind      : "{suscripcion.concepto}",
-                editable  : false,
-                name      : 'concepto'
-            }
-            ,
-            {
-                xtype     : 'textfield',
-                fieldLabel: t('suscripcion.items.iban'),
-                bind      : "{suscripcion.iban}",
-                name      : 'iban'
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.euros'),
+		                bind      : "{suscripcion.euros}",
+		                name      : 'euros'
+		            }
+		            ,
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.divisa'),
+		                bind      : "{suscripcion.divisa}",
+		                editable  : false,
+		                name      : 'divisa'
+		            }
+		            ,
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.periodo'),
+		                bind      : "{suscripcion.periodo}",
+		                name      : 'periodo'
+		            }
+		            ,
+		            {
+		                xtype     : 'checkboxfield',
+		                fieldLabel: t('suscripcion.items.activo'),
+		                bind      : "{suscripcion.activo}",
+		                editable  : false,
+		                name      : 'activo'
+		            }
+		            ,
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.concepto'),
+		                bind      : "{suscripcion.concepto}",
+		                editable  : false,
+		                name      : 'concepto'
+		            }
+		            ,
+		            {
+		                xtype     : 'textfield',
+		                fieldLabel: t('suscripcion.items.iban'),
+		                bind      : "{suscripcion.iban}",
+		                name      : 'iban'
+		            }
+		        ]
             }
         ];
 

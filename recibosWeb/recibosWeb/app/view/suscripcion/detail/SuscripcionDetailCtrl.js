@@ -20,7 +20,7 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailCtrl', {
      */
     suscripcionViewDetail: function (modelSelected) {
         var me = this, uxfieldArray, uxfieldNArray,
-            uxfield, uxfieldN, boundList, len, len2, model, datos, detail, enabled, bt;
+            uxfield, uxfieldN, boundList, len, len2, model, datos, detail, enabled, bt, otherSuscriptions;
 
         detail = me.getView();
         recibosWeb.model.SuscripcionDTO.load(modelSelected.get('id'), {
@@ -69,9 +69,35 @@ debugger;
                             boundList.getStore().loadData(datos);
                         }
                     }
+                    
+                    ////
+                    otherSuscriptions = Ext.create('Ext.data.Store', {
+                        model: 'SuscripcionDTO',
+                        proxy      : {
+                            type     : 'idfproxy',
+                            name     : 'recibosWeb.proxy.SuscripcionDTO',
+                            mockupUrl: 'data/suscripcionesListado.json',
+                            remoteUrl: 'suscripciones/others'
+//                            ,
+//                            url      : '/periodos'
+                        }
+                        
+                    });
+                    otherSuscriptions.clearFilter(true);
+                    otherSuscriptions.setRemoteFilter(true);
+                    otherSuscriptions.filter('idSuscription', model.id);
+                    otherSuscriptions.load({
+					    scope: this,
+					    callback: function(records, operation, success) {
+					        // the operation object
+					        // contains all of the details of the load operation
+					        console.log(records);
+					    }
+                    });
                 }
             }
         });
+        
     },
 
     /**

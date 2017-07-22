@@ -50,7 +50,7 @@ Ext.define('recibosWeb.view.persona.master.PersonaSearchForm', {
             {
                 xtype : 'container',
                 layout: {
-                    type : 'hbox',
+                    type : 'vbox',
                     align: 'stretch'
                 },
                 border: false,
@@ -61,7 +61,15 @@ Ext.define('recibosWeb.view.persona.master.PersonaSearchForm', {
                             name       : 'nif',
                             cls        : 'search-element',
                             fieldLabel : t('persona.items.nif')
+                        },
+                        {
+                            style      : 'margin-left:10px;margin-bottom:10px',
+                            xtype      : 'textfield',
+                            name       : 'nombre',
+                            cls        : 'search-element',
+                            fieldLabel : t('persona.items.nombre')
                         }
+                        
                 ]
 
             }

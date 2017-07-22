@@ -65,12 +65,12 @@ public class Suscripcion extends AbstractEntity<Integer> {
     private Persona persona;
     
     @Column(name = "FechaInicio")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date fechaInicio;
     
     @Column(name = "FechaBaja")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date fechaBaja;
     
