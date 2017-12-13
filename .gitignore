@@ -21,3 +21,5 @@ sencha-error*.log
 /xmlProduction/
 /pdf/
 /devoluciones/
+/recibos62/
+/salida.pdf
