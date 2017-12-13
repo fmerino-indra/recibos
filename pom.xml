@@ -119,6 +119,14 @@
 			<artifactId>jasperreports-fonts</artifactId>
 			<version>6.3.1</version>
 		</dependency>
+		
+		<!-- Google -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+		
 	</dependencies>
 	<repositories>
 		<!-- FONTS -->
@@ -146,6 +154,7 @@
 		<tree.version>0.0.1-SNAPSHOT</tree.version>
 		<tomcat.version>8.0.29</tomcat.version>
 		<igs.build.release.directory>${project.build.directory}</igs.build.release.directory>
+        <guava.version>18.0</guava.version>
 	</properties>
 	<profiles>
 
@@ -170,7 +179,6 @@
 						tool is not used in development profile. -->
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
-						<version>2.7</version>
 						<executions>
 							<execution>
 								<id>copy-public-resources</id>

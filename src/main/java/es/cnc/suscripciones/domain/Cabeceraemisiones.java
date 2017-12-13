@@ -1,7 +1,7 @@
 package es.cnc.suscripciones.domain;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,7 +50,14 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
     	super(Cabeceraemisiones.class);
 	}
     @OneToMany(mappedBy = "idCabecera", fetch = FetchType.LAZY)
-    private Set<Emision> emisions;
+    @OrderColumn(name="id")
+    @OrderBy("id ASC")
+    private List<Emision> emisions;
+    
+    @OneToMany(mappedBy = "idCabecera", fetch = FetchType.LAZY)
+    @OrderColumn(name="id")
+    @OrderBy("id ASC")
+    private List<SepaCoreXml> sepaCoreXMLs;
     
     @Column(name = "FechaEmision", nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -97,13 +106,13 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
     @JoinColumn(name = "domiciliacion", referencedColumnName = "idDomiciliacion")
     private Domiciliacion domiciliacion;
     
-    public Set<Emision> getEmisions() {
+    public List<Emision> getEmisions() {
     	if (emisions == null)
-    		emisions = new HashSet<>();
+    		emisions = new ArrayList<>();
         return emisions;
     }
     
-    public void setEmisions(Set<Emision> emisions) {
+    public void setEmisions(List<Emision> emisions) {
         this.emisions = emisions;
     }
     
@@ -217,5 +226,13 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
 	 */
 	public void setDomiciliacion(Domiciliacion domiciliacion) {
 		this.domiciliacion = domiciliacion;
+	}
+
+	public List<SepaCoreXml> getSepaCoreXMLs() {
+		return sepaCoreXMLs;
+	}
+
+	public void setSepaCoreXMLs(List<SepaCoreXml> sepaCoreXMLs) {
+		this.sepaCoreXMLs = sepaCoreXMLs;
 	}
 }

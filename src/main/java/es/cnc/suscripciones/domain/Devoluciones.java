@@ -50,6 +50,14 @@ public class Devoluciones extends AbstractEntity<Integer> {
     @DateTimeFormat(iso=ISO.DATE_TIME)
     private Date fechaBaja;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reasons_id", referencedColumnName = "id")
+    private Reason reason;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idMsgDevolucion", referencedColumnName = "id")
+    private MsgDevolucion idMsgDevolucion;
+
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("idCabecera", "idSuscripcion").toString();
     }
@@ -76,5 +84,21 @@ public class Devoluciones extends AbstractEntity<Integer> {
 
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
+	}
+
+	public Reason getReason() {
+		return reason;
+	}
+
+	public void setReason(Reason reason) {
+		this.reason = reason;
+	}
+
+	public MsgDevolucion getIdMsgDevolucion() {
+		return idMsgDevolucion;
+	}
+
+	public void setIdMsgDevolucion(MsgDevolucion idMsgDevolucion) {
+		this.idMsgDevolucion = idMsgDevolucion;
 	}
 }

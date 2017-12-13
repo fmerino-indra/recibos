@@ -20,6 +20,7 @@ Ext.define('recibosWeb.view.suscripcion.certificado.CertificadoWindowCtrl', {
     },
 
     onAccept: function () {
+debugger;    	
     	var me = this, selectionModel, selection, store, idPersona, idCertificado;
     	selectionSuscription = me.getViewModel().get('selectedSuscription');
 		idPersona = selectionSuscription.getData().persona.id;
@@ -37,6 +38,7 @@ Ext.define('recibosWeb.view.suscripcion.certificado.CertificadoWindowCtrl', {
             
             success: function (response, opts) {
 				var pdfWin= window.open('data:application/pdf;base64,' + response.responseText, '_blank', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
+//				var pdfWin= window.open('data:application/pdf;base64,' + response.responseText, '', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
             },
             failure: function (response) {
                 console.log(response);

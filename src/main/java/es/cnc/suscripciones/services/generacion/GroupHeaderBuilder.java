@@ -7,14 +7,14 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.stasiena.sepa.util.AT02Util;
 
-import com.sepa.domain.GenericOrganisationIdentification1;
-import com.sepa.domain.GenericPersonIdentification1;
-import com.sepa.domain.GroupHeader39;
-import com.sepa.domain.ObjectFactory;
-import com.sepa.domain.OrganisationIdentification4;
-import com.sepa.domain.Party6Choice;
-import com.sepa.domain.PartyIdentification32;
-import com.sepa.domain.PersonIdentification5;
+import com.sepa.domain.v008.v001.v02.GenericOrganisationIdentification1;
+import com.sepa.domain.v008.v001.v02.GenericPersonIdentification1;
+import com.sepa.domain.v008.v001.v02.GroupHeader39;
+import com.sepa.domain.v008.v001.v02.ObjectFactory;
+import com.sepa.domain.v008.v001.v02.OrganisationIdentification4;
+import com.sepa.domain.v008.v001.v02.Party6Choice;
+import com.sepa.domain.v008.v001.v02.PartyIdentification32;
+import com.sepa.domain.v008.v001.v02.PersonIdentification5;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.ParroquiaHasParroco;
@@ -33,13 +33,21 @@ public class GroupHeaderBuilder {
 	 */
 	public static GroupHeader39 buildGroupHeader(Cabeceraemisiones ce) throws DatatypeConfigurationException {
 		GroupHeader39 grpHdr = new GroupHeader39();
-		LocalDateTime ldt = LocalDateUtil.dateToLocalDateTime(ce.getFechaEmision());
+		
+		// TODO [FMM] 2017-11-06 Ahora se actualiza la fecha de envío en la generación del XML
+		LocalDateTime ldt = null;
+		ldt = LocalDateUtil.dateToLocalDateTime(ce.getFechaEnvio());
+		//		LocalDateTime ldt = LocalDateUtil.dateToLocalDateTime(ce.getFechaEmision());
+		
+		
+		
 		// Id
 		grpHdr.setMsgId(buildGrpHdrId(ce.getParroquiaHasParroco().getParroquiaId().getNif(), ce.getId(), ldt));
 		
 		// CreDtTm
 		try {
-		grpHdr.setCreDtTm(ConverterUtils.buildCreDtTm(ldt));
+			grpHdr.setCreDtTm(ConverterUtils.buildCreDtTm(ldt));
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

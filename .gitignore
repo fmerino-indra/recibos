@@ -17,3 +17,7 @@ public/
 recibosWeb/build/
 sencha-error*.log
 
+/xmlDevelopment/
+/xmlProduction/
+/pdf/
+/devoluciones/

@@ -56,12 +56,14 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 			+ " where ce = ?1 ")
 	public Cabeceraemisiones findCabeceraByIdFull(Cabeceraemisiones cabecera);
 	
-	@Query("select distinct ce from Cabeceraemisiones ce LEFT JOIN FETCH ce.emisions em"
+	@Query("select distinct ce from Cabeceraemisiones ce "
+			+ " LEFT JOIN FETCH ce.emisions em"
 			+ " INNER JOIN FETCH em.idSuscripcion psd"
 			+ " INNER JOIN FETCH psd.idDomiciliacion d"
 			+ " INNER JOIN FETCH psd.idSuscripcion s"
 			+ " INNER JOIN FETCH s.persona"
-			+ " where ce = ?1 ")
+			+ " where ce = ?1 "
+			+ " ORDER BY em.id")
 	@Deprecated // This is a heavy query
 	public Cabeceraemisiones findCabeceraByIdWithEmisiones(Cabeceraemisiones cabecera);
 
@@ -83,5 +85,19 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 			+ " WHERE ce.anyo = :anyo "
 			+ " AND ce.codigoMes = :mes")
 	public List<Cabeceraemisiones> findCabeceraByYearMonth(@Param("anyo")Integer year, @Param("mes")Integer codigoMes);
+
+	@Query("select distinct ce from Cabeceraemisiones ce "
+			+ " LEFT JOIN FETCH ce.emisions em"
+			+ " INNER JOIN FETCH ce.parroquiaHasParroco"
+			+ " INNER JOIN FETCH em.idSuscripcion psd"
+			+ " INNER JOIN FETCH psd.idDomiciliacion d"
+			+ " INNER JOIN FETCH psd.idSuscripcion s"
+			+ " INNER JOIN FETCH s.persona"
+			+ " INNER JOIN FETCH ce.domiciliacion domPar"
+			+ " LEFT JOIN FETCH ce.sepaCoreXMLs x"
+			+ " where x.idMsg = :msgId "
+			+ " AND x.activo = TRUE")
+	public Cabeceraemisiones findCabeceraByMsgIdFull(@Param("msgId") String msgId);
+	
 	
 }

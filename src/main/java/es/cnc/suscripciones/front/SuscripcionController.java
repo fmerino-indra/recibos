@@ -30,7 +30,7 @@ import es.cnc.suscripciones.services.certificado.CertificadoService;
 import es.cnc.suscripciones.services.suscripcion.SuscripcionService;
 
 @RestController()
-@RequestMapping("{contextPath}/suscripciones")
+@RequestMapping("**/suscripciones")
 public class SuscripcionController extends AbstractController<Suscripcion> {
 	@Autowired
 	SuscripcionService suscripcionService;
@@ -151,10 +151,8 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
 		        if (suscripciones != null && !suscripciones.isEmpty()) {
 		        	others = new ArrayList<>();
 		        	for (Suscripcion ss:suscripciones) {
-		        		if (!ss.getId().equals(s.getId())) {
-		        			auxDto = buildDTO(ss);
-		        			others.add(auxDto);
-		        		}
+	        			auxDto = buildDTO(ss);
+	        			others.add(auxDto);
 		        	}
 		        }
 		        returnContainer.setData(others);

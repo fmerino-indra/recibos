@@ -57,20 +57,6 @@ public interface EmisionService {
 	@Transactional
 	void deleteCabecera(Cabeceraemisiones ce);
 
-	/**
-	 * Service method that makes a record of a direct debt refund.
-	 * @param ids -> List of Emision identifiers.
-	 */
-	@Transactional
-	void devolver(List<Integer> ids);
-	
-	/**
-	 * Service method than cancel a direct debt refund. 
-	 * @param ids -> List of Emision identifiers.
-	 */
-	@Transactional
-	void anular(List<Integer> ids);
-
 	List<Cabeceraemisiones> findCabecerasByAnyoMes(Integer year, Integer codigoMes);
 	
 }

@@ -23,6 +23,14 @@ Ext.define('recibosWeb.view.suscripcion.detail.SuscripcionDetailForm', {
 
     autoScroll: true,
     layout: 'column',
+    
+//    listeners: {
+//        dirtychange: function(this, dirty, eOpts) {
+//debugger;
+//        	saveButton.enable();
+//        }
+//    },    
+    
     initComponent: function () {
         var master = Ext.create('viewmodel.persona-master');
 

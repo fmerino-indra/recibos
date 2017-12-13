@@ -24,6 +24,9 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/recibosWeb/**")
 			.addResourceLocations("file:recibosWeb/")
 			.setCachePeriod(0);
+		registry.addResourceHandler("/recibosApp/**")
+			.addResourceLocations("file:///Y:/Development/WorkspaceParroquia/recibosExt6/recWorkspace/")
+			.setCachePeriod(0);
 	}
 	
 	

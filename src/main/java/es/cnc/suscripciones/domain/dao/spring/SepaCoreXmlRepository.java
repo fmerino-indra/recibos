@@ -16,9 +16,24 @@
 
 package es.cnc.suscripciones.domain.dao.spring;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.SepaCoreXml;
 @org.springframework.stereotype.Repository
 public interface SepaCoreXmlRepository extends JpaRepository<SepaCoreXml, Integer> {
+	@Query("Select x From SepaCoreXml x"
+			+ " INNER JOIN FETCH x.idCabecera")
+	public List<SepaCoreXml> findXmlWithCabecera();
+	
+	@Query("SELECT x FROM SepaCoreXml x"
+			+ " INNER JOIN FETCH x.idCabecera c"
+			+ " WHERE c = :cabecera "
+			+ " AND "
+			+ " x.activo = TRUE")
+	public List<SepaCoreXml> findXmlByCabecera(@Param("cabecera") Cabeceraemisiones ce);
 }

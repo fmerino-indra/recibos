@@ -217,6 +217,15 @@
         {
             "path": "app.js",
             "bundle": true
+        },
+        {
+        	"path":"vendor/lo4javascript.js"
+        },
+        {
+        	"path":"vendor/rsvp.js"
+        },
+        {
+        	"path":"vendor/rx.js"
         }
     ],
 

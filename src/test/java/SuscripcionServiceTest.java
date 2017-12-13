@@ -15,10 +15,6 @@
  * limitations under the License.
  */
 
-import static org.junit.Assert.assertNotNull;
-
-import javax.transaction.Transactional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -340,9 +336,53 @@ public class SuscripcionServiceTest {
 // AYALA PEREDA, MARIA ROSA	
 //		s = suscripcionService.findSuscripcionById(6744);
 //		assertNotNull(s);
-		s = suscripcionService.createSuscripcion("ES0600494679182216466862",30d,"01155157M", "M");
-		assertNotNull(s);
-		assertNotNull(s.getActivePSD());
+
+//		s = suscripcionService.createSuscripcion("ES0600494679182216466862",30d,"01155157M", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// 05-08-2017
+// SANCHEZ-POBRE LACOSTA, MARIANO	
+//		s = suscripcionService.findSuscripcionById(6743);
+//		assertNotNull(s);
+//
+//		s = suscripcionService.updateSuscripcion(s.getId(), "ES3901280064330100049244", null);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+		
+// GARCIA GARCIA, PILAR	
+//		s = suscripcionService.createSuscripcion("ES9401824027230201645836",30d,"46203687E", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+// CARMONA GONZÁLEZ, AUGUSTO	
+//		s = suscripcionService.createSuscripcion("ES9614650100921701413658",500d,"50832751Z", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+	
+// 05-10-2017
+// HERNANDEZ, ARACELI	
+//		s = suscripcionService.findSuscripcionById(7005);
+//		assertNotNull(s);
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 40d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// 01-12-2017		
+// NIETO JOVER, FERNANDO JAVIER 	
+//		s = suscripcionService.createSuscripcion("ES8920381015983004077813",50d,"22865935W", "S");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// CARMONA GONZALEZ, BEGOÑA	
+//		s = suscripcionService.findSuscripcionById(6743);
+//		assertNotNull(s);
+//
+//		s = suscripcionService.createSuscripcion("ES8500491103262310467333",50d,"50814312K", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
 
 	}
 }

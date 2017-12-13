@@ -29,7 +29,8 @@ import es.cnc.suscripciones.front.response.ResponseList;
 import es.cnc.suscripciones.services.persona.PersonaService;
 
 @RestController()
-@RequestMapping("{contextPath}/personas")
+//@RequestMapping("{contextPath}/personas")
+@RequestMapping("**/personas")
 public class PersonaController extends AbstractController<Persona> {
 	@Autowired
 	PersonaService personaService;
@@ -112,6 +113,24 @@ public class PersonaController extends AbstractController<Persona> {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseDetail<Persona> crear(HttpServletRequest servletRequest, HttpRequest request, @RequestBody Persona p, UriComponentsBuilder uriBuilder) {
     	p = personaService.createPersona(p);
+    	ResponseDetail<Persona> response = new ResponseDetail<>();
+    	response.setData(p);
+    	response.setSuccess(true);
+    	response.setTotalCount(1l);
+    	// location header
+    	uriBuilder.pathSegment(servletRequest.getContextPath(), servletRequest.getRequestURI().startsWith("/")?servletRequest.getRequestURI().substring(1):servletRequest.getRequestURI(), String.valueOf(p.getId()));
+    	
+        HttpHeaders headers = new HttpHeaders();
+        //RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
+        //request.getURI();
+        headers.add(HttpHeaders.LOCATION,uriBuilder.build().toUriString());
+        
+        return response;
+    }
+    
+    @RequestMapping(path={"/{id}"}, method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody ResponseDetail<Persona> actualizar(HttpServletRequest servletRequest, HttpRequest request, @RequestBody Persona p, UriComponentsBuilder uriBuilder) {
+    	p = personaService.updatePersona(p);
     	ResponseDetail<Persona> response = new ResponseDetail<>();
     	response.setData(p);
     	response.setSuccess(true);

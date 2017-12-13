@@ -47,7 +47,7 @@ Ext.define('iDynamicsFront.util.SelectionDialog', {
       if(!dlg.title){dlg.title = dlg.defaultTitle;}
       
       // Construyo la vista a incrustar dentro del dialogo      
-      var selectionView = Ext.widget({xtype: dlg.selectionWidget, extraFields: dlg.extraFields, searchStore: dlg.selectionStore,
+      var selectionView = Ext.widget({xtype: dlg.selectionWidget.xtype, extraFields: dlg.extraFields, searchStore: dlg.selectionStore,
          autoClose: dlg.autoClose
 /*         viewModel: {  
             stores  : {

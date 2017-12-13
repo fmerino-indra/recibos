@@ -78,6 +78,21 @@ public class ConverterUtils {
 		}
 	}
 	
+	/**
+	 * Builds Date
+	 * @param XMLGregorianCalendar
+	 * @return the date
+	 * @throws DatatypeConfigurationException
+	 */
+	public static Date xmlGregorianCalendarToDate(XMLGregorianCalendar xmlGregorianCalendar) {
+		try {
+			return xmlGregorianCalendar.toGregorianCalendar().getTime();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 	public static void main(String[] args) throws Exception {
 		LocalDateTime hora = LocalDateTime.now();
 		LocalDate fecha = LocalDate.now();

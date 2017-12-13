@@ -3,9 +3,7 @@ package es.cnc.suscripciones.services.emision;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
-import es.cnc.suscripciones.domain.Devoluciones;
 import es.cnc.suscripciones.domain.Emision;
 import es.cnc.suscripciones.domain.Meses;
 import es.cnc.suscripciones.domain.PSD;
@@ -26,6 +23,7 @@ import es.cnc.suscripciones.domain.dao.spring.PSDRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaHasParrocoRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaIbanRepository;
 import es.cnc.suscripciones.domain.dao.spring.PeriodoRepository;
+import es.cnc.suscripciones.domain.dao.spring.ReasonRepository;
 import es.cnc.suscripciones.domain.dao.spring.SuscripcionRepository;
 import es.cnc.util.LocalDateUtil;
 import es.cnc.util.sepa.ConstantsCNC;
@@ -56,6 +54,9 @@ public class EmisionServiceImpl implements EmisionService {
 
 	@Autowired
 	SuscripcionRepository suscripcionRepository;
+
+	@Autowired
+	ReasonRepository reasonRepository;
 
 	public EmisionServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -163,7 +164,6 @@ public class EmisionServiceImpl implements EmisionService {
 	 */
 	private Cabeceraemisiones generateDirectDebtHeader(Periodo p, LocalDateTime today, LocalDateTime fEnvio, Integer year, Integer month) {
 		Cabeceraemisiones ce = new Cabeceraemisiones();
-//		ce.setCodigoMes(today.getMonthValue());
 		ce.setCodigoMes(month);
 		ce.setAnyo(year);
 		ce.setEmisionManual(false);
@@ -175,9 +175,10 @@ public class EmisionServiceImpl implements EmisionService {
 		mesCorrespondiente = LocalDateUtil.obtainTextualMonth(fecha);
 		
 		ce.setConcepto(ConstantsCNC.CONCEPTO + "-" + mesCorrespondiente + "-" + p.getNombre());
-//		ce.setConcepto(ConstantsCNC.CONCEPTO);
 		ce.setFechaEmision(LocalDateUtil.localDateTimeToDate(today));
-		ce.setFechaEnvio(LocalDateUtil.localDateTimeToDate(fEnvio));
+		//TODO [FMM] Revisar si la fecha de envío está bien actualizada aquí o mejor en la generación del XML
+//		ce.setFechaEnvio(LocalDateUtil.localDateTimeToDate(fEnvio));
+		// FMM
 		ce.setParroquiaHasParroco(phpRepository.findActiveParroquiaHasParroco());
 		ce.setDomiciliacion(ibanRepository.findActiveParroquiaIban().getDomiciliacion());
 		ce.setPeriodo(p.getId());
@@ -191,10 +192,10 @@ public class EmisionServiceImpl implements EmisionService {
 	 * @param ce
 	 * @return
 	 */
-	private Set<Emision> generateDirectDebts(Cabeceraemisiones ce) {
+	private List<Emision> generateDirectDebts(Cabeceraemisiones ce) {
 		List<PSD> psdList = psdRepository.findByPeriod(ce.getPeriodo());
 		Emision emision;
-		Set<Emision> emisiones = new HashSet<>(psdList.size());
+		List<Emision> emisiones = new ArrayList<>(psdList.size());
 		for (PSD psd : psdList) {
 			emision = generateDirectDebt(psd, ce);
 			emisiones.add(emision);
@@ -310,6 +311,7 @@ public class EmisionServiceImpl implements EmisionService {
 	 * es.cnc.suscripciones.services.emision.EmisionService#deleteCabecera(es.
 	 * cnc.suscripciones.domain.Cabeceraemisiones)
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	@Transactional
 	public void deleteCabecera(Cabeceraemisiones ce) {
@@ -318,54 +320,6 @@ public class EmisionServiceImpl implements EmisionService {
 			emisionRepository.delete(e);
 		}
 		cabeceraRepository.delete(ce);
-	}
-
-	@Override
-	@Transactional
-	public void devolver(List<Integer> ids) {
-		Emision aux = null;
-		Devoluciones devolucionActiva;
-		LocalDateTime today = LocalDateTime.now();
-		for (Integer id : ids) {
-			aux = emisionRepository.getOne(id);
-			aux.setDevuelto(true);
-			emisionRepository.save(aux);
-
-			// TODO FMM No tiene sentido, nunca habrá una activa si se va a
-			// devolver
-			devolucionActiva = devolucionRepository.findActiveReturnedByEmision(aux);
-			if (devolucionActiva != null) {
-
-				devolucionActiva.setFechaBaja(LocalDateUtil.localDateTimeToDate(today));
-				devolucionRepository.save(devolucionActiva);
-			}
-			devolucionActiva = new Devoluciones();
-			devolucionActiva.setEmision(aux);
-			devolucionActiva.setFechaDevolucion(LocalDateUtil.localDateTimeToDate(today));
-			devolucionRepository.save(devolucionActiva);
-		}
-	}
-
-	@Override
-	@Transactional
-	public void anular(List<Integer> ids) {
-		Emision aux = null;
-		Devoluciones devolucionActiva;
-		LocalDateTime today = LocalDateTime.now();
-		for (Integer id : ids) {
-			aux = emisionRepository.getOne(id);
-			aux.setDevuelto(false);
-			emisionRepository.save(aux);
-
-			devolucionActiva = devolucionRepository.findActiveReturnedByEmision(aux);
-			if (devolucionActiva != null) {
-
-				devolucionActiva.setFechaBaja(LocalDateUtil.localDateTimeToDate(today));
-				devolucionRepository.save(devolucionActiva);
-			} else {
-				// TODO FMM Si está anulada y es
-			}
-		}
 	}
 
 	/**
@@ -450,10 +404,10 @@ public class EmisionServiceImpl implements EmisionService {
 	 * @param ce
 	 * @return
 	 */
-	private Set<Emision> generateWSDirectDebts(Cabeceraemisiones ce) {
+	private List<Emision> generateWSDirectDebts(Cabeceraemisiones ce) {
 		List<PSD> psdList = psdRepository.findByPeriod(ce.getPeriodo());
 		Emision emision;
-		Set<Emision> emisiones = new HashSet<>(psdList.size());
+		List<Emision> emisiones = new ArrayList<>(psdList.size());
 		for (PSD psd : psdList) {
 			emision = generateWSDirectDebt(psd, ce);
 			emisiones.add(emision);
@@ -505,4 +459,5 @@ public class EmisionServiceImpl implements EmisionService {
 	public List<Cabeceraemisiones> findCabecerasByAnyoMes(Integer year, Integer codigoMes) {
 		return this.cabeceraRepository.findCabeceraByYearMonth(year, codigoMes);
 	}
+
 }

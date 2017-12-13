@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.transaction.Transactional;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
-import com.sepa.domain.CustomerDirectDebitInitiationV02;
-import com.sepa.domain.Document;
-import com.sepa.domain.GroupHeader39;
-import com.sepa.domain.ObjectFactory;
-import com.sepa.domain.PaymentInstructionInformation4;
+import com.sepa.domain.v008.v001.v02.CustomerDirectDebitInitiationV02;
+import com.sepa.domain.v008.v001.v02.Document;
+import com.sepa.domain.v008.v001.v02.GroupHeader39;
+import com.sepa.domain.v008.v001.v02.ObjectFactory;
+import com.sepa.domain.v008.v001.v02.PaymentInstructionInformation4;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Meses;
@@ -35,6 +36,7 @@ import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
 import es.cnc.suscripciones.domain.dao.spring.PeriodoRepository;
 import es.cnc.suscripciones.domain.dao.spring.SepaCoreXmlRepository;
 import es.cnc.util.LocalDateUtil;
+import es.cnc.util.app.HashUtils;
 
 @Component("generacionService")
 public class GeneracionServiceImpl implements GeneracionService {
@@ -82,6 +84,7 @@ public class GeneracionServiceImpl implements GeneracionService {
 	 * generateISO20022(es.cnc.suscripciones.domain.Cabeceraemisiones)
 	 */
 	@Override
+	@Transactional
 	public String generateISO20022(Cabeceraemisiones cabecera) throws DatatypeConfigurationException {
 		String fileName = null;
 		FileOutputStream fos = null;
@@ -107,6 +110,11 @@ public class GeneracionServiceImpl implements GeneracionService {
 		// ddo.setId(1);
 		// ddo.setCreDtTm(LocalDateUtil.dateToLocalDateTime(cabAux.getFechaEmision()));
 
+		// TODO [FMM] 2017-11-06 Ahora se actualiza la fecha de envío en la generación del XML
+		LocalDateTime now = LocalDateTime.now();
+		cabAux.setFechaEnvio(LocalDateUtil.localDateTimeToDate(now));
+		cabeceraRepository.save(cabAux);
+		
 		GroupHeader39 grpHdr = GroupHeaderBuilder.buildGroupHeader(cabAux);
 		PaymentInstructionInformation4 pmtInf = PaymentInstructionBuilder.buildPmtInf(cabAux);
 
@@ -146,11 +154,9 @@ public class GeneracionServiceImpl implements GeneracionService {
 			mapper.writeValue(baos, document);
 			String sb = new String(baos.toByteArray());
 			System.out.println(sb);
-			SepaCoreXml xml = new SepaCoreXml();
-			xml.setIdCabecera(cabAux);
-			xml.setXml(sb);
-			xmlRepository.save(xml);
-
+			
+			updateSepaCoreXml(cabAux, document, sb);
+			
 			fos = new FileOutputStream("xmlDevelopment/" + cabecera.getAnyo() + "/" + fileName);
 			mapper.writeValue(fos, document);
 			fos.flush();
@@ -163,6 +169,26 @@ public class GeneracionServiceImpl implements GeneracionService {
 		return fileName;
 	}
 
+	private SepaCoreXml updateSepaCoreXml(Cabeceraemisiones cabAux, Document document, String sb) {
+		List<SepaCoreXml> xmls = null;
+		xmls = xmlRepository.findXmlByCabecera(cabAux);
+		
+		for (SepaCoreXml xml : xmls) {
+			xml.setActivo(false);
+			xmlRepository.saveAndFlush(xml);
+		}
+		
+		SepaCoreXml xml = new SepaCoreXml();
+		xml.setIdCabecera(cabAux);
+		xml.setXml(sb);
+		xml.setFechaEnvio(cabAux.getFechaEnvio());
+		xml.setIdMsg(document.getCstmrDrctDbtInitn().getGrpHdr().getMsgId());
+		xml.setHash(HashUtils.calcMD5Base64(xml.getXml()));
+		xmlRepository.save(xml);
+		
+		return xml;
+	}
+	
 	public String calcFileName(Cabeceraemisiones cabecera) {
 		String retorno = null;
 		StringBuffer sb = new StringBuffer();

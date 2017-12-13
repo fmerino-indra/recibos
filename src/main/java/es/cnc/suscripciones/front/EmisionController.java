@@ -22,6 +22,7 @@ import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.front.response.ResponseList;
 import es.cnc.suscripciones.front.response.ResponseMap;
 import es.cnc.suscripciones.front.response.ResponseVoid;
+import es.cnc.suscripciones.services.devolucion.DevolucionService;
 import es.cnc.suscripciones.services.emision.EmisionService;
 import es.cnc.suscripciones.services.generacion.GeneracionService;
 
@@ -30,6 +31,9 @@ import es.cnc.suscripciones.services.generacion.GeneracionService;
 public class EmisionController {
 	@Autowired
 	EmisionService emisionService;
+	
+	@Autowired
+	DevolucionService devolucionService;
 	
 	@Autowired
 	GeneracionService generacionService;
@@ -41,7 +45,7 @@ public class EmisionController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/devolver" })
     public void devolver(@RequestBody String body, @RequestParam("id") ArrayList<Integer> ids) {
     	System.out.println(ids);
-    	emisionService.devolver(ids);
+    	devolucionService.devolver(ids);
     }
     /**
      * Anula una devolución.
@@ -51,7 +55,7 @@ public class EmisionController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/anular" })
     public void anular(@RequestBody String body, @RequestParam("id") ArrayList<Integer> ids) {
     	System.out.println(ids);
-    	emisionService.anular(ids);
+    	devolucionService.anular(ids);
     }
 
     

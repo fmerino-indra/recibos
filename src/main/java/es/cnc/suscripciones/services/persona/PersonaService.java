@@ -13,6 +13,8 @@ public interface PersonaService {
 	public Persona createPersona(String nif, String nombre, String domicilio, String cp, String poblacion, String tfno);
 	public Persona createPersona(String nif, String nombre, Persona antecesor);
 	public Persona createPersona(Persona p);
+
+	public Persona updatePersona(Persona p);
 	/**
 	 * Find a list of active personas
 	 * @return The list of active personas

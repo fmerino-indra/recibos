@@ -263,4 +263,20 @@ public class PersonaServiceImpl implements PersonaService {
 	private void emptyDir(Path camino) throws IOException {
 		FileUtils.clearDirectory(camino.toFile(), true);
 	}
+
+	@Override
+	public Persona updatePersona(Persona p) {
+		Persona act = null;
+		act = this.findPersonaById(p.getId());
+		act.setCp(p.getCp());
+		act.setDomicilio(p.getDomicilio());
+		act.setNif(p.getNif());
+		act.setNombre(p.getNombre());
+		act.setPoblacion(p.getPoblacion());
+		act.setTfno(p.getTfno());
+		
+		personaRepository.save(act);
+		
+		return act;
+	}
 }
