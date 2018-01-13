@@ -268,12 +268,15 @@ public class PersonaServiceImpl implements PersonaService {
 	public Persona updatePersona(Persona p) {
 		Persona act = null;
 		act = this.findPersonaById(p.getId());
+		
 		act.setCp(p.getCp());
 		act.setDomicilio(p.getDomicilio());
 		act.setNif(p.getNif());
 		act.setNombre(p.getNombre());
 		act.setPoblacion(p.getPoblacion());
 		act.setTfno(p.getTfno());
+		act.setMovil(p.getMovil());
+		act.setCorreo(p.getCorreo());
 		
 		personaRepository.save(act);
 		

@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,9 +27,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.cnc.Application;
+import es.cnc.suscripciones.domain.Bancos;
+import es.cnc.suscripciones.domain.Persona;
+import es.cnc.suscripciones.domain.Sucursal;
 import es.cnc.suscripciones.domain.Suscripcion;
+import es.cnc.suscripciones.services.bancos.BancosService;
+import es.cnc.suscripciones.services.persona.PersonaService;
+import es.cnc.suscripciones.services.sucursal.SucursalService;
 import es.cnc.suscripciones.services.suscripcion.SuscripcionService;
 
 /**
@@ -41,6 +52,15 @@ public class SuscripcionServiceTest {
 	@Autowired
 	private SuscripcionService suscripcionService;
 
+	@Autowired
+	private PersonaService personaService;
+
+	@Autowired
+	private BancosService bancosService;
+	
+	@Autowired
+	private SucursalService sucursalService;
+	
 	@Before
 	public void setUp() {
 		logger = LoggerFactory.getLogger(this.getClass());
@@ -376,13 +396,92 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s);
 //		assertNotNull(s.getActivePSD());
 
+		// Mal
 // CARMONA GONZALEZ, BEGOÑA	
 //		s = suscripcionService.findSuscripcionById(6743);
 //		assertNotNull(s);
-//
+//      
 //		s = suscripcionService.createSuscripcion("ES8500491103262310467333",50d,"50814312K", "M");
 //		assertNotNull(s);
 //		assertNotNull(s.getActivePSD());
+
+// SANZ CORADO JULIA MARIA	
+//		s = suscripcionService.findSuscripcionById(7013);
+//		assertNotNull(s);
+//
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 50d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+		Persona p = null;
+// MARÍA DORINDA RODICIO GÓMEZ
+//		p = new Persona();
+//		p.setNif("34425302Y");
+//		p.setCp("28007");
+//		p.setDomicilio("Av. del Mediterráneo, 24");
+//		p.setNombre("Rodicio Gómez, María Dorinda");
+//		p.setPoblacion("Madrid");
+//		p.setTfno("914333236");
+//		p = personaService.createPersona(p);
+//		assertNotNull(p);
+//		
+//		s = suscripcionService.createSuscripcion("ES7120381015916001290307", 30d, "34425302Y", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+// MARÍA DEL PILAR CRUZADO DE LA HERA
+//		p = new Persona();
+//		p.setNif("00975466J");
+//		p.setCp("28007");
+//		p.setDomicilio("C/ Amado Nervo, 4 - 6º A");
+//		p.setNombre("Cruzado de la Hera, María del Pilar");
+//		p.setPoblacion("Madrid");
+//		p.setTfno("915517990");
+//		p.setMovil("627379493");	
+//		p = personaService.createPersona(p);
+//		assertNotNull(p);
+//		
+//		s = suscripcionService.createSuscripcion("ES9000301038750002372271", 600d, "00975466J", "A");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// MARGARITA RUIZ SOLAS
+//		s = suscripcionService.findSuscripcionById(6909);
+//		assertNotNull(s);
+//
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 70d);		
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+		
+// BEGOÑA CARMONA GONZALEZ
+//		p = personaService.findPersonaById(5277); 
+//		assertNotNull(p);
+////		p.setCp("28007");
+//		p.setDomicilio("C/ Antonio Díaz Cañabate, 8");
+//		p.setTfno(null);
+//		p.setMovil("607503072");
+//		p.setCorreo("begonacar@yahoo.es");
+//		p = personaService.updatePersona(p);
+//		assertNotNull(p);
+//
+//		Bancos banco = null;
+//		List<Bancos>lista = null;
+//		banco = bancosService.findBancosByCode("0049", true);
+//		Sucursal suc = new Sucursal();
+//		suc.setIdBanco(banco);
+//		suc.setCodSuc("1108");
+//		suc.setDenSuc("Oficina 1108 BANCO-SANTANDER en MADRID (MADRID) - CRUZ DEL SUR, 4 ");
+//		suc = sucursalService.updateSucursal(suc);
+//		
+//		s = suscripcionService.findSuscripcionById(6715);
+//		assertNotNull(s);
+//        s= suscripcionService.updateSuscripcion(s.getId(), "ES8500491108262310467333", 50d);
+//      
+////		s = suscripcionService.createSuscripcion("ES8500491108262310467333",50d,"50814312K", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+				
 
 	}
 }

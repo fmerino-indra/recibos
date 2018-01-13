@@ -14,13 +14,18 @@ public class JsonToFilter {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		if (json != null && !json.isEmpty()) {
-			data = mapper.readValue(json, type);
+			try {
+				data = mapper.readValue(json, type);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return data;
 	}
 	
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
-		String json = "[{\"property\":\"filter\",\"value\":true},{\"property\":\"nif\",\"value\":2}]";
+		String json = null;
+			json="[{\"property\":\"filter\",\"value\":true},{\"property\":\"nif\",\"value\":2},{\"property\":\"fecha\",\"value\":\"01/01/2018\"}]";
 		JsonToFilter.toFilter(json, new TypeReference<List<FilterBaseDTO<?>>>() {});
 	}
 }

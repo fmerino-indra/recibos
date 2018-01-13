@@ -14,25 +14,13 @@
  * limitations under the License.
  */
 
-package es.cnc.suscripciones.services.bancos;
+package es.cnc.suscripciones.services.sucursal;
 
-import java.util.List;
+import es.cnc.suscripciones.domain.Sucursal;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+public interface SucursalService {
 
-import es.cnc.suscripciones.domain.Bancos;
+	Sucursal updateSucursal(Sucursal sucursal);
 
-public interface BancosService {
-
-	Page<Bancos> findBancos(BancosSearchCriteria criteria, Pageable pageable);
-
-	List<Bancos> findBancos(String name, String country);
-
-	Bancos findBancoById(Long id);
-
-	List<Bancos> findBancosListByCode(String code);
-	Bancos findBancosByCode(String code, Boolean active);
-
-	List<Bancos> findBancos();
+	
 }

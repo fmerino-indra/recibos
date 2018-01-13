@@ -15,15 +15,18 @@ import es.cnc.suscripciones.domain.Emision;
 import es.cnc.suscripciones.domain.Meses;
 import es.cnc.suscripciones.domain.PSD;
 import es.cnc.suscripciones.domain.Periodo;
+import es.cnc.suscripciones.domain.SepaCoreXml;
 import es.cnc.suscripciones.domain.Suscripcion;
 import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
 import es.cnc.suscripciones.domain.dao.spring.DevolucionRepository;
 import es.cnc.suscripciones.domain.dao.spring.EmisionRepository;
+import es.cnc.suscripciones.domain.dao.spring.MesesRepository;
 import es.cnc.suscripciones.domain.dao.spring.PSDRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaHasParrocoRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaIbanRepository;
 import es.cnc.suscripciones.domain.dao.spring.PeriodoRepository;
 import es.cnc.suscripciones.domain.dao.spring.ReasonRepository;
+import es.cnc.suscripciones.domain.dao.spring.SepaCoreXmlRepository;
 import es.cnc.suscripciones.domain.dao.spring.SuscripcionRepository;
 import es.cnc.util.LocalDateUtil;
 import es.cnc.util.sepa.ConstantsCNC;
@@ -33,6 +36,9 @@ public class EmisionServiceImpl implements EmisionService {
 
 	@Autowired
 	PeriodoRepository periodoRepository;
+
+	@Autowired
+	MesesRepository mesesRepository;
 
 	@Autowired
 	CabeceraRepository cabeceraRepository;
@@ -57,6 +63,9 @@ public class EmisionServiceImpl implements EmisionService {
 
 	@Autowired
 	ReasonRepository reasonRepository;
+
+	@Autowired
+	SepaCoreXmlRepository xmlRepository;
 
 	public EmisionServiceImpl() {
 		// TODO Auto-generated constructor stub
@@ -86,11 +95,15 @@ public class EmisionServiceImpl implements EmisionService {
 		Meses mes = null;
 		mes = new Meses();
 		mes.setId(monthId);
-		return periodoRepository.findPeriodosByMes(mes);
+		List<Periodo> lista = null;
+		mes = mesesRepository.findMesById(monthId);
+		lista = mes.getPeriodoes();
+		return lista;
+//		return periodoRepository.findPeriodosByMes(mes);
 	}
 
 	@Override
-	@Transactional
+//	@Transactional
 	public List<Cabeceraemisiones> generate() {
 		LocalDate today = LocalDate.now();
 		return generate(today.getMonthValue(), today.getYear());
@@ -162,6 +175,7 @@ public class EmisionServiceImpl implements EmisionService {
 	 *            -> Payment date.
 	 * @return
 	 */
+//	@Transactional
 	private Cabeceraemisiones generateDirectDebtHeader(Periodo p, LocalDateTime today, LocalDateTime fEnvio, Integer year, Integer month) {
 		Cabeceraemisiones ce = new Cabeceraemisiones();
 		ce.setCodigoMes(month);
@@ -223,7 +237,7 @@ public class EmisionServiceImpl implements EmisionService {
 		em.setPrimero(psd.getIdSuscripcion().getSecuenciaAdeudo().equals(ConstantsCNC.FRST));
 		em.setReenviado(false);
 		em.setUltimo(psd.getIdSuscripcion().getSecuenciaAdeudo().equals(ConstantsCNC.FNAL));
-		emisionRepository.save(em);
+		em=emisionRepository.saveAndFlush(em);
 		return em;
 	}
 
@@ -232,7 +246,7 @@ public class EmisionServiceImpl implements EmisionService {
 	 */
 
 	@Override
-	@Transactional
+//	@Transactional
 	public List<Cabeceraemisiones> generateRefunded(int year, int month) {
 		List<Cabeceraemisiones> lista;
 		lista = generateRefundedDirectDebtHeader(year, month);
@@ -311,13 +325,24 @@ public class EmisionServiceImpl implements EmisionService {
 	 * es.cnc.suscripciones.services.emision.EmisionService#deleteCabecera(es.
 	 * cnc.suscripciones.domain.Cabeceraemisiones)
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
-	@Transactional
+//	@Transactional
 	public void deleteCabecera(Cabeceraemisiones ce) {
-		ce = cabeceraRepository.findCabeceraByIdWithEmisiones(ce);
-		for (Emision e : ce.getEmisions()) {
-			emisionRepository.delete(e);
+//		ce = cabeceraRepository.findCabeceraByIdWithEmisiones(ce);
+		List<SepaCoreXml> xmls = null;
+		Cabeceraemisiones aux = null;
+		aux = cabeceraRepository.findCabeceraByIdFull(ce);
+		xmls = cabeceraRepository.findXmlByCabecera(ce);
+		
+		if (aux != null) {
+			for (Emision e : aux.getEmisions()) {
+				if (e != null)
+					emisionRepository.delete(e);
+			}
+			for (SepaCoreXml xml : xmls) {
+				if (xml != null)
+					xmlRepository.delete(xml);
+			}
 		}
 		cabeceraRepository.delete(ce);
 	}
@@ -388,7 +413,7 @@ public class EmisionServiceImpl implements EmisionService {
 	 * @see es.cnc.suscripciones.services.emision.EmisionService#generate()
 	 */
 	@Override
-	@Transactional
+//	@Transactional
 	public List<Cabeceraemisiones> preGenerate(int year, int month) {
 		List<Cabeceraemisiones> lista;
 		lista = generateWSDirectDebtHeaders(year, month);

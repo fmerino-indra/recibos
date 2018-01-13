@@ -1,3 +1,4 @@
+package es.cnc.suscripciones.domain;
 
 /*
  * Copyright 2012-2014 the original author or authors.

@@ -16,16 +16,21 @@
 
 package es.cnc.suscripciones.domain.dao.spring;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.cnc.suscripciones.domain.Bancos;
 @org.springframework.stereotype.Repository
-public interface BancosRepository extends Repository<Bancos, Long> {
+public interface BancosRepository extends JpaRepository<Bancos, Long> {
 
 	Page<Bancos> findAll(Pageable pageable);
 
+	List<Bancos> findBancosByCodBco(String codBco);
+	
+	Bancos findBancosByCodBcoAndActivo(String codBco, Boolean active);
 //	Page<Bancos> findByNameContainingAndCountryContainingAllIgnoringCase(String name,
 //			String country, Pageable pageable);
 //

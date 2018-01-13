@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -206,6 +208,36 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
 		returnContainer.setSuccess(true);
 		return returnContainer;
 	}
-    
-    
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json" , path={"persona"})
+	public ResponseList<List<Suscripcion>> listSuscriptionsByPerson(@RequestParam("filter") String filter) throws JsonParseException, JsonMappingException, IOException {
+		ResponseList<List<Suscripcion>> returnContainer = new ResponseList<>();
+		List<Suscripcion> suscripciones = null;		
+		FilterHolder<? extends Collection<FilterBaseDTO<?>>> fh = null;
+		Integer idPersona = null;
+		
+		fh = buildFilters(filter);
+		FilterBaseDTO<Integer> dto = null;
+		if (fh.isActive() ) {
+			dto =  (FilterBaseDTO<Integer>)fh.get("idPersona");
+			if (dto != null) {
+				idPersona = dto.getValue();
+				suscripciones = suscripcionService.findAllByIdPersona(idPersona);
+	
+		        returnContainer.setData(suscripciones);
+		        if(suscripciones != null)
+		        	returnContainer.setTotalCount(suscripciones.size());
+		        else
+		        	returnContainer.setTotalCount(0);
+			}
+		}
+		returnContainer.setSuccess(true);
+		return returnContainer;
+	}
+	
+	@RequestMapping("*")    
+    public void defaultMethod(@RequestHeader org.springframework.http.HttpHeaders HttpHeaders, @RequestBody HttpMessageConverter body) {
+    	System.out.println("aqui");
+    }
 }

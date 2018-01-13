@@ -21,7 +21,11 @@ public interface PSDRepository extends JpaRepository<PSD, Integer> {
 			+ " and s.periodo = ?1")
 	public List<PSD> findByPeriod(String period);
 	
-	@Query("SELECT DISTINCT psd FROM PSD psd"
+	@Query("SELECT DISTINCT psd"
+			+ " FROM PSD psd"
+			+ " JOIN FETCH psd.idDomiciliacion d"
+			+ " JOIN FETCH d.sucursalId s"
+			+ " JOIN FETCH s.idBanco b"
 			+ " WHERE psd.idSuscripcion = :s")
 	public List<PSD> findBySuscripcion(@Param("s") Suscripcion s);
 }

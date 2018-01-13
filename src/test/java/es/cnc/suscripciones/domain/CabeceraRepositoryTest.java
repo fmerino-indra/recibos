@@ -14,6 +14,7 @@ import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
 import es.cnc.util.app.HashUtils;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Integration test to run the application.
@@ -34,7 +35,7 @@ public class CabeceraRepositoryTest {
 		logger = LoggerFactory.getLogger(this.getClass());
 	}
 
-	@Test
+//	@Test
 //	@Transactional
 	public void findXmlByCabeceraTest() throws Exception {
 		Cabeceraemisiones ce = null;
@@ -52,4 +53,14 @@ public class CabeceraRepositoryTest {
 			}
 		}
 	}
+	
+	@Test
+	public void testCabecera() throws Exception {
+		Cabeceraemisiones cabecera, aux = null;
+		aux = new Cabeceraemisiones();
+		aux.setId(3878);
+		cabecera = cabeceraRepository.findCabeceraByIdFull(aux);
+		assertNotNull(cabecera);
+	}
+	
 }

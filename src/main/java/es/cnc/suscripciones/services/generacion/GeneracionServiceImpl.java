@@ -3,6 +3,9 @@ package es.cnc.suscripciones.services.generacion;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -89,6 +92,7 @@ public class GeneracionServiceImpl implements GeneracionService {
 		String fileName = null;
 		FileOutputStream fos = null;
 		ByteArrayOutputStream baos = null;
+		Path ruta = null;
 		/*
 		 * 1. Recibe la cabecera (ya lleva parroquia, parroco, etc.) 2. Busca
 		 * las emisiones 3.
@@ -156,8 +160,12 @@ public class GeneracionServiceImpl implements GeneracionService {
 			System.out.println(sb);
 			
 			updateSepaCoreXml(cabAux, document, sb);
-			
-			fos = new FileOutputStream("xmlDevelopment/" + cabecera.getAnyo() + "/" + fileName);
+			ruta = Paths.get(dir, cabecera.getAnyo().toString());
+			if (!Files.exists(ruta))
+				Files.createDirectory(ruta);
+			ruta = Paths.get(ruta.toAbsolutePath().toString(), fileName);
+			ruta = Files.createFile(ruta);
+			fos = new FileOutputStream(ruta.toFile());
 			mapper.writeValue(fos, document);
 			fos.flush();
 			fos.close();

@@ -30,7 +30,7 @@ import es.cnc.suscripciones.domain.dao.spring.BancosRepository;
 
 @Component("bancosService")
 @Transactional
-class BancosServiceImpl implements BancosService {
+public class BancosServiceImpl implements BancosService {
 
 	private final BancosRepository bancosRepository;
 
@@ -42,6 +42,11 @@ class BancosServiceImpl implements BancosService {
 		this.bancosRepository = bancosRepository;
 	}
 
+	@Override
+	public List<Bancos> findBancos() {
+		return this.bancosRepository.findAll();
+	}
+
 	@SuppressWarnings("unused")
 	@Override
 	public Page<Bancos> findBancos(BancosSearchCriteria criteria, Pageable pageable) {
@@ -51,7 +56,8 @@ class BancosServiceImpl implements BancosService {
 //		name = criteria.getName();
 
 		if (!StringUtils.hasLength(name)) {
-			return this.bancosRepository.findAll(null);
+//			return this.bancosRepository.findAll(null);
+//			return this.bancosRepository.findAll();
 		}
 
 		String country = "";
@@ -75,9 +81,18 @@ class BancosServiceImpl implements BancosService {
 		return null;
 	}
 
-//	@Override
-//	public List<Bancos> findBancos(String codBco, String denBco) {
-//		return jpaRepository.findAll();
-//	}
+	@Override
+	public Bancos findBancoById(Long id) {
+		return bancosRepository.findOne(id);
+	}
 
+	@Override
+	public List<Bancos> findBancosListByCode(String code) {
+		return bancosRepository.findBancosByCodBco(code);
+	}
+
+	@Override
+	public Bancos findBancosByCode(String code, Boolean active) {
+		return bancosRepository.findBancosByCodBcoAndActivo(code, active);
+	}
 }

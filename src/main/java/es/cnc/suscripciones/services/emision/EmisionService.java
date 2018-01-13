@@ -21,7 +21,7 @@ public interface EmisionService {
 	 * Generate a list of Cabeceraemisiones and Emision acording with current month pattern.
 	 * @return
 	 */
-	@Transactional
+//	@Transactional
 	public List<Cabeceraemisiones> generate();
 
 	/**
@@ -38,7 +38,7 @@ public interface EmisionService {
 	 * @param month
 	 * @return
 	 */
-	@Transactional
+//	@Transactional
 	public List<Cabeceraemisiones> preGenerate(int year, int month);
 
 
@@ -47,14 +47,14 @@ public interface EmisionService {
 	 * @param month -> Month of the refunded direct debts.
 	 * @return
 	 */
-	@Transactional
+//	@Transactional
 	public List<Cabeceraemisiones> generateRefunded(int year, int month);
 
 	/**
 	 * Delete a Cabeceraemisiones.
 	 * @param ce
 	 */
-	@Transactional
+//	@Transactional
 	void deleteCabecera(Cabeceraemisiones ce);
 
 	List<Cabeceraemisiones> findCabecerasByAnyoMes(Integer year, Integer codigoMes);

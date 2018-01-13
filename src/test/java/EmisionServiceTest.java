@@ -38,6 +38,7 @@ import es.cnc.Application;
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Emision;
 import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
+import es.cnc.suscripciones.services.cabecera.CabeceraService;
 import es.cnc.suscripciones.services.emision.EmisionService;
 import es.cnc.suscripciones.services.generacion.GeneracionService;
 import es.cnc.util.LocalDateUtil;
@@ -57,6 +58,9 @@ public class EmisionServiceTest {
 
 	@Autowired
 	private EmisionService emisionService;
+
+	@Autowired
+	private CabeceraService cabeceraService;
 
 	@Autowired
 	private CabeceraRepository cabeceraRepository;
@@ -144,6 +148,22 @@ public class EmisionServiceTest {
 		}
 		
 	}
+	
+	@Test
+	public void deleteCabeceras2018() throws Exception {
+		List<Cabeceraemisiones> cabeceras = null;
+		cabeceras = cabeceraService.findCabecerasByYear(2018);
+		assertNotNull(cabeceras);
+		assertTrue(!cabeceras.isEmpty());
+		
+		for (Cabeceraemisiones ce : cabeceras) {
+			emisionService.deleteCabecera(ce);
+		}
+		cabeceras = cabeceraService.findCabecerasByYear(2018);
+		assertNotNull(cabeceras);
+		assertTrue(cabeceras.isEmpty());
+	}
+	
 	
 //	@Test
 	@Transactional

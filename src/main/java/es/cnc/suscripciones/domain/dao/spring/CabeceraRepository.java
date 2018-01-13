@@ -27,6 +27,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
+import es.cnc.suscripciones.domain.SepaCoreXml;
 
 @Repository
 public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Integer> {
@@ -46,15 +47,21 @@ public interface CabeceraRepository extends JpaRepository<Cabeceraemisiones, Int
 	@Query("select ce from Cabeceraemisiones ce order by ce.fechaEmision desc")
 	public Page<Cabeceraemisiones> findCabecerasDesc(Pageable pageable);
 	
-	@Query("select distinct ce from Cabeceraemisiones ce LEFT JOIN FETCH ce.emisions em"
+	@Query("select distinct ce from Cabeceraemisiones ce "
+			+ " LEFT JOIN FETCH ce.emisions em"
 			+ " INNER JOIN FETCH ce.parroquiaHasParroco"
-			+ " INNER JOIN FETCH em.idSuscripcion psd"
-			+ " INNER JOIN FETCH psd.idDomiciliacion d"
-			+ " INNER JOIN FETCH psd.idSuscripcion s"
-			+ " INNER JOIN FETCH s.persona"
+			+ " LEFT JOIN FETCH em.idSuscripcion psd"
+			+ " LEFT JOIN FETCH psd.idDomiciliacion d"
+			+ " LEFT JOIN FETCH psd.idSuscripcion s"
+			+ " LEFT JOIN FETCH s.persona"
 			+ " INNER JOIN FETCH ce.domiciliacion domPar"
-			+ " where ce = ?1 ")
-	public Cabeceraemisiones findCabeceraByIdFull(Cabeceraemisiones cabecera);
+			+ " where ce = :idCabecera ")
+	public Cabeceraemisiones findCabeceraByIdFull(@Param("idCabecera")Cabeceraemisiones cabecera);
+
+	@Query("SELECT s "
+			+ " FROM SepaCoreXml s"
+			+ " WHERE s.idCabecera = :idCabecera")
+	public List<SepaCoreXml> findXmlByCabecera(@Param("idCabecera")Cabeceraemisiones cabecera);
 	
 	@Query("select distinct ce from Cabeceraemisiones ce "
 			+ " LEFT JOIN FETCH ce.emisions em"

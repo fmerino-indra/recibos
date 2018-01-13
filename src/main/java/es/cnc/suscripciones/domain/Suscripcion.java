@@ -263,7 +263,7 @@ public class Suscripcion extends AbstractEntity<Integer> {
      * Call only if PSD is initialized
      * @return
      */
-    @JsonIgnore
+//    @JsonIgnore
     public PSD getActivePSD() {
     	PSD active = null;
     	if (this.pSDs != null) {
@@ -276,6 +276,7 @@ public class Suscripcion extends AbstractEntity<Integer> {
     	return active;
     }
 
+//    @JsonIgnore
     public PSD getLastPSD() {
     	PSD last = null;
     	if (this.pSDs != null) {

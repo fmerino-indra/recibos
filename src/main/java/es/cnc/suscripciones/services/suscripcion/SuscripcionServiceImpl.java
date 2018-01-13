@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -171,6 +172,8 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 		d.setIban(iban);
 		d.setIdPersona(titular);
 		d.setSucursalId(suc);
+		d.setCuenta(IBANUtil.obtainCCC(iban));
+		d.setDc(IBANUtil.obtainDC(iban));
 		d = domiciliacionRepository.save(d);
 		return d;
 	}
@@ -450,10 +453,19 @@ public class SuscripcionServiceImpl implements SuscripcionService {
 
 	@Override
 	public List<Suscripcion> findAllByIdPersona(Integer idPersona) {
+		List<Suscripcion> listaSuscripciones = null;
+		Set<PSD> psdSet = null;
+		List<PSD> psdList = null;
 		if (idPersona == null) {
-			return new ArrayList<>();
+			listaSuscripciones = new ArrayList<>();
 		} else {
-			return suscripcionRepository.findAllById(idPersona);
+			listaSuscripciones = suscripcionRepository.findAllById(idPersona);
+			for (Suscripcion s : listaSuscripciones) {
+				psdList=pSDRepository.findBySuscripcion(s);
+				psdSet = new HashSet<>(psdList);
+				s.setPSDs(psdSet);
+			}
 		}
+		return listaSuscripciones;
 	}
 }
