@@ -50,8 +50,8 @@ public class Cabeceraemisiones extends AbstractEntity<Integer>{
     	super(Cabeceraemisiones.class);
 	}
     @OneToMany(mappedBy = "idCabecera", fetch = FetchType.LAZY)
-    @OrderColumn(name="id")
-    @OrderBy("id ASC")
+//    @OrderColumn(name="id")
+//    @OrderBy("id ASC")
     private List<Emision> emisions;
     
     @OneToMany(mappedBy = "idCabecera", fetch = FetchType.LAZY)
