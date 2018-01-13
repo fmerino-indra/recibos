@@ -62,6 +62,12 @@ public class Persona extends AbstractEntity<Integer> {
     @Column(name = "TFNO", length = 10)
     private String tfno;
     
+    @Column(name = "movil", length = 15)
+    private String movil;
+    
+    @Column(name = "correo", length = 45)
+    private String correo;
+    
     @Column(name = "idAntigua")
     private Integer idAntigua;
     
@@ -163,5 +169,21 @@ public class Persona extends AbstractEntity<Integer> {
 
 	public void setAntecesor(Persona antecesor) {
 		this.antecesor = antecesor;
+	}
+
+	public String getMovil() {
+		return movil;
+	}
+
+	public void setMovil(String movil) {
+		this.movil = movil;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 }
