@@ -62,10 +62,10 @@ public class PDFTests {
 
 	@Test
 	public void testGeneratePDFs() throws Exception {
-		certificadoService.generateCertificates(2016);
+		certificadoService.generateCertificates(2017);
 	}
 	
-	@Test
+//	@Test
 	public void testGeneratePDF() throws Exception {
 		
 		InputStream is = getClass().getResourceAsStream("withholding-v3.jasper");

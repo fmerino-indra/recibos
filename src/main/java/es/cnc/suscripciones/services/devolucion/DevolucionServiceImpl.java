@@ -7,13 +7,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.xml.bind.JAXBContext;
@@ -44,14 +45,17 @@ import com.sepa.domain.v002.v001.v03.StatusReasonInformation8;
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Devoluciones;
 import es.cnc.suscripciones.domain.Emision;
+import es.cnc.suscripciones.domain.Meses;
 import es.cnc.suscripciones.domain.MsgDevolucion;
 import es.cnc.suscripciones.domain.Reason;
 import es.cnc.suscripciones.domain.SepaCoreXml;
 import es.cnc.suscripciones.domain.dao.spring.CabeceraRepository;
 import es.cnc.suscripciones.domain.dao.spring.DevolucionRepository;
 import es.cnc.suscripciones.domain.dao.spring.EmisionRepository;
+import es.cnc.suscripciones.domain.dao.spring.MesesRepository;
 import es.cnc.suscripciones.domain.dao.spring.MsgDevolucionRepository;
 import es.cnc.suscripciones.domain.dao.spring.ReasonRepository;
+import es.cnc.suscripciones.front.dto.reports.DevolucionesReportDTO;
 import es.cnc.util.LocalDateUtil;
 import es.cnc.util.sepa.ConverterUtils;
 
@@ -74,6 +78,9 @@ public class DevolucionServiceImpl implements DevolucionService {
 
 	@Autowired
 	ReasonRepository reasonRepository;
+
+	@Autowired
+	MesesRepository mesesRepository;
 
 	public DevolucionServiceImpl() {
 		logger = LoggerFactory.getLogger(this.getClass());
@@ -110,34 +117,41 @@ public class DevolucionServiceImpl implements DevolucionService {
 		}
 	}
 
+	@Override
+	public void readRefundXMLJAXB(File xmlFile) throws FileNotFoundException {
+		FileInputStream fis = null;
+		if (xmlFile.exists()) {
+			fis = new FileInputStream(xmlFile);
+			readRefundXMLJAXB(fis);
+		}
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void readRefundXMLJAXB(File xmlFile) {
+	public void readRefundXMLJAXB(InputStream is) {
 		String xml = null;
 		Document document = null;
 		JAXBElement<Document> ele = null;
 		
-		if (xmlFile.exists()) {
-			try {
-		        JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
-	
-		        Unmarshaller unmarshaller = jc.createUnmarshaller();
-		        Object tests = unmarshaller.unmarshal(xmlFile);
-		        ele = (JAXBElement<Document>)tests;
-		        document = ele.getValue();
-		        processRefund(document);
-		        
-		        xml = new String (Files.readAllBytes(xmlFile.toPath()));
-		        logger.debug(xml);
-		        
-//		        Marshaller marshaller = jc.createMarshaller();
-//		        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//		        marshaller.marshal(tests, System.out);
-			
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+	        JAXBContext jc = JAXBContext.newInstance(ObjectFactory.class);
+
+	        Unmarshaller unmarshaller = jc.createUnmarshaller();
+	        Object tests = unmarshaller.unmarshal(is);
+	        ele = (JAXBElement<Document>)tests;
+	        document = ele.getValue();
+	        processRefund(document);
+	        ((ByteArrayInputStream)is).reset();
+	        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
+	        	xml = buffer.lines().collect(Collectors.joining("\n"));
+	        }
+	        
+//	        xml = new String (Files.readAllBytes(xmlFile.toPath()));
+	        logger.debug(xml);
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -416,5 +430,46 @@ public class DevolucionServiceImpl implements DevolucionService {
 			e.printStackTrace();
 		}
 		return xml;
+	}
+
+	@Override
+	public List<DevolucionesReportDTO> generateRefundReport(Integer fromYear, Integer toYear) {
+		return buildDevolucionesReportDTOList(devolucionRepository.findDevolucionesByPeriod(fromYear, toYear));
+	}
+	
+	private List<DevolucionesReportDTO> buildDevolucionesReportDTOList(List<Devoluciones> laLista) {
+		List<Meses> meses = mesesRepository.findMesesWithPeriodos();
+		
+		List<DevolucionesReportDTO> listaRetorno = new ArrayList<>();
+		for (Devoluciones dev:laLista) {
+			listaRetorno.add(buildDevolucionesReportDTO(dev, meses));
+		}
+		return listaRetorno;
+	}
+	
+	private DevolucionesReportDTO buildDevolucionesReportDTO(Devoluciones devolucion, final List<Meses> meses) {
+		DevolucionesReportDTO dto = null;
+		
+		if (devolucion != null) {
+			dto = new DevolucionesReportDTO();
+			dto.setId(devolucion.getId());
+			dto.setAnyo(devolucion.getEmision().getIdCabecera().getAnyo());
+			dto.setCodigoMes(devolucion.getEmision().getIdCabecera().getCodigoMes());
+			dto.setDescMes(findMesByCode(meses, dto.getCodigoMes()));
+			dto.setReasonCode(devolucion.getReason()!=null?devolucion.getReason().getReasonCode():"");
+			dto.setReasonDescription(devolucion.getReason()!=null?devolucion.getReason().getReasonDescription():"");
+			dto.setFechaDevolucion(devolucion.getFechaDevolucion());
+			dto.setImporte(devolucion.getEmision().getImporte());
+			dto.setNombrePersona(devolucion.getEmision().getIdSuscripcion().getIdSuscripcion().getPersona().getNombre());
+			dto.setTelefono(devolucion.getEmision().getIdSuscripcion().getIdSuscripcion().getPersona().getTfno());
+			dto.setMovil(devolucion.getEmision().getIdSuscripcion().getIdSuscripcion().getPersona().getMovil());
+			dto.setPeriodo(devolucion.getEmision().getIdSuscripcion().getIdSuscripcion().getPeriodo());
+		}
+		
+		return dto;
+	}
+
+	private String findMesByCode(final List<Meses> meses, Integer mesCode) {
+		return meses.stream().filter(mes -> mes.getIdMes().equals(mesCode)).findFirst().get().getMes();
 	}
 }

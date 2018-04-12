@@ -1,6 +1,7 @@
 package es.cnc.suscripciones.services.certificado;
 
 import java.util.List;
+import java.util.Map;
 
 import es.cnc.suscripciones.domain.ParroquiaHasParroco;
 import es.cnc.suscripciones.front.dto.CertificadoDTO;
@@ -24,4 +25,6 @@ public interface CertificadoService {
 	ParroquiaHasParroco getParrocoActivo();
 	
 	void generateCertificates(Integer year);
+
+	Map<String, Object> obtainPHPData(CertificadoDTO dto);
 }

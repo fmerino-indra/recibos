@@ -16,10 +16,13 @@ package es.cnc.suscripciones.services;
  * limitations under the License.
  */
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +34,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.cnc.Application;
+import es.cnc.suscripciones.front.dto.reports.DevolucionesReportDTO;
 import es.cnc.suscripciones.services.devolucion.DevolucionService;
 
 /**
@@ -51,7 +55,7 @@ public class DevolucionServiceTest {
 		logger = LoggerFactory.getLogger(this.getClass());
 	}
 
-	@Test
+//	@Test
 //	@Transactional
 	public void testFile() throws Exception {
 		File xmlFile = null;//new File("xmlProduccion/2017/devoluciones/10-Octubre/Devolucion_2017-11-04T051519_1.xml");
@@ -78,6 +82,20 @@ public class DevolucionServiceTest {
 		else
 			logger.error("[CertificadoServiceImpl] Error al crear el directorio:" + camino.toString());
 			throw new RuntimeException("No se encuentra la ruta");
+	}
+	
+	@Test
+//	@Transactional
+	public void findDevolucionesByPeriodTest() throws Exception {
+		Integer fromYear = 2017;
+		Integer toYear = 2018;
+		List<DevolucionesReportDTO> devoluciones;
+		devoluciones = devolucionService.generateRefundReport(fromYear, toYear);
+		assertNotNull(devoluciones);
+		for (DevolucionesReportDTO dev:devoluciones) {
+			logger.debug(dev.toString());
+		}
+		devoluciones.stream().forEach(dev -> logger.debug(dev.toString()));
 	}
 	
 	

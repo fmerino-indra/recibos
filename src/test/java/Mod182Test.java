@@ -56,7 +56,7 @@ public class Mod182Test {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Test
+//	@Test
 	public void testMod182Query() throws Exception {
 	
 		List list = mod182Repository.findAllEmissionSummaryByYear(2016);
@@ -69,6 +69,6 @@ public class Mod182Test {
 	
 	@Test
 	public void testMod182Service() throws Exception {
-		mod182Service.generateMod182(2016);
+		mod182Service.generateMod182(2017);
 	}
 }

@@ -482,6 +482,124 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s);
 //		assertNotNull(s.getActivePSD());
 				
+// 2018-02-18 - Juan Vicente Herrero Álvarez
+		p = new Persona();
+		
+//		p.setId(5139);
+//		personaService.findPersonaById(5138);
+//		
+//		assertNotNull(p);
+//		
+//			
+//		p.setNif("27822650X");
+//		p.setCp("28025");
+//		p.setDomicilio("Av. Nuestra Señora de Valvanera, 106");
+//		p.setNombre("Herrero Álvarez, Juan Vicente");
+//		p.setPoblacion("Madrid");
+//		p.setTfno("912259191");
+//		p = personaService.updatePersona(p);
+//		assertNotNull(p);
+//
+//		Bancos banco = null;
+//		List<Bancos>lista = null;
+//		banco = bancosService.findBancosByCode("0049", true);
+//		Sucursal suc = new Sucursal();
+//		suc.setIdBanco(banco);
+//		suc.setCodSuc("3116");
+//		suc.setDenSuc("Oficina 3116 BANCO-SANTANDER en MADRID (MADRID) - Av. Nuestra Señora de Valvanera, 90");
+//		suc = sucursalService.updateSucursal(suc);
+//		
+//		s = suscripcionService.createSuscripcion("ES0900493116412894238211", 30d, "27822650X", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+// 2018-03-16 - Margarita García Sánchez
+//				p = new Persona();
+//				
+//				p.setNif("1805831D");
+//				p.setNombre("García Sánchez, Margarita");
+//				p.setDomicilio("C/ Juan de Urbieta, 13 -P1-3ºA");
+//				p.setCp("28007");
+//				p.setPoblacion("Madrid");
+//				p.setMovil("639355321");
+//				p.setCorreo("margaritamdcgs@gmail.com");
+//				p = personaService.createPersona(p);
+//				assertNotNull(p);
 
+//				Bancos banco = null;
+//				List<Bancos>lista = null;
+//				banco = bancosService.findBancosByCode("0049", true);
+//				Sucursal suc = new Sucursal();
+//				suc.setIdBanco(banco);
+//				suc.setCodSuc("5142");
+//				suc.setDenSuc("Oficina 5142 BANCO-SANTANDER en MADRID (MADRID) - Av. del Mediterráneo, 30");
+//				suc = sucursalService.updateSucursal(suc);
+//				
+//				s = suscripcionService.createSuscripcion("ES3700495142172110030032", 20d, "1805831D", "M");
+//				assertNotNull(s);
+//				assertNotNull(s.getActivePSD());
+				
+// 2018-03-16 - CALVO GABAS, JUAN IGNACIO
+//		List<Persona> listaPersonas;
+//		
+//		listaPersonas = personaService.findPersonasByNif("13558641A");
+//		assertNotNull(listaPersonas);
+//		
+//		if (listaPersonas.isEmpty() || listaPersonas.size() > 1)
+//			throw new RuntimeException("Más de una persona para el DNI:" + "13558641A");
+//		
+//		p=listaPersonas.get(0);
+//		p.setDomicilio("Av. del Mediterráneo, 13 - 5ºB");
+//		p.setTfno("915526620");
+//		p = personaService.updatePersona(p);
+//		
+//		s = suscripcionService.findActiveSuscripcionByPersona(p);
+//		assertNotNull(s);
+//      
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 100d);
+		
+
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+		
+// 2018-04-07 - Sanz Martínez, Emilio
+		p = new Persona();
+		
+		p.setNif("05395853F");
+		
+		List<Persona> listaPersonas;
+		
+		listaPersonas = personaService.findPersonasByNif("05395853F");
+		assertNotNull(listaPersonas);
+		
+		if (listaPersonas.size() > 1) {
+			throw new RuntimeException("Más de una persona para el DNI:" + p.getNif());
+		} else if (!listaPersonas.isEmpty()) {
+			p=listaPersonas.get(0);
+		} else {
+			p.setNombre("Sanz Martínez, Emilio");
+			p.setDomicilio("C/ Julio Rey Pastor, 4 - 4º izda.");
+			p.setCp("28007");
+			p.setPoblacion("Madrid");
+	//		p.setMovil("639355321");
+			p.setTfno("915595658");
+			p.setCorreo("emiliosanzm@gmail.com");
+			p = personaService.createPersona(p);
+			assertNotNull(p);
+		}
+
+//		Bancos banco = null;
+//		List<Bancos>lista = null;
+//		banco = bancosService.findBancosByCode("0049", true);
+//		Sucursal suc = new Sucursal();
+//		suc.setIdBanco(banco);
+//		suc.setCodSuc("5142");
+//		suc.setDenSuc("Oficina 5142 BANCO-SANTANDER en MADRID (MADRID) - Av. del Mediterráneo, 30");
+//		suc = sucursalService.updateSucursal(suc);
+//		
+		s = suscripcionService.createSuscripcion("ES1701824027280200286843", 8d, "05395853F", "M");
+		assertNotNull(s);
+		assertNotNull(s.getActivePSD());
+		
 	}
 }

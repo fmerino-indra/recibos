@@ -2,6 +2,9 @@ package es.cnc;
 
 import java.util.List;
 
+import javax.servlet.MultipartConfigElement;
+
+import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,7 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 
-import es.cnc.suscripciones.front.export.pdf.util.PdfViewResolver;
+import es.cnc.suscripciones.front.export.excel.util.ExcelViewResolver;
+import es.cnc.suscripciones.front.export.pdf.itext.util.ITextPdfViewResolver;
+import es.cnc.suscripciones.front.export.pdf.jasper.util.JasperPdfViewResolver;
 
 @Configuration
 public class WebMVCConfig extends WebMvcConfigurerAdapter {
@@ -93,8 +98,41 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
      * generate PDF output for an object content
      */
     @Bean
-    public ViewResolver pdfViewResolver() {
-        return new PdfViewResolver();
+    public ViewResolver iTextPDFViewResolver() {
+        return new ITextPdfViewResolver();
     }
     
+    /*
+     * Configure View resolver to provide PDF output using lowagie pdf library to
+     * generate PDF output for an object content
+     */
+    @Bean
+    public ViewResolver jasperPDFViewResolver() {
+        return new JasperPdfViewResolver();
+    }
+    
+    /*
+     * Configure View resolver to provide PDF output using lowagie pdf library to
+     * generate PDF output for an object content
+     */
+    @Bean
+    public ViewResolver excelViewResolver() {
+        return new ExcelViewResolver();
+    }
+    
+    
+//    @Bean(name = "multipartResolver")
+//    public CommonsMultipartResolver multipartResolver() {
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        multipartResolver.setMaxUploadSize(100000);
+//        return multipartResolver;
+//    }
+
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+    	MultipartConfigFactory factory = new MultipartConfigFactory();
+    	factory.setMaxFileSize("128KB");
+    	factory.setMaxRequestSize("128KB");
+    	return factory.createMultipartConfig();
+    }
 }

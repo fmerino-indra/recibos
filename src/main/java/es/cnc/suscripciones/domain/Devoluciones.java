@@ -26,16 +26,6 @@ public class Devoluciones extends AbstractEntity<Integer> {
     @Column(name = "id")
     private Integer id;
     
-    public Integer getId() {
-        return this.id;
-    }
-    
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public Devoluciones() {
-    	super(Devoluciones.class);
-	}
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idEmision", referencedColumnName = "id")
     private Emision emision;
@@ -58,6 +48,18 @@ public class Devoluciones extends AbstractEntity<Integer> {
     @JoinColumn(name = "idMsgDevolucion", referencedColumnName = "id")
     private MsgDevolucion idMsgDevolucion;
 
+    public Devoluciones() {
+    	super(Devoluciones.class);
+	}
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("idCabecera", "idSuscripcion").toString();
     }

@@ -1,9 +1,13 @@
 package es.cnc.suscripciones.services.devolucion;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.transaction.Transactional;
+
+import es.cnc.suscripciones.front.dto.reports.DevolucionesReportDTO;
 
 public interface DevolucionService {
 
@@ -11,9 +15,10 @@ public interface DevolucionService {
 	/**
 	 * Process the status file of one or serveral direct debt refund 
 	 * @param xmlFile -> The file
+	 * @throws FileNotFoundException 
 	 */
 	@Transactional
-	public void readRefundXMLJAXB(File xmlFile);
+	public void readRefundXMLJAXB(File xmlFile) throws FileNotFoundException;
 	/**
 	 * Service method that makes a record of a direct debt refund.
 	 * @param ids -> List of Emision identifiers.
@@ -28,4 +33,8 @@ public interface DevolucionService {
 	 */
 	@Transactional
 	void anular(List<Integer> ids);
+	void readRefundXMLJAXB(InputStream is);
+	
+	List<DevolucionesReportDTO> generateRefundReport(Integer fromYear, Integer toYear);
+
 }

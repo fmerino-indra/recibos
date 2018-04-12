@@ -1,4 +1,4 @@
-package es.cnc.suscripciones.front.export.pdf.util;
+package es.cnc.suscripciones.front.export.pdf.itext.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;

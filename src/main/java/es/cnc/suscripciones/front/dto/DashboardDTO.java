@@ -13,6 +13,10 @@ public class DashboardDTO extends AbstractDTO {
 	private Double emitidos;
 	private Double devueltos;
 	
+	public DashboardDTO() {
+		super();
+		reset();
+	}
 	
 	public DashboardDTO(Integer id,Integer anyo, Integer codigoMes, String periodo, Long numEmitidos, Long numDevueltos, Double emitidos, Double devueltos) {
 		super();
@@ -22,10 +26,21 @@ public class DashboardDTO extends AbstractDTO {
 		this.periodo = periodo;
 		this.numEmitidos = numEmitidos;
 		this.numDevueltos = numDevueltos;
-		this.emitidos = emitidos;
-		this.devueltos = devueltos;
+		this.emitidos = round(emitidos,2);
+		this.devueltos = round(devueltos,2);
 	}
-	
+
+	private void reset() {
+		anyo = 0;
+		mes = 0;
+		nombreMes = "";
+		periodo = "";
+		nombrePeriodo = "";
+		numEmitidos = 0l;
+		numDevueltos = 0l;
+		emitidos = 0.0;
+		devueltos = 0.0;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -97,5 +112,14 @@ public class DashboardDTO extends AbstractDTO {
 
 	public void setDevueltos(Double devueltos) {
 		this.devueltos = devueltos;
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
 	}
 }

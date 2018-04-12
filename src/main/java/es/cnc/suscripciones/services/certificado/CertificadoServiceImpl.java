@@ -99,43 +99,28 @@ public class CertificadoServiceImpl implements CertificadoService {
 			
 			is = getClass().getResourceAsStream("/withholding-v3.jasper");
 			jr = (JasperReport)JRLoader.loadObject(is);
-			
-	//		parameters.put("parroco", "Mauricio A. Palacios Gutiérrez-Ballón");
-	//		parameters.put("parroquia", "Santa Catalina de Siena");
-	//		parameters.put("suscriptor", "Félix Merino Martínez de Pinillos");
-	//		parameters.put("anyo", "2017");
-	//		parameters.put("importe", new Float(9999.56));
-	//		parameters.put("fecha", LocalDateUtil.localDateToDate(LocalDate.now()));
-	//		parameters.put("poblacion", "Madrid");
-	//		
-			ParroquiaHasParroco php = null;
-			php = getParrocoActivo();
-			if (php != null) {
-				parameters.put("parroco", php.getParrocoId().getNombre());
-				parameters.put("nombreFirma", php.getParrocoId().getNombreFirma());
-				parameters.put("parroquia", php.getParroquiaId().getNombre());
-				parameters.put("suscriptor", dto.getNombre());
-				parameters.put("nifSuscriptor", dto.getNif());
-				parameters.put("anyo", dto.getYear().toString());
-				parameters.put("importe", new Float(dto.getSumImporte()));
-				parameters.put("fecha", LocalDateUtil.localDateToDate(LocalDate.now()));
-				parameters.put("poblacion", php.getParroquiaId().getParroquiaAux().getPoblacion());
-				parameters.put("cp", php.getParroquiaId().getParroquiaAux().getCp());
-				parameters.put("direccion", php.getParroquiaId().getParroquiaAux().getDireccion());
-				parameters.put("telefono", php.getParroquiaId().getTelefono());
 
-			} else {
-				throw new RuntimeException("[CertificadosController] Error al localizar datos de la Parroquia");
-			}
+			parameters = obtainPHPData(dto);
+//			ParroquiaHasParroco php = null;
+//			php = getParrocoActivo();
+//			if (php != null) {
+//				parameters.put("parroco", php.getParrocoId().getNombre());
+//				parameters.put("nombreFirma", php.getParrocoId().getNombreFirma());
+//				parameters.put("parroquia", php.getParroquiaId().getNombre());
+//				parameters.put("suscriptor", dto.getNombre());
+//				parameters.put("nifSuscriptor", dto.getNif());
+//				parameters.put("anyo", dto.getYear().toString());
+//				parameters.put("importe", new Float(dto.getSumImporte()));
+//				parameters.put("fecha", LocalDateUtil.localDateToDate(LocalDate.now()));
+//				parameters.put("poblacion", php.getParroquiaId().getParroquiaAux().getPoblacion());
+//				parameters.put("cp", php.getParroquiaId().getParroquiaAux().getCp());
+//				parameters.put("direccion", php.getParroquiaId().getParroquiaAux().getDireccion());
+//				parameters.put("telefono", php.getParroquiaId().getTelefono());
+//
+//			} else {
+//				throw new RuntimeException("[CertificadosController] Error al localizar datos de la Parroquia");
+//			}
 			
-	//		parameters.put("parroco", "Mauricio A. Palacios Gutiérrez");
-	//		parameters.put("parroquia", "Santa Catalina de Siena");
-	//		parameters.put("suscriptor", dto.getNombre());
-	//		parameters.put("anyo", dto.getYear().toString());
-	//		parameters.put("importe", new Float(dto.getSumImporte()));
-	//		parameters.put("fecha", LocalDateUtil.localDateToDate(LocalDate.now()));
-	//		parameters.put("poblacion", "Madrid");
-	
 			JRDataSource ds = new JREmptyDataSource();
 			jp = JasperFillManager.fillReport(jr, parameters, ds);
 			
@@ -143,6 +128,33 @@ public class CertificadoServiceImpl implements CertificadoService {
 			return baos.toByteArray();
 		}
 
+	@Override
+	public Map<String, Object> obtainPHPData(CertificadoDTO dto) {
+		Map<String, Object> parameters = new HashMap<>();
+		ParroquiaHasParroco php = null;
+
+		php = this.getParrocoActivo();
+		if (php != null) {
+			parameters.put("parroco", php.getParrocoId().getNombre());
+			parameters.put("nombreFirma", php.getParrocoId().getNombreFirma());
+			parameters.put("parroquia", php.getParroquiaId().getNombre());
+			parameters.put("suscriptor", dto.getNombre());
+			parameters.put("nifSuscriptor", dto.getNif());
+			parameters.put("anyo", dto.getYear().toString());
+			parameters.put("importe", new Float(dto.getSumImporte()));
+			parameters.put("fecha", LocalDateUtil.localDateToDate(LocalDate.now()));
+			parameters.put("poblacion", php.getParroquiaId().getParroquiaAux().getPoblacion());
+			parameters.put("cp", php.getParroquiaId().getParroquiaAux().getCp());
+			parameters.put("direccion", php.getParroquiaId().getParroquiaAux().getDireccion());
+			parameters.put("telefono", php.getParroquiaId().getTelefono());
+		} else {
+			throw new RuntimeException("[CertificadosController] Error al localizar datos de la Parroquia");
+		}
+		return parameters;
+	}
+
+	
+	
 	@Override
 	public void generateCertificates(Integer year) {
 		List<CertificadoDTO> lista = null;

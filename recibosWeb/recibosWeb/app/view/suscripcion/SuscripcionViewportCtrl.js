@@ -114,7 +114,6 @@ Ext.define('recibosWeb.view.suscripcion.SuscripcionViewportCtrl', {
 
         detail.getForm().reset();
         me.getView().getLayout().next();
-debugger;
         detailFormController = me.getView().down('suscripcion_suscripciondetailform').getController();
         dependencies = detailFormController.suscripcionReloadDependentStores();
         RSVP.all(dependencies).then(function () {

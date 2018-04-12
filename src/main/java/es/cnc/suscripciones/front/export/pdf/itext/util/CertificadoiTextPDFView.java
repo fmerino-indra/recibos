@@ -1,4 +1,4 @@
-package es.cnc.suscripciones.front.export.pdf.util;
+package es.cnc.suscripciones.front.export.pdf.itext.util;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class CertificadoPDFView extends AbstractITextPdfView {
+public class CertificadoiTextPDFView extends AbstractITextPdfView {
 	 
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,

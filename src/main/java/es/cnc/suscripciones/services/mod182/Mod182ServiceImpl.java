@@ -67,7 +67,7 @@ public class Mod182ServiceImpl implements Mod182Service {
 					cabecera.setNombre(pqia.getNombre());
 					cabecera.setYear(anyo);
 					cabecera.setContacto(pco.getNombre());
-					cabecera.setTfno("915512507");
+					cabecera.setTfno(pqia.getTelefono());
 					cabecera.setNumRegistros(lista.size());
 				}
 			}

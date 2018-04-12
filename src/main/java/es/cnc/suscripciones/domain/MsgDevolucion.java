@@ -23,17 +23,6 @@ public class MsgDevolucion extends AbstractEntity<Integer> {
     @Column(name = "id")
     private Integer id;
     
-    public Integer getId() {
-        return this.id;
-    }
-    
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public MsgDevolucion() {
-    	super(MsgDevolucion.class);
-	}
-    
     @Column(name = "creation_date", nullable=false)
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(iso=ISO.DATE_TIME)
@@ -48,11 +37,17 @@ public class MsgDevolucion extends AbstractEntity<Integer> {
     @Column(name = "sepa_core_xml")
     private String xml;
     
-    
-    public String toString() {
-        return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("idCabecera", "idSuscripcion").toString();
+    public Integer getId() {
+        return this.id;
     }
-
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public MsgDevolucion() {
+    	super(MsgDevolucion.class);
+	}
+    
 	public String getMsgId() {
 		return msgId;
 	}
@@ -84,4 +79,8 @@ public class MsgDevolucion extends AbstractEntity<Integer> {
 	public void setXml(String xml) {
 		this.xml = xml;
 	}
+	
+    public String toString() {
+        return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("idCabecera", "idSuscripcion").toString();
+    }
 }

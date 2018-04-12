@@ -1,4 +1,4 @@
-package es.cnc.suscripciones.front.export.pdf.util;
+package es.cnc.suscripciones.front.export.pdf.itext.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -46,11 +46,18 @@ public abstract class AbstractITextPdfView extends AbstractView {
         FileOutputStream fos = new FileOutputStream("prueba.pdf");
         fos.write(baos.toByteArray());
         fos.close();
+        
+        // Headers
+        setHeaders(response);
         // Flush to HTTP response.
         writeToResponse(response, baos);
     }
  
-    protected Document newDocument() {
+    protected void setHeaders(HttpServletResponse response) {
+        response.setHeader("Content-Disposition", "inline; filename=\"certificadoInline.pdf\"");
+	}
+
+	protected Document newDocument() {
         return new Document(PageSize.A4);
     }
      

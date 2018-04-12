@@ -18,9 +18,60 @@ Ext.define('recibosWeb.view.suscripcion.certificado.CertificadoWindowCtrl', {
         // TODO FMM
         me.certificadosSearch();
     },
-
-    onAccept: function () {
-debugger;    	
+    /**
+     * Submit version
+     * Si el content-disposition es 'inline' lo presenta en una nueva ventana, si es 'attachment' no lo graba
+     */
+    onAccept: function() {
+      	var me = this, selectionModel, selection, store, idPersona, idCertificado;
+	
+	  var printPanel;
+	  printPanel = me.getView().down('printTabPanel');
+	  if (printPanel == null) {
+		  printPanel =
+			Ext.create('Ext.form.Panel', {
+		    title:'Print Panel',
+		    name: 'printTabPanel',
+		    
+		    standardSubmit: true,
+		    layout: 'fit',
+		    timeout: 120000
+		  });
+	  }
+	
+	selectionSuscription = me.getViewModel().get('selectedSuscription');
+	idPersona = selectionSuscription.getData().persona.id;
+	selection = me.getView().down('gridpanel').getSelection();
+	if (selection)
+		idCertificado = selection[0].getId();
+	
+	  
+	  printPanel.submit({
+	               target : '_new',
+	               url  : Ext.util.Format.format('{0}/certificados/{1}/{2}', Environment.getBaseUrl(), idPersona, idCertificado),
+	               params : [{idPersona: idPersona},{idCertificado:idCertificado}],
+	               method : 'GET',
+	               success: function(response, opts) {
+	            	   debugger;
+	               },
+//	               success: function (response, opts) {
+//	               	//OK for firefox
+//	   				var pdfWin= window.open('data:application/pdf,' + response, '_blank', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
+//
+//	   				// Chrome? No funciona en ninguno
+////	   				var pdfWin= window.open('');
+////	   				pdfWin.document.write("'<iframe width='100%' height='100%' src='data:application/pdf;base64,' " + escape(response.responseText)+"'></iframe>");
+//
+////	   				var pdfWin= window.open('data:application/pdf;base64,' + response.responseText, '', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
+//	               },
+	               failure: function (response) {
+	                   console.log(response);
+	                   //me.error(response);
+	               }
+	              });
+    },
+  // Es la llamada original, recibe 
+    onAccept3: function () {
     	var me = this, selectionModel, selection, store, idPersona, idCertificado;
     	selectionSuscription = me.getViewModel().get('selectedSuscription');
 		idPersona = selectionSuscription.getData().persona.id;
@@ -37,7 +88,13 @@ debugger;
             method : 'GET',
             
             success: function (response, opts) {
-				var pdfWin= window.open('data:application/pdf;base64,' + response.responseText, '_blank', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
+            	//OK for firefox (creo que hay que quitar el encodeURI
+				var pdfWin= window.open('data:application/pdf;base64,' + encodeURI(response.responseText), '_blank', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
+
+				// Chrome? No funciona en ninguno
+//				var pdfWin= window.open('');
+//				pdfWin.document.write("'<iframe width='100%' height='100%' src='data:application/pdf;base64,' " + escape(response.responseText)+"'></iframe>");
+
 //				var pdfWin= window.open('data:application/pdf;base64,' + response.responseText, '', 'resizable=no, status=no, location=no, scrollbars=no, height=650, width=840');
             },
             failure: function (response) {
@@ -45,32 +102,50 @@ debugger;
                 //me.error(response);
             }
         });
-        
-//        store = me.getViewModel().getStore('certificados');
-//        store.filter([
-//            {
-//            	property:'id', 
-//        		value : idPersona
-//        	},
-//        	{
-//            	property:'idCertificado', 
-//        		value : idCertificado.getId()
-//        	}
-//        ]);
-//        
-//        
-//        store.load({
-//            callback: function (records, operation, success) {
-//                if (!success) {
-//                    if (operation.getError().code === null) {
-//                        me.error(operation.getError());
-//                    }
-//                } else {
-//                    //TODO ..
-//                }
-//            }
-//        });
-        
+    },
+
+    certificadoLoad: function () {
+        var me = this;
+        // TODO FMM
+        me.certificadosSearch();
+    },
+
+    onAcceptBase64: function () {
+    	var me = this, selectionModel, selection, store, idPersona, idCertificado,nifPersona, nombrePersona;
+    	selectionSuscription = me.getViewModel().get('selectedSuscription');
+    	
+    	nifPersona = selectionSuscription.getData().persona.nif;
+    	nombrePersona = selectionSuscription.getData().persona.nombre
+		idPersona = selectionSuscription.getData().persona.id;
+		selection = me.getView().down('gridpanel').getSelection();
+		if (selection)
+			idCertificado = selection[0].getId();
+		
+
+debugger;        
+        Ext.Ajax.request({
+            url    : Ext.util.Format.format('{0}/certificados/base64/{1}/{2}', Environment.getBaseUrl(), idPersona, idCertificado),
+//            params : [{idPersona: idPersona},{idCertificado: idCertificado}],
+            method : 'GET',
+            binary : false,
+            headers: {"Accept":"application/pdf"},
+            success: function (response, opts) {
+            	debugger;
+        		Ext.dom.Helper.append(document.body, {
+                    tag : 'iframe',
+                    id : 'downloadIframe',
+                    frameBorder : 0,
+                    width : 0,
+                    height : 0,
+//                    css : 'display:none;visibility:hidden;height:0px;',
+                    src : 'data:application/pdf;base64,' + escape(response.responseText)
+        		});
+            },
+            failure: function (response) {
+            	debugger;
+                console.log(response);
+            }
+        });
     },
 
 

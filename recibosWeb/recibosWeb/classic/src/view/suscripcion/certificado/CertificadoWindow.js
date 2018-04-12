@@ -41,6 +41,11 @@ Ext.define('recibosWeb.view.suscripcion.certificado.CertificadoWindow', {
 		width: 75,
 		height:30,
 		handler: function () { this.up('window').close(); }
+	},{
+		text : 'PDF',
+		width: 75,
+		height:30,
+		handler: 'onAcceptBase64'
 	}],
 	layout : {
 		type : 'fit',
