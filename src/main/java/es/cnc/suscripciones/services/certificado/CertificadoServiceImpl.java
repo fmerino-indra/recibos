@@ -8,9 +8,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ import org.stasiena.sepa.util.NIFUtil;
 
 import es.cnc.suscripciones.domain.ParroquiaHasParroco;
 import es.cnc.suscripciones.domain.Persona;
+import es.cnc.suscripciones.domain.dao.spring.DonativoRepository;
 import es.cnc.suscripciones.domain.dao.spring.OtrosRepository;
 import es.cnc.suscripciones.domain.dao.spring.ParroquiaHasParrocoRepository;
 import es.cnc.suscripciones.domain.dao.spring.PersonaRepository;
@@ -41,6 +44,8 @@ public class CertificadoServiceImpl implements CertificadoService {
 
 	@Autowired
 	private OtrosRepository otrosRepository;
+	@Autowired DonativoRepository donativoRepository;
+	
 	@Autowired
 	private PersonaRepository personaRepository;
 	
@@ -55,30 +60,130 @@ public class CertificadoServiceImpl implements CertificadoService {
 	@Override
 	public List<CertificadoDTO> findListForCetificado(Integer idPersona) {
 		List<CertificadoDTO> aux = null;
+		List<CertificadoDTO> donativos = null;
 		Persona p = null;
-		aux = otrosRepository.findEmissionSummaryByPersonDTO(idPersona);
 		p = personaRepository.findByPrimaryKey(idPersona);
+		
+		aux = otrosRepository.findEmissionSummaryByNifDTO(p.getNif());
+		donativos = donativoRepository.findDonativoSummaryByNifDTO(p.getNif());
+		
 		for (CertificadoDTO dto: aux) {
 			dto.setPersona(p);
 		}
+
+		for (CertificadoDTO dto: donativos) {
+			dto.setPersona(p);
+		}
+		
+		aux = joinCertificatesList(aux, donativos);
+		
 		return aux;
 	}
 
-	@Override
-	public CertificadoDTO getCertificado(Integer idPersona, Integer idCertificado) {
-		List<CertificadoDTO> aux = null;
-		Persona p = null;
-		CertificadoDTO retorno = null;
+//	private List<CertificadoDTO> joinCertificatesList(List<CertificadoDTO> emisiones, List<CertificadoDTO> donativos) {
+//		CertificadoDTO certificado;
+//		for (CertificadoDTO dto: emisiones) {
+//			certificado = buscarCertificadoEnLista(dto,donativos);
+//			if (certificado != null) {
+//				dto = joinCertificates(dto, certificado);
+//				break;
+//			}
+//		}
+//		return emisiones;
+//	}
+	
+	private List<CertificadoDTO> joinCertificatesList(List<CertificadoDTO> emisionesList, List<CertificadoDTO> donativosList) {
+		CertificadoDTO certificado;
+		Map<String, CertificadoDTO> emisiones=null;
+		Map<String, CertificadoDTO> donativos=null;
+		emisiones=toMap(emisionesList);
+		donativos=toMap(donativosList);
+		List<CertificadoDTO> retorno = null;
+		retorno = new ArrayList<>();
+	
+		for (String emisionKey: emisiones.keySet()) {
+			if (donativos.containsKey(emisionKey)) {
+				certificado = joinCertificates(emisiones.get(emisionKey), donativos.get(emisionKey));
+			} else {
+				certificado = emisiones.get(emisionKey);
+			}
+			retorno.add(certificado);
+		}
 		
-		aux = otrosRepository.findEmissionSummaryByPersonDTO(idPersona);
-		p = personaRepository.findByPrimaryKey(idPersona);
-		for (CertificadoDTO dto: aux) {
-			if (dto.getYear().equals(idCertificado)) {
-				retorno = dto;
-				retorno.setPersona(p);
-				break;
+		for (String donativoKey: donativos.keySet()) {
+			if (!emisiones.containsKey(donativoKey)) {
+				retorno.add(donativos.get(donativoKey));
 			}
 		}
+		return retorno;
+	}
+	
+	private Map<String, CertificadoDTO> toMap(List<CertificadoDTO> emisiones) {
+		Map<String, CertificadoDTO> retorno = null;
+		if (emisiones != null) {
+			retorno = new LinkedHashMap<>();
+			for (CertificadoDTO dto : emisiones) {
+				retorno.put(generateCertificateKey(dto), dto);
+			}
+		}
+		return retorno;
+	}
+	
+	private String generateCertificateKey(CertificadoDTO cert) {
+		return cert.getNif() + "-" + cert.getYear();
+	}
+	
+	/**
+	 * Returns a CertificadoDTO summary of 2 certificates: emisionDTO & donativoDTO
+	 * @param emisionDTO
+	 * @param donativoDTO must be != null
+	 * @return
+	 */
+	private CertificadoDTO joinCertificates(CertificadoDTO emisionDTO, CertificadoDTO donativoDTO) {
+		CertificadoDTO cert = null;
+		if (emisionDTO.getYear().equals(donativoDTO.getYear()) && 
+				emisionDTO.getNif().equals(donativoDTO.getNif())) {
+			cert = new CertificadoDTO(emisionDTO.getYear(), emisionDTO.getNombre(), emisionDTO.getSumImporte()+donativoDTO.getSumImporte(), emisionDTO.getCount()+donativoDTO.getCount(), 
+					emisionDTO.getNif(), emisionDTO.getIdPersona());
+			cert.setPersona(emisionDTO.getPersona());
+		}
+		return cert;
+	}
+//	/**
+//	 * Return the CertificadoDTO of a list of donations
+//	 * @param emisionDTO
+//	 * @param donativos
+//	 * @return
+//	 */
+//	private CertificadoDTO buscarCertificadoEnLista(CertificadoDTO emisionDTO, List<CertificadoDTO> donativos) {
+//		for (CertificadoDTO dto : donativos) {
+//			if (dto.getYear().equals(emisionDTO.getYear()) && 
+//					dto.getNif().equals(emisionDTO.getNif()))
+//				return dto;
+//		}
+//		return null;
+//	}
+	
+	@Override
+	public CertificadoDTO getCertificado(Integer idPersona, Integer idCertificadoYear) {
+		Persona p = null;
+		CertificadoDTO retorno = null;
+		CertificadoDTO emisionDTO = null, donativoDTO = null;
+		
+		p = personaRepository.findByPrimaryKey(idPersona);
+		
+		emisionDTO = otrosRepository.findEmissionSummaryByNifAndYearDTO(p.getNif(), idCertificadoYear);
+		donativoDTO = donativoRepository.findDonativoSummaryByNifAndYearDTO(p.getNif(), idCertificadoYear);
+		
+		emisionDTO.setPersona(p);
+
+		if (donativoDTO != null) {
+			donativoDTO.setPersona(p);
+			retorno = joinCertificates(emisionDTO, donativoDTO);
+		} else {
+			retorno = emisionDTO;
+		}
+		
 		return retorno;
 	}
 
@@ -157,28 +262,51 @@ public class CertificadoServiceImpl implements CertificadoService {
 	
 	@Override
 	public void generateCertificates(Integer year) {
-		List<CertificadoDTO> lista = null;
-		List<Persona> listaPersonas = null;
+		List<CertificadoDTO> listaEmisionesDonatios = null;
+		
+		List<CertificadoDTO> listaEmisiones = null;
+		List<CertificadoDTO> listaDonativos = null;
+		Persona persona = null;
 		byte [] certificado = null;
 		FileOutputStream fos = null;
 
-		listaPersonas = otrosRepository.findPersonasWithEmisionsByYear(year);
-		lista = new ArrayList<>(listaPersonas.size());
-		for (Persona p : listaPersonas) {
-			lista.add(otrosRepository.findEmissionSummaryByNifAndYearDTO(p.getNif(), year));
+		listaEmisiones = null;
+		listaEmisiones=otrosRepository.findEmissionCertificatesByYearDTO(year);
+		for (CertificadoDTO aux: listaEmisiones) {
+			persona = personaRepository.findByPrimaryKey(aux.getIdPersona());
+			if (persona==null) {
+				String message = MessageFormat. format("[CertificadoService][generateCertificates] No person with NIF: {}", aux.getNif());
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+			aux.setPersona(persona);
 		}
 
+		listaDonativos = donativoRepository.findDonativoSummaryByYearDTO(year);
+		for (CertificadoDTO aux: listaDonativos) {
+			persona = personaRepository.findByPrimaryKey(aux.getIdPersona());
+			if (persona==null) {
+				String message = MessageFormat. format("[CertificadoService][generateCertificates] No person with NIF: {}", aux.getNif());
+				logger.error(message);
+				throw new RuntimeException(message);
+			}
+			aux.setPersona(persona);
+		}
+		
+		listaEmisionesDonatios=joinCertificatesList(listaEmisiones, listaDonativos);
+		
 		Path ficheroPath = null;
 		Path camino = null;
+		Path wrongPath = null;
 		String ficheroName = null;
 		
 		try {
 			camino = calcPath(year);
+			wrongPath = calcWrongPath(year);
 		} catch (IOException e1) {
 			throw new RuntimeException("No se ha podido crear el directorio:"+year,e1);
 		}
-		int i=1;
-		for (CertificadoDTO dto : lista) {
+		for (CertificadoDTO dto : listaEmisionesDonatios) {
 			try {
 				if (NIFUtil.isNIFValid(dto.getNif())) {
 					certificado = generate(dto);
@@ -186,6 +314,27 @@ public class CertificadoServiceImpl implements CertificadoService {
 					try {
 						ficheroName = calcFilename(dto);
 						ficheroPath = Paths.get(camino.toAbsolutePath().toString(), ficheroName);
+						ficheroPath = Files.createFile(ficheroPath);
+
+						fos = new FileOutputStream(ficheroPath.toFile());
+
+						fos.write(certificado);
+						fos.close();
+						logger.info("[CertificadoServiceImpl] Generated PDF Certificate:{}", ficheroName);
+					} catch (FileNotFoundException e) {
+						logger.error("[CertificadoServiceImpl] Error saving PDF Certificate:FileNotFoundException:{}", ficheroName);
+					} catch (IOException e) {
+						logger.error("[CertificadoServiceImpl] Error saving PDF Certificate:IOException:{}", ficheroName);
+					}
+					} else {
+						logger.warn("[CertificadoServiceImpl] PDF Certificate is null:{}", ficheroName);
+					}
+				} else {
+					certificado = generate(dto);
+					if (certificado != null) {
+					try {
+						ficheroName = calcFilename(dto);
+						ficheroPath = Paths.get(wrongPath.toAbsolutePath().toString(), ficheroName);
 						ficheroPath = Files.createFile(ficheroPath);
 
 						fos = new FileOutputStream(ficheroPath.toFile());
@@ -210,6 +359,18 @@ public class CertificadoServiceImpl implements CertificadoService {
 
 	private Path calcPath(Integer year) throws IOException {
 		Path camino = Paths.get("pdf/pdfProduction/", year.toString(), "/certificados");
+		try {
+			Files.deleteIfExists(camino);
+			Files.createDirectories(camino);
+		} catch (IOException e) {
+			logger.error("[CertificadoServiceImpl] Error al crear el directorio:" + camino.toString());
+			throw e;
+		}
+		return camino;
+	}
+	
+	private Path calcWrongPath(Integer year) throws IOException {
+		Path camino = Paths.get("pdf/pdfProduction/", year.toString(), "/certificados/wrong");
 		try {
 			Files.deleteIfExists(camino);
 			Files.createDirectories(camino);

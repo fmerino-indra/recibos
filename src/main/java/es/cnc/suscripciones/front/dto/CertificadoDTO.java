@@ -10,14 +10,16 @@ public class CertificadoDTO extends AbstractDTO {
 	private Long count;
 	private Persona persona;
 	private String nif;
+	private Integer idPersona;
 	
-	public CertificadoDTO(Integer year, String nombre, Double sumImporte, Long count, String nif) {
+	public CertificadoDTO(Integer year, String nombre, Double sumImporte, Long count, String nif, Integer id) {
 		super();
 		this.sumImporte = sumImporte;
 		this.year = year;
 		this.nombre = nombre;
 		this.count = count;
 		this.setNif(nif);
+		this.setIdPersona(id);
 	}
 	/**
 	 * @return the sumImporte
@@ -103,5 +105,11 @@ public class CertificadoDTO extends AbstractDTO {
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;
+	}
+	public Integer getIdPersona() {
+		return idPersona;
+	}
+	public void setIdPersona(Integer idPersona) {
+		this.idPersona = idPersona;
 	}
 }

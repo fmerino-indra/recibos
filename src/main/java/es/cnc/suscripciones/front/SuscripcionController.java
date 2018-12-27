@@ -169,9 +169,9 @@ public class SuscripcionController extends AbstractController<Suscripcion> {
 	}
 
     
-    @RequestMapping(method = RequestMethod.PUT, produces = "application/json", path={"/{id}"})
-    public void cambiarSuscripcion(@RequestBody String body, @PathVariable("id") Integer id) {
-    	System.out.println(body);
+    @RequestMapping(method = RequestMethod.PUT, produces = "application/json", path={"/{idSuscripcion}"})
+    public void cambiarSuscripcion(@PathVariable("idSuscripcion") Integer id) {
+    	System.out.println();
     }
     
     /**

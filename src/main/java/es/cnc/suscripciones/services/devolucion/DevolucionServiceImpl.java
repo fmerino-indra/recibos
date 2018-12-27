@@ -122,13 +122,18 @@ public class DevolucionServiceImpl implements DevolucionService {
 		FileInputStream fis = null;
 		if (xmlFile.exists()) {
 			fis = new FileInputStream(xmlFile);
-			readRefundXMLJAXB(fis);
+			try {
+				readRefundXMLJAXB(fis);
+			} catch (RuntimeException e) {
+				logger.error("[DevolucionService][readRefundXMLJAXB(File)] Exception while refund");
+			}
 		}
 		
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional
 	public void readRefundXMLJAXB(InputStream is) {
 		String xml = null;
 		Document document = null;
@@ -141,7 +146,12 @@ public class DevolucionServiceImpl implements DevolucionService {
 	        Object tests = unmarshaller.unmarshal(is);
 	        ele = (JAXBElement<Document>)tests;
 	        document = ele.getValue();
-	        processRefund(document);
+	        try {
+	        	processRefund(document);
+	        } catch (RuntimeException e) {
+	        	logger.error("[DevolucionService][readRefundXMLJAXB] Exception while processRefund", e);
+	        	throw e;
+	        }
 	        ((ByteArrayInputStream)is).reset();
 	        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
 	        	xml = buffer.lines().collect(Collectors.joining("\n"));
@@ -186,7 +196,10 @@ public class DevolucionServiceImpl implements DevolucionService {
 		msgDevolucionRepository.save(msgDevolucion);
 		
 		ce = cabeceraRepository.findCabeceraByMsgIdFull(msgDevolucion.getOrgMsgId());
-		
+		if (ce == null) {
+			throw new RuntimeException("[DevolucionService][processRefund] Cabecera not found for message id: "+msgDevolucion.getOrgMsgId() );
+		}
+			
 		if (ce.getSepaCoreXMLs() != null && !ce.getSepaCoreXMLs().isEmpty()) {
 			for (SepaCoreXml x : ce.getSepaCoreXMLs()) {
 				// Como CE hay dos OneToMany y se usa @OrderColumn, al ejecutar la

@@ -212,6 +212,7 @@ Ext.define('recibosWeb.view.preemision.PreemisionViewportCtrl', {
     },
 
     emitir: function (emitir) {
+    	debugger;
         var me = this;
         selection = me.lookupReference('preemision_preemisionmaster').down('preemision_preemisiongrid').getSelectionModel().getSelection();
 
@@ -221,13 +222,16 @@ Ext.define('recibosWeb.view.preemision.PreemisionViewportCtrl', {
         var mes = selection[0].data.codigoMes;
         Ext.Ajax.request({
             url    : Ext.util.Format.format('{0}/emisiones/emitir', Environment.getBaseUrl()),
-        params : {anyo: year, codigoMes: mes},
+            params : {anyo: year, codigoMes: mes},
+            method: 'POST',
             success: function (response) {
+            	debugger;
             	var vista = me.getView().down('preemision_preemisionmaster');
             	me.info(Ext.util.Format.format('{0} {1}', 'Se ha generado la emisión para el mes de:', mes));
                 vista.getController().preemisionSearch();
             },
             failure: function (response) {
+            	debugger;
                 me.error(response);
             }
         });
@@ -243,7 +247,7 @@ Ext.define('recibosWeb.view.preemision.PreemisionViewportCtrl', {
         var mes = selection[0].data.codigoMes;
         Ext.Ajax.request({
             url    : Ext.util.Format.format('{0}/emisiones/generar', Environment.getBaseUrl()),
-        params : {anyo: year, codigoMes: mes},
+            params : {anyo: year, codigoMes: mes},
             success: function (response) {
             	var vista = me.getView().down('preemision_preemisionmaster');
             	me.info(Ext.util.Format.format('{0} {1}', 'Se ha generado la emisión para el mes de:', mes));

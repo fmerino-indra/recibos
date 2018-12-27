@@ -30,7 +30,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.cnc.Application;
+import es.cnc.suscripciones.domain.Persona;
 import es.cnc.suscripciones.domain.dao.spring.OtrosRepository;
+import es.cnc.suscripciones.domain.dao.spring.PersonaRepository;
 
 /**
  * Integration test to run the application.
@@ -46,6 +48,9 @@ public class SuscripcionQueryTest {
 	@Autowired
 	private OtrosRepository otrosRepository;
 
+	@Autowired
+	private PersonaRepository personaRepository;
+	
 	@Before
 	public void setUp() {
 		logger = LoggerFactory.getLogger(this.getClass());
@@ -55,19 +60,10 @@ public class SuscripcionQueryTest {
 	@Test
 	public void testMascara() throws Exception {
 //		PageRequest pr = new PageRequest(page, limit);
-		
-		List<Object[]> lista = otrosRepository.findEmissionSummaryByPerson(5132);
-		assertNotNull(lista);
-		assertTrue(lista.size()>0);
-		for (Object[] cert: lista) {
-			for (Object o : cert) {
-				System.out.print(o+ "-") ;
-			}
-			System.out.println();
-		}
-
+		Persona p=null;
+		p = personaRepository.findByPrimaryKey(5132);
 	
-		List list = otrosRepository.findEmissionSummaryByPersonDTO(5132);
+		List list = otrosRepository.findEmissionSummaryByNifDTO(p.getNif());
 		assertNotNull(list);
 		assertTrue(list.size()>0);
 		for (Object cert: list) {

@@ -10,9 +10,7 @@ import javax.transaction.Transactional;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +25,7 @@ import es.cnc.suscripciones.services.emision.EmisionService;
 import es.cnc.suscripciones.services.generacion.GeneracionService;
 
 @RestController()
-@RequestMapping("{contextPath}/emisiones")
+@RequestMapping("**/emisiones")
 public class EmisionController {
 	@Autowired
 	EmisionService emisionService;
@@ -58,10 +56,20 @@ public class EmisionController {
     	devolucionService.anular(ids);
     }
 
-    
-//    @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/emitir" }, params={"anyo", "codigoMes"})
-    public void porDefecto(@RequestBody String body,@RequestHeader HttpHeaders headers,@RequestParam("anyo") Integer year, @RequestParam("codigoMes") Integer codigoMes) {
-    	System.out.println(body);
+    // Funciona mal con Swagger
+//    @RequestMapping(produces = "application/json")
+//    public ResponseVoid porDefecto(@RequestBody String body,@RequestHeader HttpHeaders headers) {
+//    	System.out.println(body);
+//    	return new ResponseVoid();
+//    }
+//    public void porDefecto(HttpEntity<String> httpEntity,@RequestHeader HttpHeaders headers) {
+    @RequestMapping(path={"/**"})
+    public  String porDefecto() {
+    	String body=null;
+    	return "hola";
+//    	body=httpEntity.getBody();
+//    	System.out.println(body);
+//    	return new ResponseVoid();
     }
     /**
      * Emite los recibos de un período.
@@ -69,8 +77,10 @@ public class EmisionController {
      * @param ids
      * @throws DatatypeConfigurationException 
      */
+//    @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/emitir" }, params={"anyo", "codigoMes"})
+//    public ResponseMap<Map<String, Cabeceraemisiones>> emitir(@RequestBody String body, @RequestParam("anyo") Integer year, @RequestParam("codigoMes") Integer codigoMes) {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = { "/emitir" }, params={"anyo", "codigoMes"})
-    public ResponseMap<Map<String, Cabeceraemisiones>> emitir(@RequestBody String body, @RequestParam("anyo") Integer year, @RequestParam("codigoMes") Integer codigoMes) {
+    public ResponseMap<Map<String, Cabeceraemisiones>> emitir(@RequestParam("anyo") Integer year, @RequestParam("codigoMes") Integer codigoMes) {
 		List<Cabeceraemisiones> cabeceras = null;
     	ResponseMap<Map<String, Cabeceraemisiones>> response = null;
     	Map<String, Cabeceraemisiones> fileNamesCabeceras = null;

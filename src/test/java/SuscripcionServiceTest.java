@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import es.cnc.Application;
 import es.cnc.suscripciones.domain.Bancos;
@@ -47,6 +47,7 @@ import es.cnc.suscripciones.services.suscripcion.SuscripcionService;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
+@WebAppConfiguration
 public class SuscripcionServiceTest {
 	Logger logger;
 	@Autowired
@@ -483,7 +484,7 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s.getActivePSD());
 				
 // 2018-02-18 - Juan Vicente Herrero Álvarez
-		p = new Persona();
+//		p = new Persona();
 		
 //		p.setId(5139);
 //		personaService.findPersonaById(5138);
@@ -563,30 +564,29 @@ public class SuscripcionServiceTest {
 //		assertNotNull(s.getActivePSD());
 		
 // 2018-04-07 - Sanz Martínez, Emilio
-		p = new Persona();
-		
-		p.setNif("05395853F");
-		
-		List<Persona> listaPersonas;
-		
-		listaPersonas = personaService.findPersonasByNif("05395853F");
-		assertNotNull(listaPersonas);
-		
-		if (listaPersonas.size() > 1) {
-			throw new RuntimeException("Más de una persona para el DNI:" + p.getNif());
-		} else if (!listaPersonas.isEmpty()) {
-			p=listaPersonas.get(0);
-		} else {
-			p.setNombre("Sanz Martínez, Emilio");
-			p.setDomicilio("C/ Julio Rey Pastor, 4 - 4º izda.");
-			p.setCp("28007");
-			p.setPoblacion("Madrid");
-	//		p.setMovil("639355321");
-			p.setTfno("915595658");
-			p.setCorreo("emiliosanzm@gmail.com");
-			p = personaService.createPersona(p);
-			assertNotNull(p);
-		}
+//		p = new Persona();
+//		
+//		p.setNif("05395853F");
+//		
+//		List<Persona> listaPersonas;
+//		
+//		listaPersonas = personaService.findPersonasByNif("05395853F");
+//		assertNotNull(listaPersonas);
+//		
+//		if (listaPersonas.size() > 1) {
+//			throw new RuntimeException("Más de una persona para el DNI:" + p.getNif());
+//		} else if (!listaPersonas.isEmpty()) {
+//			p=listaPersonas.get(0);
+//		} else {
+//			p.setNombre("Sanz Martínez, Emilio");
+//			p.setDomicilio("C/ Julio Rey Pastor, 4 - 4º izda.");
+//			p.setCp("28007");
+//			p.setPoblacion("Madrid");
+//			p.setTfno("915595658");
+//			p.setCorreo("emiliosanzm@gmail.com");
+//			p = personaService.createPersona(p);
+//			assertNotNull(p);
+//		}
 
 //		Bancos banco = null;
 //		List<Bancos>lista = null;
@@ -597,9 +597,118 @@ public class SuscripcionServiceTest {
 //		suc.setDenSuc("Oficina 5142 BANCO-SANTANDER en MADRID (MADRID) - Av. del Mediterráneo, 30");
 //		suc = sucursalService.updateSucursal(suc);
 //		
-		s = suscripcionService.createSuscripcion("ES1701824027280200286843", 8d, "05395853F", "M");
-		assertNotNull(s);
-		assertNotNull(s.getActivePSD());
+//		s = suscripcionService.createSuscripcion("ES1701824027280200286843", 8d, "05395853F", "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// Antonio Justel Perandones		
+		//
+//		s = suscripcionService.findSuscripcionById(6616);
+//		assertNotNull(s);
+//      
+//		s = suscripcionService.updateSuscripcion(s.getId(), null, 10.0);
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+		
+// 2018-07-09 Mª Jesús Garrido Galindo
+		//
+//		p = new Persona();
+//		
+//		p.setNif("11791453C");
+//		
+//		List<Persona> listaPersonas;
+//		
+//		listaPersonas = personaService.findPersonasByNif("11791453C");
+//		assertNotNull(listaPersonas);
+//		
+//		if (listaPersonas.size() > 1) {
+//			throw new RuntimeException("Más de una persona para el DNI:" + p.getNif());
+//		} else if (!listaPersonas.isEmpty()) {
+//			p=listaPersonas.get(0);
+//		} else {
+//			p.setNombre("Garrido Galindo, María Jesús");
+//			p.setDomicilio("c/ Leo, 7");
+//			p.setCp("28007");
+//			p.setPoblacion("Madrid");
+//			p.setMovil("650563031");
+//			p.setCorreo("marigargal@hotmail.com");
+//			p = personaService.createPersona(p);
+//			assertNotNull(p);
+//		}
+//
+//		Bancos banco = null;
+//		banco = bancosService.findBancosByCode("0049", true);
+//		Sucursal suc; 
+//		String codSuc = "2861";
+//		suc = sucursalService.findSucursalByBcoAndCode(banco.getCodBco(), codSuc);
+//		if (suc == null) {
+//			suc = new Sucursal();
+//			suc.setIdBanco(banco);
+//			suc.setCodSuc(codSuc);
+//			suc.setDenSuc("Oficina 2861 BANCO-SANTANDER en MADRID (MADRID) - c/ Dr. Esquerdo, 126");
+//			suc = sucursalService.updateSucursal(suc);
+//		}
+//		String cta = "ES5000492861162494160301";
+//		
+//		s = suscripcionService.createSuscripcion(cta, 20d, p.getNif(), "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
+// 2018-09-13
+// Julia Rivas Maestro		
+				//
+//				s = suscripcionService.findSuscripcionById(6596);
+//				assertNotNull(s);
+//		      
+//				s = suscripcionService.updateSuscripcion(s.getId(), "ES7401280064310100053465", null);
+//				assertNotNull(s);
+//				assertNotNull(s.getActivePSD());
+
+// 2018-11-12
+// María José Vilar Romo - 50€ - ES20-0049-2861-1822-1432-1660
+//		p = new Persona();
+//		
+//		p.setNif("06240872Y");
+//		
+//		List<Persona> listaPersonas;
+//		
+//		listaPersonas = personaService.findPersonasByNif(p.getNif());
+//		assertNotNull(listaPersonas);
+//		
+//		if (listaPersonas.size() > 1) {
+//			throw new RuntimeException("Más de una persona para el DNI:" + p.getNif());
+//		} else if (!listaPersonas.isEmpty()) {
+//			p=listaPersonas.get(0);
+//		} else {
+//			p.setNombre("Vilar Romo, María José");
+//			p.setDomicilio("c/ Cruz del Sur, 30C, 2ºE");
+//			p.setCp("28007");
+//			p.setPoblacion("Madrid");
+//			p.setMovil("644025230");
+//			p.setCorreo("mariajose.vilar@rtve.es");
+//			p = personaService.createPersona(p);
+//			assertNotNull(p);
+//		}
+//
+//		Bancos banco = null;
+//		banco = bancosService.findBancosByCode("0049", true);
+//		Sucursal suc; 
+//		String codSuc = "2861";
+//		suc = sucursalService.findSucursalByBcoAndCode(banco.getCodBco(), codSuc);
+//		if (suc == null) {
+//			suc = new Sucursal();
+//			suc.setIdBanco(banco);
+//			suc.setCodSuc(codSuc);
+//			suc.setDenSuc("Oficina 2861 BANCO-SANTANDER en MADRID (MADRID) - c/ Dr. Esquerdo, 126");
+//			suc = sucursalService.updateSucursal(suc);
+//		}
+//		String cta = "ES2000492861182214321660";
+//		
+//		s = suscripcionService.createSuscripcion(cta, 50d, p.getNif(), "M");
+//		assertNotNull(s);
+//		assertNotNull(s.getActivePSD());
+
 		
 	}
 }

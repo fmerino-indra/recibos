@@ -12,8 +12,10 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import es.cnc.suscripciones.domain.CabeceraEmisionManual;
 import es.cnc.suscripciones.domain.Cabeceraemisiones;
 import es.cnc.suscripciones.domain.Emision;
+import es.cnc.suscripciones.domain.EmisionManual;
 import es.cnc.util.LocalDateUtil;
 
 public class ConverterUtils {
@@ -35,6 +37,19 @@ public class ConverterUtils {
 	public static BigDecimal buildCtrlSum(Cabeceraemisiones ce) {
 		Double d = new Double(0);
 		for (Emision em:ce.getEmisions()) {
+			d+=em.getImporte();
+		}
+		return new BigDecimal(d).setScale(2,RoundingMode.HALF_UP);
+	}
+	
+	/**
+	 * Builds the sum of the order.
+	 * @param cem CabeceraEmisionManual with info from database
+	 * @return
+	 */
+	public static BigDecimal buildCtrlSum(CabeceraEmisionManual cem) {
+		Double d = new Double(0);
+		for (EmisionManual em:cem.getEmisionManuals()) {
 			d+=em.getImporte();
 		}
 		return new BigDecimal(d).setScale(2,RoundingMode.HALF_UP);

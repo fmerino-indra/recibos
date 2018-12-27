@@ -1,4 +1,6 @@
 package es.cnc.suscripciones.domain;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -58,6 +62,17 @@ public class ParroquiaAux extends AbstractEntity<Integer> {
     
     @Column(name = "provincia", length = 40)
     private String provincia;
+    
+    @Column(name = "Activo")
+    private Boolean activo;
+    
+	@Temporal(TemporalType.DATE)
+	private Date fin;
+
+	@Temporal(TemporalType.DATE)
+	private Date inicio;
+
+    
     
     public Pais getPais() {
         return pais;
@@ -110,5 +125,29 @@ public class ParroquiaAux extends AbstractEntity<Integer> {
     public String toString() {
         return new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).setExcludeFieldNames("pais", "idParroquia").toString();
     }
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
     
+	public Date getFin() {
+		return this.fin;
+	}
+
+	public void setFin(Date fin) {
+		this.fin = fin;
+	}
+
+	public Date getInicio() {
+		return this.inicio;
+	}
+
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
+	}
+
 }

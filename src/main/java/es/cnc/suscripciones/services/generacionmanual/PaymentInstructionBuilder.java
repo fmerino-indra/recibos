@@ -1,7 +1,8 @@
-package es.cnc.suscripciones.services.generacion;
+package es.cnc.suscripciones.services.generacionmanual;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
@@ -36,9 +37,9 @@ import com.sepa.domain.v008.v001.v02.RemittanceInformation5;
 import com.sepa.domain.v008.v001.v02.SequenceType1Code;
 import com.sepa.domain.v008.v001.v02.ServiceLevel8Choice;
 
-import es.cnc.suscripciones.domain.Cabeceraemisiones;
+import es.cnc.suscripciones.domain.CabeceraEmisionManual;
 import es.cnc.suscripciones.domain.Domiciliacion;
-import es.cnc.suscripciones.domain.Emision;
+import es.cnc.suscripciones.domain.EmisionManual;
 import es.cnc.suscripciones.domain.ParroquiaHasParroco;
 import es.cnc.util.LocalDateUtil;
 import es.cnc.util.sepa.ConverterUtils;
@@ -58,14 +59,14 @@ public class PaymentInstructionBuilder {
 	 * @return
 	 * @throws DatatypeConfigurationException
 	 */
-	public static PaymentInstructionInformation4 buildPmtInf(Cabeceraemisiones cabAux)
+	public static PaymentInstructionInformation4 buildPmtInf(CabeceraEmisionManual cabAux)
 			throws DatatypeConfigurationException {
 		PaymentInstructionInformation4 payment = oF.createPaymentInstructionInformation4();
 
 		payment.setPmtInfId(buildPmtInfId(cabAux));
 		// Payment Method: Only DD (Direct Debit)
 		payment.setPmtMtd(PaymentMethod2Code.DD);
-		payment.setNbOfTxs(ConverterUtils.buildNbOfTxs(cabAux.getEmisions().size()));
+		payment.setNbOfTxs(ConverterUtils.buildNbOfTxs(cabAux.getEmisionManuals().size()));
 		payment.setCtrlSum(ConverterUtils.buildCtrlSum(cabAux));
 		payment.setPmtTpInf(buildPmtTpInf());
 		payment.setReqdColltnDt(ConverterUtils.buildCreDtTm(cabAux.getFechaEnvio()));
@@ -79,10 +80,10 @@ public class PaymentInstructionBuilder {
 		return payment;
 	}
 
-	private static String buildPmtInfId(Cabeceraemisiones ce) {
+	private static String buildPmtInfId(CabeceraEmisionManual ce) {
 		StringBuilder sb = new StringBuilder();
 		Formatter formatter = new Formatter(sb);
-		formatter.format("%1$1S%2$04d%3$TY%3$Tm%3$Td%3$TH%3$TM%3$TS", ce.getPeriodo(), ce.getId(), ce.getFechaEnvio());
+		formatter.format("%1$1S%2$04d%3$TY%3$Tm%3$Td%3$TH%3$TM%3$TS", "O", ce.getId(), ce.getFechaEnvio());
 		formatter.close();
 		return sb.toString();
 	}
@@ -115,7 +116,7 @@ public class PaymentInstructionBuilder {
 	 * @param ce
 	 * @return
 	 */
-	private static PartyIdentification32 buildCdtr(Cabeceraemisiones ce) {
+	private static PartyIdentification32 buildCdtr(CabeceraEmisionManual ce) {
 		PartyIdentification32 pi32 = oF.createPartyIdentification32();
 		pi32.setNm(ce.getConcepto());
 		return pi32;
@@ -126,17 +127,11 @@ public class PaymentInstructionBuilder {
 	 * TODO [FMM] Actualizar banco, sucursal y DC
 	 * @return
 	 */
-	private static CashAccount16 buildCdtrAcct(Cabeceraemisiones ce) {
+	private static CashAccount16 buildCdtrAcct(CabeceraEmisionManual ce) {
 		CashAccount16 ca16 = oF.createCashAccount16();
 		AccountIdentification4Choice ai4 = oF.createAccountIdentification4Choice();
 		String iban = null;
 
-//		Parroquia p = ce.getParroquiaHasParroco().getParroquiaId();
-//		String banco = p.getBanco();
-//		String sucursal = p.getSucursal();
-//		String DC = p.getDc();
-//		String cuenta = p.getCuenta();
-//		iban = IBANUtil.calcular(p.getParroquiaAux().getPais().getCodigoIso2(), banco, sucursal, DC, cuenta);
 		Domiciliacion dom = ce.getDomiciliacion();
 		iban = dom.getIban();
 		if (IBANUtil.validarIBAN(iban))
@@ -149,7 +144,7 @@ public class PaymentInstructionBuilder {
 	/**
 	 * <CdtrAgt> <FinInstnId> <BIC>BSABESBBXXX</BIC> </FinInstnId> </CdtrAgt>
 	 */
-	private static BranchAndFinancialInstitutionIdentification4 buildCdtrAgt(Cabeceraemisiones ce) {
+	private static BranchAndFinancialInstitutionIdentification4 buildCdtrAgt(CabeceraEmisionManual ce) {
 		BranchAndFinancialInstitutionIdentification4 bafii4 = oF.createBranchAndFinancialInstitutionIdentification4();
 		FinancialInstitutionIdentification7 fii7 = oF.createFinancialInstitutionIdentification7();
 
@@ -188,10 +183,10 @@ public class PaymentInstructionBuilder {
 	 * @return
 	 * @throws DatatypeConfigurationException
 	 */
-	private static List<DirectDebitTransactionInformation9> buildDrctDbtTxInfList(Cabeceraemisiones cabecera)
+	private static List<DirectDebitTransactionInformation9> buildDrctDbtTxInfList(CabeceraEmisionManual cabecera)
 			throws DatatypeConfigurationException {
 		List<DirectDebitTransactionInformation9> drctDbtTxInfList = new ArrayList<>();
-		for (Emision em : cabecera.getEmisions()) {
+		for (EmisionManual em : cabecera.getEmisionManuals()) {
 			drctDbtTxInfList.add(buildDrctDbtTxInf(em));
 		}
 		return drctDbtTxInfList;
@@ -210,7 +205,7 @@ public class PaymentInstructionBuilder {
 	 * 
 	 * @throws DatatypeConfigurationException
 	 */
-	private static DirectDebitTransactionInformation9 buildDrctDbtTxInf(Emision em)
+	private static DirectDebitTransactionInformation9 buildDrctDbtTxInf(EmisionManual em)
 			throws DatatypeConfigurationException {
 		DirectDebitTransactionInformation9 ddti9 = oF.createDirectDebitTransactionInformation9();
 
@@ -235,12 +230,12 @@ public class PaymentInstructionBuilder {
 	 * 
 	 * 
 	 */
-	private static PaymentIdentification1 buildPmtId(Emision em) {
+	private static PaymentIdentification1 buildPmtId(EmisionManual em) {
 		PaymentIdentification1 pi1 = oF.createPaymentIdentification1();
 		StringBuilder sb = new StringBuilder();
 		sb.append(SEPAUtil.lPad(em.getId().toString(), 11, '0'));
 		sb.append(" ");
-		sb.append(SEPAUtil.lPad(em.getIdSuscripcion().getIdSuscripcion().getPersona().getNif(), 9, ' '));
+		sb.append(SEPAUtil.lPad(em.getDomiciliacion().getIdPersona().getNif(), 9, ' '));
 		sb.append(" ");
 
 		Formatter formatter = new Formatter(sb);
@@ -259,9 +254,9 @@ public class PaymentInstructionBuilder {
 	 * 
 	 * 		<InstdAmt Ccy="EUR"> <Value>601.01</Value> </InstdAmt>
 	 */
-	private static ActiveOrHistoricCurrencyAndAmount buildInstdAmt(Emision em) {
+	private static ActiveOrHistoricCurrencyAndAmount buildInstdAmt(EmisionManual em) {
 		ActiveOrHistoricCurrencyAndAmount amount = oF.createActiveOrHistoricCurrencyAndAmount();
-		amount.setCcy(em.getIdSuscripcion().getIdSuscripcion().getDivisa().toUpperCase());
+		amount.setCcy(em.getDivisa().toUpperCase());
 		amount.setValue(BigDecimal.valueOf(em.getImporte()).setScale(2, RoundingMode.HALF_UP));
 		return amount;
 	}
@@ -274,11 +269,14 @@ public class PaymentInstructionBuilder {
 	 * @return
 	 * @throws DatatypeConfigurationException
 	 */
-	private static DirectDebitTransaction6 buildDrctDbtTx(Emision em) throws DatatypeConfigurationException {
+	private static DirectDebitTransaction6 buildDrctDbtTx(EmisionManual em) throws DatatypeConfigurationException {
+		LocalDateTime fecha = null;
+		fecha = LocalDateUtil.fromYearMonthDay(2009,10,31);
+		
 		DirectDebitTransaction6 ddt6 = oF.createDirectDebitTransaction6();
 		MandateRelatedInformation6 mri6 = oF.createMandateRelatedInformation6();
-		mri6.setMndtId(SEPAUtil.lPad(em.getIdSuscripcion().getId().toString(), 35, '0'));
-		mri6.setDtOfSgntr(ConverterUtils.buildCreDtTm(em.getIdSuscripcion().getFechaFirma()));
+		mri6.setMndtId(SEPAUtil.lPad(em.getId().toString(), 35, '0'));
+		mri6.setDtOfSgntr(ConverterUtils.buildCreDtTm(fecha));
 
 		ddt6.setMndtRltdInf(mri6);
 		return ddt6;
@@ -292,7 +290,7 @@ public class PaymentInstructionBuilder {
 	 * @param em
 	 * @return
 	 */
-	private static BranchAndFinancialInstitutionIdentification4 buildDbtrAgt(Emision em) {
+	private static BranchAndFinancialInstitutionIdentification4 buildDbtrAgt(EmisionManual em) {
 		BranchAndFinancialInstitutionIdentification4 bfii4 = oF.createBranchAndFinancialInstitutionIdentification4();
 		bfii4.setFinInstnId(oF.createFinancialInstitutionIdentification7());
 		return bfii4;
@@ -304,22 +302,22 @@ public class PaymentInstructionBuilder {
 	 * @param em
 	 * @return
 	 */
-	private static PartyIdentification32 buildDbtr(Emision em) {
+	private static PartyIdentification32 buildDbtr(EmisionManual em) {
 		PartyIdentification32 pi32 = oF.createPartyIdentification32();
-		pi32.setNm(em.getIdSuscripcion().getIdSuscripcion().getPersona().getNombre());
+		pi32.setNm(em.getDomiciliacion().getIdPersona().getNombre());
 		return pi32;
 	}
 // TODO [FMM] Hay que diferenciar si es suscripción u ocasional
-	private static CashAccount16 buildDbtrAcct(Emision em) {
+	private static CashAccount16 buildDbtrAcct(EmisionManual em) {
 		CashAccount16 ca16 = oF.createCashAccount16();
 		AccountIdentification4Choice ai4 = oF.createAccountIdentification4Choice();
 
-		ai4.setIBAN(em.getIdSuscripcion().getIdDomiciliacion().getIban());
+		ai4.setIBAN(em.getDomiciliacion().getIban());
 		ca16.setId(ai4);
 		return ca16;
 	}
 
-	private static RemittanceInformation5 buildRmtInf(Emision em) {
+	private static RemittanceInformation5 buildRmtInf(EmisionManual em) {
 		RemittanceInformation5 ri5 = oF.createRemittanceInformation5();
 //		ri5.getUstrd().add(em.getIdSuscripcion().getIdSuscripcion().getConcepto());
 		ri5.getUstrd().add(em.getIdCabecera().getConcepto());

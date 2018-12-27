@@ -21,6 +21,5 @@ import es.cnc.suscripciones.domain.Sucursal;
 public interface SucursalService {
 
 	Sucursal updateSucursal(Sucursal sucursal);
-
-	
+	Sucursal findSucursalByBcoAndCode(String codBco, String codSuc);
 }

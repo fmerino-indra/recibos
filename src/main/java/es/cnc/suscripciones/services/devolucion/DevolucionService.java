@@ -18,7 +18,11 @@ public interface DevolucionService {
 	 * @throws FileNotFoundException 
 	 */
 	@Transactional
-	public void readRefundXMLJAXB(File xmlFile) throws FileNotFoundException;
+	void readRefundXMLJAXB(File xmlFile) throws FileNotFoundException;
+
+	@Transactional
+	void readRefundXMLJAXB(InputStream is) throws FileNotFoundException;
+	
 	/**
 	 * Service method that makes a record of a direct debt refund.
 	 * @param ids -> List of Emision identifiers.
@@ -33,7 +37,6 @@ public interface DevolucionService {
 	 */
 	@Transactional
 	void anular(List<Integer> ids);
-	void readRefundXMLJAXB(InputStream is);
 	
 	List<DevolucionesReportDTO> generateRefundReport(Integer fromYear, Integer toYear);
 

@@ -76,7 +76,7 @@ public class Mod182ServiceImpl implements Mod182Service {
 			for (Mod182DeclaradosDTO declarado:lista) {
 				declarado.setCodProv(28);
 				declarado.setClave("A");
-				recursivo = calculateRecursividad(declarado.getId(), declarado.getSumImporte(), anyo);
+				recursivo = calculateRecursividad(declarado.getId(), declarado.getNif(), declarado.getSumImporte(), anyo);
 				if (recursivo) {
 					recursivoClave = 1;
 				} else {
@@ -173,9 +173,9 @@ public class Mod182ServiceImpl implements Mod182Service {
 		return camino;
 	}
 	
-	private boolean calculateRecursividad(Integer id, Double d, Integer year) {
+	private boolean calculateRecursividad(Integer id, String nif, Double d, Integer year) {
 		List<CertificadoDTO> lista = null;
-		lista = certificadosRepository.findEmissionSummaryByPersonDTO(id);
+		lista = certificadosRepository.findEmissionSummaryByNifDTO(nif);
 		CertificadoDTO dto = null;
 		boolean recursivo = (lista != null) && (lista.size() > 0) ;
 		

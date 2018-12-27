@@ -1,3 +1,4 @@
+package es.cnc.suscripciones.services;
 
 /*
  * Copyright 2012-2014 the original author or authors.
@@ -20,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -32,6 +34,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.cnc.Application;
+import es.cnc.suscripciones.front.dto.CertificadoDTO;
 import es.cnc.suscripciones.services.certificado.CertificadoService;
 import es.cnc.util.LocalDateUtil;
 import net.sf.jasperreports.engine.JRDataSource;
@@ -41,6 +44,9 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Integration test to run the application.
@@ -63,6 +69,14 @@ public class PDFTests {
 	@Test
 	public void testGeneratePDFs() throws Exception {
 		certificadoService.generateCertificates(2017);
+	}
+	
+//	@Test
+	public void findListForCetificadoTest() throws Exception {
+		List<CertificadoDTO> lista;
+		lista=certificadoService.findListForCetificado(5206);
+		assertNotNull(lista);
+		assertFalse(lista.isEmpty());
 	}
 	
 //	@Test

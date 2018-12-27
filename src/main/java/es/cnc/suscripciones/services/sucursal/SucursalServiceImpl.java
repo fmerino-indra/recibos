@@ -35,6 +35,9 @@ public class SucursalServiceImpl implements SucursalService {
 	public Sucursal updateSucursal(Sucursal sucursal) {
 		return sucursalRepository.save(sucursal);
 	}
-	
-	
+
+	@Override
+	public Sucursal findSucursalByBcoAndCode(String codBco, String codSuc) {
+		return sucursalRepository.findSucursalByCodBanAndCodSuc(codBco, codSuc);
+	}
 }

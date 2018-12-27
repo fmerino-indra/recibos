@@ -9,18 +9,18 @@ import es.cnc.suscripciones.front.dto.CertificadoDTO;
 public interface CertificadoService {
 
 	/**
-	 * Find a list of active subscriptions 
-	 * @return The list of active subscriptions
+	 * Find a list of CertifiacoDTO of a person grouped by year (Emissions & Donativo)
+	 * @return The list of CertificadoDTO
 	 */
 	List<CertificadoDTO> findListForCetificado(Integer idPersona);
 	
 	/**
-	 * Returns the certificado object
+	 * Returns the CertificadoDTO object identified as year
 	 * @param idPersona
-	 * @param idCertificado. The year.
+	 * @param idCertificadoYear. The year.
 	 * @return
 	 */
-	CertificadoDTO getCertificado(Integer idPersona, Integer idCertificado);
+	CertificadoDTO getCertificado(Integer idPersona, Integer idCertificadoYear);
 
 	ParroquiaHasParroco getParrocoActivo();
 	

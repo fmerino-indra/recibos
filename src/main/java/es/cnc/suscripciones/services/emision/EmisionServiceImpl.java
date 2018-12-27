@@ -484,5 +484,4 @@ public class EmisionServiceImpl implements EmisionService {
 	public List<Cabeceraemisiones> findCabecerasByAnyoMes(Integer year, Integer codigoMes) {
 		return this.cabeceraRepository.findCabeceraByYearMonth(year, codigoMes);
 	}
-
 }

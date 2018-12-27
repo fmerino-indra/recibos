@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -23,15 +24,23 @@ import es.cnc.suscripciones.front.export.pdf.itext.util.ITextPdfViewResolver;
 import es.cnc.suscripciones.front.export.pdf.jasper.util.JasperPdfViewResolver;
 
 @Configuration
+@EnableWebMvc
 public class WebMVCConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/recibosWeb/**")
+		registry.addResourceHandler("/**")
 			.addResourceLocations("file:recibosWeb/")
 			.setCachePeriod(0);
 		registry.addResourceHandler("/recibosApp/**")
 			.addResourceLocations("file:///Y:/Development/WorkspaceParroquia/recibosExt6/recWorkspace/")
 			.setCachePeriod(0);
+		
+	    registry.addResourceHandler("swagger-ui.html")
+	      .addResourceLocations("classpath:/META-INF/resources/");
+	 
+	    registry.addResourceHandler("/webjars/**")
+	      .addResourceLocations("classpath:/META-INF/resources/webjars/");
+		
 	}
 	
 	

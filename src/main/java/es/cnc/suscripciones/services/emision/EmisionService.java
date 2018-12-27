@@ -58,5 +58,4 @@ public interface EmisionService {
 	void deleteCabecera(Cabeceraemisiones ce);
 
 	List<Cabeceraemisiones> findCabecerasByAnyoMes(Integer year, Integer codigoMes);
-	
 }

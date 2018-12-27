@@ -19,8 +19,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name = "sepa_core_xml")
-public class SepaCoreXml extends AbstractEntity<Integer> {
+@Table(name = "sepa_core_xml_manual")
+public class SepaCoreXmlManual extends AbstractEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -33,13 +33,13 @@ public class SepaCoreXml extends AbstractEntity<Integer> {
     public void setId(Integer id) {
         this.id = id;
     }
-    public SepaCoreXml() {
-    	super(SepaCoreXml.class);
+    public SepaCoreXmlManual() {
+    	super(SepaCoreXmlManual.class);
     	this.setActivo(true);
 	}
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cabeceraemisiones_id", referencedColumnName = "id")
-    private Cabeceraemisiones idCabecera;
+    private CabeceraEmisionManual idCabecera;
     
     @Column(name = "fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
@@ -67,14 +67,14 @@ public class SepaCoreXml extends AbstractEntity<Integer> {
 	/**
 	 * @return the idCabecera
 	 */
-	public Cabeceraemisiones getIdCabecera() {
+	public CabeceraEmisionManual getIdCabecera() {
 		return idCabecera;
 	}
 
 	/**
 	 * @param idCabecera the idCabecera to set
 	 */
-	public void setIdCabecera(Cabeceraemisiones idCabecera) {
+	public void setIdCabecera(CabeceraEmisionManual idCabecera) {
 		this.idCabecera = idCabecera;
 	}
 
